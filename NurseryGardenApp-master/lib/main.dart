@@ -33,6 +33,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: '.env');
   Stripe.publishableKey = dotenv.get('STRIPE_PUBLISHABLE_KEY');
+  await Stripe.instance.applySettings();
   await di.init();
   EasyLoading.init();
   LicenseRegistry.addLicense(() async* {
