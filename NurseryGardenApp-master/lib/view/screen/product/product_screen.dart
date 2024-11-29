@@ -8,6 +8,7 @@ import 'package:nurserygardenapp/view/base/empty_grid_item.dart';
 import 'package:nurserygardenapp/view/screen/product/widget/product_grid_item.dart';
 import 'package:provider/provider.dart';
 import 'package:vs_scrollbar/vs_scrollbar.dart';
+import 'package:nurserygardenapp/view/screen/sos_button.dart'; // Correct import for the current structure
 
 final List<String> imgList = [
   Images.carousel_first,
@@ -122,6 +123,7 @@ class _ProductScreenState extends State<ProductScreen> {
                 Navigator.pushNamed(context, Routes.getProductSearchRoute());
               },
               child: Container(
+                width: 200,
                 height: 40,
                 decoration: BoxDecoration(
                     color: Colors.white,
@@ -144,18 +146,28 @@ class _ProductScreenState extends State<ProductScreen> {
               ),
             ),
             actions: [
+              // Shopping cart button
+              IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, Routes.getCartRoute());
+                },
+                icon: Icon(
+                  Icons.shopping_cart_outlined,
+                  color: Colors.white,
+                ),
+              ),
+              // SOS Button
               Padding(
-                padding: const EdgeInsets.only(right: 15),
-                child: IconButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, Routes.getCartRoute());
-                    },
-                    icon: Icon(
-                      Icons.shopping_cart_outlined,
-                      color: Colors.white,
-                    )),
-              )
-            ]),
+                padding: const EdgeInsets.only(right: 8.0),
+                child: SOSButton(
+                  onPressed: () {
+                    print("SOS button pressed!");
+                    // Add your desired functionality here
+                  },
+                ),
+              ),
+            ],
+          ),
         body: SizedBox(
             height: size.height,
             width: size.width,

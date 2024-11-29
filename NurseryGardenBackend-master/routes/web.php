@@ -81,6 +81,14 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/order/ship/{id}', [OrderController::class, 'showShipOrder'])->name('order.ship');
         Route::get('/order/partial/{id}', [OrderController::class, 'showPartialOrder'])->name('order.partial');
 
+         // Verification
+         Route::get('/verification', [OrderController::class, 'index'])->name('verification.index');
+         Route::get('/verification/detail/{id}', [OrderController::class, 'order_detail'])->name('verification.detail');
+         Route::any('/verification/search', [OrderController::class, 'search'])->name('verification.search');
+         Route::any('/verification/filter/{status}', [OrderController::class, 'filter'])->name('verification.filter');
+         Route::get('/verification/ship/{id}', [OrderController::class, 'showShipOrder'])->name('verification.ship');
+         Route::get('/verification/partial/{id}', [OrderController::class, 'showPartialOrder'])->name('verification.partial');
+
         // Custom
         Route::get('/custom/style', [CustomController::class, 'index'])->name('custom.index');
         Route::get('/customs/style/insert', [CustomController::class, 'insert'])->name('custom.insert');
@@ -89,6 +97,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/customs/style/update', [CustomController::class, 'update'])->name('custom.update');
         Route::any('/customs/style/search', [CustomController::class, 'search'])->name('custom.search');
         Route::get('/customs/style/delete/{id}', [CustomController::class, 'delete'])->name('custom.delete');
+
+        //Report
+        Route::get('/report', [CustomController::class, 'index'])->name('report.index');
+
 
         // Delivery
         Route::post('/order/delivery', [DeliveryController::class, 'updateDelivery'])->name('delivery.update');

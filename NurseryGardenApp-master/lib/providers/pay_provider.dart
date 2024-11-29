@@ -28,13 +28,23 @@ class PayProvider extends ChangeNotifier {
     _intentID = '';
     notifyListeners();
 
+    print("Fetching payment intent ID for order: $orderID");
+
+
     ApiResponse apiResponse = await payRepo.getPaymentIntentID(orderID);
+    if (apiResponse.error != null) {
+      print("API Error: ${apiResponse.error}");
+    }
     if (context.mounted) {
       result = ResponseHelper.responseHelper(context, apiResponse);
       if (result) {
         _intentID = apiResponse.response!.data['data']['Client_Secret'];
+              print("Payment intent ID fetched: $_intentID");
+
         notifyListeners();
-      }
+      }else {
+      print("Failed to fetch payment intent ID: ${apiResponse.error}");
+    }
     }
     _isLoading = false;
     notifyListeners();

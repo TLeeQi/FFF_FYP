@@ -8,12 +8,12 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Nursery Garden</title>
+    <title>FixIt Foliage Frenzy</title>
 
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ url('/icon/nursery_garden_icon.png') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ url('/icon/fff_icon.png') }}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -54,9 +54,9 @@
                 <div class="app-brand demo">
                     <a href="index.html" class="app-brand-link">
                         <span class="app-brand-logo demo me-1">
-                            <img src="{{ url('/icon/nursery_garden_icon.png') }}" height="25" width="25">
+                            <img src="{{ url('/icon/fff_icon.png') }}" height="25" width="25">
                         </span>
-                        <span class="app-brand-text demo menu-text fw-semibold ms-2">Nursery Garden</span>
+                        <span class="app-brand-text demo menu-text fw-semibold ms-2" style="font-size: 16px;">FixIt Foliage Frenzy</span>
                     </a>
 
                     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -83,7 +83,7 @@
                     <!-- Dashboards -->
                     <li class="menu-item">
                         <a href="{{ route('customer.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons mdi mdi-home-outline"></i>
+                            <i class="menu-icon tf-icons mdi mdi-account-multiple-outline"></i>
                             <div data-i18n="Dashboards">Customers</div>
                         </a>
                     </li>
@@ -95,21 +95,21 @@
                     <!-- Order -->
                     <li class="menu-item">
                         <a href="{{ route('order.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons mdi mdi-package-variant-closed"></i>
+                            <i class="menu-icon tf-icons mdi mdi-file-document-multiple-outline"></i>
                             <div data-i18n="Dashboards">Orders</div>
                         </a>
                     </li>
 
                     <li class="menu-item">
                         <a href="{{ route('delivery.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons mdi mdi-truck-delivery"></i>
+                            <i class="menu-icon tf-icons mdi mdi-truck-delivery-outline"></i>
                             <div data-i18n="Dashboards">Order's Delivery</div>
                         </a>
                     </li>
 
 
                     {{-- Biddings --}}
-                    <li class="menu-header small text-uppercase">
+                    <!-- <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Biddings</span>
                     </li>
                     <li class="menu-item">
@@ -122,6 +122,15 @@
                         <a href="{{ route('bidding.insert') }}" class="menu-link">
                             <i class="menu-icon tf-icons mdi mdi-plus-box-outline"></i>
                             <div data-i18n="Dashboards">Add Biddings</div>
+                        </a>
+                    </li> -->
+                    <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">Verification</span>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ route('verification.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons mdi mdi-check-decagram-outline"></i>
+                            <div data-i18n="Dashboards">Verifications</div>
                         </a>
                     </li>
 
@@ -145,12 +154,12 @@
                     </li>
 
 
-                    <li class="menu-header small text-uppercase">
+                    <!-- <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Plant</span>
-                    </li>
+                    </li> -->
 
                     <!-- Plant -->
-                    <li class="menu-item">
+                    <!-- <li class="menu-item">
                         <a href="{{ route('plant.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons mdi mdi-flower-outline"></i>
                             <div data-i18n="Dashboards">Plants</div>
@@ -161,7 +170,7 @@
                             <i class="menu-icon tf-icons mdi mdi-plus-box-outline"></i>
                             <div data-i18n="Dashboards">Add Plant</div>
                         </a>
-                    </li>
+                    </li> -->
 
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Product</span>
@@ -182,12 +191,12 @@
                     </li>
 
 
-                    <li class="menu-header small text-uppercase">
+                    <!-- <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Custom Style</span>
-                    </li>
+                    </li> -->
 
                     <!-- Product -->
-                    <li class="menu-item">
+                    <!-- <li class="menu-item">
                         <a href="{{ route('custom.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons mdi mdi-package-variant-closed"></i>
                             <div data-i18n="Dashboards">Style</div>
@@ -197,6 +206,18 @@
                         <a href="{{ route('custom.insert') }}" class="menu-link">
                             <i class="menu-icon tf-icons mdi mdi-plus-box-outline"></i>
                             <div data-i18n="Dashboards">Add Style</div>
+                        </a>
+                    </li> -->
+
+                    <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">Report</span>
+                    </li>
+
+                    <!-- Product -->
+                    <li class="menu-item">
+                        <a href="{{ route('report.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons mdi mdi-file-chart-outline"></i>
+                            <div data-i18n="Dashboards">Generate Report</div>
                         </a>
                     </li>
 
@@ -308,7 +329,7 @@
                                 <script>
                                     document.write(new Date().getFullYear());
                                 </script>
-                                - Nursery Garden <span class="text-danger"><i class="tf-icons mdi mdi-heart"></i>
+                                - FixIt Foliage Frenzy <span class="text-danger"><i class="tf-icons mdi mdi-heart"></i>
                             </div>
 
                         </div>

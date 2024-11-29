@@ -60,25 +60,25 @@ class _DashboardScreenState extends State<DashboardScreen> {
           items: [
             _barItem(
                 this._pageIndex == 0
-                    ? Icons.local_florist
-                    : Icons.local_florist_outlined,
-                'Plant',
+                    ? Icons.home
+                    : Icons.home_outlined,
+                'Home',
                 0),
             _barItem(
                 this._pageIndex == 1 ? Icons.widgets : Icons.widgets_outlined,
-                'Product',
+                'Services',
                 1),
             _barItem(
                 this._pageIndex == 2
-                    ? Icons.insights_rounded
-                    : Icons.insights_outlined,
-                'Customization',
+                    ? Icons.file_upload
+                    : Icons.file_upload_outlined,
+                'Requests',
                 2),
             _barItem(
                 this._pageIndex == 3
-                    ? Icons.local_atm
-                    : Icons.local_atm_outlined,
-                'Bidding',
+                    ? Icons.groups
+                    : Icons.groups_outlined,
+                'Vendors',
                 3),
             _barItem(
                 this._pageIndex == 4

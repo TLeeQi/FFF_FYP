@@ -53,6 +53,30 @@ class CategorySeeder extends Seeder
                 'type' => "Product",
             ],
 
+            [
+                'name' => "Wiring",
+                'status' => "1",
+                'type' => "Product",
+            ],
+
+            [
+                'name' => "Piping",
+                'status' => "1",
+                'type' => "Product",
+            ],
+
+            [
+                'name' => "Gardening",
+                'status' => "1",
+                'type' => "Product",
+            ],
+
+            [
+                'name' => "Runner",
+                'status' => "1",
+                'type' => "Product",
+            ],
+
         ]);
     }
 }

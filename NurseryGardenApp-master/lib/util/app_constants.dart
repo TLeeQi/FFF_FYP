@@ -3,7 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 class AppConstants {
   static String url = dotenv.env['APP_BASE_URL']!;
   static String prefix = dotenv.env['APP_URL_PREFIX']!;
-  static const String APP_NAME = "Nursery Garden App";
+  static const String APP_NAME = "FFF App";
   static const String APP_VERSION = 'v 0.0.1';
   static const String APP_URI = '';
   static final String BASE_URI = url + prefix;
