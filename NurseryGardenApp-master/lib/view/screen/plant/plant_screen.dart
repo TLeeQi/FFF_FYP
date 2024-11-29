@@ -1,11 +1,5 @@
-import 'package:carousel_slider/carousel_slider.dart' as carousel_slider;
 import 'package:flutter/material.dart';
-
-final List<String> imgList = [
-  'assets/image1.jpg',
-  'assets/image2.jpg',
-  'assets/image3.jpg',
-];
+import 'package:nurserygardenapp/view/screen/sos_button.dart'; // Correct import for the current structure
 
 class PlantScreen extends StatefulWidget {
   const PlantScreen({super.key});
@@ -15,85 +9,213 @@ class PlantScreen extends StatefulWidget {
 }
 
 class _PlantScreenState extends State<PlantScreen> {
-  //final carousel_slider.CarouselController _controller = carousel_slider.CarouselController();
-  int current = 0;
-
-  final List<Widget> imageSliders = imgList
-      .map((item) => Container(
-            margin: EdgeInsets.all(5.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(5.0)),
-              child: Stack(
-                children: <Widget>[
-                  Image.asset(item, fit: BoxFit.cover, width: 1000.0),
-                  Positioned(
-                    bottom: 0.0,
-                    left: 0.0,
-                    right: 0.0,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            Color.fromARGB(200, 0, 0, 0),
-                            Color.fromARGB(0, 0, 0, 0)
-                          ],
-                          begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter,
-                        ),
-                      ),
-                      padding: EdgeInsets.symmetric(
-                          vertical: 5.0, horizontal: 20.0),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ))
-      .toList();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Plant Carousel"),
-      ),
-      body: Column(
-        children: [
-          carousel_slider.CarouselSlider(
-            items: imageSliders,
-            //carouselController: _controller,
-            options: carousel_slider.CarouselOptions(
-              viewportFraction: 1,
-              autoPlay: true,
-              enlargeCenterPage: true,
-              aspectRatio: 2.0,
-              onPageChanged: (index, reason) {
-                setState(() {
-                  current = index;
-                });
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.green[100],
+        elevation: 0,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Image.asset(
+                  'assets/image/fff_icon.png', // Replace with your logo asset
+                  height: 40,
+                  width: 40,
+                ),
+                const SizedBox(width: 10),
+                const Text(
+                  "FixIt and Foliage Frenzy",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     // Add emergency button functionality
+            //   },
+            //   style: ElevatedButton.styleFrom(
+            //     backgroundColor: Colors.red,
+            //     shape: CircleBorder(),  // Use CircleBorder for a circular shape
+            //     padding: EdgeInsets.all(24),  // Adjust padding to control the size
+            //   ),
+                // shape: RoundedRectangleBorder(
+                //   borderRadius: BorderRadius.circular(20),
+                // ),
+              //   padding: const EdgeInsets.symmetric(
+              //     vertical: 10.0,  // Reduced vertical padding
+              //     horizontal: 10.0, // Reduced horizontal padding
+              //   ),
+              //   minimumSize: Size(70, 30),  // Optional: Set a minimum width and height
+              // ),
+            //   child: const Text(
+            //     "EMERGENCY",
+            //     style: TextStyle(
+            //       color: Colors.white,
+            //       fontWeight: FontWeight.bold,
+            //       fontSize: 8,
+            //     ),
+            //    textAlign: TextAlign.center,  // Center the text
+            //   ),
+            // ),
+            // Container(
+            //   decoration: BoxDecoration(
+            //     shape: BoxShape.circle,
+            //     gradient: LinearGradient(
+            //       colors: [Colors.red, Colors.redAccent],
+            //       begin: Alignment.topLeft,
+            //       end: Alignment.bottomRight,
+            //     ),
+            //   ),
+            //   child: ElevatedButton(
+            //     onPressed: () {
+            //       // Add emergency button functionality
+            //     },
+            //     style: ElevatedButton.styleFrom(
+            //       shape: CircleBorder(),
+            //       padding: EdgeInsets.all(10),  // Adjust padding to control the size
+            //       backgroundColor: Colors.transparent,  // Make button background transparent
+            //       shadowColor: Colors.transparent,  // Remove button shadow
+            //     ),
+            //     child: const Text(
+            //       "SOS",
+            //       style: TextStyle(
+            //         color: Colors.white,
+            //         fontWeight: FontWeight.bold,
+            //         fontSize: 16,  // Adjust font size as needed
+            //       ),
+            //       textAlign: TextAlign.center,
+            //     ),
+            //   ),
+            // ),
+            SOSButton(
+              onPressed: () {
+                // Handle SOS button press
+                print("SOS button pressed!");
               },
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: imgList.asMap().entries.map((entry) {
-              return GestureDetector(
-                //onTap: () => _controller.animateToPage(entry.key),
-                child: Container(
-                  width: 8.0,
-                  height: 8.0,
-                  margin: EdgeInsets.symmetric(vertical: 6.0, horizontal: 4.0),
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: (Theme.of(context).brightness == Brightness.dark
-                              ? Colors.white
-                              : Colors.black)
-                          .withOpacity(current == entry.key ? 0.9 : 0.4)),
+          ],
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Title Section
+              const Text(
+                "FixIt and Foliage Frenzy",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
                 ),
-              );
-            }).toList(),
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                "Exactly What You Need",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black87,
+                ),
+              ),
+              const SizedBox(height: 16),
+
+              // Description Section
+              const Text(
+                "Through this system, it provides a centralized and efficient solution for connecting individuals in need of various services with qualified workers capable of fulfilling those requests. The platform addresses the needs of users such as the elderly, people with disabilities, or those living alone who require assistance with tasks ranging from household chores to specialized services.",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.black87,
+                ),
+              ),
+              const SizedBox(height: 20),
+
+              // Discover Button with Image
+              Center(
+                child: InkWell(
+                  onTap: () {
+                    // Add action here when the image is tapped
+                    // For example, you can navigate to another screen
+                  },
+                  child: Image.asset(
+                    'assets/image/service.jpg', // Path to your image
+                    width: 600, // Set desired width
+                    height: 400, // Set desired height
+                    fit: BoxFit.contain, // Adjust how the image fits
+                  ),
+                ),
+              ),
+              // New "Why Choose Us?" Section
+              const SizedBox(height: 20), // Add space before the new section
+              const Text(
+                "Why Choose Us?",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  Icon(Icons.star_rounded, size: 30, color: Colors.yellow), // Icon
+                  const SizedBox(width: 10),
+                  const Expanded( // Use Expanded to allow text to wrap
+                    child: Text(
+                      "We provide reliable and efficient services tailored to your needs, ensuring satisfaction and peace of mind.",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20), // Add space between rows
+              Row(
+                children: [
+                  Icon(Icons.thumb_up_rounded, size: 30, color: Colors.red), // Second Icon
+                  const SizedBox(width: 10),
+                  const Expanded( // Use Expanded to allow text to wrap
+                    child: Text(
+                      "Our team is dedicated to providing top-notch customer service and support.",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20), // Add space between rows
+              Row(
+                children: [
+                  Icon(Icons.shield_rounded, size: 30, color: Colors.grey), // Second Icon
+                  const SizedBox(width: 10),
+                  const Expanded( // Use Expanded to allow text to wrap
+                    child: Text(
+                      "Get protected by warranty and insurance.",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
