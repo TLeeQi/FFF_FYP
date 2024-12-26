@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class Routes {
   /** ROUTE NAME **/
   static const String COMING_SOON = '/coming-soon';
@@ -21,6 +23,10 @@ class Routes {
   // Product
   static const String PRODUCT_SCREEN = '/product';
   static const String PRODUCT_DETAIL_SCREEN = '/product-detail';
+  static const String WIRING_DETAIL_SCREEN = '/wiring-detail';
+  static const String PIPING_DETAIL_SCREEN = '/piping-detail';
+  static const String GARDENING_DETAIL_SCREEN = '/gardening-detail';
+  static const String RUNNER_DETAIL_SCREEN = '/runner-detail';
   static const String PRODUCT_SEARCH_SCREEN = '/product-search';
   static const String PRODUCT_SEARCH_RESULT_SCREEN = '/product-search/result';
 
@@ -37,7 +43,11 @@ class Routes {
   static const String ORDER_SCREEN = '/order';
   static const String ORDER_DETAIL_SCREEN = '/order-detail';
   static const String ORDER_CONFIRMATION_SCREEN = '/order-confirmation';
-  static const String ORDER_ADDRESS_SCREEN = '/order-address';
+  static const String ORDER_CONFIRMATION_SCREEN_WIRING = '/order-confirmation-wiring';
+  static const String ORDER_CONFIRMATION_SCREEN_PIPING = '/order-confirmation-piping';
+  static const String ORDER_CONFIRMATION_SCREEN_GARDENING = '/order-confirmation-gardening';
+  static const String ORDER_CONFIRMATION_SCREEN_RUNNER = '/order-confirmation-runner';
+  static const String ORDER_ADDRESS_SCREEN = '/order-address';  
   static const String ORDER_DELIVERY_SCREEN = '/order-delivery';
   static const String ORDER_RECEIPT_SCREEN = '/order-receipt';
 
@@ -53,6 +63,10 @@ class Routes {
   static const String BIDDING_SCREEN = '/bidding';
   static const String BIDDING_DETAIL_SCREEN = '/bidding-detail';
   static const String BIDDING_REFUND_SCREEN = '/bidding-refund';
+
+  // Vendor
+  static const String VENDOR_SCREEN = '/vendor';
+  static const String VENDOR_DETAIL_SCREEN = '/vendor-detail';
 
   // Delivery
   static const String DELIVERY_SCREEN = '/delivery';
@@ -99,6 +113,18 @@ class Routes {
   static String getProductDetailRoute(
           String productID, String isSearch, String isCart) =>
       '$PRODUCT_DETAIL_SCREEN?productID=$productID&isSearch=$isSearch&isCart=$isCart';
+  static String getWiringDetailRoute(
+          String productID, String isSearch, String isCart) =>
+      '$WIRING_DETAIL_SCREEN?productID=$productID&isSearch=$isSearch&isCart=$isCart';
+  static String getPipingDetailRoute(
+          String productID, String isSearch, String isCart) =>
+      '$PIPING_DETAIL_SCREEN?productID=$productID&isSearch=$isSearch&isCart=$isCart';
+  static String getGardeningDetailRoute(
+          String productID, String isSearch, String isCart) =>
+      '$GARDENING_DETAIL_SCREEN?productID=$productID&isSearch=$isSearch&isCart=$isCart';
+  static String getRunnerDetailRoute(
+          String productID, String isSearch, String isCart) =>
+      '$RUNNER_DETAIL_SCREEN?productID=$productID&isSearch=$isSearch&isCart=$isCart';
   static String getProductSearchRoute() => PRODUCT_SEARCH_SCREEN;
   static String getProductSearchResultRoute(String searchKeyword) =>
       '$PRODUCT_SEARCH_RESULT_SCREEN?searchKeyword=$searchKeyword';
@@ -116,8 +142,34 @@ class Routes {
   static String getOrderRoute() => ORDER_SCREEN;
   static String getOrderDetailRoute(String orderID) =>
       '$ORDER_DETAIL_SCREEN?orderID=$orderID';
-  static String getOrderConfirmationRoute(String comeFrom) =>
-      '$ORDER_CONFIRMATION_SCREEN?comeFrom=$comeFrom';
+  static String getOrderConfirmationRoute(
+    String comeFrom, 
+    {bool isWiring = false, bool isPiping = false, bool isGardening = false, bool isRunner = false, 
+    required Map<String, dynamic> detailData} // Ensure detailData is included in the parameters
+  ) {print("Detail Data Encoded: ${jsonEncode(detailData)}"); 
+    return '$ORDER_CONFIRMATION_SCREEN?comeFrom=$comeFrom'
+      '&isWiring=$isWiring'
+      '&isPiping=$isPiping'
+      '&isGardening=$isGardening'
+      '&isRunner=$isRunner'
+      '&detailData=${Uri.encodeComponent(jsonEncode(detailData))}';
+    }
+// static String getOrderConfirmationRoute
+// (String comeFrom, {bool isWiring = false, bool isPiping = false, bool isGardening = false, bool isRunner = false}, Map<String, dynamic> detailData)=> 
+// // {
+//     // String route = ORDER_CONFIRMATION_SCREEN;
+//     // if (isWiring) {
+//     //   route = ORDER_CONFIRMATION_SCREEN_WIRING;
+//     // } else if (isPiping) {
+//     //   route = ORDER_CONFIRMATION_SCREEN_PIPING;
+//     // } else if (isGardening) {
+//     //   route = ORDER_CONFIRMATION_SCREEN_GARDENING;
+//     // } else if (isRunner) {
+//     //   route = ORDER_CONFIRMATION_SCREEN_RUNNER;
+//     // }
+//     // return 
+//     '$ORDER_CONFIRMATION_SCREEN?comeFrom=$comeFrom&detailData=$detailData';
+//   // }
   static String getOrderAddressRoute() => ORDER_ADDRESS_SCREEN;
   static String getOrderDeliveryRoute(String orderID) =>
       '$ORDER_DELIVERY_SCREEN?orderID=$orderID';
@@ -142,10 +194,15 @@ class Routes {
       '$DELIVERY_RECEIPT_SCREEN?deliveryID=$deliveryID';
 
   // Bidding
-  static String getBiddingRoute() => BIDDING_SCREEN;
-  static String getBiddingDetailRoute(String biddingID) =>
-      '$BIDDING_DETAIL_SCREEN?biddingID=$biddingID';
-  static String getBiddingRefundRoute() => BIDDING_REFUND_SCREEN;
+  // static String getBiddingRoute() => BIDDING_SCREEN;
+  // static String getBiddingDetailRoute(String biddingID) =>
+  //     '$BIDDING_DETAIL_SCREEN?biddingID=$biddingID';
+  // static String getBiddingRefundRoute() => BIDDING_REFUND_SCREEN;
+
+  // Vendor
+  static String getVendorRoute() => VENDOR_SCREEN;
+  static String getVendorDetailRoute(String vendorID) =>
+      '$VENDOR_DETAIL_SCREEN?vendorID=$vendorID';
 
   // Image widget
   static String getImageEnlargeRoute(String tag, String url) =>

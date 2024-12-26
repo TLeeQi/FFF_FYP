@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:nurserygardenapp/util/color_resources.dart';
 import 'package:nurserygardenapp/view/screen/account/account_screen.dart';
-import 'package:nurserygardenapp/view/screen/bidding/bidding_screen.dart';
-import 'package:nurserygardenapp/view/screen/customization/customization_screen.dart';
+// import 'package:nurserygardenapp/view/screen/bidding/bidding_screen.dart';
+import 'package:nurserygardenapp/view/screen/vendor/vendor_screen.dart';
+import 'package:nurserygardenapp/view/screen/order/order_screen.dart';
 import 'package:nurserygardenapp/view/screen/plant/plant_screen.dart';
 import 'package:nurserygardenapp/view/screen/product/product_screen.dart';
 
@@ -30,8 +31,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
     _screen = [
       PlantScreen(),
       ProductScreen(),
-      CustomizationScreen(),
-      BiddingScreen(),
+      OrderScreen(),
+      VendorScreen(),
       AccountScreen(),
     ];
   }

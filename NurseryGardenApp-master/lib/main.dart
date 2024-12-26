@@ -20,6 +20,8 @@ import 'package:nurserygardenapp/providers/plant_provider.dart';
 import 'package:nurserygardenapp/providers/product_provider.dart';
 import 'package:nurserygardenapp/providers/splash_provider.dart';
 import 'package:nurserygardenapp/providers/user_provider.dart';
+import 'package:nurserygardenapp/providers/vendor_provider.dart';
+// import 'package:nurserygardenapp/providers/wiring_provider.dart';
 import 'package:nurserygardenapp/util/app_constants.dart';
 import 'package:nurserygardenapp/util/dimensions.dart';
 import 'package:nurserygardenapp/util/routes.dart';
@@ -55,6 +57,8 @@ Future<void> main() async {
         ChangeNotifierProvider(create: (context) => di.sl<AddressProvider>()),
         ChangeNotifierProvider(create: (context) => di.sl<DeliveryProvider>()),
         ChangeNotifierProvider(create: (context) => di.sl<BiddingProvider>()),
+        ChangeNotifierProvider(create: (context) => di.sl<VendorProvider>()),
+        // ChangeNotifierProvider(create: (context) => di.sl<WiringProvider>()),
       ],
       child: MyApp(
         isWeb: !kIsWeb,

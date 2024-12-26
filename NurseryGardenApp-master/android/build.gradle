@@ -11,6 +11,13 @@ buildscript {
     }
 }
 
+// plugins {
+//     id 'com.android.nurserygardenapp'
+//     id 'kotlin-android'
+//     id 'com.google.gms.google-services'
+//     id 'com.google.firebase.crashlytics'
+// }
+
 allprojects {
     repositories {
         google()

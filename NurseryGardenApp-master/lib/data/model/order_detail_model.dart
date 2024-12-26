@@ -7,6 +7,11 @@ import 'dart:convert';
 import 'package:nurserygardenapp/data/model/delivery_model.dart';
 import 'package:nurserygardenapp/data/model/plant_model.dart';
 import 'package:nurserygardenapp/data/model/product_model.dart';
+import 'package:nurserygardenapp/data/model/wiring_model.dart'; 
+import 'package:nurserygardenapp/data/model/piping_model.dart';
+import 'package:nurserygardenapp/data/model/gardening_model.dart';
+import 'package:nurserygardenapp/data/model/runner_model.dart';
+
 
 OrderDetailModel orderDetailModelFromJson(String str) =>
     OrderDetailModel.fromJson(json.decode(str));
@@ -45,6 +50,11 @@ class Data {
   List<Product>? product;
   List<OrderItem>? orderItem;
   List<Delivery>? delivery;
+  List<Wiring>? wiring;
+  //Wiring? wiring;
+  List<Piping>? piping;
+  List<Gardening>? gardening;
+  List<Runner>? runner;
 
   Data({
     this.order_address,
@@ -52,6 +62,10 @@ class Data {
     this.product,
     this.orderItem,
     this.delivery,
+    this.wiring,
+    this.piping,
+    this.gardening,
+    this.runner,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
@@ -71,6 +85,24 @@ class Data {
             ? []
             : List<Delivery>.from(
                 json["delivery_list"]!.map((x) => Delivery.fromJson(x))),
+        wiring: json["wiring"] == null
+            ? []
+            : List<Wiring>.from(
+                json["wiring"]!.map((x) => Wiring.fromJson(x))),
+       // wiring: json["wiring"] == null ? null : Wiring.fromJson(json["wiring"]),
+
+        piping: json["piping"] == null
+            ? []
+            : List<Piping>.from(
+                json["piping"]!.map((x) => Piping.fromJson(x))),  
+        gardening: json["gardening"] == null
+            ? []
+            : List<Gardening>.from(
+                json["gardening"]!.map((x) => Gardening.fromJson(x))),
+        runner: json["runner"] == null
+            ? []
+            : List<Runner>.from(
+                json["runner"]!.map((x) => Runner.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -86,7 +118,21 @@ class Data {
         "delivery_list": delivery == null
             ? []
             : List<dynamic>.from(delivery!.map((x) => x.toJson())),
+        "wiring": wiring == null
+            ? []
+            : List<dynamic>.from(wiring!.map((x) => x.toJson())),
+        //"wiring": wiring?.toJson(),
+        "piping": piping == null
+            ? []
+            : List<dynamic>.from(piping!.map((x) => x.toJson())),
+        "gardening": gardening == null
+            ? []
+            : List<dynamic>.from(gardening!.map((x) => x.toJson())),
+        "runner": runner == null
+            ? []
+            : List<dynamic>.from(runner!.map((x) => x.toJson())),
       };
+
 }
 
 class OrderItem {
@@ -99,6 +145,10 @@ class OrderItem {
   dynamic cartId;
   int? productId;
   int? plantId;
+  int? wiringId;
+  int? pipingId;
+  int? gardeningId;
+  int? runnerId;
   dynamic biddingId;
   DateTime? createdAt;
   DateTime? updatedAt;
@@ -114,6 +164,10 @@ class OrderItem {
     this.productId,
     this.plantId,
     this.biddingId,
+    this.wiringId,
+    this.pipingId,
+    this.gardeningId,
+    this.runnerId,
     this.createdAt,
     this.updatedAt,
   });
@@ -129,6 +183,10 @@ class OrderItem {
         productId: json["product_id"],
         plantId: json["plant_id"],
         biddingId: json["bidding_id"],
+        wiringId: json["wiring_id"],
+        pipingId: json["piping_id"],
+        gardeningId: json["gardening_id"],
+        runnerId: json["runner_id"],
         createdAt: json["created_at"] == null
             ? null
             : DateTime.parse(json["created_at"]),
@@ -148,6 +206,10 @@ class OrderItem {
         "product_id": productId,
         "plant_id": plantId,
         "bidding_id": biddingId,
+        "wiring_id": wiringId,
+        "piping_id": pipingId,
+        "gardening_id": gardeningId,
+        "runner_id": runnerId,
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
       };

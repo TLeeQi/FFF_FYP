@@ -129,38 +129,38 @@ class _AccountScreenState extends State<AccountScreen> {
         width: MediaQuery.of(context).size.width,
         child: Column(
           children: [
-            // SizedBox(
-            //   height: 5,
-            // ),
-            GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, Routes.getOrderRoute());
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                    border: Border(
-                        bottom: BorderSide(
-                  color: ColorResources.COLOR_GREY.withOpacity(0.3),
-                  width: 0.5,
-                ))),
-                child: ListTile(
-                  leading: Icon(
-                    Icons.list_alt_outlined,
-                    color: ColorResources.COLOR_BLACK,
-                  ),
-                  title: Text(
-                    "Orders",
-                    style: CustomTextStyles(context).titleStyle.copyWith(
-                          fontWeight: FontWeight.w300,
-                          fontSize: 16,
-                        ),
-                  ),
-                  trailing: Icon(
-                    Icons.chevron_right_outlined,
-                  ),
-                ),
-              ),
+            SizedBox(
+              height: 5,
             ),
+            // GestureDetector(
+            //   onTap: () {
+            //     Navigator.pushNamed(context, Routes.getOrderRoute());
+            //   },
+            //   child: Container(
+            //     decoration: BoxDecoration(
+            //         border: Border(
+            //             bottom: BorderSide(
+            //       color: ColorResources.COLOR_GREY.withOpacity(0.3),
+            //       width: 0.5,
+            //     ))),
+            //     child: ListTile(
+            //       leading: Icon(
+            //         Icons.list_alt_outlined,
+            //         color: ColorResources.COLOR_BLACK,
+            //       ),
+            //       title: Text(
+            //         "Orders",
+            //         style: CustomTextStyles(context).titleStyle.copyWith(
+            //               fontWeight: FontWeight.w300,
+            //               fontSize: 16,
+            //             ),
+            //       ),
+            //       trailing: Icon(
+            //         Icons.chevron_right_outlined,
+            //       ),
+            //     ),
+            //   ),
+            // ),
             GestureDetector(
               onTap: () {
                 Navigator.pushNamed(context, Routes.getDeliveryRoute());
@@ -174,11 +174,11 @@ class _AccountScreenState extends State<AccountScreen> {
                 ))),
                 child: ListTile(
                   leading: Icon(
-                    Icons.local_shipping_outlined,
+                    Icons.volunteer_activism_outlined,
                     color: ColorResources.COLOR_BLACK,
                   ),
                   title: Text(
-                    "Delivery",
+                    "Status",
                     style: CustomTextStyles(context).titleStyle.copyWith(
                           fontWeight: FontWeight.w300,
                           fontSize: 16,
@@ -217,35 +217,35 @@ class _AccountScreenState extends State<AccountScreen> {
             //     ),
             //   ),
             // ),
-            GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, Routes.getBiddingRefundRoute());
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                    border: Border(
-                        bottom: BorderSide(
-                  color: ColorResources.COLOR_GREY.withOpacity(0.3),
-                  width: 0.5,
-                ))),
-                child: ListTile(
-                  leading: Icon(
-                    Icons.money_off_csred_outlined,
-                    color: ColorResources.COLOR_BLACK,
-                  ),
-                  title: Text(
-                    "Bidding Refund",
-                    style: CustomTextStyles(context).titleStyle.copyWith(
-                          fontWeight: FontWeight.w300,
-                          fontSize: 16,
-                        ),
-                  ),
-                  trailing: Icon(
-                    Icons.chevron_right_outlined,
-                  ),
-                ),
-              ),
-            ),
+            // GestureDetector(
+            //   onTap: () {
+            //     Navigator.pushNamed(context, Routes.getBiddingRefundRoute());
+            //   },
+            //   child: Container(
+            //     decoration: BoxDecoration(
+            //         border: Border(
+            //             bottom: BorderSide(
+            //       color: ColorResources.COLOR_GREY.withOpacity(0.3),
+            //       width: 0.5,
+            //     ))),
+            //     child: ListTile(
+            //       leading: Icon(
+            //         Icons.money_off_csred_outlined,
+            //         color: ColorResources.COLOR_BLACK,
+            //       ),
+            //       title: Text(
+            //         "Bidding Refund",
+            //         style: CustomTextStyles(context).titleStyle.copyWith(
+            //               fontWeight: FontWeight.w300,
+            //               fontSize: 16,
+            //             ),
+            //       ),
+            //       trailing: Icon(
+            //         Icons.chevron_right_outlined,
+            //       ),
+            //     ),
+            //   ),
+            // ),
             GestureDetector(
               onTap: () {
                 Navigator.pushNamed(context, Routes.getSettingsRoute());

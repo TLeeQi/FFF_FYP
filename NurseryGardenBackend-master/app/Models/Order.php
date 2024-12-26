@@ -22,6 +22,7 @@ class Order extends Model
         'user_id',
         'receiver_name',
         'note',
+        'price',
         'created_at',
         'updated_at',
     ];

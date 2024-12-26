@@ -9,7 +9,7 @@ import 'package:nurserygardenapp/providers/product_provider.dart';
 import 'package:nurserygardenapp/util/color_resources.dart';
 import 'package:nurserygardenapp/util/custom_text_style.dart';
 import 'package:nurserygardenapp/util/dimensions.dart';
-import 'package:nurserygardenapp/util/routes.dart';
+// import 'package:nurserygardenapp/util/routes.dart';
 import 'package:nurserygardenapp/view/base/custom_button.dart';
 import 'package:nurserygardenapp/view/base/custom_space.dart';
 import 'package:nurserygardenapp/view/base/image_enlarge_widget.dart';
@@ -86,14 +86,20 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     cart.isPurchase = "false";
     cart.isCart = false;
     cart_prov.addCartList(cart);
-    Navigator.pushNamed(context, Routes.getOrderConfirmationRoute("product"))
-        .then((value) {
-      if (value == true) {
-        cart_prov.clearCartList();
-        getProductInformation();
-      }
-      ;
-    });
+    // Navigator.pushNamed(context, Routes.getOrderConfirmationRoute(
+    //   "product", 
+    //   isWiring: false, 
+    //   isPiping: false, 
+    //   isGardening: false, 
+    //   isRunner: false,
+    //   detailData: product,))
+    //     .then((value) {
+    //   if (value == true) {
+    //     cart_prov.clearCartList();
+    //     getProductInformation();
+    //   }
+    //   ;
+    // });
   }
 
   void showModalBottom(int index, BuildContext context) {

@@ -10,7 +10,7 @@ import 'package:nurserygardenapp/providers/plant_provider.dart';
 import 'package:nurserygardenapp/util/color_resources.dart';
 import 'package:nurserygardenapp/util/custom_text_style.dart';
 import 'package:nurserygardenapp/util/dimensions.dart';
-import 'package:nurserygardenapp/util/routes.dart';
+// import 'package:nurserygardenapp/util/routes.dart';
 import 'package:nurserygardenapp/view/base/custom_button.dart';
 import 'package:nurserygardenapp/view/base/custom_space.dart';
 import 'package:nurserygardenapp/view/base/image_enlarge_widget.dart';
@@ -92,14 +92,19 @@ class _PlantDetailScreenState extends State<PlantDetailScreen> {
     cart.isPurchase = "false";
     cart.isCart = false;
     cart_prov.addCartList(cart);
-    Navigator.pushNamed(context, Routes.getOrderConfirmationRoute("plant"))
-        .then((value) {
-      if (value == true) {
-        cart_prov.clearCartList();
-        getPlantInformation();
-      }
-      ;
-    });
+    // Navigator.pushNamed(context, Routes.getOrderConfirmationRoute(
+    //   "plant", 
+    //   isWiring: false, 
+    //   isPiping: false, 
+    //   isGardening: false, 
+    //   isRunner: false))
+    //     .then((value) {
+    //   if (value == true) {
+    //     cart_prov.clearCartList();
+    //     getPlantInformation();
+    //   }
+    //   ;
+    // });
   }
 
   void showModalBottom(int index, BuildContext context) {

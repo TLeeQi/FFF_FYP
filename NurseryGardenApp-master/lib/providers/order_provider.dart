@@ -7,6 +7,10 @@ import 'package:nurserygardenapp/data/model/order_model.dart';
 import 'package:nurserygardenapp/data/model/order_recieipt_model.dart';
 import 'package:nurserygardenapp/data/model/plant_model.dart';
 import 'package:nurserygardenapp/data/model/product_model.dart';
+import 'package:nurserygardenapp/data/model/wiring_model.dart'; 
+import 'package:nurserygardenapp/data/model/piping_model.dart';
+import 'package:nurserygardenapp/data/model/gardening_model.dart';
+import 'package:nurserygardenapp/data/model/runner_model.dart';
 import 'package:nurserygardenapp/data/model/response/api_response.dart';
 import 'package:nurserygardenapp/data/model/user_model.dart';
 import 'package:nurserygardenapp/data/repositories/order_repo.dart';
@@ -78,6 +82,18 @@ class OrderProvider extends ChangeNotifier {
   List<Plant> get getOrderPlantList => _orderPlantList;
   List<Product> _orderProductList = [];
   List<Product> get getOrderProductList => _orderProductList;
+  List<Wiring> _orderWiringList = [];
+  List<Wiring> get getOrderWiringList => _orderWiringList;
+
+// Wiring? _orderWiringDetail;
+// Wiring? get orderWiringDetail => _orderWiringDetail;
+
+  List<Piping> _orderPipingList = [];
+  List<Piping> get getOrderPipingList => _orderPipingList;
+  List<Gardening> _orderGardeningList = [];
+  List<Gardening> get getOrderGardeningList => _orderGardeningList;
+  List<Runner> _orderRunnerList = [];
+  List<Runner> get getOrderRunnerList => _orderRunnerList;
 
   List<Delivery> _orderDeliveryList = [];
   List<Delivery> get getOrderDeliveryList => _orderDeliveryList;
@@ -94,16 +110,38 @@ class OrderProvider extends ChangeNotifier {
     notifyListeners();
 
     ApiResponse apiResponse = await orderRepo.getOrderDetail(query);
+     print("API call completed");
+     print("Raw API Response: ${apiResponse.response!.data}");
 
     if (context.mounted) {
       result = ResponseHelper.responseHelper(context, apiResponse);
+
       if (result) {
-        _orderDetailModel =
-            OrderDetailModel.fromJson(apiResponse.response!.data);
-        _orderDetailList = _orderDetailModel.data!.orderItem ?? [];
-        _orderPlantList = _orderDetailModel.data!.plant ?? [];
-        _orderProductList = _orderDetailModel.data!.product ?? [];
-        _orderDeliveryList = _orderDetailModel.data!.delivery ?? [];
+        try {
+             _orderDetailModel = OrderDetailModel.fromJson(apiResponse.response!.data);
+             print("OrderDetailModel parsed successfully");
+             print("OrderDetailModel data: ${_orderDetailModel.data}");
+             print("Wiring List from API Response: ${apiResponse.response!.data['wiring']}");
+             //print("Parsed Wiring List: ${_orderWiringList.map((wiring) => wiring.id).toList()}");
+
+           } catch (e) {
+             print("Error parsing OrderDetailModel: $e");
+           }
+        _orderDetailList = _orderDetailModel.data?.orderItem ?? [];
+        _orderPlantList = _orderDetailModel.data?.plant ?? [];
+        _orderProductList = _orderDetailModel.data?.product ?? [];
+        _orderDeliveryList = _orderDetailModel.data?.delivery ?? [];
+       _orderWiringList = _orderDetailModel.data?.wiring ?? [];
+       //_orderWiringDetail = _orderDetailModel.data!.wiring;
+       //print("Wiring Detail Array Order Provider: ${_orderWiringDetail?.id}");
+
+        _orderPipingList = _orderDetailModel.data!.piping ?? [];
+        _orderGardeningList = _orderDetailModel.data!.gardening ?? [];
+        _orderRunnerList = _orderDetailModel.data!.runner ?? [];
+
+        // Debugging logs
+        print("Order Detail List: ${_orderDetailList.map((item) => item.wiringId).toList()}");
+        print("Wiring List: ${_orderWiringList.map((wiring) => wiring.id).toList()}");
       }
     }
 
@@ -112,12 +150,46 @@ class OrderProvider extends ChangeNotifier {
     return result;
   }
 
+  Wiring? getWiringDetailById(int? wiringId) {
+    print("Looking for Wiring ID: $wiringId");
+    print("Available Wiring IDs: ${_orderWiringList.map((w) => w.id).toList()}");
+  if (wiringId == null) {
+    return null;
+  }
+  try {
+    return _orderWiringList.firstWhere(
+      (detail) => detail.id == wiringId,
+    );
+  } catch (e) {
+    print("Wiring detail not found for ID: $wiringId");
+    return null;
+  }
+}
+
+// Wiring? getWiringDetailById(int? wiringId) {
+//     print("Looking for Wiring ID: $wiringId");
+//     if (wiringId == null || _orderWiringDetail == null) {
+//         return null;
+//     }
+    
+//     if (_orderWiringDetail!.id == wiringId) {
+//         return _orderWiringDetail;
+//     } else {
+//         print("Wiring detail not found for ID: $wiringId");
+//         return null;
+//     }
+// }
+
   clearOrderDetail() {
     _orderDetailModel = OrderDetailModel();
     _orderDetailList = [];
     _orderPlantList = [];
     _orderProductList = [];
     _orderDeliveryList = [];
+    _orderWiringList = [];
+    _orderPipingList = [];
+    _orderGardeningList = [];
+    _orderRunnerList = [];
     notifyListeners();
   }
 
@@ -141,6 +213,94 @@ class OrderProvider extends ChangeNotifier {
         print(_orderIdCreated);
       }
     }
+    _isLoading = false;
+    notifyListeners();
+    return result;
+  }
+
+  Future<bool> storeWiringDetail(
+      Map<String, dynamic> wiringData, BuildContext context) async {
+    bool result = false;
+    _isLoading = true;
+    _orderIdCreated = '';
+    notifyListeners();
+
+    ApiResponse apiResponse = await orderRepo.storeWiringDetail(wiringData);
+    if (context.mounted) {
+      result = ResponseHelper.responseHelper(context, apiResponse);
+      if (result) {
+        _orderIdCreated =
+            apiResponse.response!.data['data']['order_id'].toString();
+        print(_orderIdCreated);
+      }
+    }
+    
+    _isLoading = false;
+    notifyListeners();
+    return result;
+  }
+
+  Future<bool> storePipingDetail(
+      Map<String, dynamic> pipingData, BuildContext context) async {
+    bool result = false;
+    _isLoading = true;
+    _orderIdCreated = '';
+    notifyListeners();
+
+    ApiResponse apiResponse = await orderRepo.storePipingDetail(pipingData);
+    if (context.mounted) {
+      result = ResponseHelper.responseHelper(context, apiResponse);
+      if (result) {
+        _orderIdCreated =
+            apiResponse.response!.data['data']['order_id'].toString();
+        print(_orderIdCreated);
+      }
+    }
+    
+    _isLoading = false;
+    notifyListeners();
+    return result;
+  }
+
+  Future<bool> storeGardeningDetail(
+      Map<String, dynamic> gardeningData, BuildContext context) async {
+    bool result = false;
+    _isLoading = true;
+    _orderIdCreated = '';
+    notifyListeners();
+
+    ApiResponse apiResponse = await orderRepo.storeGardeningDetail(gardeningData);
+    if (context.mounted) {
+      result = ResponseHelper.responseHelper(context, apiResponse);
+      if (result) {
+        _orderIdCreated =
+            apiResponse.response!.data['data']['order_id'].toString();
+        print(_orderIdCreated);
+      }
+    }
+    
+    _isLoading = false;
+    notifyListeners();
+    return result;
+  }
+
+  Future<bool> storeRunnerDetail(
+      Map<String, dynamic> runnerData, BuildContext context) async {
+    bool result = false;
+    _isLoading = true;
+    _orderIdCreated = '';
+    notifyListeners();
+
+    ApiResponse apiResponse = await orderRepo.storeRunnerDetail(runnerData);
+    if (context.mounted) {
+      result = ResponseHelper.responseHelper(context, apiResponse);
+      if (result) {
+        _orderIdCreated =
+            apiResponse.response!.data['data']['order_id'].toString();
+        print(_orderIdCreated);
+      }
+    }
+    
     _isLoading = false;
     notifyListeners();
     return result;

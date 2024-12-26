@@ -48,6 +48,54 @@ class OrderRepo {
     }
   }
 
+  Future<ApiResponse> storeWiringDetail(Map<String, dynamic> wiringData) async {
+    try {
+      Response response = await dioClient.post(
+        AppConstants.ORDER_WIRING_DETAIL_URI, 
+        data: wiringData,
+      );
+      return ApiResponse.withSuccess(response);
+    } catch (e) {
+      return ApiResponse.withError(ApiErrorHandler.getMessage(e));
+    }
+  }
+
+  Future<ApiResponse> storePipingDetail(Map<String, dynamic> pipingData) async {
+    try {
+      Response response = await dioClient.post(
+        AppConstants.ORDER_PIPING_DETAIL_URI, 
+        data: pipingData,
+      );
+      return ApiResponse.withSuccess(response);
+    } catch (e) {
+      return ApiResponse.withError(ApiErrorHandler.getMessage(e));
+    }
+  }
+
+  Future<ApiResponse> storeGardeningDetail(Map<String, dynamic> gardeningData) async {
+    try {
+      Response response = await dioClient.post(
+        AppConstants.ORDER_GARDENING_DETAIL_URI, 
+        data: gardeningData,
+      );
+      return ApiResponse.withSuccess(response);
+    } catch (e) {
+      return ApiResponse.withError(ApiErrorHandler.getMessage(e));
+    }
+  }
+
+  Future<ApiResponse> storeRunnerDetail(Map<String, dynamic> runnerData) async {
+    try {
+      Response response = await dioClient.post(
+        AppConstants.ORDER_RUNNER_DETAIL_URI, 
+        data: runnerData,
+      );
+      return ApiResponse.withSuccess(response);
+    } catch (e) {
+      return ApiResponse.withError(ApiErrorHandler.getMessage(e));
+    }
+  }
+
   Future<ApiResponse> getReceipt(param) async {
     try {
       Response response =

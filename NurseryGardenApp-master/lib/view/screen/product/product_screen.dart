@@ -147,15 +147,15 @@ class _ProductScreenState extends State<ProductScreen> {
             ),
             actions: [
               // Shopping cart button
-              IconButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, Routes.getCartRoute());
-                },
-                icon: Icon(
-                  Icons.shopping_cart_outlined,
-                  color: Colors.white,
-                ),
-              ),
+              // IconButton(
+              //   onPressed: () {
+              //     Navigator.pushNamed(context, Routes.getCartRoute());
+              //   },
+              //   icon: Icon(
+              //     Icons.shopping_cart_outlined,
+              //     color: Colors.white,
+              //   ),
+              // ),
               // SOS Button
               Padding(
                 padding: const EdgeInsets.only(right: 8.0),
@@ -325,25 +325,62 @@ class _ProductScreenState extends State<ProductScreen> {
                                           );
                                         } else {
                                           return ProductGridItem(
-                                            key: ValueKey(productProvider
-                                                .productList
-                                                .elementAt(index)
-                                                .id),
-                                            product: productProvider.productList
-                                                .elementAt(index),
+                                            key: ValueKey(productProvider.productList.elementAt(index).id),
+                                            product: productProvider.productList.elementAt(index),
                                             onTap: () async {
-                                              await Navigator.pushNamed(
+                                              final product = productProvider.productList.elementAt(index);
+
+                                              // Navigate based on cat_id
+                                              if (product.catId == 7) {
+                                                await Navigator.pushNamed(
+                                                  context,
+                                                  Routes.getWiringDetailRoute(
+                                                    product.id!.toString(),
+                                                    "false",
+                                                    "false",
+                                                  ),
+                                                );
+                                              } else if (product.catId == 5) {
+                                                await Navigator.pushNamed(
+                                                  context,
+                                                  Routes.getPipingDetailRoute(
+                                                    product.id!.toString(),
+                                                    "false",
+                                                    "false",
+                                                  ),
+                                                );
+                                              } else if (product.catId == 15) {
+                                                await Navigator.pushNamed(
+                                                  context,
+                                                  Routes.getGardeningDetailRoute(
+                                                    product.id!.toString(),
+                                                    "false",
+                                                    "false",
+                                                  ),
+                                                );
+                                              }else if (product.catId == 18) {
+                                                await Navigator.pushNamed(
+                                                  context,
+                                                  Routes.getRunnerDetailRoute(
+                                                    product.id!.toString(),
+                                                    "false",
+                                                    "false",
+                                                  ),
+                                                );
+                                              }else {
+                                                print("Product catID: ${product.catId}");
+                                                await Navigator.pushNamed(
                                                   context,
                                                   Routes.getProductDetailRoute(
-                                                      productProvider
-                                                          .productList
-                                                          .elementAt(index)
-                                                          .id!
-                                                          .toString(),
-                                                      "false",
-                                                      "false"));
+                                                    product.id!.toString(),
+                                                    "false",
+                                                    "false",
+                                                  ),
+                                                );
+                                              }
                                             },
                                           );
+
                                         }
                                       },
                                     );

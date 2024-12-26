@@ -15,9 +15,9 @@ import 'package:nurserygardenapp/view/screen/address/sub_screen/add_address_scre
 import 'package:nurserygardenapp/view/screen/address/sub_screen/address_detail_screen.dart';
 import 'package:nurserygardenapp/view/screen/auth/login_screen.dart';
 import 'package:nurserygardenapp/view/screen/auth/register_screen.dart';
-import 'package:nurserygardenapp/view/screen/bidding/bidding_screen.dart';
-import 'package:nurserygardenapp/view/screen/bidding/sub_screen/bidding_detail_screen.dart';
-import 'package:nurserygardenapp/view/screen/bidding/sub_screen/bidding_refund_screen.dart';
+// import 'package:nurserygardenapp/view/screen/bidding/bidding_screen.dart';
+// import 'package:nurserygardenapp/view/screen/bidding/sub_screen/bidding_detail_screen.dart';
+// import 'package:nurserygardenapp/view/screen/bidding/sub_screen/bidding_refund_screen.dart';
 import 'package:nurserygardenapp/view/screen/cart/cart_screen.dart';
 import 'package:nurserygardenapp/view/screen/customization/sub_screen/customConfirmation_screen.dart';
 import 'package:nurserygardenapp/view/screen/customization/customization_screen.dart';
@@ -40,10 +40,17 @@ import 'package:nurserygardenapp/view/screen/plant/plant_screen.dart';
 import 'package:nurserygardenapp/view/screen/plant/plant_search_result_screen.dart';
 import 'package:nurserygardenapp/view/screen/plant/widget/plant_search_screen.dart';
 import 'package:nurserygardenapp/view/screen/product/product_detail_screen.dart';
+import 'package:nurserygardenapp/view/screen/product/wiring_detail_screen.dart';
+import 'package:nurserygardenapp/view/screen/product/piping_detail_screen.dart';
+import 'package:nurserygardenapp/view/screen/product/gardening_detail_screen.dart';
+import 'package:nurserygardenapp/view/screen/product/runner_detail_screen.dart';
 import 'package:nurserygardenapp/view/screen/product/product_screen.dart';
 import 'package:nurserygardenapp/view/screen/product/product_search_result_screen.dart';
 import 'package:nurserygardenapp/view/screen/product/widget/product_search_screen.dart';
 import 'package:nurserygardenapp/view/screen/splash/splash_screen.dart';
+import 'dart:convert'; 
+import 'package:nurserygardenapp/view/screen/vendor/vendor_detail_screen.dart';
+import 'package:nurserygardenapp/view/screen/vendor/vendor_screen.dart';
 
 class RouterHelper {
   static final FluroRouter router = FluroRouter();
@@ -72,7 +79,7 @@ class RouterHelper {
                 ? 1
                 : params['page'][0] == 'Customization'
                     ? 2
-                    : params['page'][0] == 'Bidding'
+                    : params['page'][0] == 'Vendors'
                         ? 3
                         : params['page'][0] == 'Account'
                             ? 4
@@ -113,6 +120,38 @@ class RouterHelper {
 
   static Handler _productDetailHandler = Handler(
     handlerFunc: (context, Map<String, dynamic> params) => ProductDetailScreen(
+      productID: params['productID'][0],
+      isSearch: params['isSearch'][0],
+      isCart: params['isCart'][0],
+    ),
+  );
+
+   static Handler _wiringDetailHandler = Handler(
+    handlerFunc: (context, Map<String, dynamic> params) => WiringDetailScreen(
+      productID: params['productID'][0],
+      isSearch: params['isSearch'][0],
+      isCart: params['isCart'][0],
+    ),
+  );
+
+  static Handler _pipingDetailHandler = Handler(
+    handlerFunc: (context, Map<String, dynamic> params) => PipingDetailScreen(
+      productID: params['productID'][0],
+      isSearch: params['isSearch'][0],
+      isCart: params['isCart'][0],
+    ),
+  );
+
+  static Handler _gardeningDetailHandler = Handler(
+    handlerFunc: (context, Map<String, dynamic> params) => GardeningDetailScreen(
+      productID: params['productID'][0],
+      isSearch: params['isSearch'][0],
+      isCart: params['isCart'][0],
+    ),
+  );
+
+  static Handler _runnerDetailHandler = Handler(
+    handlerFunc: (context, Map<String, dynamic> params) => RunnerDetailScreen(
       productID: params['productID'][0],
       isSearch: params['isSearch'][0],
       isCart: params['isCart'][0],
@@ -165,11 +204,47 @@ class RouterHelper {
   );
 
   static Handler _orderConfirmationHandler = Handler(
-    handlerFunc: (context, Map<String, dynamic> parameters) =>
-        OrderConfirmationScreen(
-      comeFrom: parameters['comeFrom'][0],
-    ),
-  );
+  handlerFunc: (context, Map<String, dynamic> parameters) {
+    print("Raw Parameters Received: $parameters");
+
+    // Extract parameters from the map
+    String comeFrom = parameters['comeFrom'][0];
+    bool isWiring = parameters['isWiring'] != null && parameters['isWiring'][0] == 'true';
+    bool isPiping = parameters['isPiping'] != null && parameters['isPiping'][0] == 'true';
+    bool isGardening = parameters['isGardening'] != null && parameters['isGardening'][0] == 'true';
+    bool isRunner = parameters['isRunner'] != null && parameters['isRunner'][0] == 'true';
+
+    // Decode the detailData parameter
+    Map<String, dynamic> detailData = {};
+
+    if (parameters['detailData'] != null) {
+      try {
+        String encodedData = parameters['detailData'].first;
+        detailData = jsonDecode(Uri.decodeComponent(encodedData)) as Map<String, dynamic>;
+
+            print("Parameters Received: $parameters");
+            print("Decoded comeFrom: $comeFrom");
+            print("Decoded isWiring: $isWiring");
+            print("Decoded isPiping: $isPiping");
+            print("Decoded isGardening: $isGardening");
+            print("Decoded isRunner: $isRunner");
+            print("Decoded detailData: $detailData");
+      } catch (e) {
+        print("Error decoding detailData: $e");
+      }
+    }
+
+    return OrderConfirmationScreen(
+      comeFrom: comeFrom,
+      isWiring: isWiring,
+      isPiping: isPiping,
+      isGardening: isGardening,
+      isRunner: isRunner,
+      detailData: detailData,
+    );
+  },
+);
+
 
   static Handler _orderAddressHandler = Handler(
     handlerFunc: (context, Map<String, dynamic> parameters) =>
@@ -218,20 +293,31 @@ class RouterHelper {
   );
 
   // =================================Bidding=========================================
-  static Handler _biddingHandler = Handler(
-    handlerFunc: (context, Map<String, dynamic> parameters) => BiddingScreen(),
+  // static Handler _biddingHandler = Handler(
+  //   handlerFunc: (context, Map<String, dynamic> parameters) => BiddingScreen(),
+  // );
+
+  // static Handler _biddingDetailHandler = Handler(
+  //   handlerFunc: (context, Map<String, dynamic> parameters) =>
+  //       BiddingDetailScreen(
+  //     biddingID: parameters['biddingID'][0],
+  //   ),
+  // );
+
+  // static Handler _biddingRefundHandler = Handler(
+  //     handlerFunc: (context, Map<String, dynamic> parameters) =>
+  //         BiddingRefundScreen());
+
+  // =================================Vendor=========================================
+  static Handler _vendorHandler = Handler(
+    handlerFunc: (context, Map<String, dynamic> parameters) => VendorScreen(),
   );
 
-  static Handler _biddingDetailHandler = Handler(
-    handlerFunc: (context, Map<String, dynamic> parameters) =>
-        BiddingDetailScreen(
-      biddingID: parameters['biddingID'][0],
+  static Handler _vendorDetailHandler = Handler(
+    handlerFunc: (context, Map<String, dynamic> parameters) => VendorDetailScreen(
+      vendorId: parameters['vendorId'][0],
     ),
   );
-
-  static Handler _biddingRefundHandler = Handler(
-      handlerFunc: (context, Map<String, dynamic> parameters) =>
-          BiddingRefundScreen());
 
   // =================================Account=========================================
   static Handler _accountHandler = Handler(
@@ -315,6 +401,14 @@ class RouterHelper {
         handler: _productHandler, transitionType: TransitionType.fadeIn);
     router.define(Routes.PRODUCT_DETAIL_SCREEN,
         transitionType: TransitionType.fadeIn, handler: _productDetailHandler);
+    router.define(Routes.WIRING_DETAIL_SCREEN,
+        transitionType: TransitionType.fadeIn, handler: _wiringDetailHandler);
+    router.define(Routes.PIPING_DETAIL_SCREEN,
+        transitionType: TransitionType.fadeIn, handler: _pipingDetailHandler);
+    router.define(Routes.GARDENING_DETAIL_SCREEN,
+        transitionType: TransitionType.fadeIn, handler: _gardeningDetailHandler);
+    router.define(Routes.RUNNER_DETAIL_SCREEN,
+        transitionType: TransitionType.fadeIn, handler: _runnerDetailHandler);
     router.define(Routes.PRODUCT_SEARCH_SCREEN,
         transitionType: TransitionType.fadeIn, handler: _productSearchHandler);
     router.define(Routes.PRODUCT_SEARCH_RESULT_SCREEN,
@@ -361,12 +455,16 @@ class RouterHelper {
     router.define(Routes.DELIVERY_RECEIPT_SCREEN,
         handler: _deliveryReceiptHandler,
         transitionType: TransitionType.fadeIn);
-    router.define(Routes.BIDDING_SCREEN,
-        handler: _biddingHandler, transitionType: TransitionType.fadeIn);
-    router.define(Routes.BIDDING_DETAIL_SCREEN,
-        handler: _biddingDetailHandler, transitionType: TransitionType.fadeIn);
-    router.define(Routes.BIDDING_REFUND_SCREEN,
-        handler: _biddingRefundHandler, transitionType: TransitionType.fadeIn);
+    // router.define(Routes.BIDDING_SCREEN,
+    //     handler: _biddingHandler, transitionType: TransitionType.fadeIn);
+    // router.define(Routes.BIDDING_DETAIL_SCREEN,
+    //      handler: _biddingDetailHandler, transitionType: TransitionType.fadeIn);
+    // router.define(Routes.BIDDING_REFUND_SCREEN,
+    //     handler: _biddingRefundHandler, transitionType: TransitionType.fadeIn);
+    router.define(Routes.VENDOR_SCREEN,
+        handler: _vendorHandler, transitionType: TransitionType.fadeIn);
+    router.define(Routes.VENDOR_DETAIL_SCREEN,
+        handler: _vendorDetailHandler, transitionType: TransitionType.fadeIn);
     router.define(Routes.ACCOUNT_SCREEN,
         handler: _accountHandler, transitionType: TransitionType.fadeIn);
     router.define(Routes.PROFILE_SCREEN,

@@ -9,6 +9,7 @@ class AppConstants {
   static final String BASE_URI = url + prefix;
   static final String NO_MORE_DATA = 'No More Data...';
   static final String APP_KEY = dotenv.env['APP_KEY']!;
+  static const String VENDOR_IMAGE_PATH = '/vendor_image/';
 
   // Dialog Type
   static const String DIALOG_SUCCESS = 'success';
@@ -88,7 +89,10 @@ class AppConstants {
   static const String ORDER_RECEIPT_URI = '/order/receipt';
   static const String ORDER_CANCEL_URI = '/order/cancel';
   static const String ORDER_CHANGE_ADDRESS_URI = '/order/address/change';
-
+  static const String ORDER_WIRING_DETAIL_URI = '/order/wiringdetail';
+  static const String ORDER_PIPING_DETAIL_URI = '/order/pipingdetail';
+  static const String ORDER_GARDENING_DETAIL_URI = '/order/gardeningdetail';
+  static const String ORDER_RUNNER_DETAIL_URI = '/order/runnerdetail';
   // Payment
   static const String PAYMENT_URI = '/order/payment/intent';
   static const String PAYMENT_SUCCESS_HANDLING = '/order/payment/succeed';
@@ -110,6 +114,11 @@ class AppConstants {
   static const String BIDDING_PAYMENT_INTENT_URI = '/bidding/payment/intent';
   static const String BIDDING_PAYMENT_URI = '/bidding/payment';
   static const String BIDDING_REFUND_URI = '/bidding/refund/list';
+
+  // Vendor
+  static const String VENDOR_URI = '/vendor';
+  static const String VENDOR_DETAIL_URI = '/vendor/show';
+  static const String VENDOR_RATING_URI = '/vendor/rate';
 
   // Shared Key
   static const String THEME = 'theme';

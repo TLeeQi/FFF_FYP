@@ -57,6 +57,8 @@ class AuthRepo {
       'Authorization': 'Bearer $token',
     };
 
+    print('Token saved in authrepo: $token');
+
     try {
       await sharedPreferences.setString(AppConstants.TOKEN, token);
     } catch (e) {

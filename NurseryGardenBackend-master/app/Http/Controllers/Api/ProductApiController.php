@@ -34,7 +34,7 @@ class ProductApiController extends Controller
         $product_query = Product::leftjoin('category', 'category.id', 'product.cat_id')
             ->where('product.status', $status)
             ->where('product.quantity', '>', '0')
-            ->select('product.*', 'category.name as category_name', 'product.image as image');
+            ->select('product.*', 'product.cat_id as cat_id', 'category.name as category_name', 'product.image as image');
 
         // Pagination Limit
         if ($request->limit) {

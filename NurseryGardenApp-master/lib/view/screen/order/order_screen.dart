@@ -25,9 +25,9 @@ class _OrderScreenState extends State<OrderScreen> {
 
   List<String> _statusList = [
     "To Pay",
-    "To Ship",
-    "Partial",
-    "To Receive",
+    "Preparing",
+    // "Partial",
+    "To Rate",
     "Completed",
     "Cancelled"
   ];
@@ -80,13 +80,15 @@ class _OrderScreenState extends State<OrderScreen> {
       params['status'] = 'pay';
     } else if (status == _statusList[1]) {
       params['status'] = 'ship';
-    } else if (status == _statusList[2]) {
-      params['status'] = 'partial';
-    } else if (status == _statusList[3]) {
+    } 
+    // else if (status == _statusList[2]) {
+    //   params['status'] = 'partial';
+    // } 
+    else if (status == _statusList[2]) {
       params['status'] = 'receive';
-    } else if (status == _statusList[4]) {
+    } else if (status == _statusList[3]) {
       params['status'] = 'completed';
-    } else if (status == _statusList[5]) {
+    } else if (status == _statusList[4]) {
       params['status'] = 'cancel';
     }
     params['limit'] = '8';
@@ -99,13 +101,13 @@ class _OrderScreenState extends State<OrderScreen> {
 
     return Scaffold(
         appBar: AppBar(
-          leading: BackButton(
-            onPressed: () {
-              Navigator.pushNamedAndRemoveUntil(context,
-                  Routes.getDashboardRoute("Account"), (route) => false);
-            },
-            color: Colors.white, // <-- SEE HERE
-          ),
+          // leading: BackButton(
+          //   onPressed: () {
+          //     Navigator.pushNamedAndRemoveUntil(context,
+          //         Routes.getDashboardRoute("Requests"), (route) => false);
+          //   },
+          //   color: Colors.white, // <-- SEE HERE
+          // ),
           backgroundColor: ColorResources.COLOR_PRIMARY,
           title: Text(
             "Orders",

@@ -25,6 +25,12 @@ import 'package:nurserygardenapp/providers/splash_provider.dart';
 import 'package:nurserygardenapp/providers/user_provider.dart';
 import 'package:nurserygardenapp/util/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:nurserygardenapp/providers/vendor_provider.dart';
+// import 'package:nurserygardenapp/providers/wiring_provider.dart';
+// import 'package:nurserygardenapp/providers/wiringdetail_provider.dart';
+import 'package:nurserygardenapp/data/repositories/vendor_repo.dart';
+// import 'package:nurserygardenapp/data/repositories/wiring_repo.dart';
+
 import 'package:get_it/get_it.dart';
 import 'data/dio/dio_client.dart';
 import 'data/repositories/auth_repo.dart';
@@ -60,6 +66,10 @@ Future<void> init() async {
       () => DeliveryRepo(dioClient: sl(), sharedPreferences: sl()));
   sl.registerLazySingleton(
       () => BiddingRepo(dioClient: sl(), sharedPreferences: sl()));
+  sl.registerLazySingleton(
+      () => VendorRepo(dioClient: sl(), sharedPreferences: sl()));
+  // sl.registerLazySingleton(
+  //     () => WiringRepo(dioClient: sl(), sharedPreferences: sl()));
 
   // Provider
   sl.registerFactory(() => AuthProvider(authRepo: sl()));
@@ -85,6 +95,8 @@ Future<void> init() async {
       () => DeliveryProvider(deliveryRepo: sl(), sharedPreferences: sl()));
   sl.registerFactory(
       () => BiddingProvider(biddingRepo: sl(), sharedPreferences: sl()));
+  sl.registerFactory(
+      () => VendorProvider(vendorRepo: sl(), sharedPreferences: sl()));
 
   // External
   final sharedPreferences = await SharedPreferences.getInstance();

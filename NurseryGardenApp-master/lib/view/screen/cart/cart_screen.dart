@@ -189,11 +189,17 @@ class _CartScreenState extends State<CartScreen> {
                             return;
                           }
                           ;
-                          Navigator.pushNamed(context,
-                                  Routes.getOrderConfirmationRoute("cart"))
-                              .then((value) {
-                            _loadData();
-                          });
+                        //   Navigator.pushNamed(context, Routes.getOrderConfirmationRoute(
+                        //     "cart", 
+                        //     isWiring: false, 
+                        //     isPiping: false, 
+                        //     isGardening: false, 
+                        //     isRunner: false),
+                        //     detailData: cartProvider.addedCartList,
+                        //     )
+                        //       .then((value) {
+                        //     _loadData();
+                        //   });
                         },
                         child: Container(
                           decoration: BoxDecoration(

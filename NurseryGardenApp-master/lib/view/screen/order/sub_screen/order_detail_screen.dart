@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:nurserygardenapp/data/model/order_model.dart';
 import 'package:nurserygardenapp/providers/order_provider.dart';
+import 'package:nurserygardenapp/data/model/wiring_model.dart';
 import 'package:nurserygardenapp/util/app_constants.dart';
 import 'package:nurserygardenapp/util/color_resources.dart';
 import 'package:nurserygardenapp/util/custom_text_style.dart';
@@ -13,6 +14,7 @@ import 'package:nurserygardenapp/view/screen/order/widget/empty_order_detail.dar
 import 'package:nurserygardenapp/view/screen/order/widget/shipping_status.dart';
 import 'package:nurserygardenapp/view/screen/payment/payment_helper/payment_type.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class OrderDetailScreen extends StatefulWidget {
   final String orderID;
@@ -262,7 +264,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                                                                             .status ==
                                                                         "partial" ||
                                                                     order.status ==
-                                                                        "recieve" ||
+                                                                        "receive" ||
                                                                     order.status ==
                                                                         "completed"))
                                                               Icon(
@@ -336,7 +338,11 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                                                                     .orderDetailList[
                                                                         index]
                                                                     .productId !=
-                                                                null)
+                                                                null && 
+                                                                      orderProvider
+                                                                      .orderDetailList[index]
+                                                                      .wiringId != 
+                                                                      null)
                                                               Container(
                                                                 height: 80,
                                                                 width: 80,
@@ -446,20 +452,63 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                                                                                   }).first.name}",
                                                                               style: CustomTextStyles(context).titleStyle.copyWith(fontSize: 16),
                                                                             ),
-                                                                          ),
+                                                                          ),                                                                          
+                                                                        ),
+                                                                        if (orderProvider
+                                                                              .orderDetailList[index]
+                                                                              .productId !=
+                                                                          null && 
+                                                                              orderProvider
+                                                                              .orderDetailList[index]
+                                                                              .wiringId != 
+                                                                              null)
+                                                                        Flexible(
+                                                                          child:
+                                                                              GestureDetector(
+                                                                                onTap: () {
+                                                                                  showDialog(
+                                                                                    context: context,
+                                                                                    builder: (BuildContext context) {
+                                                                                      return AlertDialog(
+                                                                                        title: Text("Wiring Details"),
+                                                                                        content: _buildWiringDetails(
+                                                                                          wiringData: orderProvider.getWiringDetailById(
+                                                                                            orderProvider.orderDetailList[index].wiringId!,
+                                                                                          ),
+                                                                                        ),
+                                                                                        actions: [
+                                                                                          TextButton(
+                                                                                            onPressed: () {
+                                                                                              Navigator.of(context).pop();
+                                                                                            },
+                                                                                            child: Text("Close"),
+                                                                                          ),
+                                                                                        ],
+                                                                                      );
+                                                                                    },
+                                                                                  );
+                                                                                },
+                                                                                child: Text(
+                                                                                  "View Wiring Details",
+                                                                                  style: TextStyle(
+                                                                                    color: ColorResources.COLOR_PRIMARY,
+                                                                                    decoration: TextDecoration.underline,
+                                                                                  ),
+                                                                                ),
+                                                                              ),
                                                                         ),
                                                                       SizedBox(
                                                                         height:
                                                                             4,
                                                                       ),
-                                                                      Text(
-                                                                          "Quantity: ${orderProvider.orderDetailList[index].quantity}",
-                                                                          style:
-                                                                              TextStyle(fontSize: 14)),
-                                                                      SizedBox(
-                                                                        height:
-                                                                            4,
-                                                                      ),
+                                                                      // Text(
+                                                                      //     "Quantity: ${orderProvider.orderDetailList[index].quantity}",
+                                                                      //     style:
+                                                                      //         TextStyle(fontSize: 14)),
+                                                                      // SizedBox(
+                                                                      //   height:
+                                                                      //       4,
+                                                                      // ),
                                                                     ],
                                                                   ),
                                                                   Expanded(
@@ -471,11 +520,11 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                                                                           CrossAxisAlignment
                                                                               .end,
                                                                       children: [
-                                                                        Text(
-                                                                            "RM" +
-                                                                                "${orderProvider.orderDetailList[index].amount!.toStringAsFixed(2)}",
-                                                                            style:
-                                                                                TextStyle(color: ColorResources.COLOR_PRIMARY, fontSize: 16))
+                                                                        // Text(
+                                                                        //     "RM" +
+                                                                        //         "${orderProvider.orderDetailList[index].amount!.toStringAsFixed(2)}",
+                                                                        //     style:
+                                                                        //         TextStyle(color: ColorResources.COLOR_PRIMARY, fontSize: 16))
                                                                       ],
                                                                     ),
                                                                   )
@@ -692,4 +741,82 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                   },
                 ))));
   }
+}
+
+Widget _buildWiringDetails({required Wiring? wiringData}) {
+  if (wiringData == null) {
+    return Text("No wiring details available.");
+  }
+
+  return Padding(
+    padding: const EdgeInsets.all(16.0),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Wiring Details",
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+        SizedBox(height: 10),
+        _buildDetailRow("Service Type", wiringData.type),
+        _buildDetailRow(
+            "Fix Items", (wiringData.fixitem as List?)?.join(', ') ?? "N/A"),
+        _buildDetailRow("Has Parts", wiringData.ishavepart.toString()),
+        _buildDetailRow("Property Type", wiringData.typesProperty),
+        _buildDetailRow("Appointment Date", wiringData.appDate.toString()),
+        _buildDetailRow("Preferred Time", wiringData.preferredTime),
+        _buildDetailRow("Additional Details", wiringData.details),
+        _buildDetailRow("Budget", wiringData.budget),
+        SizedBox(height: 10),
+        Text(
+          "Uploaded Photos",
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        ),
+        SizedBox(height: 10),
+        _buildPhotoGallery(wiringData.photo),
+      ],
+    ),
+  );
+}
+
+
+Widget _buildDetailRow(String label, String? value) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 4.0),
+    child: Row(
+      children: [
+        Text(
+          "$label: ",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        Expanded(
+          child: Text(value ?? "N/A"),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget _buildPhotoGallery(dynamic photoPaths) {
+  if (photoPaths == null || photoPaths is! List || photoPaths.isEmpty) {
+    return Text("No photos uploaded.");
+  }
+
+  final baseUrl = dotenv.env['BASE_URL'] ?? '';
+
+  return Wrap(
+    spacing: 10,
+    runSpacing: 10,
+    children: photoPaths.map((path) {
+      return Image.network(
+        "$baseUrl$path",
+        width: 100,
+        height: 100,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) {
+          return Icon(Icons.broken_image, size: 100);
+        },
+      );
+    }).toList(),
+  );
 }

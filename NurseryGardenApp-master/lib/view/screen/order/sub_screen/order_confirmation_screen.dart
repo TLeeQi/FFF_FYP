@@ -1,4 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
+// import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:nurserygardenapp/providers/cart_provider.dart';
@@ -13,13 +13,32 @@ import 'package:nurserygardenapp/view/base/circular_indicator.dart';
 import 'package:nurserygardenapp/view/base/page_loading.dart';
 import 'package:nurserygardenapp/view/screen/payment/payment_helper/payment_type.dart';
 import 'package:provider/provider.dart';
+import 'dart:io';
 
 class OrderConfirmationScreen extends StatefulWidget {
   final String comeFrom;
-  const OrderConfirmationScreen({
-    super.key,
-    this.comeFrom = "cart",
-  });
+  final bool isWiring;
+  final bool isPiping;
+  final bool isGardening;
+  final bool isRunner;
+  final Map<String, dynamic> detailData;
+
+  OrderConfirmationScreen({
+    Key? key,
+    this.comeFrom = "",
+    this.isWiring = false,
+    this.isPiping = false,
+    this.isGardening = false,
+    this.isRunner = false,
+    required this.detailData,
+  }) : super(key: key) {
+    print("OrderConfirmationScreen initialized:");
+    print("isWiring: $isWiring");
+    print("isPiping: $isPiping");
+    print("isGardening: $isGardening");
+    print("isRunner: $isRunner");
+    print("detailData: $detailData");
+  }
 
   @override
   State<OrderConfirmationScreen> createState() =>
@@ -37,7 +56,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
       Provider.of<OrderProvider>(context, listen: false);
   late AddressProvider address_prov =
       Provider.of<AddressProvider>(context, listen: false);
-  double totalAmount = 0;
+  double totalAmount = 50;
 
   final String emptyAddress_msg =
       "Please add your address prior make the order.";
@@ -58,10 +77,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
   }
 
   _getInitalData() async {
-    double total = 0;
-    cart_prov.addedCartList.forEach((element) {
-      total += element.quantity! * element.price!;
-    });
+    double total = 50;
     bool result = await address_prov.getAddressList(context, params);
 
     setState(() {
@@ -80,17 +96,32 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print("isWiring: ${widget.isWiring}");
+    print("detailData: ${widget.detailData}");
+
     return Scaffold(
         appBar: AppBar(
             backgroundColor: ColorResources.COLOR_PRIMARY,
             leading: BackButton(
               color: Colors.white,
               onPressed: () {
-                Navigator.pop(context, true);
+                // if(widget.isWiring){
+                //   Navigator.pushNamedAndRemoveUntil(context,
+                //     Routes.getWiringDetailRoute(widget.detailData['prod_id'], "false", "false"), (route) => false);
+                // }else if(widget.isPiping){
+                //   Navigator.pushNamedAndRemoveUntil(context,
+                //     Routes.getPipingDetailRoute(widget.detailData['id'], "false", "false"), (route) => false);
+                // }else if(widget.isGardening){
+                //   Navigator.pushNamedAndRemoveUntil(context,
+                //     Routes.getGardeningDetailRoute(widget.detailData['id'], "false", "false"), (route) => false);
+                // }else if(widget.isRunner){
+                //   Navigator.pushNamedAndRemoveUntil(context,
+                //     Routes.getRunnerDetailRoute(widget.detailData['id'], "false", "false"), (route) => false);
+                // }
               },
             ),
             title: Text(
-              "Checkout",
+              "Booking Details",
               style: CustomTextStyles(context).subTitleStyle.copyWith(
                   fontWeight: FontWeight.w400,
                   fontSize: 18,
@@ -204,26 +235,87 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                               });
                             }
                             if (widget.comeFrom == productMode) {
-                              await cartProvider
-                                  .addToCart(
-                                      context, cartProvider.addedCartList.first,
-                                      ismsg: false, isCart: false)
-                                  .then((value) async {
-                                if (value == true) {
-                                  await orderProvider
-                                      .addOrder(cartProvider.returnAddCart,
-                                          address, context)
-                                      .then((value) {
-                                    if (value == true) {
-                                      Navigator.pushReplacementNamed(
-                                          context,
-                                          Routes.getPaymentRoute(
-                                              (PaymentType.card).toString(),
-                                              orderProvider.orderIdCreated));
-                                    }
-                                  });
-                                }
-                              });
+                              if(widget.isWiring){
+                                  // await orderProvider
+                                  //   .storeWiringDetail(widget.detailData, context)
+                                  //   .then((value) async {
+                                  //     if (value == true) {
+                                        Navigator.pushReplacementNamed(
+                                            context,
+                                            Routes.getPaymentRoute(
+                                                (PaymentType.card).toString(),
+                                                orderProvider.orderIdCreated));
+                                    //   }
+                                    // });
+                                  }
+                                  else if(widget.isPiping){
+                                    // await orderProvider
+                                    // .storePipingDetail(widget.detailData, context)
+                                    // .then((value) async {
+                                    //   if (value == true) {
+                                        Navigator.pushReplacementNamed(
+                                            context,
+                                            Routes.getPaymentRoute(
+                                                (PaymentType.card).toString(),
+                                                orderProvider.orderIdCreated));
+                                    //   }
+                                    // });
+                                  }
+                                  else if(widget.isGardening){
+                                    // await orderProvider
+                                    // .storeGardeningDetail(widget.detailData, context)
+                                    // .then((value) async {
+                                    //   if (value == true) {
+                                        Navigator.pushReplacementNamed(
+                                            context,
+                                            Routes.getPaymentRoute(
+                                                (PaymentType.card).toString(),
+                                                orderProvider.orderIdCreated));
+                                    //   }
+                                    // });
+                                  }
+                                  else if(widget.isRunner){
+                                    // await orderProvider
+                                    // .storeRunnerDetail(widget.detailData, context)
+                                    // .then((value) async {
+                                      // if (value == true) {
+                                        Navigator.pushReplacementNamed(
+                                            context,
+                                            Routes.getPaymentRoute(
+                                                (PaymentType.card).toString(),
+                                                orderProvider.orderIdCreated));
+                                    //   }
+                                    // });
+                                  }else {
+                                    await cartProvider
+                                        .addToCart(
+                                          context, 
+                                          cartProvider.addedCartList.first,
+                                          ismsg: false, 
+                                          isCart: false,
+                                        )
+                                        .then((value) async {
+                                          if (value == true) {
+                                            await orderProvider
+                                                .addOrder(
+                                                  cartProvider.returnAddCart,
+                                                  address, 
+                                                  context,
+                                                )
+                                                .then((value) {
+                                                  if (value == true) {
+                                                    Navigator.pushReplacementNamed(
+                                                      context,
+                                                      Routes.getPaymentRoute(
+                                                        (PaymentType.card).toString(),
+                                                        orderProvider.orderIdCreated,
+                                                      ),
+                                                    );
+                                                  }
+                                                });
+                                          }
+                                        });
+                                  }
                             }
                           },
                           child: Container(
@@ -320,314 +412,23 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
                         SizedBox(
                           height: 10,
                         ),
+                        
                         Container(
-                          height: cartProvider.addedCartList.length < 2
-                              ? MediaQuery.of(context).size.height / 5
-                              : cartProvider.addedCartList.length == 3
-                                  ? MediaQuery.of(context).size.height / 2.8
-                                  : MediaQuery.of(context).size.height / 2.5,
-                          child: ListView.builder(
-                              padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
-                              shrinkWrap: true,
-                              itemCount: cartProvider.addedCartList.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 5),
-                                        child: GestureDetector(
-                                          onTap: () {},
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(10)),
-                                              boxShadow: <BoxShadow>[
-                                                BoxShadow(
-                                                    color: Colors.grey
-                                                        .withOpacity(0.2),
-                                                    offset: const Offset(0, 2),
-                                                    blurRadius: 10.0),
-                                              ],
-                                            ),
-                                            child: Container(
-                                                padding: EdgeInsets.all(5),
-                                                height: 120,
-                                                width: double.infinity,
-                                                child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    SizedBox(
-                                                      width: 15,
-                                                    ),
-                                                    if (cartProvider
-                                                            .addedCartList[
-                                                                index]
-                                                            .plantId !=
-                                                        null)
-                                                      Container(
-                                                        height: 80,
-                                                        width: 80,
-                                                        child:
-                                                            CachedNetworkImage(
-                                                          filterQuality:
-                                                              FilterQuality
-                                                                  .high,
-                                                          imageUrl: widget
-                                                                      .comeFrom ==
-                                                                  cartMode
-                                                              ? "${cartProvider.getCartPlantList.where((element) {
-                                                                    return element
-                                                                            .id ==
-                                                                        cartProvider
-                                                                            .addedCartList[index]
-                                                                            .plantId;
-                                                                  }).first.imageURL!}"
-                                                              : "${plantProvider.plantList.where((element) {
-                                                                    return element
-                                                                            .id ==
-                                                                        cartProvider
-                                                                            .addedCartList[index]
-                                                                            .plantId;
-                                                                  }).first.imageURL!}",
-                                                          memCacheHeight: 200,
-                                                          memCacheWidth: 200,
-                                                          imageBuilder: (context,
-                                                                  imageProvider) =>
-                                                              Container(
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              image:
-                                                                  DecorationImage(
-                                                                image:
-                                                                    imageProvider,
-                                                                fit: BoxFit
-                                                                    .fitHeight,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          placeholder:
-                                                              (context, url) =>
-                                                                  Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(1.0),
-                                                            child: Center(
-                                                                child:
-                                                                    CircularProgressIndicator(
-                                                              color:
-                                                                  ColorResources
-                                                                      .COLOR_GRAY,
-                                                            )),
-                                                          ),
-                                                          errorWidget: (context,
-                                                                  url, error) =>
-                                                              Icon(Icons.error),
-                                                        ),
-                                                      ),
-                                                    if (cartProvider
-                                                            .addedCartList[
-                                                                index]
-                                                            .productId !=
-                                                        null)
-                                                      Container(
-                                                        height: 80,
-                                                        width: 80,
-                                                        child:
-                                                            CachedNetworkImage(
-                                                          filterQuality:
-                                                              FilterQuality
-                                                                  .high,
-                                                          imageUrl: widget
-                                                                      .comeFrom ==
-                                                                  cartMode
-                                                              ? "${cartProvider.getCartProductList.where((element) {
-                                                                    return element
-                                                                            .id ==
-                                                                        cartProvider
-                                                                            .addedCartList[index]
-                                                                            .productId;
-                                                                  }).first.imageURL!}"
-                                                              : "${productProvider.productList.where((element) {
-                                                                    return element
-                                                                            .id ==
-                                                                        cartProvider
-                                                                            .addedCartList[index]
-                                                                            .productId;
-                                                                  }).first.imageURL!}",
-                                                          memCacheHeight: 200,
-                                                          memCacheWidth: 200,
-                                                          imageBuilder: (context,
-                                                                  imageProvider) =>
-                                                              Container(
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              image:
-                                                                  DecorationImage(
-                                                                image:
-                                                                    imageProvider,
-                                                                fit: BoxFit
-                                                                    .fitHeight,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          placeholder:
-                                                              (context, url) =>
-                                                                  Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(1.0),
-                                                            child: Center(
-                                                                child:
-                                                                    CircularProgressIndicator(
-                                                              color:
-                                                                  ColorResources
-                                                                      .COLOR_GRAY,
-                                                            )),
-                                                          ),
-                                                          errorWidget: (context,
-                                                                  url, error) =>
-                                                              Icon(Icons.error),
-                                                        ),
-                                                      ),
-                                                    SizedBox(
-                                                      width: 15,
-                                                    ),
-                                                    Expanded(
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .end,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Column(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              if (cartProvider
-                                                                      .addedCartList[
-                                                                          index]
-                                                                      .plantId !=
-                                                                  null)
-                                                                widget.comeFrom ==
-                                                                        cartMode
-                                                                    ? Flexible(
-                                                                        child:
-                                                                            Container(
-                                                                          width:
-                                                                              100,
-                                                                          child:
-                                                                              Text(
-                                                                            "${cartProvider.getCartPlantList.where((element) {
-                                                                                  return element.id == cartProvider.addedCartList[index].plantId;
-                                                                                }).first.name}",
-                                                                            style:
-                                                                                TextStyle(fontSize: 16),
-                                                                            overflow:
-                                                                                TextOverflow.ellipsis,
-                                                                          ),
-                                                                        ),
-                                                                      )
-                                                                    : Flexible(
-                                                                        child:
-                                                                            Text(
-                                                                          "${plantProvider.plantList.where((element) {
-                                                                                return element.id == cartProvider.addedCartList[index].plantId;
-                                                                              }).first.name}",
-                                                                          style:
-                                                                              TextStyle(fontSize: 16),
-                                                                          overflow:
-                                                                              TextOverflow.ellipsis,
-                                                                        ),
-                                                                      ),
-                                                              if (cartProvider
-                                                                      .addedCartList[
-                                                                          index]
-                                                                      .productId !=
-                                                                  null)
-                                                                widget.comeFrom ==
-                                                                        cartMode
-                                                                    ? Flexible(
-                                                                        child:
-                                                                            Text(
-                                                                          "${cartProvider.getCartProductList.where((element) {
-                                                                                return element.id == cartProvider.addedCartList[index].productId;
-                                                                              }).first.name}",
-                                                                          style:
-                                                                              TextStyle(fontSize: 16),
-                                                                          overflow:
-                                                                              TextOverflow.ellipsis,
-                                                                        ),
-                                                                      )
-                                                                    : Flexible(
-                                                                        child:
-                                                                            Text(
-                                                                          "${productProvider.productList.where((element) {
-                                                                                return element.id == cartProvider.addedCartList[index].productId;
-                                                                              }).first.name}",
-                                                                          style:
-                                                                              TextStyle(fontSize: 16),
-                                                                          overflow:
-                                                                              TextOverflow.ellipsis,
-                                                                        ),
-                                                                      ),
-                                                              SizedBox(
-                                                                height: 4,
-                                                              ),
-                                                              Text(
-                                                                  "Quantity: ${cartProvider.addedCartList[index].quantity}",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          14)),
-                                                              SizedBox(
-                                                                height: 4,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Expanded(
-                                                            child: Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .end,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .end,
-                                                              children: [
-                                                                Text(
-                                                                    "RM" +
-                                                                        "${(cartProvider.addedCartList[index].quantity! * cartProvider.addedCartList[index].price!).toStringAsFixed(2)}",
-                                                                    style: TextStyle(
-                                                                        color: ColorResources
-                                                                            .COLOR_PRIMARY,
-                                                                        fontSize:
-                                                                            16))
-                                                              ],
-                                                            ),
-                                                          )
-                                                        ],
-                                                      ),
-                                                    )
-                                                  ],
-                                                )),
-                                          ),
-                                        ),
-                                      ),
-                                    ]);
-                              }),
+                          child: SingleChildScrollView(
+                              physics: AlwaysScrollableScrollPhysics(),
+                              child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                if (widget.isWiring) _buildWiringDetails(widget.detailData),
+                                if (widget.isPiping) _buildPipingDetails(widget.detailData),
+                                if (widget.isGardening) _buildGardeningDetails(widget.detailData),
+                                if (widget.isRunner) _buildRunnerDetails(widget.detailData),
+                              ],
+                            ),
+                          ),
                         ),
+
                         Container(
                           width: double.infinity,
                           color: Colors.white,
@@ -696,4 +497,97 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
           );
         }));
   }
+  
+  Widget _buildWiringDetails(Map<String, dynamic> data) {
+    print("Building OrderConfirmationScreen with detailData: $data");
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            "Wiring Details",
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 10),
+          _buildDetailRow("Service Type", data['type']),
+          _buildDetailRow("Fix Items", (data['fixitem'] as List?)?.join(', ') ?? "N/A"),
+          _buildDetailRow("Has Parts", data['ishavepart'] ? "Yes" : "No"),
+          _buildDetailRow("Property Type", data['types_property']),
+          _buildDetailRow("Appointment Date", data['app_date']),
+          _buildDetailRow("Preferred Time", data['preferred_time']),
+          _buildDetailRow("Additional Details", data['details']),
+          _buildDetailRow("Budget", data['budget']),
+          _buildDetailRow("Address", data['address']),
+          SizedBox(height: 10),
+          Text(
+            "Uploaded Photos",
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 10),
+          _buildPhotoGallery(data['photo']),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPipingDetails(Map<String, dynamic> data) {
+    return Text("Piping Details: ${data['pipingDetail']}");
+    // Add more detailed UI for piping here using data
+  }
+
+  Widget _buildGardeningDetails(Map<String, dynamic> data) {
+    return Text("Gardening Details: ${data['gardeningDetail']}");
+    // Add more detailed UI for gardening here using data
+  }
+
+  Widget _buildRunnerDetails(Map<String, dynamic> data) {
+    return Text("Runner Details: ${data['runnerDetail']}");
+    // Add more detailed UI for runner here using data
+  }
+}
+
+Widget _buildDetailRow(String label, String? value) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 4.0),
+    child: Row(
+      children: [
+        Text(
+          "$label: ",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        Expanded(
+          child: Text(value ?? "N/A"),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget _buildPhotoGallery(dynamic photoPaths) {
+  if (photoPaths == null || photoPaths is! List || photoPaths.isEmpty) {
+    return Text("No photos uploaded.");
+  }
+  return Wrap(
+    spacing: 10,
+    runSpacing: 10,
+    children: photoPaths.map((path) {
+      return Image.file(
+        File(path),
+        width: 100,
+        height: 100,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) {
+          return Icon(Icons.broken_image, size: 100);
+        },
+      );
+    }).toList(),
+  );
 }

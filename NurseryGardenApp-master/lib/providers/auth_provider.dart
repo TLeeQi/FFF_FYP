@@ -193,4 +193,5 @@ class AuthProvider with ChangeNotifier {
     _isActiveRememberMe = !_isActiveRememberMe;
     notifyListeners();
   }
+
 }

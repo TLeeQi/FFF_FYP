@@ -43,6 +43,10 @@ Route::prefix('v1')->namespace('App\\Http\\Controllers\\Api')->group(function ()
         Route::get('product/category', 'ProductApiController@getCategory');
         Route::get('product/detail', 'ProductApiController@show');
 
+        /* Wiring */
+        // Route::get('wiring', 'WiringApiController@wiring');
+        // Route::post('wiring/detail', 'WiringApiController@store');
+
         /* Cart */
         Route::get('cart', 'CartApiController@show');
         Route::post('cart/add', 'CartApiController@add');
@@ -56,6 +60,22 @@ Route::prefix('v1')->namespace('App\\Http\\Controllers\\Api')->group(function ()
         Route::get('order/receipt', 'OrderApiController@receipt');
         Route::post('order/cancel', 'OrderApiController@cancel');
         Route::post('order/address/change', 'OrderApiController@updateOrderAddress');
+
+        Route::post('order/wiringdetail', 'OrderApiController@storeWiringDetail');
+        Route::post('order/pipingdetail', 'OrderApiController@storePipingDetail');
+        Route::post('order/gardeningdetail', 'OrderApiController@storeGardeningDetail');
+        Route::post('order/runnerdetail', 'OrderApiController@storeRunnerDetail');
+
+        /* Vendor */
+        Route::get('vendor', 'VendorApiController@index');
+        Route::get('vendor/{id}', 'VendorApiController@show');
+        Route::post('vendor/{id}/rate', 'VendorApiController@rate');
+
+        /* Order Detail */
+        // Route::get('order/detail/wiring', 'OrderApiController@wiringDetail');
+        // Route::get('order/detail/piping', 'OrderApiController@pipingDetail');
+        // Route::get('order/detail/gardening', 'OrderApiController@gardeningDetail');
+        // Route::get('order/detail/runner', 'OrderApiController@runnerDetail');
 
         /* Payment */
         Route::post('order/payment/intent', 'PaymentApiController@paymentIntent');
