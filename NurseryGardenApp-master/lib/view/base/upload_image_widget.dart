@@ -82,7 +82,7 @@ class _UploadImageWidgetState extends State<UploadImageWidget> {
                 }),
             ListTile(
               leading: const Icon(Icons.photo_camera),
-              title: Text("Cemera"),
+              title: Text("Camera"),
               onTap: () {
                 _handleImage(context, ImageSource.camera);
                 Navigator.of(context).pop();

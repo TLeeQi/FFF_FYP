@@ -152,12 +152,13 @@ class _PipingDetailScreenState extends State<PipingDetailScreen> {
       'types_property': propertyType,
       'app_date': appointmentDate?.toIso8601String().split('T')[0], // Convert to string
       'preferred_time': appointmentTime,
-      'details': additionalDetails,
+      'details': additionalDetails?.isNotEmpty == true ? additionalDetails : null,
       'photo': uploadedPhotos.isNotEmpty 
       ? uploadedPhotos.map((file) => file.path).toList() 
-      : [], // Ensure an empty array for photos
+      : null, // Ensure an empty array for photos
       'budget': budget,
       'address': address,
+      'prod_id': widget.productID,
     };
 
     // Print the form data for debugging

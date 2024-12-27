@@ -9,6 +9,8 @@ import 'package:nurserygardenapp/view/base/custom_button.dart';
 import 'package:nurserygardenapp/view/screen/order/widget/empty_order.dart';
 import 'package:nurserygardenapp/view/screen/payment/payment_helper/payment_type.dart';
 import 'package:provider/provider.dart';
+import 'package:nurserygardenapp/view/screen/emergency_screen.dart';
+import 'package:nurserygardenapp/view/screen/sos_button.dart';
 
 class OrderScreen extends StatefulWidget {
   const OrderScreen({super.key});
@@ -110,12 +112,24 @@ class _OrderScreenState extends State<OrderScreen> {
           // ),
           backgroundColor: ColorResources.COLOR_PRIMARY,
           title: Text(
-            "Orders",
+            "Booking",
             style: CustomTextStyles(context).titleStyle.copyWith(
                   color: Colors.white,
                   fontSize: 16,
                 ),
           ),
+          actions: [
+            SOSButton(
+              onPressed: () {
+                // Handle SOS button press
+                print("SOS button pressed!");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => EmergencyScreen()),
+                );
+              },
+            ),
+          ],
         ),
         body: Container(
             // padding: EdgeInsets.only(top: 5),

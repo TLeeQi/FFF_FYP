@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nurserygardenapp/view/screen/sos_button.dart'; // Correct import for the current structure
+import 'package:nurserygardenapp/util/color_resources.dart';
+import 'package:nurserygardenapp/view/screen/emergency_screen.dart';
 
 class PlantScreen extends StatefulWidget {
   const PlantScreen({super.key});
@@ -14,7 +16,7 @@ class _PlantScreenState extends State<PlantScreen> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.green[100],
+        backgroundColor: ColorResources.COLOR_PRIMARY,
         elevation: 0,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -32,7 +34,7 @@ class _PlantScreenState extends State<PlantScreen> {
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
                 ),
               ],
@@ -99,6 +101,10 @@ class _PlantScreenState extends State<PlantScreen> {
               onPressed: () {
                 // Handle SOS button press
                 print("SOS button pressed!");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => EmergencyScreen()),
+                );
               },
             ),
           ],

@@ -499,7 +499,7 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
   }
   
   Widget _buildWiringDetails(Map<String, dynamic> data) {
-    print("Building OrderConfirmationScreen with detailData: $data");
+    print("Building OrderConfirmationScreen with detailData Wiring: $data");
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -539,18 +539,120 @@ class _OrderConfirmationScreenState extends State<OrderConfirmationScreen> {
   }
 
   Widget _buildPipingDetails(Map<String, dynamic> data) {
-    return Text("Piping Details: ${data['pipingDetail']}");
-    // Add more detailed UI for piping here using data
+    print("Building OrderConfirmationScreen with detailData Piping: $data");
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            "Piping Details",
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 10),
+          _buildDetailRow("Service Type", data['type']),
+          _buildDetailRow("Fix Items", (data['fixitem'] as List?)?.join(', ') ?? "N/A"),
+          _buildDetailRow("Problems", (data['problem'] as List?)?.join(', ') ?? "N/A"),
+          _buildDetailRow("Property Type", data['types_property']),
+          _buildDetailRow("Appointment Date", data['app_date']),
+          _buildDetailRow("Preferred Time", data['preferred_time']),
+          _buildDetailRow("Additional Details", data['details']),
+          _buildDetailRow("Budget", data['budget']),
+          _buildDetailRow("Address", data['address']),
+          SizedBox(height: 10),
+          Text(
+            "Uploaded Photos",
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 10),
+          _buildPhotoGallery(data['photo']),
+        ],
+      ),
+    );
   }
 
   Widget _buildGardeningDetails(Map<String, dynamic> data) {
-    return Text("Gardening Details: ${data['gardeningDetail']}");
-    // Add more detailed UI for gardening here using data
+    print("Building OrderConfirmationScreen with detailData Gardening: $data");
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            "Gardening Details",
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 10),
+          _buildDetailRow("Service Type", data['type']),
+          _buildDetailRow("Area", data['area']),
+          _buildDetailRow("Property Type", data['types_property']),
+          _buildDetailRow("Appointment Date", data['app_date']),
+          _buildDetailRow("Preferred Time", data['preferred_time']),
+          _buildDetailRow("Additional Details", data['details']),
+          _buildDetailRow("Budget", data['budget']),
+          _buildDetailRow("Address", data['address']),
+          SizedBox(height: 10),
+          Text(
+            "Uploaded Photos",
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 10),
+          _buildPhotoGallery(data['photo']),
+        ],
+      ),
+    );
   }
 
   Widget _buildRunnerDetails(Map<String, dynamic> data) {
-    return Text("Runner Details: ${data['runnerDetail']}");
-    // Add more detailed UI for runner here using data
+    print("Building OrderConfirmationScreen with detailData Piping: $data");
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            "Piping Details",
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 10),
+          _buildDetailRow("Service Type", data['type']),
+          _buildDetailRow("Area", data['area']),
+          _buildDetailRow("Appointment Date", data['app_date']),
+          _buildDetailRow("Preferred Time", data['preferred_time']),
+          _buildDetailRow("Additional Details", data['details']),
+          _buildDetailRow("Budget", data['budget']),
+          _buildDetailRow("Address", data['address']),
+          SizedBox(height: 10),
+          Text(
+            "Uploaded Photos",
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 10),
+          _buildPhotoGallery(data['photo']),
+        ],
+      ),
+    );
   }
 }
 
