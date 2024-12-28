@@ -118,14 +118,23 @@ class _WiringDetailScreenState extends State<WiringDetailScreen> {
   }
 
   void _pickPhoto() async {
+    // final ImagePicker picker = ImagePicker();
+    // final XFile? photo = await picker.pickImage(source: ImageSource.gallery);
+    // if (photo != null) {
+    //   setState(() {
+    //     uploadedPhotos.add(File(photo.path));
+    //   });
+    // }
     final ImagePicker picker = ImagePicker();
-    final XFile? photo = await picker.pickImage(source: ImageSource.gallery);
-    if (photo != null) {
-      setState(() {
-        uploadedPhotos.add(File(photo.path));
-      });
-    }
-  }
+     final List<XFile>? photos = await picker.pickMultiImage(); // Allow multiple image selection
+     if (photos != null && photos.isNotEmpty) {
+       setState(() {
+         uploadedPhotos.clear(); // Clear previous photos if needed
+         uploadedPhotos.addAll(photos.map((file) => File(file.path)).toList()); // Add selected photos
+       });
+     }
+   }
+  
 
   void _removePhoto(int index) {
     setState(() {
@@ -226,7 +235,7 @@ class _WiringDetailScreenState extends State<WiringDetailScreen> {
       'details': additionalDetails?.isNotEmpty == true ? additionalDetails : null,
       'photo': uploadedPhotos.isNotEmpty 
       ? uploadedPhotos.map((file) => file.path).toList() 
-      : null, // Ensure an empty array for photos
+      : [], // Ensure an empty array for photos
       'budget': budget,
       'address': address,
       'prod_id': widget.productID,

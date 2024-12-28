@@ -125,7 +125,7 @@ class WiringList {
 
 class Wiring {
   int? id;
-  int? Catid;
+  // int? Catid;
   String? type;
   List<String>? fixitem;
   bool? ishavepart;
@@ -133,18 +133,19 @@ class Wiring {
   DateTime? appDate; // Changed to DateTime
   String? preferredTime;
   String? details; // Optional
-  List<String>? photo; // Optional
+  //String? photo; // Optional
+  List<String>? photo;
   String? budget;
   DateTime? createdAt;
   DateTime? updatedAt;
-  String? categoryName;
+  // String? categoryName;
   String? imageURL;
   bool? isSelected;
   int? productID;
 
   Wiring({
     this.id,
-    this.Catid,
+    // this.Catid,
     this.type,
     this.fixitem,
     this.ishavepart,
@@ -156,7 +157,7 @@ class Wiring {
     this.budget,
     this.createdAt,
     this.updatedAt,
-    this.categoryName,
+    // this.categoryName,
     this.imageURL,
     this.isSelected = false,
     this.productID,
@@ -165,7 +166,7 @@ class Wiring {
   factory Wiring.fromJson(Map<String, dynamic> json) {
     print("Wiring JSON: $json");
     print("id: ${json["id"]}, type: ${json["id"]?.runtimeType}");
-    print("Catid: ${json["Catid"]}, type: ${json["Catid"]?.runtimeType}");
+    // print("Catid: ${json["Catid"]}, type: ${json["Catid"]?.runtimeType}");
     print("type: ${json["type"]}, type: ${json["type"]?.runtimeType}");
     print("fixitem: ${json["fixitem"]}, type: ${json["fixitem"]?.runtimeType}");
     print("ishavepart: ${json["ishavepart"]}, type: ${json["ishavepart"]?.runtimeType}");
@@ -183,7 +184,7 @@ class Wiring {
 
     return Wiring(
         id: json["id"],
-        Catid: json["Catid"],
+        // Catid: json["Catid"],
         type: json["type"],
         fixitem: json["fixitem"] == null ? null : List<String>.from(json["fixitem"]),
         ishavepart: json["ishavepart"],
@@ -192,6 +193,7 @@ class Wiring {
         preferredTime: json["preferredTime"],
         details: json["details"],
         photo: json["photo"] == null ? null : List<String>.from(json["photo"]),
+        //photo: json["photo"],
         budget: json["budget"],
         createdAt: json["created_at"] == null
             ? null
@@ -199,7 +201,7 @@ class Wiring {
         updatedAt: json["updated_at"] == null
             ? null
             : DateTime.parse(json["updated_at"]),
-        categoryName: json["category_name"],
+        //categoryName: json["category_name"],
         imageURL: jsonDecode(json["image_url"]),
         productID: json["id"],
       );      
@@ -207,7 +209,7 @@ class Wiring {
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "Catid": Catid,
+        // "Catid": Catid,
         "type": type,
         "fixitem": fixitem == null ? null : List<dynamic>.from(fixitem!),
         "ishavepart": ishavepart,
@@ -216,10 +218,11 @@ class Wiring {
         "preferredTime": preferredTime,
         "details": details,
         "photo": photo == null ? null : List<dynamic>.from(photo!),
+        //"photo": photo,
         "budget": budget,
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
-        "category_name": categoryName,
+        //"category_name": categoryName,
         "image_url": imageURL,
         "product_id": productID,
       };

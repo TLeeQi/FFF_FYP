@@ -135,8 +135,8 @@ class VendorApiController extends Controller
 
         // Search by product name
         if ($request->keyword) {
-            $vendor_query = $vendor_query->where('vendor.name', 'like', '%' . $request->keyword . '%')
-			->where('vendor.status', '1');
+            $vendor_query = $vendor_query->where('name', 'like', '%' . $request->keyword . '%')
+			->where('status', '1');
         }
 
         // Search by category

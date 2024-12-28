@@ -39,6 +39,7 @@ class _VendorScreenState extends State<VendorScreen> {
   Future<void> _loadData({bool isLoadMore = false}) async {
     try {
       await vendor_prov.listOfVendor(context, params, isLoadMore: isLoadMore);
+      print('Vendor List: ${vendor_prov.vendorList}');
     } catch (e) {
       print('Error in _loadData: $e');
     }

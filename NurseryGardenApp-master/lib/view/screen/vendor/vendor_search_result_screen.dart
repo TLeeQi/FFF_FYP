@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+// import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nurserygardenapp/providers/vendor_provider.dart';
 import 'package:nurserygardenapp/util/color_resources.dart';
@@ -22,10 +22,6 @@ class _VendorSearchResultScreenState extends State<VendorSearchResultScreen> {
 
   final _scrollController = ScrollController();
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  var _selectedFilterList = "None";
-
-  List<String> _filtertList = ["Price", "Top Sales"];
 
   // Param
   var params = {
@@ -67,21 +63,6 @@ class _VendorSearchResultScreenState extends State<VendorSearchResultScreen> {
       });
     }
     await vendor_prov.searchVendor(context, params, isLoadMore: isLoadMore);
-  }
-
-  void _handleFilterParamChange(param, bool isPrice, bool isSales) {
-    params['limit'] = '8';
-    params['keyword'] = widget.searchKeyword;
-    params['sortOrder'] = param['sortOrder'] ?? "asc";
-    // Test
-    if (isPrice) {
-      params['sortBy'] = "price";
-    }
-    if (isSales) {
-      params['sortBy'] = "sales_amount";
-    }
-    params['category'] = param['category'] ?? "";
-    _loadData();
   }
 
   @override
@@ -133,105 +114,6 @@ class _VendorSearchResultScreenState extends State<VendorSearchResultScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(10),
-                    child: CupertinoSlidingSegmentedControl<String>(
-                        backgroundColor: Theme.of(context).cardColor,
-                        thumbColor: Theme.of(context).primaryColor,
-                        // groupValue: _selectedFilterList,
-                        onValueChanged: (value) {
-                          setState(() {
-                            if (_selectedFilterList == value) {
-                              params['sortOrder'] = "asc" == params['sortOrder']
-                                  ? params['sortOrder'] = "desc"
-                                  : params['sortOrder'] = "asc";
-                            } else {
-                              params['sortOrder'] = "asc";
-                            }
-                            _selectedFilterList = value!;
-                            _selectedFilterList == _filtertList[0]
-                                ? _handleFilterParamChange(params, true, false)
-                                : _handleFilterParamChange(params, false, true);
-                          });
-                        },
-                        children: {
-                          _filtertList[0]: Container(
-                            decoration: BoxDecoration(
-                              color: _selectedFilterList == _filtertList[0]
-                                  ? ColorResources.COLOR_PRIMARY
-                                  : Colors.white,
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            height: 40,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(_filtertList[0],
-                                    style: TextStyle(
-                                      color:
-                                          _selectedFilterList == _filtertList[0]
-                                              ? Colors.white
-                                              : Colors.black,
-                                    )),
-                                if (_selectedFilterList != "None" &&
-                                    _selectedFilterList == _filtertList[0])
-                                  const SizedBox(width: 5),
-                                if (_selectedFilterList != "None" &&
-                                    _selectedFilterList == _filtertList[0])
-                                  Icon(
-                                    params['sortOrder'] == "asc"
-                                        ? Icons.arrow_downward
-                                        : Icons.arrow_upward,
-                                    color:
-                                        _selectedFilterList == _filtertList[0]
-                                            ? Colors.white
-                                            : Colors.black,
-                                    size: 16,
-                                  ),
-                              ],
-                            ),
-                          ),
-                          _filtertList[1]: Container(
-                            decoration: BoxDecoration(
-                              color: _selectedFilterList == _filtertList[1]
-                                  ? ColorResources.COLOR_PRIMARY
-                                  : Colors.white,
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            height: 40,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(_filtertList[1],
-                                    style: TextStyle(
-                                      color:
-                                          _selectedFilterList == _filtertList[1]
-                                              ? Colors.white
-                                              : Colors.black,
-                                    )),
-                                if (_selectedFilterList != "None" &&
-                                    _selectedFilterList == _filtertList[1])
-                                  const SizedBox(width: 5),
-                                if (_selectedFilterList != "None" &&
-                                    _selectedFilterList == _filtertList[1])
-                                  Icon(
-                                    params['sortOrder'] == "desc"
-                                        ? Icons.arrow_upward
-                                        : Icons.arrow_downward,
-                                    color:
-                                        _selectedFilterList == _filtertList[1]
-                                            ? Colors.white
-                                            : Colors.black,
-                                    size: 16,
-                                  ),
-                              ],
-                            ),
-                          )
-                        }),
-                  ),
                   Consumer<VendorProvider>(
                       builder: (context, vendorProvider, child) {
                     return vendorProvider.isLoadingSearch &&
@@ -270,8 +152,6 @@ class _VendorSearchResultScreenState extends State<VendorSearchResultScreen> {
                                   shrinkWrap: true,
                                   controller: _scrollController,
                                   physics: const BouncingScrollPhysics(),
-                                  // physics:
-                                  //     const AlwaysScrollableScrollPhysics(),
                                   itemCount:
                                       vendorProvider.vendorListSearch.length +
                                           ((vendorProvider.isLoadingSearch &&

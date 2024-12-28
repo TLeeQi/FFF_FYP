@@ -43,10 +43,6 @@ class Routes {
   static const String ORDER_SCREEN = '/order';
   static const String ORDER_DETAIL_SCREEN = '/order-detail';
   static const String ORDER_CONFIRMATION_SCREEN = '/order-confirmation';
-  static const String ORDER_CONFIRMATION_SCREEN_WIRING = '/order-confirmation-wiring';
-  static const String ORDER_CONFIRMATION_SCREEN_PIPING = '/order-confirmation-piping';
-  static const String ORDER_CONFIRMATION_SCREEN_GARDENING = '/order-confirmation-gardening';
-  static const String ORDER_CONFIRMATION_SCREEN_RUNNER = '/order-confirmation-runner';
   static const String ORDER_ADDRESS_SCREEN = '/order-address';  
   static const String ORDER_DELIVERY_SCREEN = '/order-delivery';
   static const String ORDER_RECEIPT_SCREEN = '/order-receipt';
