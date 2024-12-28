@@ -34,24 +34,24 @@ class WiringModel {
 }
 
 class Data {
-  WiringList? wiringList;
+  WiringsList? wiringsList;
 
   Data({
-    this.wiringList,
+    this.wiringsList,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-        wiringList: json["wiring"] == null
+        wiringsList: json["wirings"] == null
             ? null
-            : WiringList.fromJson(json["wiring"]),
+            : WiringsList.fromJson(json["wirings"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "wiring": wiringList?.toJson(),
+        "wirings": wiringsList?.toJson(),
       };
 }
 
-class WiringList {
+class WiringsList {
   int? currentPage;
   List<Wiring>? wiring;
   String? firstPageUrl;
@@ -66,7 +66,7 @@ class WiringList {
   int? to;
   int? total;
 
-  WiringList({
+  WiringsList({
     this.currentPage,
     this.wiring,
     this.firstPageUrl,
@@ -82,7 +82,7 @@ class WiringList {
     this.total,
   });
 
-  factory WiringList.fromJson(Map<String, dynamic> json) => WiringList(
+  factory WiringsList.fromJson(Map<String, dynamic> json) => WiringsList(
         currentPage: json["current_page"],
         wiring: json["data"] == null
             ? []
@@ -160,7 +160,7 @@ class Wiring {
     // this.categoryName,
     this.imageURL,
     this.isSelected = false,
-    this.productID,
+    //this.productID,
   });
 
   factory Wiring.fromJson(Map<String, dynamic> json) {
@@ -170,9 +170,9 @@ class Wiring {
     print("type: ${json["type"]}, type: ${json["type"]?.runtimeType}");
     print("fixitem: ${json["fixitem"]}, type: ${json["fixitem"]?.runtimeType}");
     print("ishavepart: ${json["ishavepart"]}, type: ${json["ishavepart"]?.runtimeType}");
-    print("typesProperty: ${json["typesProperty"]}, type: ${json["typesProperty"]?.runtimeType}");
-    print("appDate: ${json["appDate"]}, type: ${json["appDate"]?.runtimeType}");
-    print("preferredTime: ${json["preferredTime"]}, type: ${json["preferredTime"]?.runtimeType}");
+    print("typesProperty: ${json["types_property"]}, type: ${json["types_property"]?.runtimeType}");
+    print("appDate: ${json["app_date"]}, type: ${json["app_date"]?.runtimeType}");
+    print("preferredTime: ${json["preferred_time"]}, type: ${json["preferred_time"]?.runtimeType}");
     print("details: ${json["details"]}, type: ${json["details"]?.runtimeType}");
     print("photo: ${json["photo"]}, type: ${json["photo"]?.runtimeType}");
     print("budget: ${json["budget"]}, type: ${json["budget"]?.runtimeType}");
@@ -180,7 +180,7 @@ class Wiring {
     print("updatedAt: ${json["updated_at"]}, type: ${json["updated_at"]?.runtimeType}");
     print("categoryName: ${json["category_name"]}, type: ${json["category_name"]?.runtimeType}");
     print("imageURL: ${json["image_url"]}, type: ${json["image_url"]?.runtimeType}");
-    print("productID: ${json["id"]}, type: ${json["id"]?.runtimeType}");
+    //print("productID: ${json["product_id"]}, type: ${json["product_id"]?.runtimeType}");
 
     return Wiring(
         id: json["id"],
@@ -188,9 +188,9 @@ class Wiring {
         type: json["type"],
         fixitem: json["fixitem"] == null ? null : List<String>.from(json["fixitem"]),
         ishavepart: json["ishavepart"],
-        typesProperty: json["typesProperty"],
-        appDate: json["appDate"] == null ? null : DateTime.parse(json["appDate"]),
-        preferredTime: json["preferredTime"],
+        typesProperty: json["types_property"],
+        appDate: json["app_date"] == null ? null : DateTime.parse(json["app_date"]),
+        preferredTime: json["preferred_time"],
         details: json["details"],
         photo: json["photo"] == null ? null : List<String>.from(json["photo"]),
         //photo: json["photo"],
@@ -202,8 +202,9 @@ class Wiring {
             ? null
             : DateTime.parse(json["updated_at"]),
         //categoryName: json["category_name"],
-        imageURL: jsonDecode(json["image_url"]),
-        productID: json["id"],
+        imageURL: json["image_url"],
+        //imageURL: jsonDecode(json["image_url"],
+        //productID: json["product_id"],
       );      
   }
 
@@ -224,7 +225,7 @@ class Wiring {
         "updated_at": updatedAt?.toIso8601String(),
         //"category_name": categoryName,
         "image_url": imageURL,
-        "product_id": productID,
+        //"product_id": productID,
       };
 }
 

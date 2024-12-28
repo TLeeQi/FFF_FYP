@@ -114,14 +114,19 @@ class OrderProvider extends ChangeNotifier {
      print("Raw API Response: ${apiResponse.response!.data}");
 
     if (context.mounted) {
+      print("Context is mounted");
       result = ResponseHelper.responseHelper(context, apiResponse);
 
       if (result) {
+
+        print("About to parse OrderDetailModel");
+
         try {
              _orderDetailModel = OrderDetailModel.fromJson(apiResponse.response!.data);
              print("OrderDetailModel parsed successfully");
              print("OrderDetailModel data: ${_orderDetailModel.data}");
-             print("Wiring List from API Response: ${apiResponse.response!.data['wiring']}");
+             print("Wiring List from API Response: ${_orderDetailModel.data?.wiring}");
+             //print("Wiring List from API Response: ${apiResponse.response!.data['wiring']}");
              //print("Parsed Wiring List: ${_orderWiringList.map((wiring) => wiring.id).toList()}");
 
            } catch (e) {
@@ -135,14 +140,22 @@ class OrderProvider extends ChangeNotifier {
        //_orderWiringDetail = _orderDetailModel.data!.wiring;
        //print("Wiring Detail Array Order Provider: ${_orderWiringDetail?.id}");
 
-        _orderPipingList = _orderDetailModel.data!.piping ?? [];
-        _orderGardeningList = _orderDetailModel.data!.gardening ?? [];
-        _orderRunnerList = _orderDetailModel.data!.runner ?? [];
+        _orderPipingList = _orderDetailModel.data?.piping ?? [];
+        _orderGardeningList = _orderDetailModel.data?.gardening ?? [];
+        _orderRunnerList = _orderDetailModel.data?.runner ?? [];
 
         // Debugging logs
-        print("Order Detail List: ${_orderDetailList.map((item) => item.wiringId).toList()}");
-        print("Wiring List: ${_orderWiringList.map((wiring) => wiring.id).toList()}");
+        print("Order Detail List Wiring ID: ${_orderDetailList.map((item) => item.wiringId).toList()}");
+        print("Order Detail ID: ${_orderDetailList.map((item) => item.id).toList()}");
+        print("Wiring List ID: ${_orderWiringList.map((wiring) => wiring.id).toList()}");
+        print("_orderWiringList: ${_orderWiringList}");
       }
+      else {
+        print("API call failed");
+      }
+    }
+    else {
+      print("Context is not mounted");
     }
 
     _isLoadingDetail = false;
@@ -153,18 +166,36 @@ class OrderProvider extends ChangeNotifier {
   Wiring? getWiringDetailById(int? wiringId) {
     print("Looking for Wiring ID: $wiringId");
     print("Available Wiring IDs: ${_orderWiringList.map((w) => w.id).toList()}");
-  if (wiringId == null) {
-    return null;
+
+    if (wiringId == null) {
+      print("Wiring ID is null");
+      return null;
+    }
+
+    if (_orderWiringList.isEmpty) {
+      print("Wiring list is empty, cannot find wiring detail.");
+      return null;
+    }
+
+    try {
+      final wiringDetail = _orderWiringList.firstWhere(
+        (wiring) => wiring.id == wiringId,
+        orElse: () {
+          print("Wiring detail not found for ID: $wiringId");
+
+          return Wiring();
+        },
+      );
+
+      print("Wiring detail found id: ${wiringDetail.id}");
+      
+
+      return wiringDetail;
+    } catch (e) {
+      print("Exception occurred while finding wiring detail: $e");
+      return null;
+    }
   }
-  try {
-    return _orderWiringList.firstWhere(
-      (detail) => detail.id == wiringId,
-    );
-  } catch (e) {
-    print("Wiring detail not found for ID: $wiringId");
-    return null;
-  }
-}
 
 // Wiring? getWiringDetailById(int? wiringId) {
 //     print("Looking for Wiring ID: $wiringId");

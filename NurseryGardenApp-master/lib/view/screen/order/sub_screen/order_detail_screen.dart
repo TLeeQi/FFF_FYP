@@ -34,6 +34,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
   // Param
   var params = {};
 
+
   @override
   void initState() {
     super.initState();
@@ -51,7 +52,9 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
           Order();
       address = order.address ?? "";
     });
-    await order_prov.getOrderDetail(context, params);
+
+    // Check if the order is a wiring order
+      await order_prov.getOrderDetail(context, params);
   }
 
   @override
@@ -180,7 +183,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                                       padding: (orderProvider.isLoadingDetail ||
                                               (orderProvider
                                                       .orderDetailList.length <
-                                                  8))
+                                                  8)) 
                                           ? EdgeInsets.fromLTRB(10, 0, 10, 10)
                                           : EdgeInsets.only(
                                               bottom: 235,
@@ -276,126 +279,126 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                                                             SizedBox(
                                                               width: 5,
                                                             ),
-                                                            if (orderProvider
-                                                                    .orderDetailList[
-                                                                        index]
-                                                                    .plantId !=
-                                                                null)
-                                                              Container(
-                                                                height: 80,
-                                                                width: 80,
-                                                                child:
-                                                                    CachedNetworkImage(
-                                                                  filterQuality:
-                                                                      FilterQuality
-                                                                          .high,
-                                                                  imageUrl:
-                                                                      "${orderProvider.getOrderPlantList.where((element) {
-                                                                            return element.id ==
-                                                                                orderProvider.orderDetailList[index].plantId;
-                                                                          }).first.imageURL!}",
-                                                                  memCacheHeight:
-                                                                      200,
-                                                                  memCacheWidth:
-                                                                      200,
-                                                                  imageBuilder:
-                                                                      (context,
-                                                                              imageProvider) =>
-                                                                          Container(
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      image:
-                                                                          DecorationImage(
-                                                                        image:
-                                                                            imageProvider,
-                                                                        fit: BoxFit
-                                                                            .fitHeight,
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                  placeholder:
-                                                                      (context,
-                                                                              url) =>
-                                                                          Padding(
-                                                                    padding:
-                                                                        const EdgeInsets
-                                                                            .all(
-                                                                            1.0),
-                                                                    child: Center(
-                                                                        child: CircularProgressIndicator(
-                                                                      color: ColorResources
-                                                                          .COLOR_GRAY,
-                                                                    )),
-                                                                  ),
-                                                                  errorWidget: (context,
-                                                                          url,
-                                                                          error) =>
-                                                                      Icon(Icons
-                                                                          .error),
-                                                                ),
-                                                              ),
-                                                            if (orderProvider
-                                                                    .orderDetailList[
-                                                                        index]
-                                                                    .productId !=
-                                                                null && 
-                                                                      orderProvider
-                                                                      .orderDetailList[index]
-                                                                      .wiringId != 
-                                                                      null)
-                                                              Container(
-                                                                height: 80,
-                                                                width: 80,
-                                                                child:
-                                                                    CachedNetworkImage(
-                                                                  filterQuality:
-                                                                      FilterQuality
-                                                                          .high,
-                                                                  imageUrl:
-                                                                      "${"${orderProvider.getOrderProductList.where((element) {
-                                                                            return element.id ==
-                                                                                orderProvider.orderDetailList[index].productId;
-                                                                          }).first.imageURL!}"}",
-                                                                  memCacheHeight:
-                                                                      200,
-                                                                  memCacheWidth:
-                                                                      200,
-                                                                  imageBuilder:
-                                                                      (context,
-                                                                              imageProvider) =>
-                                                                          Container(
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      image:
-                                                                          DecorationImage(
-                                                                        image:
-                                                                            imageProvider,
-                                                                        fit: BoxFit
-                                                                            .fitHeight,
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                  placeholder:
-                                                                      (context,
-                                                                              url) =>
-                                                                          Padding(
-                                                                    padding:
-                                                                        const EdgeInsets
-                                                                            .all(
-                                                                            1.0),
-                                                                    child: Center(
-                                                                        child: CircularProgressIndicator(
-                                                                      color: ColorResources
-                                                                          .COLOR_GRAY,
-                                                                    )),
-                                                                  ),
-                                                                  errorWidget: (context,
-                                                                          url,
-                                                                          error) =>
-                                                                      Icon(Icons
-                                                                          .error),
-                                                                ),
-                                                              ),
+                                                            // if (orderProvider
+                                                            //         .orderDetailList[
+                                                            //             index]
+                                                            //         .plantId !=
+                                                            //     null)
+                                                            //   Container(
+                                                            //     height: 80,
+                                                            //     width: 80,
+                                                            //     child:
+                                                            //         CachedNetworkImage(
+                                                            //       filterQuality:
+                                                            //           FilterQuality
+                                                            //               .high,
+                                                            //       imageUrl:
+                                                            //           "${orderProvider.getOrderPlantList.where((element) {
+                                                            //                 return element.id ==
+                                                            //                     orderProvider.orderDetailList[index].plantId;
+                                                            //               }).first.imageURL!}",
+                                                            //       memCacheHeight:
+                                                            //           200,
+                                                            //       memCacheWidth:
+                                                            //           200,
+                                                            //       imageBuilder:
+                                                            //           (context,
+                                                            //                   imageProvider) =>
+                                                            //               Container(
+                                                            //         decoration:
+                                                            //             BoxDecoration(
+                                                            //           image:
+                                                            //               DecorationImage(
+                                                            //             image:
+                                                            //                 imageProvider,
+                                                            //             fit: BoxFit
+                                                            //                 .fitHeight,
+                                                            //           ),
+                                                            //         ),
+                                                            //       ),
+                                                            //       placeholder:
+                                                            //           (context,
+                                                            //                   url) =>
+                                                            //               Padding(
+                                                            //         padding:
+                                                            //             const EdgeInsets
+                                                            //                 .all(
+                                                            //                 1.0),
+                                                            //         child: Center(
+                                                            //             child: CircularProgressIndicator(
+                                                            //           color: ColorResources
+                                                            //               .COLOR_GRAY,
+                                                            //         )),
+                                                            //       ),
+                                                            //       errorWidget: (context,
+                                                            //               url,
+                                                            //               error) =>
+                                                            //           Icon(Icons
+                                                            //               .error),
+                                                            //     ),
+                                                            //   ),
+                                                            // if (orderProvider
+                                                            //         .orderDetailList[
+                                                            //             index]
+                                                            //         .productId !=
+                                                            //     null && 
+                                                            //           orderProvider
+                                                            //           .orderDetailList[index]
+                                                            //           .wiringId != 
+                                                            //           null)
+                                                            //   Container(
+                                                            //     height: 80,
+                                                            //     width: 80,
+                                                            //     child:
+                                                            //         CachedNetworkImage(
+                                                            //       filterQuality:
+                                                            //           FilterQuality
+                                                            //               .high,                                                
+                                                            //       imageUrl:
+                                                            //           "${"${orderProvider.getOrderProductList.where((element) {
+                                                            //                 return element.id ==
+                                                            //                     orderProvider.orderDetailList[index].productId;
+                                                            //               }).first.imageURL!}"}",
+                                                            //       memCacheHeight:
+                                                            //           200,
+                                                            //       memCacheWidth:
+                                                            //           200,
+                                                            //       imageBuilder:
+                                                            //           (context,
+                                                            //                   imageProvider) =>
+                                                            //               Container(
+                                                            //         decoration:
+                                                            //             BoxDecoration(
+                                                            //           image:
+                                                            //               DecorationImage(
+                                                            //             image:
+                                                            //                 imageProvider,
+                                                            //             fit: BoxFit
+                                                            //                 .fitHeight,
+                                                            //           ),
+                                                            //         ),
+                                                            //       ),
+                                                            //       placeholder:
+                                                            //           (context,
+                                                            //                   url) =>
+                                                            //               Padding(
+                                                            //         padding:
+                                                            //             const EdgeInsets
+                                                            //                 .all(
+                                                            //                 1.0),
+                                                            //         child: Center(
+                                                            //             child: CircularProgressIndicator(
+                                                            //           color: ColorResources
+                                                            //               .COLOR_GRAY,
+                                                            //         )),
+                                                            //       ),
+                                                            //       errorWidget: (context,
+                                                            //               url,
+                                                            //               error) =>
+                                                            //           Icon(Icons
+                                                            //               .error),
+                                                            //     ),
+                                                            //   ),
                                                             SizedBox(
                                                               width: 15,
                                                             ),
@@ -416,48 +419,53 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                                                                         CrossAxisAlignment
                                                                             .start,
                                                                     children: [
-                                                                      if (orderProvider
-                                                                              .orderDetailList[index]
-                                                                              .plantId !=
-                                                                          null)
-                                                                        Flexible(
-                                                                          child:
-                                                                              Container(
-                                                                            width:
-                                                                                100,
-                                                                            child:
-                                                                                Text(
-                                                                              "${orderProvider.getOrderPlantList.where((element) {
-                                                                                    return element.id == orderProvider.orderDetailList[index].plantId;
-                                                                                  }).first.name}",
-                                                                              style: CustomTextStyles(context).titleStyle.copyWith(fontSize: 16),
-                                                                              softWrap: true,
-                                                                              overflow: TextOverflow.ellipsis,
-                                                                            ),
-                                                                          ),
-                                                                        ),
-                                                                      if (orderProvider
-                                                                              .orderDetailList[index]
-                                                                              .productId !=
-                                                                          null)
-                                                                        Flexible(
-                                                                          child:
-                                                                              Container(
-                                                                            width:
-                                                                                100,
-                                                                            child:
-                                                                                Text(
-                                                                              "${orderProvider.getOrderProductList.where((element) {
-                                                                                    return element.id == orderProvider.orderDetailList[index].productId;
-                                                                                  }).first.name}",
-                                                                              style: CustomTextStyles(context).titleStyle.copyWith(fontSize: 16),
-                                                                            ),
-                                                                          ),                                                                          
-                                                                        ),
-                                                                        if (orderProvider
-                                                                              .orderDetailList[index]
-                                                                              .productId !=
-                                                                          null && 
+                                                                      // if (orderProvider
+                                                                      //         .orderDetailList[index]
+                                                                      //         .plantId !=
+                                                                      //     null)
+                                                                      //   Flexible(
+                                                                      //     child:
+                                                                      //         Container(
+                                                                      //       width:
+                                                                      //           100,
+                                                                      //       child:
+                                                                      //           Text(
+                                                                      //         "${orderProvider.getOrderPlantList.where((element) {
+                                                                      //               return element.id == orderProvider.orderDetailList[index].plantId;
+                                                                      //             }).first.name}",
+                                                                      //         style: CustomTextStyles(context).titleStyle.copyWith(fontSize: 16),
+                                                                      //         softWrap: true,
+                                                                      //         overflow: TextOverflow.ellipsis,
+                                                                      //       ),
+                                                                      //     ),
+                                                                      //   ),
+                                                                      // if (orderProvider
+                                                                      //         .orderDetailList[index]
+                                                                      //         .productId !=
+                                                                      //     null)
+                                                                      //   Flexible(
+                                                                      //     child:
+                                                                      //         Container(
+                                                                      //       width:
+                                                                      //           100,
+                                                                      //       child:
+                                                                      //           Text(
+                                                                      //         "${orderProvider.getOrderProductList.where((element) {
+                                                                      //               return element.id == orderProvider.orderDetailList[index].productId;
+                                                                      //             }).first.name}",
+                                                                      //         style: CustomTextStyles(context).titleStyle.copyWith(fontSize: 16),
+                                                                      //       ),
+                                                                      //     ),                                                                          
+                                                                      //   ),
+                                                                        // if (orderProvider
+                                                                        //       .orderDetailList[index]
+                                                                        //       .productId !=
+                                                                        //   null && 
+                                                                        //       orderProvider
+                                                                        //       .orderDetailList[index]
+                                                                        //       .wiringId != 
+                                                                        //       null)
+                                                                              if (
                                                                               orderProvider
                                                                               .orderDetailList[index]
                                                                               .wiringId != 
@@ -744,6 +752,10 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
 }
 
 Widget _buildWiringDetails({required Wiring? wiringData}) {
+  print("wiring details initiated");
+  print("Wiring Data: ${wiringData}");
+  print("Wiring Data ID: ${wiringData?.id}");
+
   if (wiringData == null) {
     return Text("No wiring details available.");
   }
@@ -768,6 +780,7 @@ Widget _buildWiringDetails({required Wiring? wiringData}) {
         _buildDetailRow("Additional Details", wiringData.details),
         _buildDetailRow("Budget", wiringData.budget),
         SizedBox(height: 10),
+
         Text(
           "Uploaded Photos",
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),

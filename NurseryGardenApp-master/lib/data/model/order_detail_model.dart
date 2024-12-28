@@ -30,12 +30,18 @@ class OrderDetailModel {
     this.error,
   });
 
-  factory OrderDetailModel.fromJson(Map<String, dynamic> json) =>
-      OrderDetailModel(
+  factory OrderDetailModel.fromJson(Map<String, dynamic> json) {
+    print("OrderDetailModel JSON: $json");
+    print("success: ${json["success"]}, type: ${json["success"]?.runtimeType}");
+    print("data: ${json["data"]}, type: ${json["data"]?.runtimeType}");
+    print("error: ${json["error"]}, type: ${json["error"]?.runtimeType}");
+
+    return OrderDetailModel(
         success: json["success"],
         data: json["data"] == null ? null : Data.fromJson(json["data"]),
         error: json["error"],
       );
+  }
 
   Map<String, dynamic> toJson() => {
         "success": success,
@@ -68,8 +74,20 @@ class Data {
     this.runner,
   });
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
-        order_address: json["order_address"],
+  factory Data.fromJson(Map<String, dynamic> json) {
+    print("Parsing Data: $json");
+    print("order_address: ${json["order_address"]}, type: ${json["order_address"]?.runtimeType}");
+    print("plant: ${json["plant"]}, type: ${json["plant"]?.runtimeType}");
+    print("product: ${json["product"]}, type: ${json["product"]?.runtimeType}");
+    print("orderItem: ${json["order_item"]}, type: ${json["order_item"]?.runtimeType}");
+    print("delivery: ${json["delivery_list"]}, type: ${json["delivery_list"]?.runtimeType}");
+    print("wiring: ${json["wiring"]}, type: ${json["wiring"]?.runtimeType}");
+    print("piping: ${json["piping"]}, type: ${json["piping"]?.runtimeType}");
+    print("gardening: ${json["gardening"]}, type: ${json["gardening"]?.runtimeType}");
+    print("runner: ${json["runner"]}, type: ${json["runner"]?.runtimeType}");
+
+    return Data(
+        order_address: json["order_address"] ?? '',
         plant: json["plant"] == null
             ? []
             : List<Plant>.from(json["plant"]!.map((x) => Plant.fromJson(x))),
@@ -104,7 +122,7 @@ class Data {
             : List<Runner>.from(
                 json["runner"]!.map((x) => Runner.fromJson(x))),
       );
-
+  }
   Map<String, dynamic> toJson() => {
         "plant": plant == null
             ? []
