@@ -5,10 +5,12 @@ import 'package:nurserygardenapp/view/screen/vendor/widget/vendor_grid_item.dart
 import 'package:provider/provider.dart';
 // import 'package:flutter/material.dart';
 import 'package:nurserygardenapp/util/color_resources.dart';
-import 'package:nurserygardenapp/util/custom_text_style.dart';
 import 'package:nurserygardenapp/util/routes.dart';
 import 'package:vs_scrollbar/vs_scrollbar.dart';
 import 'package:nurserygardenapp/view/base/empty_grid_item.dart';
+import 'package:nurserygardenapp/view/screen/emergency_screen.dart';
+import 'package:nurserygardenapp/view/screen/sos_button.dart';
+
 
 class VendorScreen extends StatefulWidget {
   // Define a GlobalKey for a specific widget
@@ -24,7 +26,7 @@ class _VendorScreenState extends State<VendorScreen> {
 
   final _scrollController = ScrollController();
 
-  final GlobalKey<ScaffoldState> vendorScaffoldKey = GlobalKey<ScaffoldState>();
+  //final GlobalKey<ScaffoldState> vendorScaffoldKey = GlobalKey<ScaffoldState>();
 
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
@@ -36,7 +38,7 @@ class _VendorScreenState extends State<VendorScreen> {
 
   Future<void> _loadData({bool isLoadMore = false}) async {
     try {
-      await vendor_prov.getVendorList(context, params).then((value) {});
+      await vendor_prov.listOfVendor(context, params, isLoadMore: isLoadMore);
     } catch (e) {
       print('Error in _loadData: $e');
     }
@@ -84,17 +86,53 @@ class _VendorScreenState extends State<VendorScreen> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      key: vendorScaffoldKey,
+      //key: vendorScaffoldKey,
       
       appBar: AppBar(
-          backgroundColor: ColorResources.COLOR_PRIMARY,
-          title: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Text("Verified Vendors",
-                style: CustomTextStyles(context)
-                    .titleStyle
-                    .copyWith(color: ColorResources.COLOR_WHITE, fontSize: 16)),
-          ),
+         backgroundColor: ColorResources.COLOR_PRIMARY,
+            title: InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, Routes.getVendorSearchRoute());
+              },
+              child: Container(
+                width: 400,
+                height: 40,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(4),
+                    border: Border.all(color: Colors.white)),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(children: [
+                    Expanded(
+                        child: Text(
+                      "Search Vendors",
+                      style: TextStyle(
+                        color: Colors.black.withOpacity(0.5),
+                        fontSize: 14,
+                      ),
+                    )),
+                    Icon(Icons.search),
+                  ]),
+                ),
+              ),
+            ),
+            actions: [
+              // SOS Button
+              Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: SOSButton(
+                  onPressed: () {
+                    print("SOS button pressed!");
+                    // Add your desired functionality here
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => EmergencyScreen()),
+                    );
+                  },
+                ),
+              ),
+            ],
         ),
         body: SizedBox(
             height: size.height,
@@ -180,12 +218,12 @@ class _VendorScreenState extends State<VendorScreen> {
                                                             8)
                                                     ? 8
                                                     : vendorProvider
-                                                              .vendorNoMoreData
+                                                              .noMoreDataMessage
                                                             .isNotEmpty
                                                         ? 1
                                                         : 0),
                                         padding: (vendorProvider
-                                                    .vendorNoMoreData
+                                                    .noMoreDataMessage
                                                     .isNotEmpty &&
                                                 !vendorProvider.isLoading)
                                             ? EdgeInsets.fromLTRB(10, 0, 10, 10)
@@ -207,12 +245,12 @@ class _VendorScreenState extends State<VendorScreen> {
                                                   vendorProvider
                                                       .vendorList.length &&
                                               vendorProvider
-                                                  .vendorNoMoreData.isEmpty) {
+                                                  .noMoreDataMessage.isEmpty) {
                                             return EmptyGridItem();
                                           } else if (index ==
                                                   vendorProvider
                                                       .vendorList.length &&
-                                              vendorProvider.vendorNoMoreData
+                                              vendorProvider.noMoreDataMessage
                                                   .isNotEmpty) {
                                             return Container(
                                               height: 150,
@@ -222,7 +260,7 @@ class _VendorScreenState extends State<VendorScreen> {
                                               child: Center(
                                                 child: Text(
                                                     vendorProvider
-                                                        .vendorNoMoreData,
+                                                        .noMoreDataMessage,
                                                     style: TextStyle(
                                                         color: Colors.grey
                                                             .withOpacity(0.5))),
@@ -232,17 +270,16 @@ class _VendorScreenState extends State<VendorScreen> {
                                             return SizedBox(
                                               height: 200,
                                               child: VendorGridItem(
-                                                  vendor: vendorProvider
-                                                      .vendorList[index],
+                                                 key: ValueKey(vendorProvider.vendorList.elementAt(index).id),
+                                                vendor: vendorProvider.vendorList.elementAt(index),
                                                   onTap: () {
+                                                     final vendor = vendorProvider.vendorList.elementAt(index);
                                                     Navigator.pushNamed(
                                                         context,
                                                         Routes.getVendorDetailRoute(
-                                                              vendorProvider
-                                                                .vendorList[
-                                                                    index]
-                                                                .id
-                                                                .toString()));
+                                                              vendor.id!.toString(),
+                                                              "false",
+                                                              "false"));
                                                   }),
                                             );
                                           }

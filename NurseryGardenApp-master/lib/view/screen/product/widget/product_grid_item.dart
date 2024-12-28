@@ -27,6 +27,12 @@ class _ProductGridItemState extends State<ProductGridItem> {
 
   @override
   Widget build(BuildContext context) {
+    print('Product: ${widget.product}');
+    print('Product ImageURL: ${widget.product.imageURL}');
+    print('Product Image: ${widget.product.image}');
+    print('Product Name: ${widget.product.name}');
+    print('Product Price: ${widget.product.price}');
+    
     return InkWell(
       onTap: widget.onTap,
       splashColor: Theme.of(context).primaryColor,

@@ -51,6 +51,8 @@ import 'package:nurserygardenapp/view/screen/splash/splash_screen.dart';
 import 'dart:convert'; 
 import 'package:nurserygardenapp/view/screen/vendor/vendor_detail_screen.dart';
 import 'package:nurserygardenapp/view/screen/vendor/vendor_screen.dart';
+import 'package:nurserygardenapp/view/screen/vendor/widget/vendor_search_screen.dart';
+import 'package:nurserygardenapp/view/screen/vendor/vendor_search_result_screen.dart';
 
 class RouterHelper {
   static final FluroRouter router = FluroRouter();
@@ -315,8 +317,21 @@ class RouterHelper {
 
   static Handler _vendorDetailHandler = Handler(
     handlerFunc: (context, Map<String, dynamic> parameters) => VendorDetailScreen(
-      vendorId: parameters['vendorId'][0],
+      vendorID: parameters['vendorID'][0],
+      isSearch: parameters['isSearch'][0],
+      isCart: parameters['isCart'][0],
     ),
+  );
+
+  static Handler _vendorSearchHandler = Handler(
+    handlerFunc: (context, Map<String, dynamic> parameters) =>
+        VendorSearchScreen(),
+  );
+
+  static Handler _vendorSearchResultHandler = Handler(
+    handlerFunc: (context, Map<String, dynamic> parameters) =>
+        VendorSearchResultScreen(
+            searchKeyword: parameters['searchKeyword'][0]),
   );
 
   // =================================Account=========================================
@@ -465,6 +480,10 @@ class RouterHelper {
         handler: _vendorHandler, transitionType: TransitionType.fadeIn);
     router.define(Routes.VENDOR_DETAIL_SCREEN,
         handler: _vendorDetailHandler, transitionType: TransitionType.fadeIn);
+    router.define(Routes.VENDOR_SEARCH_SCREEN,
+        handler: _vendorSearchHandler, transitionType: TransitionType.fadeIn);
+    router.define(Routes.VENDOR_SEARCH_RESULT_SCREEN,
+        handler: _vendorSearchResultHandler, transitionType: TransitionType.fadeIn);
     router.define(Routes.ACCOUNT_SCREEN,
         handler: _accountHandler, transitionType: TransitionType.fadeIn);
     router.define(Routes.PROFILE_SCREEN,

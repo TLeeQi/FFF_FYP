@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:nurserygardenapp/providers/product_provider.dart';
+import 'package:nurserygardenapp/providers/vendor_provider.dart';
 import 'package:nurserygardenapp/util/color_resources.dart';
 import 'package:nurserygardenapp/util/routes.dart';
 import 'package:provider/provider.dart';
 
-class ProductSearchScreen extends StatefulWidget {
+class VendorSearchScreen extends StatefulWidget {
   @override
-  _ProductSearchScreenState createState() => _ProductSearchScreenState();
+  _VendorSearchScreenState createState() => _VendorSearchScreenState();
 }
 
-class _ProductSearchScreenState extends State<ProductSearchScreen> {
+class _VendorSearchScreenState extends State<VendorSearchScreen> {
   TextEditingController _searchController = TextEditingController();
   FocusNode _focusNode = FocusNode();
 
@@ -43,22 +43,22 @@ class _ProductSearchScreenState extends State<ProductSearchScreen> {
         backgroundColor: ColorResources.COLOR_PRIMARY,
         title: Container(
           height: 40,
-          child: Consumer<ProductProvider>(
-              builder: (context, productProvider, child) {
+          child: Consumer<VendorProvider>(
+              builder: (context, vendorProvider, child) {
             return TextField(
               onChanged: (value) {
-                productProvider.getSearchTips(value);
+                vendorProvider.getSearchTips(value);
               },
               onSubmitted: (value) {
                 if (_searchController.text.isEmpty) {
-                  EasyLoading.showError('Please enter the service name',
+                  EasyLoading.showError('Please enter the vendor name',
                       dismissOnTap: true,
                       duration: Duration(milliseconds: 500));
                   return;
                 }
                 FocusScope.of(context).unfocus();
                 Navigator.pushNamed(context,
-                    Routes.getProductSearchResultRoute(_searchController.text));
+                    Routes.getVendorSearchResultRoute(_searchController.text));
               },
               autofocus: true,
               cursorColor: Theme.of(context).primaryColor,
@@ -70,7 +70,7 @@ class _ProductSearchScreenState extends State<ProductSearchScreen> {
                   filled: true,
                   contentPadding: EdgeInsets.only(left: 10),
                   focusColor: Theme.of(context).primaryColor,
-                  hintText: 'Search Service',
+                  hintText: 'Search Vendor',
                   hintStyle: TextStyle(
                     color: Colors.black.withOpacity(0.5),
                     fontSize: 14,
@@ -87,7 +87,7 @@ class _ProductSearchScreenState extends State<ProductSearchScreen> {
                     ),
                     onPressed: () {
                       if (_searchController.text.isEmpty) {
-                        EasyLoading.showError('Please enter the service name',
+                        EasyLoading.showError('Please enter the vendor name',
                             dismissOnTap: true,
                             duration: Duration(milliseconds: 500));
                         return;
@@ -95,7 +95,7 @@ class _ProductSearchScreenState extends State<ProductSearchScreen> {
                       FocusScope.of(context).unfocus();
                       Navigator.pushNamed(
                           context,
-                          Routes.getProductSearchResultRoute(
+                          Routes.getVendorSearchResultRoute(
                               _searchController.text));
                     },
                   )),
@@ -104,29 +104,29 @@ class _ProductSearchScreenState extends State<ProductSearchScreen> {
         ),
       ),
       body:
-          Consumer<ProductProvider>(builder: (context, productProvider, child) {
-        return productProvider.productSearchHint.length == 0
+          Consumer<VendorProvider>(builder: (context, vendorProvider, child) {
+        return vendorProvider.vendorSearchHint.length == 0
             ? Container(
                 height: 50,
                 child: Center(
                   child: Text(
-                    'No Service Found',
+                    'No Vendor Found',
                     style: TextStyle(fontSize: 16),
                   ),
                 ),
               )
             : ListView.builder(
-                itemCount: productProvider.productSearchHint.length,
+                itemCount: vendorProvider.vendorSearchHint.length,
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
                       Navigator.pushNamed(
                           context,
-                          Routes.getProductSearchResultRoute(
-                              productProvider.productSearchHint[index]));
+                          Routes.getVendorSearchResultRoute(
+                              vendorProvider.vendorSearchHint[index]));
                     },
                     child: ListTile(
-                      title: Text(productProvider.productSearchHint[index]),
+                      title: Text(vendorProvider.vendorSearchHint[index]),
                     ),
                   );
                 },

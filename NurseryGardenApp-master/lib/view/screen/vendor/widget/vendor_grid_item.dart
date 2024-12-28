@@ -1,13 +1,14 @@
+// import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:nurserygardenapp/data/model/vendor_model.dart';
+// import 'package:nurserygardenapp/providers/vendor_provider.dart';
 import 'package:nurserygardenapp/util/color_resources.dart';
 import 'package:nurserygardenapp/util/custom_text_style.dart';
 import 'package:nurserygardenapp/view/base/custom_space.dart';
-// import 'package:nurserygardenapp/util/app_constants.dart';
+// import 'package:provider/provider.dart';
 
-
-class VendorGridItem extends StatelessWidget {
+class VendorGridItem extends StatefulWidget {
   const VendorGridItem({
     super.key,
     required this.vendor,
@@ -16,6 +17,18 @@ class VendorGridItem extends StatelessWidget {
 
   final Vendor vendor;
   final void Function() onTap;
+
+  @override
+  State<VendorGridItem> createState() => _VendorGridItemState();
+}
+
+class _VendorGridItemState extends State<VendorGridItem> {
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsFlutterBinding.ensureInitialized();
+  }
 
   List<Widget> _buildStars(double rating) {
     List<Widget> stars = [];
@@ -36,16 +49,25 @@ class VendorGridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("vendor.image: ${vendor.image}");
+    // print("vendor.image: ${widget.vendor.image}");
 
-    String imageUrl = vendor.image != null && vendor.image!.isNotEmpty
-        ? 'assets/vendor_image/${vendor.image}'
-        : 'assets/vendor_image/no_vendor.png'; // Use local asset if no image URL
+    // String imageUrl = widget.vendor.image != null && widget.vendor.image!.isNotEmpty
+    //     ? 'assets/vendor_image/${widget.vendor.image}'
+    //     : 'assets/vendor_image/no_vendor.png'; // Use local asset if no image URL
 
-    print("imageUrl: $imageUrl");
+    // print("imageUrl: $imageUrl");
     Size size = MediaQuery.of(context).size;
+    print('Vendor: ${widget.vendor}');
+    print('Vendor ImageURL: ${widget.vendor.imageURL}');
+    print('Vendor Image: ${widget.vendor.image}');
+    print('Vendor Name: ${widget.vendor.name}');
+    print('Vendor Email: ${widget.vendor.email}');
+    print('Vendor Phone: ${widget.vendor.phone}');
+    print('Vendor Rating: ${widget.vendor.rating}');
+
     return InkWell(
-      onTap: onTap,
+      onTap: widget.onTap,
+
       splashColor: Theme.of(context).primaryColor,
       borderRadius: BorderRadius.circular(16),
       child: Container(
@@ -71,7 +93,7 @@ class VendorGridItem extends StatelessWidget {
                 //child: Text('image'),
                 child: CachedNetworkImage(
                   filterQuality: FilterQuality.high,
-                  imageUrl: imageUrl,
+                  imageUrl: "${widget.vendor.imageURL!}",
                   imageBuilder: (context, imageProvider) => Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
@@ -93,21 +115,21 @@ class VendorGridItem extends StatelessWidget {
               ),
               VerticalSpacing(),
               Text(
-                vendor.name!,
+                widget.vendor.name!,
                 style: Theme.of(context).textTheme.displaySmall!.copyWith(
                       color: Theme.of(context).colorScheme.onSurface,
                       fontSize: 14,
                     ),
               ),
               Text(
-                "Email: ${vendor.email}",
+                "Email: ${widget.vendor.email}",
                 style: CustomTextStyles(context).subTitleStyle.copyWith(
                       color: ColorResources.COLOR_PRIMARY,
                       fontSize: 12,
                     ),
               ),
               Text(
-                "Phone: ${vendor.phone}",
+                "Phone: ${widget.vendor.phone}",
                 style: CustomTextStyles(context).subTitleStyle.copyWith(
                       color: ColorResources.COLOR_PRIMARY,
                       fontSize: 12,
@@ -123,10 +145,10 @@ class VendorGridItem extends StatelessWidget {
               // ),
               Row(
                 children: [
-                  ..._buildStars(vendor.rating ?? 0.0), // Build stars based on rating
+                  ..._buildStars(widget.vendor.rating ?? 0.0), // Build stars based on rating
                   SizedBox(width: 4),
                   Text(
-                    "${vendor.rating?.toStringAsFixed(1) ?? 'N/A'}",
+                    "${widget.vendor.rating?.toStringAsFixed(1) ?? 'N/A'}",
                     style: CustomTextStyles(context).subTitleStyle.copyWith(
                           color: ColorResources.COLOR_PRIMARY,
                           fontSize: 12,

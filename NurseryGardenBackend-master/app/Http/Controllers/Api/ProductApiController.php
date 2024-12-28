@@ -81,6 +81,8 @@ class ProductApiController extends Controller
             $sortOrder
         )->paginate($limit);
 
+        \Log::info('Products Retrieved: ', $products->toArray()); 
+
         $ret['products'] = $products;
 
         return $this->success($ret);

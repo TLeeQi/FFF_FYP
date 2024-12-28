@@ -9,6 +9,7 @@ import 'package:nurserygardenapp/view/screen/product/widget/product_grid_item.da
 import 'package:provider/provider.dart';
 import 'package:vs_scrollbar/vs_scrollbar.dart';
 import 'package:nurserygardenapp/view/screen/sos_button.dart'; // Correct import for the current structure
+import 'package:nurserygardenapp/view/screen/emergency_screen.dart';
 
 final List<String> imgList = [
   Images.carousel_first,
@@ -123,7 +124,7 @@ class _ProductScreenState extends State<ProductScreen> {
                 Navigator.pushNamed(context, Routes.getProductSearchRoute());
               },
               child: Container(
-                width: 200,
+                width: 400,
                 height: 40,
                 decoration: BoxDecoration(
                     color: Colors.white,
@@ -134,7 +135,7 @@ class _ProductScreenState extends State<ProductScreen> {
                   child: Row(children: [
                     Expanded(
                         child: Text(
-                      "Search Product",
+                      "Search Services",
                       style: TextStyle(
                         color: Colors.black.withOpacity(0.5),
                         fontSize: 14,
@@ -163,6 +164,10 @@ class _ProductScreenState extends State<ProductScreen> {
                   onPressed: () {
                     print("SOS button pressed!");
                     // Add your desired functionality here
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => EmergencyScreen()),
+                    );
                   },
                 ),
               ),
@@ -331,7 +336,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                               final product = productProvider.productList.elementAt(index);
 
                                               // Navigate based on cat_id
-                                              if (product.catId == 7) {
+                                              if (product.catId == 15) {
                                                 await Navigator.pushNamed(
                                                   context,
                                                   Routes.getWiringDetailRoute(
@@ -340,7 +345,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                                     "false",
                                                   ),
                                                 );
-                                              } else if (product.catId == 5) {
+                                              } else if (product.catId == 16) {
                                                 await Navigator.pushNamed(
                                                   context,
                                                   Routes.getPipingDetailRoute(
@@ -349,7 +354,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                                     "false",
                                                   ),
                                                 );
-                                              } else if (product.catId == 15) {
+                                              } else if (product.catId == 17) {
                                                 await Navigator.pushNamed(
                                                   context,
                                                   Routes.getGardeningDetailRoute(

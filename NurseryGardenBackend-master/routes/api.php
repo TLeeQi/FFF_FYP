@@ -67,9 +67,12 @@ Route::prefix('v1')->namespace('App\\Http\\Controllers\\Api')->group(function ()
         Route::post('order/runnerdetail', 'OrderApiController@storeRunnerDetail');
 
         /* Vendor */
-        Route::get('vendor', 'VendorApiController@index');
-        Route::get('vendor/{id}', 'VendorApiController@show');
         Route::post('vendor/{id}/rate', 'VendorApiController@rate');
+        Route::get('vendor', 'VendorApiController@vendor');
+        Route::get('vendorlist', 'VendorApiController@vendorList');
+        Route::get('vendor/search/keyword', 'VendorApiController@searchKeyword');
+        Route::any('vendor/search', 'VendorApiController@searchVendor');
+        Route::get('vendor/detail', 'VendorApiController@show');
 
         /* Order Detail */
         // Route::get('order/detail/wiring', 'OrderApiController@wiringDetail');

@@ -39,6 +39,9 @@ class Product extends Model
 
     public function getImageUrlAttribute()
     {
+        \Log::info('image: ' . $this->image);
+        \Log::info('asset: ' . asset('/product_image/' . $this->image));
+        \Log::info('json_encode: ' . json_encode(asset('/product_image/' . $this->image)));
         return  json_encode(asset('/product_image/' . $this->image));
     }
 

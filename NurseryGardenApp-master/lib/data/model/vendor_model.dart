@@ -7,7 +7,7 @@ String vendorModelToJson(VendorModel data) => json.encode(data.toJson());
 
 class VendorModel {
   bool? success;
-  VendorData? data;
+  Data? data;
   String? error;
 
   VendorModel({
@@ -18,9 +18,7 @@ class VendorModel {
 
   factory VendorModel.fromJson(Map<String, dynamic> json) => VendorModel(
         success: json["success"],
-        data: json["data"]?["vendors"] == null
-            ? null
-            : VendorData.fromJson(json["data"]["vendors"]),
+         data: json["data"] == null ? null : Data.fromJson(json["data"]),
         error: json["error"],
       );
 
@@ -31,24 +29,42 @@ class VendorModel {
       };
 }
 
-class VendorData {
+class Data {
+  VendorsList? vendorsList;
+
+  Data({
+    this.vendorsList,
+  });
+
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
+        vendorsList: json["vendors"] == null
+            ? null
+            : VendorsList.fromJson(json["vendors"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "vendors": vendorsList?.toJson(),
+      };
+}
+
+class VendorsList {
   int? currentPage;
-  List<Vendor>? vendors;
+  List<Vendor>? vendor;
   String? firstPageUrl;
   int? from;
   int? lastPage;
   String? lastPageUrl;
   List<Link>? links;
-  dynamic nextPageUrl;
+  String?  nextPageUrl;
   String? path;
   int? perPage;
   dynamic prevPageUrl;
   int? to;
   int? total;
 
-  VendorData({
+  VendorsList({
     this.currentPage,
-    this.vendors,
+    this.vendor,
     this.firstPageUrl,
     this.from,
     this.lastPage,
@@ -62,21 +78,21 @@ class VendorData {
     this.total,
   });
 
-  factory VendorData.fromJson(Map<String, dynamic> json) => VendorData(
+  factory VendorsList.fromJson(Map<String, dynamic> json) => VendorsList(
         currentPage: json["current_page"],
-        vendors: json["data"] == null
+        vendor: json["data"] == null
             ? []
-            : List<Vendor>.from(json["data"].map((x) => Vendor.fromJson(x))),
+            : List<Vendor>.from(json["data"]!.map((x) => Vendor.fromJson(x))),
         firstPageUrl: json["first_page_url"],
         from: json["from"],
         lastPage: json["last_page"],
         lastPageUrl: json["last_page_url"],
         links: json["links"] == null
             ? []
-            : List<Link>.from(json["links"].map((x) => Link.fromJson(x))),
+            : List<Link>.from(json["links"]!.map((x) => Link.fromJson(x))),
         nextPageUrl: json["next_page_url"],
         path: json["path"],
-        perPage: json["per_page"],
+        perPage: json["per_page"] == null ? null : json["per_page"],
         prevPageUrl: json["prev_page_url"],
         to: json["to"],
         total: json["total"],
@@ -84,9 +100,9 @@ class VendorData {
 
   Map<String, dynamic> toJson() => {
         "current_page": currentPage,
-        "data": vendors == null
+        "data": vendor == null
             ? []
-            : List<dynamic>.from(vendors!.map((x) => x.toJson())),
+            : List<dynamic>.from(vendor!.map((x) => x.toJson())),
         "first_page_url": firstPageUrl,
         "from": from,
         "last_page": lastPage,
@@ -113,7 +129,9 @@ class Vendor {
   DateTime? createdAt;
   DateTime? updatedAt;
   String? image;
+  String? imageURL;
   String? status;
+  String? description;
 
   Vendor({
     this.id,
@@ -125,7 +143,9 @@ class Vendor {
     this.createdAt,
     this.updatedAt,
     this.image,
+    this.imageURL,
     this.status,
+    this.description,
   });
 
   factory Vendor.fromJson(Map<String, dynamic> json) => Vendor(
@@ -144,7 +164,9 @@ class Vendor {
             ? null
             : DateTime.parse(json["updated_at"]),
         image: json["image"],
+        imageURL: jsonDecode(json["image_url"]),
         status: json["status"],
+        description: json["description"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -156,8 +178,10 @@ class Vendor {
         "rating": rating,
         "image": image,
         "status": status,
+        "description": description,
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
+        "image_url": imageURL,
       };
 }
 

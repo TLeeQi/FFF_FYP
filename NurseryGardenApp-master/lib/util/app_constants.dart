@@ -9,7 +9,6 @@ class AppConstants {
   static final String BASE_URI = url + prefix;
   static final String NO_MORE_DATA = 'No More Data...';
   static final String APP_KEY = dotenv.env['APP_KEY']!;
-  static const String VENDOR_IMAGE_PATH = '/vendor_image/';
 
   // Dialog Type
   static const String DIALOG_SUCCESS = 'success';
@@ -116,13 +115,16 @@ class AppConstants {
   static const String BIDDING_REFUND_URI = '/bidding/refund/list';
 
   // Vendor
-  static const String VENDOR_URI = '/vendor';
-  static const String VENDOR_DETAIL_URI = '/vendor/show';
+  static const String VENDOR_LIST_URI = '/vendorlist';
+  static const String VENDOR_SEARCH = '/vendor/search';
+  static const String VENDOR_SEARCH_KEYWORD = '/vendor/search/keyword';
   static const String VENDOR_RATING_URI = '/vendor/rate';
+  // static const String VENDOR_IMAGE_PATH = '/vendor_image/';
 
   // Shared Key
   static const String THEME = 'theme';
   static const String TOKEN = 'token';
   static const String PLANT_TOKEN = 'plant_token';
   static const String PRODUCT_TOKEN = 'product_token';
+  static const String VENDOR_TOKEN = 'vendor_token';
 }

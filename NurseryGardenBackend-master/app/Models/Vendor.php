@@ -12,7 +12,15 @@ class Vendor extends Model
     protected $table = "vendors";
     public $primaryKey = 'id';
 
-    protected $fillable = ['name', 'email', 'phone', 'address', 'rating', 'status', 'image', 'description'];
+    protected $fillable = [
+        'name', 
+        'email', 
+        'phone', 
+        'address', 
+        'rating', 
+        'status', 
+        'image',
+        'description'];
 
     public $appends = [
         'image_url'

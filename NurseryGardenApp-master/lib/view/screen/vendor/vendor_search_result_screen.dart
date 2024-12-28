@@ -1,24 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:nurserygardenapp/providers/product_provider.dart';
+import 'package:nurserygardenapp/providers/vendor_provider.dart';
 import 'package:nurserygardenapp/util/color_resources.dart';
 import 'package:nurserygardenapp/util/routes.dart';
 import 'package:nurserygardenapp/view/base/empty_grid_item.dart';
-import 'package:nurserygardenapp/view/screen/product/widget/product_grid_item.dart';
+import 'package:nurserygardenapp/view/screen/vendor/widget/vendor_grid_item.dart';
 import 'package:provider/provider.dart';
 
-class ProductSearchResultScreen extends StatefulWidget {
+class VendorSearchResultScreen extends StatefulWidget {
   final String searchKeyword;
-  const ProductSearchResultScreen({super.key, required this.searchKeyword});
+  const VendorSearchResultScreen({super.key, required this.searchKeyword});
 
   @override
-  State<ProductSearchResultScreen> createState() =>
-      _ProductSearchResultScreenState();
+  State<VendorSearchResultScreen> createState() =>
+      _VendorSearchResultScreenState();
 }
 
-class _ProductSearchResultScreenState extends State<ProductSearchResultScreen> {
-  late ProductProvider product_prov =
-      Provider.of<ProductProvider>(context, listen: false);
+class _VendorSearchResultScreenState extends State<VendorSearchResultScreen> {
+  late VendorProvider vendor_prov =
+      Provider.of<VendorProvider>(context, listen: false);
 
   final _scrollController = ScrollController();
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -49,7 +49,7 @@ class _ProductSearchResultScreenState extends State<ProductSearchResultScreen> {
   void _onScroll() {
     if (_scrollController.position.pixels ==
         _scrollController.position.maxScrollExtent) {
-      if (product_prov.productListSearch.length < int.parse(params['limit']!)) {
+      if (vendor_prov.vendorListSearch.length < int.parse(params['limit']!)) {
         return;
       } else {
         int currentLimit = int.parse(params['limit']!);
@@ -66,19 +66,8 @@ class _ProductSearchResultScreenState extends State<ProductSearchResultScreen> {
         _isFirstTime = false;
       });
     }
-    await product_prov.searchProduct(context, params, isLoadMore: isLoadMore);
+    await vendor_prov.searchVendor(context, params, isLoadMore: isLoadMore);
   }
-
-  // void _handleParamChanged(param) {
-  //   params['limit'] = '8';
-  //   params['keyword'] = widget.searchKeyword;
-  //   params['sortOrder'] = param['sortOrder'] ?? "";
-  //   setState(() {
-  //     sortOrder = param['sortOrder'] ?? "asc";
-  //   });
-  //   params['category'] = param['category'] ?? "";
-  //   _loadData();
-  // }
 
   void _handleFilterParamChange(param, bool isPrice, bool isSales) {
     params['limit'] = '8';
@@ -243,10 +232,10 @@ class _ProductSearchResultScreenState extends State<ProductSearchResultScreen> {
                           )
                         }),
                   ),
-                  Consumer<ProductProvider>(
-                      builder: (context, productProvider, child) {
-                    return productProvider.isLoadingSearch &&
-                            productProvider.endSearchResult.isEmpty &&
+                  Consumer<VendorProvider>(
+                      builder: (context, vendorProvider, child) {
+                    return vendorProvider.isLoadingSearch &&
+                            vendorProvider.endSearchResult.isEmpty &&
                             _isFirstTime
                         ? Expanded(
                             child: GridView.builder(
@@ -265,11 +254,11 @@ class _ProductSearchResultScreenState extends State<ProductSearchResultScreen> {
                                   return EmptyGridItem();
                                 }),
                           )
-                        : productProvider.productListSearch.isEmpty &&
-                                !productProvider.isLoadingSearch
+                        : vendorProvider.vendorListSearch.isEmpty &&
+                                !vendorProvider.isLoadingSearch
                             ? Center(
                                 child: Text(
-                                  "No Service Found",
+                                  "No Vendor Found",
                                   style: TextStyle(
                                       color: Colors.grey.withOpacity(0.7),
                                       fontSize: 18),
@@ -284,20 +273,20 @@ class _ProductSearchResultScreenState extends State<ProductSearchResultScreen> {
                                   // physics:
                                   //     const AlwaysScrollableScrollPhysics(),
                                   itemCount:
-                                      productProvider.productListSearch.length +
-                                          ((productProvider.isLoadingSearch &&
-                                                  productProvider
-                                                          .productListSearch
+                                      vendorProvider.vendorListSearch.length +
+                                          ((vendorProvider.isLoadingSearch &&
+                                                  vendorProvider
+                                                          .vendorListSearch
                                                           .length >=
                                                       8)
                                               ? 8
-                                              : productProvider.endSearchResult
+                                              : vendorProvider.endSearchResult
                                                       .isNotEmpty
                                                   ? 1
                                                   : 0),
-                                  padding: (productProvider
+                                  padding: (vendorProvider
                                               .endSearchResult.isNotEmpty &&
-                                          !productProvider.isLoadingSearch)
+                                          !vendorProvider.isLoadingSearch)
                                       ? EdgeInsets.all(10)
                                       : EdgeInsets.only(
                                           bottom: 235,
@@ -314,15 +303,15 @@ class _ProductSearchResultScreenState extends State<ProductSearchResultScreen> {
                                   itemBuilder:
                                       (BuildContext context, int index) {
                                     if (index >=
-                                            productProvider
-                                                .productListSearch.length &&
-                                        productProvider
+                                            vendorProvider
+                                                .vendorListSearch.length &&
+                                        vendorProvider
                                             .endSearchResult.isEmpty) {
                                       return EmptyGridItem();
                                     } else if (index ==
-                                            productProvider
-                                                .productListSearch.length &&
-                                        productProvider
+                                            vendorProvider
+                                                .vendorListSearch.length &&
+                                        vendorProvider
                                             .endSearchResult.isNotEmpty) {
                                       return Container(
                                         height: 150,
@@ -330,72 +319,32 @@ class _ProductSearchResultScreenState extends State<ProductSearchResultScreen> {
                                             vertical: 10),
                                         child: Center(
                                           child: Text(
-                                              productProvider.endSearchResult,
+                                              vendorProvider.endSearchResult,
                                               style: TextStyle(
                                                   color: Colors.grey
                                                       .withOpacity(0.5))),
                                         ),
                                       );
                                     } else {
-                                      return ProductGridItem(
-                                        key: ValueKey(productProvider
-                                            .productListSearch
+                                      return VendorGridItem(
+                                        key: ValueKey(vendorProvider
+                                            .vendorListSearch
                                             .elementAt(index)
                                             .id),
-                                        product: productProvider
-                                            .productListSearch
+                                        vendor: vendorProvider
+                                            .vendorListSearch
                                             .elementAt(index),
                                         onTap: () async {
-                                          final product = productProvider.productListSearch.elementAt(index);
-
-                                              // Navigate based on cat_id
-                                              if (product.catId == 15) {
-                                                await Navigator.pushNamed(
-                                                  context,
-                                                  Routes.getWiringDetailRoute(
-                                                    product.id!.toString(),
-                                                    "false",
-                                                    "false",
-                                                  ),
-                                                );
-                                              } else if (product.catId == 16) {
-                                                await Navigator.pushNamed(
-                                                  context,
-                                                  Routes.getPipingDetailRoute(
-                                                    product.id!.toString(),
-                                                    "false",
-                                                    "false",
-                                                  ),
-                                                );
-                                              } else if (product.catId == 17) {
-                                                await Navigator.pushNamed(
-                                                  context,
-                                                  Routes.getGardeningDetailRoute(
-                                                    product.id!.toString(),
-                                                    "false",
-                                                    "false",
-                                                  ),
-                                                );
-                                              }else if (product.catId == 18) {
-                                                await Navigator.pushNamed(
-                                                  context,
-                                                  Routes.getRunnerDetailRoute(
-                                                    product.id!.toString(),
-                                                    "false",
-                                                    "false",
-                                                  ),
-                                                );
-                                              }else {
-                                                print("Product catID: ${product.catId}");
-                                                await Navigator.pushNamed(
-                                                  context,
-                                                  Routes.getProductDetailRoute(
-                                                    product.id!.toString(),
-                                                    "false",
-                                                    "false",
-                                                  ),
-                                                );
-                                              }
+                                          await Navigator.pushNamed(
+                                              context,
+                                              Routes.getVendorDetailRoute(
+                                                  vendorProvider
+                                                      .vendorListSearch
+                                                      .elementAt(index)
+                                                      .id!
+                                                      .toString(),
+                                                  "true",
+                                                  'false'));
                                         },
                                       );
                                     }

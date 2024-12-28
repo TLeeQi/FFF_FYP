@@ -67,6 +67,8 @@ class Routes {
   // Vendor
   static const String VENDOR_SCREEN = '/vendor';
   static const String VENDOR_DETAIL_SCREEN = '/vendor-detail';
+  static const String VENDOR_SEARCH_SCREEN = '/vendor-search';
+  static const String VENDOR_SEARCH_RESULT_SCREEN = '/vendor-search/result';
 
   // Delivery
   static const String DELIVERY_SCREEN = '/delivery';
@@ -85,6 +87,9 @@ class Routes {
   // Image Widget
   static const String IMAGE_ENLARGE_SCREEN = '/image-enlarge';
 
+  // Emergency
+  static const String EMERGENCY_SCREEN = '/emergency';
+
   /** ROUTE **/
   static String getComingSoonRoute() => COMING_SOON;
   static String getSplashRoute() => SPLASH_SCREEN;
@@ -98,6 +103,9 @@ class Routes {
   static String getMainRoute() => DASHBOARD;
   static String getDashboardRoute(String page) =>
       '$DASHBOARD_SCREEN?page=$page';
+
+  // Emergency
+  // static String getEmergencyRoute() => EMERGENCY_SCREEN;
 
   // Plant
   static String getPlantRoute() => PLANT_SCREEN;
@@ -201,8 +209,14 @@ class Routes {
 
   // Vendor
   static String getVendorRoute() => VENDOR_SCREEN;
-  static String getVendorDetailRoute(String vendorID) =>
-      '$VENDOR_DETAIL_SCREEN?vendorID=$vendorID';
+  // static String getVendorDetailRoute(String vendorID) =>
+  //     '$VENDOR_DETAIL_SCREEN?vendorID=$vendorID';
+  static String getVendorDetailRoute(
+          String vendorID, String isSearch, String isCart) =>
+      '$VENDOR_DETAIL_SCREEN?vendorID=$vendorID&isSearch=$isSearch&isCart=$isCart';
+  static String getVendorSearchRoute() => VENDOR_SEARCH_SCREEN;
+  static String getVendorSearchResultRoute(String searchKeyword) =>
+      '$VENDOR_SEARCH_RESULT_SCREEN?searchKeyword=$searchKeyword';
 
   // Image widget
   static String getImageEnlargeRoute(String tag, String url) =>
