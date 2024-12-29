@@ -34,24 +34,24 @@ class GardeningModel {
 }
 
 class Data {
-  GardeningList? gardeningList;
+  GardeningsList? gardeningsList;
 
   Data({
-    this.gardeningList,
+    this.gardeningsList,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-        gardeningList: json["gardening"] == null
+        gardeningsList: json["gardenings"] == null
             ? null
-            : GardeningList.fromJson(json["gardening"]),
+            : GardeningsList.fromJson(json["gardenings"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "gardening": gardeningList?.toJson(),
+        "gardenings": gardeningsList?.toJson(),
       };
 }
 
-class GardeningList {
+class GardeningsList {
   int? currentPage;
   List<Gardening>? gardening;
   String? firstPageUrl;
@@ -66,7 +66,7 @@ class GardeningList {
   int? to;
   int? total;
 
-  GardeningList({
+  GardeningsList({
     this.currentPage,
     this.gardening,
     this.firstPageUrl,
@@ -82,7 +82,7 @@ class GardeningList {
     this.total,
   });
 
-  factory GardeningList.fromJson(Map<String, dynamic> json) => GardeningList(
+  factory GardeningsList.fromJson(Map<String, dynamic> json) => GardeningsList(
         currentPage: json["current_page"],
         gardening: json["data"] == null
             ? []
@@ -125,7 +125,7 @@ class GardeningList {
 
 class Gardening {
   int? id;
-  int? Catid;
+  //int? Catid;
   String? type;
   String? area;
   String? typesProperty;
@@ -136,13 +136,14 @@ class Gardening {
   String? budget;
   DateTime? createdAt;
   DateTime? updatedAt;
-  String? categoryName;
+  //String? categoryName;
   String? imageURL;
   bool? isSelected;
+  int? productID; // Optional
 
   Gardening({
     this.id,
-    this.Catid,
+    //this.Catid,
     this.type,
     this.area,
     this.typesProperty,
@@ -153,19 +154,38 @@ class Gardening {
     this.budget,
     this.createdAt,
     this.updatedAt,
-    this.categoryName,
+    //this.categoryName,
     this.imageURL,
     this.isSelected = false,
+    this.productID,
   });
 
-  factory Gardening.fromJson(Map<String, dynamic> json) => Gardening(
+  factory Gardening.fromJson(Map<String, dynamic> json) {
+    print("Gardening JSON: $json");
+    print("id: ${json["id"]}, type: ${json["id"]?.runtimeType}");
+    // print("Catid: ${json["Catid"]}, type: ${json["Catid"]?.runtimeType}");
+    print("type: ${json["type"]}, type: ${json["type"]?.runtimeType}");
+    print("area: ${json["area"]}, type: ${json["area"]?.runtimeType}");
+    print("typesProperty: ${json["types_property"]}, type: ${json["types_property"]?.runtimeType}");
+    print("appDate: ${json["app_date"]}, type: ${json["app_date"]?.runtimeType}");
+    print("preferredTime: ${json["preferred_time"]}, type: ${json["preferred_time"]?.runtimeType}");
+    print("details: ${json["details"]}, type: ${json["details"]?.runtimeType}");
+    print("photo: ${json["photo"]}, type: ${json["photo"]?.runtimeType}");
+    print("budget: ${json["budget"]}, type: ${json["budget"]?.runtimeType}");
+    print("createdAt: ${json["created_at"]}, type: ${json["created_at"]?.runtimeType}");
+    print("updatedAt: ${json["updated_at"]}, type: ${json["updated_at"]?.runtimeType}");
+    print("categoryName: ${json["category_name"]}, type: ${json["category_name"]?.runtimeType}");
+    print("imageURL: ${json["image_url"]}, type: ${json["image_url"]?.runtimeType}");
+    print("productID: ${json["product_id"]}, type: ${json["product_id"]?.runtimeType}");
+
+    return Gardening(
         id: json["id"],
-        Catid: json["Catid"],
+        //Catid: json["Catid"],
         type: json["type"],
         area: json["area"],
-        typesProperty: json["typesProperty"],
-        appDate: json["appDate"] == null ? null : DateTime.parse(json["appDate"]),
-        preferredTime: json["preferredTime"],
+        typesProperty: json["types_property"],
+        appDate: json["app_date"] == null ? null : DateTime.parse(json["app_date"]),
+        preferredTime: json["preferred_time"],
         details: json["details"],
         photo: json["photo"] == null ? null : List<String>.from(json["photo"]),
         budget: json["budget"],
@@ -175,13 +195,16 @@ class Gardening {
         updatedAt: json["updated_at"] == null
             ? null
             : DateTime.parse(json["updated_at"]),
-        categoryName: json["category_name"],
-        imageURL: jsonDecode(json["image_url"]),
+        //categoryName: json["category_name"],
+        //imageURL: jsonDecode(json["image_url"]),
+        imageURL: json["image_url"],
+        productID: json["product_id"],
       );
+  }
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "Catid": Catid,
+        //"Catid": Catid,
         "type": type,
         "area": area,
         "typesProperty": typesProperty,
@@ -192,8 +215,9 @@ class Gardening {
         "budget": budget,
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
-        "category_name": categoryName,
+        //"category_name": categoryName,
         "image_url": imageURL,
+        "product_id": productID,
       };
 }
 

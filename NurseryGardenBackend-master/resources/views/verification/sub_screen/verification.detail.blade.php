@@ -25,10 +25,10 @@
                                             @if ($order->status == 'pay')
                                                 <span class="badge bg-label-secondary rounded-pill">To
                                                     {{ ucfirst($order->status) }}</span>
-                                            @elseif ($order->status == 'ship')
+                                            @elseif ($order->status == 'prepare')
                                                 <span class="badge bg-label-warning rounded-pill">To
                                                     {{ ucfirst($order->status) }}</span>
-                                            @elseif ($order->status == 'receive')
+                                            @elseif ($order->status == 'confirm')
                                                 <span class="badge bg-label-primary rounded-pill">To
                                                     {{ ucfirst($order->status) }}</span>
                                             @elseif (strtolower($order->status) == 'completed')

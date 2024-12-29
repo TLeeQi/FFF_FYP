@@ -31,7 +31,7 @@ class OrderApiController extends Controller
     {
         $query = Order::where('order.user_id', Auth::id());
 
-        // pay/ship/partial/receive/completed/cancel
+        // pay/prepare/confirm/completed/cancel
         if ($request->status != null) {
             $query = $query->where('order.status', $request->status);
         } else {
@@ -78,7 +78,7 @@ class OrderApiController extends Controller
 
         // If there are no matching orders, return fail
         if ($query->count() == 0) {
-            return $this->fail('No orders yet.');
+            return $this->fail('No requests yet.');
         }
 
         // Array to store
@@ -108,7 +108,7 @@ class OrderApiController extends Controller
                     ->select('plant.*', 'category.name as category_name', 'plant.image as image')
                     ->first();
                 $ret['plant'][] = $plant;
-            } else if (!is_null($item->product_id) && is_null($item->wiring_id)) {
+            } else if (!is_null($item->product_id) && is_null($item->wiring_id) && is_null($item->piping_id) && is_null($item->gardening_id) && is_null($item->runner_id)) {
                 $product = Product::leftjoin('category', 'category.id', 'product.cat_id')
                     ->where('product.id', $item->product_id)
                     ->select('product.*', 'category.name as category_name', 'product.image as image')
@@ -136,7 +136,7 @@ class OrderApiController extends Controller
                     // Log the wiring details
                     \Log::info('Wiring Detail:', $wiring ? $wiring->toArray() : 'No wiring found');
                     \Log::info('Wiring Array:', $wiringArray);
-                    \Log::info('Response Data:', $ret);
+                    \Log::info('Response Data from Wiring:', $ret);
                     \Log::info('Order Item Wiring IDs:', $order_item->pluck('wiring_id')->toArray());
                     \Log::info('Final Wiring Data:', $ret['wiring']);
                     
@@ -144,24 +144,87 @@ class OrderApiController extends Controller
                     \Log::warning('No wiring found for ID: '.$item->wiring_id);
                 }
 
-            } else if (!is_null($item->product_id) && !is_null($item->piping_id)) {
-                $piping = PipingDetail::leftjoin('order_detail', 'order_detail.piping_id', 'piping_detail.id')
-                    ->where('piping_detail.id', $item->piping_id)
-                    ->select('piping_detail.*')
-                    ->first();
-                $ret['piping'][] = $piping;
-            } else if (!is_null($item->product_id) && !is_null($item->gardening_id)) {
-                $gardening = GardeningDetail::leftjoin('order_detail', 'order_detail.gardening_id', 'gardening_detail.id')
-                    ->where('gardening_detail.id', $item->gardening_id)
-                    ->select('gardening_detail.*')
-                    ->first();
-                $ret['gardening'][] = $gardening;
-            } else if (!is_null($item->product_id) && !is_null($item->runner_id)) {
-                $runner = RunnerDetail::leftjoin('order_detail', 'order_detail.runner_id', 'runner_detail.id')
-                    ->where('runner_detail.id', $item->runner_id)
-                    ->select('runner_detail.*')
-                    ->first();
-                $ret['runner'][] = $runner;
+            } else if (!is_null($item->piping_id)) {
+                $piping = PipingDetail::find($item->piping_id);
+                // Log the wiring details
+                \Log::info('Piping Detail:', $piping ? $piping->toArray() : 'No piping found');
+
+                // Decode and add URLs for wiring photos
+                if ($piping) {
+                    $pipingPhotos = $piping->photo ? json_decode($piping->photo, true) : [];
+                    $piping->photo_urls = array_map(function ($path) {
+                        return asset('storage/' . $path);
+                    }, $pipingPhotos);
+
+                    // Add wiring detail to the array
+                    $pipingArray[] = $piping->toArray();
+
+                    $ret['piping'] = $pipingArray;
+
+                    // Log the piping details
+                    \Log::info('Piping Detail:', $piping ? $piping->toArray() : 'No piping found');
+                    \Log::info('Piping Array:', $pipingArray);
+                    \Log::info('Response Data from Piping:', $ret);
+                    \Log::info('Order Item Piping IDs:', $order_item->pluck('piping_id')->toArray());
+                    \Log::info('Final Piping Data:', $ret['piping']);
+                    
+                }else {
+                    \Log::warning('No piping found for ID: '.$item->piping_id);
+                }
+            } else if (!is_null($item->gardening_id)) {
+                $gardening = GardeningDetail::find($item->gardening_id);
+                // Log the wiring details
+                \Log::info('Gardening Detail:', $gardening ? $gardening->toArray() : 'No gardening found');
+
+                // Decode and add URLs for wiring photos
+                if ($gardening) {
+                    $gardeningPhotos = $gardening->photo ? json_decode($gardening->photo, true) : [];
+                    $gardening->photo_urls = array_map(function ($path) {
+                        return asset('storage/' . $path);
+                    }, $gardeningPhotos);
+
+                    // Add wiring detail to the array
+                    $gardeningArray[] = $gardening->toArray();
+
+                    $ret['gardening'] = $gardeningArray;
+
+                    // Log the gardening details
+                    \Log::info('Gardening Detail:', $gardening ? $gardening->toArray() : 'No gardening found');
+                    \Log::info('Gardening Array:', $gardeningArray);
+                    \Log::info('Response Data from Gardening:', $ret);
+                    \Log::info('Order Item Gardening IDs:', $order_item->pluck('gardening_id')->toArray());
+                    \Log::info('Final Gardening Data:', $ret['gardening']);
+                    
+                }else {
+                    \Log::warning('No gardening found for ID: '.$item->gardening_id);
+                }
+            } else if (!is_null($item->runner_id)) {
+                $runner = RunnerDetail::find($item->runner_id);
+                // Log the runner details
+                \Log::info('Runner Detail:', $runner ? $runner->toArray() : 'No runner found');
+
+                // Decode and add URLs for runner photos
+                if ($runner) {
+                    $runnerPhotos = $runner->photo ? json_decode($runner->photo, true) : [];
+                    $runner->photo_urls = array_map(function ($path) {
+                        return asset('storage/' . $path);
+                    }, $runnerPhotos);
+
+                // Add wiring detail to the array
+                $runnerArray[] = $runner->toArray();
+
+                $ret['runner'] = $runnerArray;
+
+                // Log the runner details
+                \Log::info('Runner Detail:', $runner ? $runner->toArray() : 'No runner found');
+                \Log::info('Runner Array:', $runnerArray);
+                \Log::info('Response Data from Runner:', $ret);
+                \Log::info('Order Item Runner IDs:', $order_item->pluck('runner_id')->toArray());
+                \Log::info('Final Runner Data:', $ret['runner']);
+                
+            }else {
+                \Log::warning('No runner found for ID: '.$item->runner_id);
+            }
             }
         }
 
@@ -435,6 +498,7 @@ class OrderApiController extends Controller
                 'photo' => 'nullable|array',
                 'budget' => 'required|string',
                 'address' => 'required|string',
+                'prod_id' => 'required|integer',
             ]);
         
             \Log::info('Validated Data', $validatedData);
@@ -489,7 +553,7 @@ class OrderApiController extends Controller
                 'price' => '50',
                 'amount' => '50',
                 'order_id' => $order->id,
-                'product_id' => null,
+                'product_id' => $validatedData['prod_id'],
                 'plant_id' => null,
                 'bidding_id' => null,
                 'wiring_id' => null, // Use the ID from the created wiring detail
@@ -531,7 +595,7 @@ class OrderApiController extends Controller
                 'preferred_time' => 'required|string',
                 'details' => 'nullable|string',
                 'photo' => 'nullable|array',
-                
+                'prod_id' => 'required|integer',        
                 'budget' => 'required|string',
                 'address' => 'required|string',
             ]);
@@ -589,7 +653,7 @@ class OrderApiController extends Controller
                 'price' => '50',
                 'amount' => '50',
                 'order_id' => $order->id,
-                'product_id' => null,
+                'product_id' => $validatedData['prod_id'],
                 'plant_id' => null,
                 'bidding_id' => null,
                 'wiring_id' => null, // Use the ID from the created wiring detail
@@ -632,6 +696,7 @@ class OrderApiController extends Controller
                 'photo' => 'nullable|array',
                 'budget' => 'required|string',
                 'address' => 'required|string',
+                'prod_id' => 'required|integer',
             ]);
         
             \Log::info('Validated Data', $validatedData);
@@ -686,7 +751,7 @@ class OrderApiController extends Controller
                 'price' => '50',
                 'amount' => '50',
                 'order_id' => $order->id,
-                'product_id' => null,
+                'product_id' => $validatedData['prod_id'],
                 'plant_id' => null,
                 'bidding_id' => null,
                 'wiring_id' => null, // Use the ID from the created wiring detail
@@ -739,14 +804,14 @@ class OrderApiController extends Controller
 
         $order_detail =
             Order::leftjoin('order_detail', 'order_detail.order_id', 'order.id')
-            ->leftjoin('plant', 'plant.id', 'order_detail.plant_id')
+            // ->leftjoin('plant', 'plant.id', operator: 'order_detail.plant_id')
             ->leftjoin('product', 'product.id', 'order_detail.product_id')
             ->where('order.user_id', Auth::id())
             ->where('order.id', $id)
             ->select(
                 'order_detail.*',
-                'plant.name as plant_name',
-                'plant.price as plant_price',
+                //'plant.name as plant_name',
+                //'plant.price as plant_price',
                 'product.name as product_name',
                 'product.price as product_price',
             )
@@ -765,8 +830,8 @@ class OrderApiController extends Controller
             ->first();
 
         $sender = [
-            "Sender" => "Nursery Garden SDN Berhad",
-            "Address" => "Nursery Garden, Pontian Besar, 82000, Pontian, Johor"
+            "Sender" => "Fix It and Foliage Frenzy",
+            "Address" => "Fix It and Foliage Frenzy, 81300, Impian Emas, Johor"
         ];
 
 
@@ -792,7 +857,7 @@ class OrderApiController extends Controller
             return $this->fail('Order not found.');
         }
 
-        if ($order->status !== 'ship') {
+        if ($order->status !== 'prepare') {
             return $this->fail('Invalid order status.');
         }
 

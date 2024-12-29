@@ -31,4 +31,9 @@ class PipingDetail extends Model
         'photo' => 'array',
         'app_date' => 'date',
     ];
+
+    public function orderDetail()
+    {
+        return $this->hasMany(OrderDetailModel::class, 'piping_id', 'id');
+    }
 }

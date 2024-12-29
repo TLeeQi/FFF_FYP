@@ -160,7 +160,7 @@ class Wiring {
     // this.categoryName,
     this.imageURL,
     this.isSelected = false,
-    //this.productID,
+    this.productID,
   });
 
   factory Wiring.fromJson(Map<String, dynamic> json) {
@@ -180,7 +180,7 @@ class Wiring {
     print("updatedAt: ${json["updated_at"]}, type: ${json["updated_at"]?.runtimeType}");
     print("categoryName: ${json["category_name"]}, type: ${json["category_name"]?.runtimeType}");
     print("imageURL: ${json["image_url"]}, type: ${json["image_url"]?.runtimeType}");
-    //print("productID: ${json["product_id"]}, type: ${json["product_id"]?.runtimeType}");
+    print("productID: ${json["product_id"]}, type: ${json["product_id"]?.runtimeType}");
 
     return Wiring(
         id: json["id"],
@@ -204,7 +204,7 @@ class Wiring {
         //categoryName: json["category_name"],
         imageURL: json["image_url"],
         //imageURL: jsonDecode(json["image_url"],
-        //productID: json["product_id"],
+        productID: json["product_id"],
       );      
   }
 
@@ -225,7 +225,7 @@ class Wiring {
         "updated_at": updatedAt?.toIso8601String(),
         //"category_name": categoryName,
         "image_url": imageURL,
-        //"product_id": productID,
+        "product_id": productID,
       };
 }
 

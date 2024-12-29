@@ -13,6 +13,7 @@ import 'package:nurserygardenapp/view/base/image_enlarge_widget.dart';
 import 'package:nurserygardenapp/view/base/page_loading.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/services.dart';
 
 class VendorDetailScreen extends StatefulWidget {
   final String vendorID;
@@ -58,6 +59,11 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
 
   // Function to make a phone call
   Future<void> _callVendor(String phone) async {
+    Clipboard.setData(ClipboardData(text: phone));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Phone number copied to clipboard')),
+    );
+
     final Uri phoneUri = Uri(scheme: 'tel', path: phone);
     if (await canLaunchUrl(phoneUri)) {
       await launchUrl(phoneUri);
@@ -68,6 +74,11 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
 
   // Function to send an email
   Future<void> _emailVendor(String email) async {
+      Clipboard.setData(ClipboardData(text: email));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Email copied to clipboard')),
+    );
+
     final Uri emailUri = Uri(
       scheme: 'mailto',
       path: email,
@@ -82,6 +93,12 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
 
   // Function to show the vendor's address on Google Maps
   Future<void> _showAddressOnMap(String address) async {
+
+    Clipboard.setData(ClipboardData(text: address));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Address copied to clipboard')),
+    );
+
     final Uri mapUri = Uri(
       scheme: 'https',
       host: 'www.google.com',
@@ -198,74 +215,6 @@ class _VendorDetailScreenState extends State<VendorDetailScreen> {
           ],
         ),
       ),
-            // padding: EdgeInsets.all(0),
-            // child: Container(
-            //   decoration: BoxDecoration(
-            //     boxShadow: <BoxShadow>[
-            //       BoxShadow(
-            //           color: Colors.grey,
-            //           offset: const Offset(0, 2),
-            //           blurRadius: 10.0),
-            //     ],
-            //   ),
-            //   child: Row(
-            //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //       children: <Widget>[
-            //         Expanded(
-            //           child: GestureDetector(
-            //             child: Container(
-            //               decoration: BoxDecoration(
-            //                 color: ColorResources.COLOR_PRIMARY,
-            //               ),
-            //               child: Column(
-            //                 mainAxisAlignment: MainAxisAlignment.center,
-            //                 crossAxisAlignment: CrossAxisAlignment.center,
-            //                 children: <Widget>[
-            //                   Icon(
-            //                     Icons.add_shopping_cart_outlined,
-            //                     color: Colors.white,
-            //                   ),
-            //                   //phone number
-            //                   Text(
-            //                     'Add to cart',
-            //                     style: TextStyle(
-            //                       color: Colors.white,
-            //                       fontSize: 14,
-            //                     ),
-            //                   )
-            //                 ],
-            //               ),
-            //             ),
-            //           ),
-            //         ),
-            //         // Container(
-            //         //   color: Colors.white,
-            //         //   width: 2,
-            //         // ),
-            //         Expanded(
-            //           child: GestureDetector(
-            //             child: Container(
-            //               decoration: BoxDecoration(
-            //                 color: ColorResources.COLOR_WHITE,
-            //               ),
-            //               child: Column(
-            //                 mainAxisAlignment: MainAxisAlignment.center,
-            //                 children: <Widget>[
-            //                   //email , addres
-            //                   Text(
-            //                     "Buy now",
-            //                     style: TextStyle(
-            //                         fontWeight: FontWeight.bold,
-            //                         fontSize: 14,
-            //                         color: ColorResources.COLOR_PRIMARY),
-            //                   )
-            //                 ],
-            //               ),
-            //             ),
-            //           ),
-            //         )
-            //       ]),
-            // )),
         body: SafeArea(
           child: Center(
             child: isLoading

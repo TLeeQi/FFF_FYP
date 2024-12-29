@@ -106,21 +106,21 @@ class DeliveryApiController extends Controller
         // Delivery receipt on certain delivery
         $order_detail =
             Delivery::leftjoin('order_detail', 'order_detail.delivery_id', 'delivery.id')
-            // ->leftjoin('order', 'order.id', 'order_detail.order_id')
-            ->leftjoin('plant', 'plant.id', 'order_detail.plant_id')
+            ->leftjoin('order', 'order.id', 'order_detail.order_id')
+            //->leftjoin('plant', 'plant.id', 'order_detail.plant_id')
             ->leftjoin('product', 'product.id', 'order_detail.product_id')
             ->where('delivery.user_id', Auth::id())
             ->where('delivery.id', $id)
             ->select(
-                // 'order.id as order_id',
-                // 'order.created_at as order_date',
-                // 'order.address as order_address',
-                // 'order.status as order_status',
-                // 'order.total_amount as order_total_amount',
+                'order.id as order_id',
+                'order.created_at as order_date',
+                'order.address as order_address',
+                'order.status as order_status',
+                'order.total_amount as order_total_amount',
                 'order_detail.*',
-                'plant.name as plant_name',
-                'plant.price as plant_price',
-                'plant.image as plant_image',
+                //'plant.name as plant_name',
+                //'plant.price as plant_price',
+                //'plant.image as plant_image',
                 'product.name as product_name',
                 'product.price as product_price',
                 'product.image as product_image',
@@ -135,8 +135,8 @@ class DeliveryApiController extends Controller
             )->first();
 
         $sender = [
-            "Sender" => "Nursery Garden SDN Berhad",
-            "Address" => "Nursery Garden, Pontian Besar, 82000, Pontian, Johor"
+            "Sender" => "Fix It and Foliage Frenzy",
+            "Address" => "Fix It and Foliage Frenzy, 81300, Impian Emas, Johor"
         ];
 
         $delivery = Delivery::where('id', $id)->first();

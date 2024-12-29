@@ -2,7 +2,7 @@
 
 @section('content')
     @foreach ($deliver as $delivery)
-        @if ($delivery->status == 'ship')
+        @if ($delivery->status == 'prepare')
             <div class="card mb-4 p-4">
                 <div class="card-header d-flex justify-content-between align-items-center mb-3 px-0">
                     <h5 class="mb-0">Edit Order Delivery Status</h5>
@@ -14,9 +14,9 @@
                     @csrf
                     <div class="form-floating form-floating-outline mb-4">
                         <select class="form-select" id="selectOption" aria-label="Default select example" name="status">
-                            <option hidden value="ship">Deliver in progress</option>
-                            <option value="ship">Deliver in progress</option>
-                            <option value="delivered">Delivered</option>
+                            <option hidden value="prepare">Deliver in progress</option>
+                            <option value="prepare">Deliver in progress</option>
+                            <option value="Confirmed">Confirmed</option>
                         </select>
                         <label for="exampleFormControlSelect1">Delivery Status</label>
                     </div>
@@ -68,7 +68,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Save</button>
             </div>
-        @elseif($delivery->status == 'delivered')
+        @elseif($delivery->status == 'Confirmed')
             <div class="row">
                 <div class="col-xl">
                     <div class="card mb-4">
@@ -122,7 +122,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="card-header px-0 py-2">
-                                            <h5 class="mb-0">Receiver Information</h5>
+                                            <h5 class="mb-0">Service Requestor Information</h5>
                                         </div>
                                         <blockquote class="blockquote mb-0">
                                             <p>
@@ -287,8 +287,8 @@
             var selectElement = document.getElementById("selectOption");
             var selectedOptionValue = selectElement.value;
 
-            if ((selectedOptionValue === "delivered" && frame.src === "") ||
-                (selectedOptionValue === "ship" && frame.src !== "")
+            if ((selectedOptionValue === "Confirmed" && frame.src === "") ||
+                (selectedOptionValue === "prepare" && frame.src !== "")
             ) {
                 alert("Please update the delivery status of the order and ensure the prove of delivery is updated");
                 return false; // Prevent form submission

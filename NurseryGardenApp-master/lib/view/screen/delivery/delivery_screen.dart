@@ -65,7 +65,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
       appBar: CustomAppBar(
         isBackButtonExist: false,
         isBgPrimaryColor: true,
-        title: 'Delivery',
+        title: 'Booking Status',
         context: context,
         isCenter: false,
         isActionButtonExist: true,
@@ -238,7 +238,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                       Row(
                                         children: [
                                           Text(
-                                            "Shipping Status: ",
+                                            "Booking Status: ",
                                             style: CustomTextStyles(context)
                                                 .titleStyle,
                                           ),
@@ -256,7 +256,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                                                     index]
                                                                 .status
                                                                 .toString() ==
-                                                            'delivered'
+                                                            'Confirmed'
                                                         ? ColorResources
                                                             .COLOR_PRIMARY
                                                         : ColorResources

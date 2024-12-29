@@ -31,7 +31,7 @@ class Order extends Model
         '0' => "cancel",
         '1' => "To Pay",
         '2' => "Completed",
-        '3' => "To Ship",
+        '3' => "Preparing",
         '4' => "Cancel"
     ];
 

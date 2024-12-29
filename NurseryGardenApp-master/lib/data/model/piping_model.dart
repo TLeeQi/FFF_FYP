@@ -34,26 +34,26 @@ class PipingModel {
 }
 
 class Data {
-  PipingList? pipingList;
+  PipingsList? pipingsList;
 
   Data({
-    this.pipingList,
+    this.pipingsList,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-        pipingList: json["piping"] == null
+        pipingsList: json["pipings"] == null
             ? null
-            : PipingList.fromJson(json["piping"]),
+            : PipingsList.fromJson(json["pipings"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "piping": pipingList?.toJson(),
+        "pipings": pipingsList?.toJson(),
       };
 }
 
-class PipingList {
+class PipingsList {
   int? currentPage;
-  List<Piping>? piping;
+  List<Piping>? pipings;
   String? firstPageUrl;
   int? from;
   int? lastPage;
@@ -66,9 +66,9 @@ class PipingList {
   int? to;
   int? total;
 
-  PipingList({
+  PipingsList({
     this.currentPage,
-    this.piping,
+    this.pipings,
     this.firstPageUrl,
     this.from,
     this.lastPage,
@@ -82,9 +82,9 @@ class PipingList {
     this.total,
   });
 
-  factory PipingList.fromJson(Map<String, dynamic> json) => PipingList(
+  factory PipingsList.fromJson(Map<String, dynamic> json) => PipingsList(
         currentPage: json["current_page"],
-        piping: json["data"] == null
+        pipings: json["data"] == null
             ? []
             : List<Piping>.from(json["data"]!.map((x) => Piping.fromJson(x))),
         firstPageUrl: json["first_page_url"],
@@ -104,9 +104,9 @@ class PipingList {
 
   Map<String, dynamic> toJson() => {
         "current_page": currentPage,
-        "data": piping == null
+        "data": pipings == null
             ? []
-            : List<dynamic>.from(piping!.map((x) => x.toJson())),
+            : List<dynamic>.from(pipings!.map((x) => x.toJson())),
         "first_page_url": firstPageUrl,
         "from": from,
         "last_page": lastPage,
@@ -125,7 +125,7 @@ class PipingList {
 
 class Piping {
   int? id;
-  int? Catid;
+  // int? Catid;
   String? type;
   List<String>? fixitem;
   List<String>? problem;
@@ -137,13 +137,14 @@ class Piping {
   String? budget;
   DateTime? createdAt;
   DateTime? updatedAt;
-  String? categoryName;
+  // String? categoryName;
   String? imageURL;
-  bool? isSelected;
+  //bool? isSelected;
+  int? productID;
 
   Piping({
     this.id,
-    this.Catid,
+    // this.Catid,
     this.type,
     this.fixitem,
     this.problem,
@@ -155,20 +156,40 @@ class Piping {
     this.budget,
     this.createdAt,
     this.updatedAt,
-    this.categoryName,
+    // this.categoryName,
     this.imageURL,
-    this.isSelected = false,
+    //this.isSelected = false,
+    this.productID,
   });
 
-  factory Piping.fromJson(Map<String, dynamic> json) => Piping(
+  factory Piping.fromJson(Map<String, dynamic> json) {
+    print("Piping JSON: $json");
+    print("id: ${json["id"]}, type: ${json["id"]?.runtimeType}");
+    // print("Catid: ${json["Catid"]}, type: ${json["Catid"]?.runtimeType}");
+    print("type: ${json["type"]}, type: ${json["type"]?.runtimeType}");
+    print("fixitem: ${json["fixitem"]}, type: ${json["fixitem"]?.runtimeType}");
+    print("problem: ${json["problem"]}, type: ${json["problem"]?.runtimeType}");
+    print("typesProperty: ${json["types_property"]}, type: ${json["types_property"]?.runtimeType}");
+    print("appDate: ${json["app_date"]}, type: ${json["app_date"]?.runtimeType}");
+    print("preferredTime: ${json["preferred_time"]}, type: ${json["preferred_time"]?.runtimeType}");
+    print("details: ${json["details"]}, type: ${json["details"]?.runtimeType}");
+    print("photo: ${json["photo"]}, type: ${json["photo"]?.runtimeType}");
+    print("budget: ${json["budget"]}, type: ${json["budget"]?.runtimeType}");
+    print("createdAt: ${json["created_at"]}, type: ${json["created_at"]?.runtimeType}");
+    print("updatedAt: ${json["updated_at"]}, type: ${json["updated_at"]?.runtimeType}");
+    print("categoryName: ${json["category_name"]}, type: ${json["category_name"]?.runtimeType}");
+    print("imageURL: ${json["image_url"]}, type: ${json["image_url"]?.runtimeType}");
+    print("productID: ${json["product_id"]}, type: ${json["product_id"]?.runtimeType}");
+
+    return Piping(
         id: json["id"],
-        Catid: json["Catid"],
+        // Catid: json["Catid"],
         type: json["type"],
         fixitem: json["fixitem"] == null ? null : List<String>.from(json["fixitem"]),
         problem: json["problem"] == null ? null : List<String>.from(json["problem"]),
-        typesProperty: json["typesProperty"],
-        appDate: json["appDate"] == null ? null : DateTime.parse(json["appDate"]),
-        preferredTime: json["preferredTime"],
+        typesProperty: json["types_property"],
+        appDate: json["app_date"] == null ? null : DateTime.parse(json["app_date"]),
+        preferredTime: json["preferred_time"],
         details: json["details"],
         photo: json["photo"] == null ? null : List<String>.from(json["photo"]),
         budget: json["budget"],
@@ -178,13 +199,15 @@ class Piping {
         updatedAt: json["updated_at"] == null
             ? null
             : DateTime.parse(json["updated_at"]),
-        categoryName: json["category_name"],
-        imageURL: jsonDecode(json["image_url"]),
+        // categoryName: json["category_name"],
+        imageURL: json["image_url"],
+        //imageURL: jsonDecode(json["image_url"]),
+        productID: json["product_id"],
       );
-
+  }
   Map<String, dynamic> toJson() => {
         "id": id,
-        "Catid": Catid,
+        // "Catid": Catid,
         "type": type,
         "fixitem": fixitem == null ? null : List<dynamic>.from(fixitem!),
         "problem": problem == null ? null : List<dynamic>.from(problem!),
@@ -192,12 +215,13 @@ class Piping {
         "appDate": appDate?.toIso8601String(),
         "preferredTime": preferredTime,
         "details": details,
-        "photo": photo == null ? null : List<dynamic>.from(photo!),
+        // "photo": photo == null ? null : List<dynamic>.from(photo!),
         "budget": budget,
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
-        "category_name": categoryName,
+        // "category_name": categoryName,
         "image_url": imageURL,
+        "product_id": productID,
       };
 }
 

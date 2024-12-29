@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nurserygardenapp/util/custom_text_style.dart';
 import 'package:nurserygardenapp/view/base/custom_appbar.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/services.dart';
 
 class HelpScreen extends StatelessWidget {
   const HelpScreen({super.key});
@@ -28,11 +30,9 @@ class HelpScreen extends StatelessWidget {
               child: Text("FixIt Foliage Frenzy",
                   style: CustomTextStyles(context).titleStyle),
             ),
-            HelpContainer(icon: Icons.phone, title: "07-6668888"),
-            HelpContainer(icon: Icons.email, title: "fff@gmail.com"),
-            HelpContainer(
-                icon: Icons.location_on,
-                title: "Impian Emas, Johor, Malaysia"),
+            HelpContainer(icon: Icons.phone, title: "07-6668888", url: "tel:07-6668888", isCopyable: true),
+            HelpContainer(icon: Icons.email, title: "fff@gmail.com", url: "mailto:fff@gmail.com", isCopyable: true),
+            HelpContainer(icon: Icons.location_on, title: "Southern University College, Johor, Malaysia", url: "https://www.google.com/maps/search/?api=1&query=Southern+University+College,+Johor,+Malaysia", isCopyable: true),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: Text(
@@ -52,14 +52,39 @@ class HelpScreen extends StatelessWidget {
 class HelpContainer extends StatelessWidget {
   final IconData icon;
   final String title;
-  const HelpContainer({super.key, required this.icon, required this.title});
+  final String url; // Add a URL parameter
+  final bool isCopyable;
+
+  const HelpContainer({
+    super.key, 
+    required this.icon, 
+    required this.title, 
+    required this.url,
+    this.isCopyable = false
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+    return GestureDetector(
+         onTap: () async {
+           if (isCopyable) {
+             // Copy text to clipboard
+             Clipboard.setData(ClipboardData(text: title));
+             ScaffoldMessenger.of(context).showSnackBar(
+               SnackBar(content: Text('$title copied to clipboard')),
+             );
+
+             if (await canLaunch(url)) {
+               await launch(url);
+             } else {
+               throw 'Could not launch $url';
+             }
+           }
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 5),
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
@@ -84,6 +109,7 @@ class HelpContainer extends StatelessWidget {
             )
           ],
         ),
+      ),
       ),
     );
   }

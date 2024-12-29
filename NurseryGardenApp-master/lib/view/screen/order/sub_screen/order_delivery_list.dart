@@ -66,7 +66,7 @@ class _OrderDeliveryListScreenState extends State<OrderDeliveryListScreen> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: CustomAppBar(
-        title: "Order Delivery List",
+        title: "Booking Status List",
         context: context,
         isBackButtonExist: false,
         isBgPrimaryColor: true,
@@ -183,7 +183,7 @@ class _OrderDeliveryListScreenState extends State<OrderDeliveryListScreen> {
                                       Row(
                                         children: [
                                           Text(
-                                            "Tracking Number:",
+                                            "Contact Number:",
                                             style: CustomTextStyles(context)
                                                 .titleStyle,
                                           ),
@@ -201,7 +201,7 @@ class _OrderDeliveryListScreenState extends State<OrderDeliveryListScreen> {
                                       Row(
                                         children: [
                                           Text(
-                                            "Courier Company: ",
+                                            "Service Provider Company: ",
                                             style: CustomTextStyles(context)
                                                 .titleStyle,
                                           ),
@@ -221,7 +221,7 @@ class _OrderDeliveryListScreenState extends State<OrderDeliveryListScreen> {
                                       Row(
                                         children: [
                                           Text(
-                                            "Shipping Status: ",
+                                            "Booking Status: ",
                                             style: CustomTextStyles(context)
                                                 .titleStyle,
                                           ),
@@ -239,7 +239,7 @@ class _OrderDeliveryListScreenState extends State<OrderDeliveryListScreen> {
                                                                     index]
                                                                 .status
                                                                 .toString() ==
-                                                            'delivered'
+                                                            'Confirmed'
                                                         ? ColorResources
                                                             .COLOR_PRIMARY
                                                         : ColorResources

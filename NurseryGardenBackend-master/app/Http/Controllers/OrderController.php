@@ -122,7 +122,7 @@ class OrderController extends Controller
 
         $order = Order::where('id', $id)->get();
 
-        return view('order.sub_screen.order_ship')
+        return view('order.sub_screen.order_prepare')
             ->with('orders', $order)
             ->with('order_item', $order_item)
             ->with('item_detail', $item_detail)

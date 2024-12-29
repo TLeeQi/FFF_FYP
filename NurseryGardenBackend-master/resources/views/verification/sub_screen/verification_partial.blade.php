@@ -150,7 +150,7 @@
                                     onsubmit="return getSelectedOption() ">
                                     @csrf
                                     <input type="hidden" name="items[]" id="items[]" value="">
-                                    <input type="hidden" name="status" id="status" value="ship">
+                                    <input type="hidden" name="status" id="status" value="prepare">
 
                                     <div class="form-floating form-floating-outline mb-4">
                                         <input type="text" id="method" name="method" class="form-control"
@@ -225,8 +225,8 @@
                             var selectElement = document.getElementById("selectOption");
                             var selectedOptionValue = selectElement.value;
 
-                            if ((selectedOptionValue === "delivered" && frame.src === "") ||
-                                (selectedOptionValue === "ship" && frame.src !== "")
+                            if ((selectedOptionValue === "Confirmed" && frame.src === "") ||
+                                (selectedOptionValue === "prepare" && frame.src !== "")
                             ) {
                                 alert("Please update the delivery status of the order and ensure the prove of delivery is updated");
                                 return false; // Prevent form submission

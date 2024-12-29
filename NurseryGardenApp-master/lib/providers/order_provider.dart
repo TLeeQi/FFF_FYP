@@ -84,10 +84,6 @@ class OrderProvider extends ChangeNotifier {
   List<Product> get getOrderProductList => _orderProductList;
   List<Wiring> _orderWiringList = [];
   List<Wiring> get getOrderWiringList => _orderWiringList;
-
-// Wiring? _orderWiringDetail;
-// Wiring? get orderWiringDetail => _orderWiringDetail;
-
   List<Piping> _orderPipingList = [];
   List<Piping> get getOrderPipingList => _orderPipingList;
   List<Gardening> _orderGardeningList = [];
@@ -125,10 +121,11 @@ class OrderProvider extends ChangeNotifier {
              _orderDetailModel = OrderDetailModel.fromJson(apiResponse.response!.data);
              print("OrderDetailModel parsed successfully");
              print("OrderDetailModel data: ${_orderDetailModel.data}");
-             print("Wiring List from API Response: ${_orderDetailModel.data?.wiring}");
-             //print("Wiring List from API Response: ${apiResponse.response!.data['wiring']}");
-             //print("Parsed Wiring List: ${_orderWiringList.map((wiring) => wiring.id).toList()}");
 
+             print("Wiring List from API Response: ${_orderDetailModel.data?.wiring}");
+             print("Piping List from API Response: ${_orderDetailModel.data?.piping}");
+             print("Gardening List from API Response: ${_orderDetailModel.data?.gardening}");
+             print("Runner List from API Response: ${_orderDetailModel.data?.runner}");
            } catch (e) {
              print("Error parsing OrderDetailModel: $e");
            }
@@ -136,19 +133,26 @@ class OrderProvider extends ChangeNotifier {
         _orderPlantList = _orderDetailModel.data?.plant ?? [];
         _orderProductList = _orderDetailModel.data?.product ?? [];
         _orderDeliveryList = _orderDetailModel.data?.delivery ?? [];
+        
        _orderWiringList = _orderDetailModel.data?.wiring ?? [];
-       //_orderWiringDetail = _orderDetailModel.data!.wiring;
-       //print("Wiring Detail Array Order Provider: ${_orderWiringDetail?.id}");
-
         _orderPipingList = _orderDetailModel.data?.piping ?? [];
         _orderGardeningList = _orderDetailModel.data?.gardening ?? [];
         _orderRunnerList = _orderDetailModel.data?.runner ?? [];
 
         // Debugging logs
-        print("Order Detail List Wiring ID: ${_orderDetailList.map((item) => item.wiringId).toList()}");
         print("Order Detail ID: ${_orderDetailList.map((item) => item.id).toList()}");
+
         print("Wiring List ID: ${_orderWiringList.map((wiring) => wiring.id).toList()}");
         print("_orderWiringList: ${_orderWiringList}");
+
+        print("Piping List ID: ${_orderPipingList.map((piping) => piping.id).toList()}");
+        print("_orderPipingList: ${_orderPipingList}");
+
+        print("Gardening List ID: ${_orderGardeningList.map((gardening) => gardening.id).toList()}");
+        print("_orderGardeningList: ${_orderGardeningList}");
+
+        print("Runner List ID: ${_orderRunnerList.map((runner) => runner.id).toList()}");
+        print("_orderRunnerList: ${_orderRunnerList}");
       }
       else {
         print("API call failed");
@@ -193,6 +197,108 @@ class OrderProvider extends ChangeNotifier {
       return wiringDetail;
     } catch (e) {
       print("Exception occurred while finding wiring detail: $e");
+      return null;
+    }
+  }
+
+  Piping? getPipingDetailById(int? pipingId) {
+    print("Looking for Piping ID: $pipingId");
+    print("Available Piping IDs: ${_orderPipingList.map((p) => p.id).toList()}");
+
+    if (pipingId == null) {
+      print("Piping ID is null");
+      return null;
+    }
+
+    if (_orderPipingList.isEmpty) {
+      print("Piping list is empty, cannot find piping detail.");
+      return null;
+    }
+
+    try {
+      final pipingDetail = _orderPipingList.firstWhere(
+            (piping) => piping.id == pipingId,
+        orElse: () {
+          print("Piping detail not found for ID: $pipingId");
+
+          return Piping();
+        },
+      );
+
+      print("Piping detail found id: ${pipingDetail.id}");
+      
+
+      return pipingDetail;
+    } catch (e) {
+      print("Exception occurred while finding piping detail: $e");
+      return null;
+    }
+  }
+
+  Gardening? getGardeningDetailById(int? gardeningId) {
+    print("Looking for Gardening ID: $gardeningId");
+    print("Available Gardening IDs: ${_orderGardeningList.map((g) => g.id).toList()}");
+
+    if (gardeningId == null) {
+      print("Gardening ID is null");
+      return null;
+    }
+
+    if (_orderGardeningList.isEmpty) {
+      print("Gardening list is empty, cannot find gardening detail.");
+      return null;
+    }
+
+    try {
+      final gardeningDetail = _orderGardeningList.firstWhere(
+            (gardening) => gardening.id == gardeningId,
+        orElse: () {
+          print("Gardening detail not found for ID: $gardeningId");
+
+          return Gardening();
+        },
+      );
+
+      print("Gardening detail found id: ${gardeningDetail.id}");
+      
+
+      return gardeningDetail;
+    } catch (e) {
+      print("Exception occurred while finding gardening detail: $e");
+      return null;
+    }
+  }
+
+  Runner? getRunnerDetailById(int? runnerId) {
+    print("Looking for Runner ID: $runnerId");
+    print("Available Runner IDs: ${_orderRunnerList.map((r) => r.id).toList()}");
+
+    if (runnerId == null) {
+      print("Runner ID is null");
+      return null;
+    }
+
+    if (_orderRunnerList.isEmpty) {
+      print("Runner list is empty, cannot find runner detail.");
+      return null;
+    }
+
+    try {
+      final runnerDetail = _orderRunnerList.firstWhere(
+            (runner) => runner.id == runnerId,
+        orElse: () {
+          print("Runner detail not found for ID: $runnerId");
+
+          return Runner();
+        },
+      );
+
+      print("Runner detail found id: ${runnerDetail.id}");
+      
+
+      return runnerDetail;
+    } catch (e) {
+      print("Exception occurred while finding runner detail: $e");
       return null;
     }
   }
@@ -394,7 +500,7 @@ class OrderProvider extends ChangeNotifier {
     if (context.mounted) {
       result = ResponseHelper.responseHelper(context, apiResponse);
       if (result) {
-        showCustomSnackBar("Your order has been cancelled.", context);
+        showCustomSnackBar("Your requested service has been cancelled.", context);
       }
     }
     _isLoading = false;

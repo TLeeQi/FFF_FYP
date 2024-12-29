@@ -78,7 +78,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/order/detail/{id}', [OrderController::class, 'order_detail'])->name('order.detail');
         Route::any('/order/search', [OrderController::class, 'search'])->name('order.search');
         Route::any('/order/filter/{status}', [OrderController::class, 'filter'])->name('order.filter');
-        Route::get('/order/ship/{id}', [OrderController::class, 'showShipOrder'])->name('order.ship');
+        Route::get('/order/prepare/{id}', [OrderController::class, 'showShipOrder'])->name('order.prepare');
         Route::get('/order/partial/{id}', [OrderController::class, 'showPartialOrder'])->name('order.partial');
 
          // Verification
@@ -86,7 +86,7 @@ Route::middleware('auth:sanctum')->group(function () {
          Route::get('/verification/detail/{id}', [OrderController::class, 'order_detail'])->name('verification.detail');
          Route::any('/verification/search', [OrderController::class, 'search'])->name('verification.search');
          Route::any('/verification/filter/{status}', [OrderController::class, 'filter'])->name('verification.filter');
-         Route::get('/verification/ship/{id}', [OrderController::class, 'showShipOrder'])->name('verification.ship');
+         Route::get('/verification/prepare/{id}', [OrderController::class, 'showShipOrder'])->name('verification.ship');
          Route::get('/verification/partial/{id}', [OrderController::class, 'showPartialOrder'])->name('verification.partial');
 
         // Custom

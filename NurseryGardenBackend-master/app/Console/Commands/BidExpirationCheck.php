@@ -100,7 +100,7 @@ class BidExpirationCheck extends Command
 
         // Fill up the information at client side for address
         $order = Order::create([
-            'status' =>  'ship',
+            'status' =>  'prepare',
             'date' => Carbon::now(),
             'total_amount' => $bidding_detail->amount,
             'user_id' => $bidding->winner_id,

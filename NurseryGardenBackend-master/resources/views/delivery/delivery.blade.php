@@ -39,7 +39,7 @@
                             <th class="text-truncate">Order ID</th>
                             <th class="text-truncate">Delivery Company</th>
                             <th class="text-truncate">Tracking Number</th>
-                            <th class="text-truncate">Ship out Date</th>
+                            <th class="text-truncate">Prepare Date</th>
                             <th class="text-truncate">Action</th>
                             <th class="text-truncate">Status</th>
                         </tr>
@@ -97,7 +97,7 @@
                                     </td>
 
                                     <td>
-                                        @if ($deliver->status == 'ship')
+                                        @if ($deliver->status == 'prepare')
                                             <span class="badge bg-label-success rounded-pill">{{ $deliver->status }}</span>
                                         @else
                                             <span class="badge bg-label-primary rounded-pill">{{ $deliver->status }}</span>

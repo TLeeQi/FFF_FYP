@@ -127,17 +127,17 @@ class _OrderReceiptScreenState extends State<OrderReceiptScreen> {
                                 ],
                               ),
                               Divider(),
-                              Text("Sender Information",
+                              Text("Admin of Fix It and Foliage Frenzy",
                                   style: CustomTextStyles(context)
                                       .titleStyle
                                       .copyWith(fontSize: 16)),
                               SizedBox(height: 5),
                               Row(
                                 children: [
-                                  Text("Sender: ",
+                                  Text("Admin: ",
                                       style:
                                           CustomTextStyles(context).titleStyle),
-                                  Text(orderProvider.receiptSender.sender ?? "",
+                                  Text(orderProvider.receiptSender.sender ?? "N/A",
                                       style: CustomTextStyles(context)
                                           .subTitleStyle),
                                 ],
@@ -162,14 +162,14 @@ class _OrderReceiptScreenState extends State<OrderReceiptScreen> {
                                 ],
                               ),
                               Divider(),
-                              Text("Receiver Information",
+                              Text("Service Requestor Information",
                                   style: CustomTextStyles(context)
                                       .titleStyle
                                       .copyWith(fontSize: 16)),
                               SizedBox(height: 5),
                               Row(
                                 children: [
-                                  Text("Receiver: ",
+                                  Text("Service Requestor: ",
                                       style:
                                           CustomTextStyles(context).titleStyle),
                                   Text(orderProvider.receiptUser.name ?? "",
@@ -219,11 +219,11 @@ class _OrderReceiptScreenState extends State<OrderReceiptScreen> {
                                         // mainAxisAlignment:
                                         //     MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(
-                                            "${(index + 1).toString()}. ",
-                                            style: CustomTextStyles(context)
-                                                .titleStyle,
-                                          ),
+                                          // Text(
+                                          //   "${(index + 1).toString()}. ",
+                                          //   style: CustomTextStyles(context)
+                                          //       .titleStyle,
+                                          // ),
                                           Text(
                                               orderProvider
                                                       .orderReceiptItem[index]
@@ -234,14 +234,14 @@ class _OrderReceiptScreenState extends State<OrderReceiptScreen> {
                                                   "",
                                               style: CustomTextStyles(context)
                                                   .titleStyle),
-                                          Text(
-                                              " x " +
-                                                  orderProvider
-                                                      .orderReceiptItem[index]
-                                                      .quantity
-                                                      .toString(),
-                                              style: CustomTextStyles(context)
-                                                  .subTitleStyle),
+                                          // Text(
+                                          //     " x " +
+                                          //         orderProvider
+                                          //             .orderReceiptItem[index]
+                                          //             .quantity
+                                          //             .toString(),
+                                          //     style: CustomTextStyles(context)
+                                          //         .subTitleStyle),
                                           Spacer(),
                                           if (orderProvider
                                                   .orderReceiptItem[index]

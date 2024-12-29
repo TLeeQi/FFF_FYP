@@ -35,9 +35,9 @@ class FAQsScreen extends StatelessWidget {
                   des:
                       "Yes, All service providers undergo a rigorous vetting process, including background checks and verification of qualifications. You can also view their ratings, reviews, and past work from other users."),
               FAQItem(
-                  title: "Can I change an order address?",
+                  title: "Can I change an address?",
                   des:
-                      "Yes, you can change an order address before your order shipped. To change an order address, please go to Orders, select the To Ship, and click Change Address."),
+                      "Yes, you can change an address before your order paid. To change an address, please go to Orders, select the 'preparing', and click Change Address."),
               FAQItem(
                   title: "How can I track my order?",
                   des:

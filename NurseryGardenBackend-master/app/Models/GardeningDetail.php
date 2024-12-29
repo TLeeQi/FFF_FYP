@@ -28,4 +28,9 @@ class GardeningDetail extends Model
         'photo' => 'array',
         'app_date' => 'date',
     ];
+
+    public function orderDetail()
+    {
+        return $this->hasMany(OrderDetailModel::class, 'gardening_id', 'id');
+    }
 }

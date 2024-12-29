@@ -93,7 +93,7 @@ class DeliveryController extends Controller
                 'expected_date' => $request->expected_date
             ]);
 
-            // Update Order Item has been delivered
+            // Update Order Item has been Confirmed
             $selectedItem = [];
             foreach ($items as $itemss) {
                 $selectedItem[] = explode(',', $itemss);
@@ -125,7 +125,7 @@ class DeliveryController extends Controller
             }
 
             if ($isfull == true && $order->is_separate == null) {
-                $order->status = 'receive';
+                $order->status = 'confirm';
                 $order->save();
             } else {
                 $order->status = 'partial';
@@ -134,10 +134,10 @@ class DeliveryController extends Controller
             }
         }
 
-        // Update the Shipping Detail but not set it to delivered
-        if ($request->status == 'ship' && $request->id != null) {
+        // Update the booking Detail but not set it to Confirmed
+        if ($request->status == 'prepare' && $request->id != null) {
             $delivery = Delivery::where('id', $request->id)->first();
-            $delivery->status = 'ship';
+            $delivery->status = 'prepare';
             $delivery->tracking_number = $request->track_num;
             $delivery->method = $request->method;
             $delivery->expected_date = $request->expected_date;
@@ -163,13 +163,13 @@ class DeliveryController extends Controller
 
             // Update delivery
             $delivery->prv_img = $imageName;
-            $delivery->status = 'delivered';
+            $delivery->status = 'Confirmed';
             $delivery->save();
 
             // Update order
             $deliveryList = Delivery::where('order_id', $delivery->order_id)->get();
             foreach ($deliveryList as $deliverys) {
-                if ($deliverys->status != 'delivered') {
+                if ($deliverys->status != 'Confirmed') {
                     return redirect()->route('delivery.index');
                 }
             }

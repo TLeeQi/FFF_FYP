@@ -89,9 +89,9 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
         delivery = _deliveryProvider.deliveryDetail;
       }
     }
-    if (delivery.status == "ship") {
+    if (delivery.status == "prepare") {
       _currentStep = 1;
-    } else if (delivery.status == "delivered") {
+    } else if (delivery.status == "Confirmed") {
       _currentStep = 2;
     } else {
       _currentStep = 0;
@@ -113,7 +113,7 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
         isBgPrimaryColor: true,
         isCenter: false,
         isBackButtonExist: false,
-        title: "Delivery Detail",
+        title: "Booking Status",
         context: context,
       ),
       body: Container(
@@ -153,7 +153,7 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                                     color: ColorResources.COLOR_PRIMARY,
                                   ),
                                 ),
-                              if (delivery.status == "ship")
+                              if (delivery.status == "prepare")
                                 Container(
                                   padding:
                                       const EdgeInsets.fromLTRB(0, 10, 15, 10),
@@ -163,7 +163,7 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                                     color: ColorResources.COLOR_PRIMARY,
                                   ),
                                 ),
-                              if (delivery.status == "delivered")
+                              if (delivery.status == "Confirmed")
                                 Container(
                                   padding:
                                       const EdgeInsets.fromLTRB(0, 10, 15, 10),
@@ -178,22 +178,22 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   if (delivery.status == "")
-                                    Text("Seller is preparing your order",
+                                    Text("Admin is searching your service provider",
                                         style: CustomTextStyles(context)
                                             .titleStyle),
-                                  if (delivery.status == "ship")
-                                    Text("Your parcel is on the way",
+                                  if (delivery.status == "prepare")
+                                    Text("Service provider is on the way",
                                         style: CustomTextStyles(context)
                                             .titleStyle),
-                                  if (delivery.status == "delivered")
-                                    Text("Your Parcel has been delivered",
+                                  if (delivery.status == "Confirmed")
+                                    Text("Your requested service has been completed",
                                         style: CustomTextStyles(context)
                                             .titleStyle),
                                   SizedBox(height: 10),
                                   if (delivery.status == "")
                                     Row(
                                       children: [
-                                        Text("Order Date: ",
+                                        Text("Requested Date: ",
                                             style: CustomTextStyles(context)
                                                 .subTitleStyle),
                                         Text(
@@ -203,7 +203,7 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                                                 .subTitleStyle),
                                       ],
                                     ),
-                                  if (delivery.status == "ship")
+                                  if (delivery.status == "prepare")
                                     Row(
                                       children: [
                                         Text("Expected Date: ",
@@ -216,7 +216,7 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                                                 .subTitleStyle),
                                       ],
                                     ),
-                                  if (delivery.status == "delivered")
+                                  if (delivery.status == "Confirmed")
                                     Text(
                                         DateFormat('dd-MM-yyyy').format(
                                             delivery.updatedAt ??
@@ -257,7 +257,7 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("Order Address: ",
+                                    Text("Address: ",
                                         style: CustomTextStyles(context)
                                             .titleStyle),
                                     SizedBox(height: 10),
@@ -273,8 +273,8 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                               ]),
                         ),
                       // Click to view delivery order item
-                      if (delivery.status == "delivered" ||
-                          delivery.status == "ship")
+                      if (delivery.status == "Confirmed" ||
+                          delivery.status == "prepare")
                         Padding(
                           padding: const EdgeInsets.only(top: 20),
                           child: GestureDetector(
@@ -295,7 +295,7 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text("Click here to view delivery detail",
+                                  Text("Click here to view booking detail",
                                       style:
                                           CustomTextStyles(context).titleStyle),
                                   Icon(
@@ -323,12 +323,12 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                             children: [
                               Row(
                                 children: [
-                                  Text("Delivery Status",
+                                  Text("Booking Status",
                                       style:
                                           CustomTextStyles(context).titleStyle),
                                   Spacer(),
-                                  if (delivery.status == "delivered" ||
-                                      delivery.status == "ship")
+                                  if (delivery.status == "Confirmed" ||
+                                      delivery.status == "prepare")
                                     Padding(
                                       padding: const EdgeInsets.only(right: 5),
                                       child: InkWell(
@@ -347,8 +347,8 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                                         ),
                                       ),
                                     ),
-                                  if (delivery.status == "delivered" ||
-                                      delivery.status == "ship")
+                                  if (delivery.status == "Confirmed" ||
+                                      delivery.status == "prepare")
                                     Text(delivery.trackingNumber ?? "",
                                         style: CustomTextStyles(context)
                                             .subTitleStyle),
@@ -363,7 +363,7 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                                   return ColorResources.COLOR_PRIMARY;
                                 }),
                                 controlsBuilder: (context, details) {
-                                  if (delivery.status == "delivered") {
+                                  if (delivery.status == "Confirmed") {
                                     return Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -385,7 +385,7 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                                             padding: const EdgeInsets.fromLTRB(
                                                 5, 10, 5, 0),
                                             child: Text(
-                                              "View Proof of Delivery",
+                                              "View Proof of Completed Booking",
                                               style: CustomTextStyles(context)
                                                   .titleStyle
                                                   .copyWith(
@@ -404,7 +404,7 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                                   Step(
                                     state: StepState.indexed,
                                     title: Text(
-                                      'Order Placed',
+                                      'Booking Requested',
                                       style:
                                           CustomTextStyles(context).titleStyle,
                                     ),
@@ -416,7 +416,7 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                                           .copyWith(fontSize: 12),
                                     ),
                                     content: Text(
-                                        'Seller is preparing your parcel for shipment.',
+                                        'Admin is searching your service provider.',
                                         style: CustomTextStyles(context)
                                             .subTitleStyle),
                                     isActive: true,
@@ -424,12 +424,12 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                                   Step(
                                     state: StepState.indexed,
                                     title: Text(
-                                      'Order Shipped',
+                                      'Service Provider Found',
                                       style:
                                           CustomTextStyles(context).titleStyle,
                                     ),
-                                    subtitle: delivery.status == "delivered" ||
-                                            delivery.status == "ship"
+                                    subtitle: delivery.status == "Confirmed" ||
+                                            delivery.status == "prepare"
                                         ? Text(
                                             DateFormat('dd-MM-yyyy HH:mm')
                                                 .format(delivery.createdAt!),
@@ -439,20 +439,20 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                                           )
                                         : null,
                                     content: Text(
-                                        'Your order has been shipped and is on the way.',
+                                        'Your booking has been confirmed and is on the way.',
                                         style: CustomTextStyles(context)
                                             .subTitleStyle),
-                                    isActive: delivery.status == "delivered" ||
-                                        delivery.status == "ship",
+                                    isActive: delivery.status == "Confirmed" ||
+                                        delivery.status == "prepare",
                                   ),
                                   Step(
                                     state: StepState.complete,
                                     title: Text(
-                                      'Order Delivered',
+                                      'Booking Completed',
                                       style:
                                           CustomTextStyles(context).titleStyle,
                                     ),
-                                    subtitle: delivery.status == "delivered"
+                                    subtitle: delivery.status == "Confirmed"
                                         ? Text(
                                             DateFormat('dd-MM-yyyy HH:mm')
                                                 .format(delivery.updatedAt!),
@@ -461,10 +461,10 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                                                 .copyWith(fontSize: 12))
                                         : null,
                                     content: Text(
-                                        'Your order has been delivered and received.',
+                                        'Your requested service has been completed.',
                                         style: CustomTextStyles(context)
                                             .subTitleStyle),
-                                    isActive: delivery.status == "delivered",
+                                    isActive: delivery.status == "Confirmed",
                                   ),
                                 ],
                               ),

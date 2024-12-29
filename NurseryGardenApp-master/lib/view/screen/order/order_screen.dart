@@ -23,13 +23,13 @@ class _OrderScreenState extends State<OrderScreen> {
   late OrderProvider order_prov =
       Provider.of<OrderProvider>(context, listen: false);
   final _scrollController = ScrollController();
-  String _selectedStatus = 'To Ship';
+  String _selectedStatus = 'Preparing';
 
   List<String> _statusList = [
     "To Pay",
     "Preparing",
     // "Partial",
-    "To Rate",
+    "Confirmed",
     "Completed",
     "Cancelled"
   ];
@@ -55,7 +55,7 @@ class _OrderScreenState extends State<OrderScreen> {
   }
 
   // Param
-  var params = {'limit': '8', 'status': 'ship'};
+  var params = {'limit': '8', 'status': 'prepare'};
 
   Future<void> _loadData({bool isLoadMore = false}) async {
     await order_prov.getOrderList(context, params, isLoadMore: isLoadMore);
@@ -81,13 +81,13 @@ class _OrderScreenState extends State<OrderScreen> {
     if (status == _statusList[0]) {
       params['status'] = 'pay';
     } else if (status == _statusList[1]) {
-      params['status'] = 'ship';
+      params['status'] = 'prepare';
     } 
     // else if (status == _statusList[2]) {
     //   params['status'] = 'partial';
     // } 
     else if (status == _statusList[2]) {
-      params['status'] = 'receive';
+      params['status'] = 'confirm';
     } else if (status == _statusList[3]) {
       params['status'] = 'completed';
     } else if (status == _statusList[4]) {
@@ -204,7 +204,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                     !orderProvider.isLoading
                                 ? Center(
                                     child: Text(
-                                    "No Orders",
+                                    "No Requests",
                                     style: TextStyle(
                                         color: Colors.grey.withOpacity(0.7),
                                         fontSize: 18),
@@ -316,12 +316,12 @@ class _OrderScreenState extends State<OrderScreen> {
                                                                             .orderList[
                                                                                 index]
                                                                             .status! ==
-                                                                        "ship" ||
+                                                                        "prepare" ||
                                                                     orderProvider
                                                                             .orderList[
                                                                                 index]
                                                                             .status! ==
-                                                                        "receive"
+                                                                        "confirm"
                                                                 ? 'To ' +
                                                                     orderProvider
                                                                         .orderList[
@@ -359,7 +359,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                                               .start,
                                                       children: [
                                                         Text(
-                                                          'Order created at: ',
+                                                          'Requested at: ',
                                                           style:
                                                               CustomTextStyles(
                                                                       context)
@@ -397,7 +397,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                                               .start,
                                                       children: [
                                                         Text(
-                                                          "Order Total: ",
+                                                          "Deposit: ",
                                                           style:
                                                               CustomTextStyles(
                                                                       context)
@@ -433,12 +433,12 @@ class _OrderScreenState extends State<OrderScreen> {
                                                     //             .orderList[
                                                     //                 index]
                                                     //             .status! ==
-                                                    //         "ship" ||
+                                                    //         "prepare" ||
                                                     //     orderProvider
                                                     //             .orderList[
                                                     //                 index]
                                                     //             .status! ==
-                                                    //         "receive" ||
+                                                    //         "confirm" ||
                                                     //     orderProvider
                                                     //             .orderList[
                                                     //                 index]
@@ -482,7 +482,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                                                 orderProvider
                                                                     .orderList[
                                                                         index]
-                                                                    .status = "ship";
+                                                                    .status = "prepare";
                                                               });
                                                               _loadData();
                                                             } else {

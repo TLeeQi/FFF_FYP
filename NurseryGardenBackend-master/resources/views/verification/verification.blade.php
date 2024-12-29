@@ -31,9 +31,9 @@
     <div class="col-12 mt-2 mb-2">
         <a href = "{{ route('verification.index') }}" class="btn-sm btn btn-light m-1">All</a>
         <a href = "{{ route('verification.filter', ['status' => 'pay']) }}" class="btn-sm btn btn-secondary m-1">To Pay</a>
-        <a href = "{{ route('verification.filter', ['status' => 'ship']) }}" class="btn-sm btn btn-warning m-1">To Ship</a>
-        <a href = "{{ route('verification.filter', ['status' => 'partial']) }}" class="btn-sm btn btn-info m-1">Partial Receive</a>
-        <a href = "{{ route('verification.filter', ['status' => 'receive']) }}" class="btn-sm btn btn-primary m-1">To Receive</a>
+        <a href = "{{ route('verification.filter', ['status' => 'prepare']) }}" class="btn-sm btn btn-warning m-1">Preparing</a>
+        <!-- <a href = "{{ route('verification.filter', ['status' => 'partial']) }}" class="btn-sm btn btn-info m-1">Partial Receive</a> -->
+        <a href = "{{ route('verification.filter', ['status' => 'confirm']) }}" class="btn-sm btn btn-primary m-1">Confirmed</a>
         <a href = "{{ route('verification.filter', ['status' => 'completed']) }}" class="btn-sm btn btn-success m-1">Completed</a>
         <a href = "{{ route('verification.filter', ['status' => 'cancel']) }}" class="btn-sm btn btn-danger m-1">Cancel</a>
     </div>
@@ -95,11 +95,11 @@
                                             <a href="" class="btn-sm btn btn-secondary badge m-1">Await
                                                 Payment</a>
                                         @elseif ($order->status == 'ship')
-                                            <a href="{{ route('order.ship', $order->id) }}"
-                                                class="btn-sm btn btn-warning badge m-1">Packaging</a>
-                                        @elseif ($order->status == 'receive')
+                                            <a href="{{ route('order.prepare', $order->id) }}"
+                                                class="btn-sm btn btn-warning badge m-1">Preparing</a>
+                                        @elseif ($order->status == 'confirm')
                                             <a href="{{ route('delivery.detail', \App\Models\Delivery::where('order_id', $order->id)->first()->id) }}"
-                                                class="btn-sm btn btn-primary badge m-1">Shipping</a>
+                                                class="btn-sm btn btn-primary badge m-1">Confirmed</a>
                                         @elseif ($order->status == 'completed')
                                             <a href="" class="btn-sm btn btn-success badge m-1">Completed</a>
                                         @elseif($order->status == 'partial')
@@ -117,7 +117,7 @@
                                         @elseif ($order->status == 'ship')
                                             <a href="{{ route('order.ship', $order->id) }}"
                                                 class="btn-sm btn btn-warning badge m-1">Packaging...</a>
-                                        @elseif ($order->status == 'receive')
+                                        @elseif ($order->status == 'confirm')
                                             <a href="{{ route('order.ship', $order->id) }}"
                                                 class="btn-sm btn btn-primary badge m-1">Shipping...</a>
                                         @elseif (strtolower($order->status) == 'completed')
@@ -137,7 +137,7 @@
                                         @elseif ($order->status == 'ship')
                                             <span class="badge bg-label-warning rounded-pill">To
                                                 {{ ucfirst($order->status) }}</span>
-                                        @elseif ($order->status == 'receive')
+                                        @elseif ($order->status == 'confirm')
                                             <span class="badge bg-label-primary rounded-pill">To
                                                 {{ ucfirst($order->status) }}</span>
                                         @elseif (strtolower($order->status) == 'completed')

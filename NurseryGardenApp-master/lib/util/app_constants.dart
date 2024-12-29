@@ -41,9 +41,9 @@ class AppConstants {
   static const String SOIL = "soil";
 
   // Address Tye
-  static const String ADDRESS_PACK = 'Seller is preparing your parcel';
-  static const String ADDRESS_SHIP = 'Your parcel is on the way';
-  static const String ADDRESS_DELIVER = 'Your parcel has been delivered';
+  static const String ADDRESS_PACK = 'Admin is searching your service provider';
+  static const String ADDRESS_PREPARE = 'Your service provider is confirmed';
+  static const String ADDRESS_DELIVER = 'Your booking has been completed';
 
   // Upload Image/File
   static const String UPLOAD_IMAGE = '/upload_file';

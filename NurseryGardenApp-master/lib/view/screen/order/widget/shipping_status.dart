@@ -56,7 +56,7 @@ class _ShippingStatusState extends State<ShippingStatus> {
                       .titleStyle
                       .copyWith(fontSize: 16)),
               SizedBox(height: 3),
-              Text("Please pay to confirm your order",
+              Text("Please pay to confirm your booking",
                   style: CustomTextStyles(context)
                       .subTitleStyle
                       .copyWith(fontSize: 14))
@@ -88,12 +88,12 @@ class _ShippingStatusState extends State<ShippingStatus> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text("Order Cancelled",
+              Text("Booking Cancelled",
                   style: CustomTextStyles(context)
                       .titleStyle
                       .copyWith(fontSize: 16)),
               SizedBox(height: 3),
-              Text("Your order has been cancelled",
+              Text("Your booking has been cancelled",
                   style: CustomTextStyles(context)
                       .subTitleStyle
                       .copyWith(fontSize: 14))
@@ -132,12 +132,12 @@ class _ShippingStatusState extends State<ShippingStatus> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text("Order Placed",
+                Text("Booking Placed",
                     style: CustomTextStyles(context)
                         .titleStyle
                         .copyWith(fontSize: 16)),
                 SizedBox(height: 3),
-                Text("Seller is preparing your order",
+                Text("Admin is searching your service provider",
                     style: CustomTextStyles(context)
                         .subTitleStyle
                         .copyWith(fontSize: 14))
@@ -186,12 +186,12 @@ class _ShippingStatusState extends State<ShippingStatus> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text("Order Shipped",
+                Text("Booking Confirmed",
                     style: CustomTextStyles(context)
                         .titleStyle
                         .copyWith(fontSize: 16)),
                 SizedBox(height: 3),
-                Text("Your parcel is on the way",
+                Text("Service provider is on the way",
                     style: CustomTextStyles(context)
                         .subTitleStyle
                         .copyWith(fontSize: 14))
@@ -245,12 +245,12 @@ class _ShippingStatusState extends State<ShippingStatus> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text("Order Delivered",
+                Text("Booking Completed",
                     style: CustomTextStyles(context)
                         .titleStyle
                         .copyWith(fontSize: 16)),
                 SizedBox(height: 3),
-                Text("Your parcel has been delivered",
+                Text("Your requested service has been completed",
                     style: CustomTextStyles(context)
                         .subTitleStyle
                         .copyWith(fontSize: 14))
@@ -300,12 +300,12 @@ class _ShippingStatusState extends State<ShippingStatus> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text("Order Separate",
+                Text("Booking Separate",
                     style: CustomTextStyles(context)
                         .titleStyle
                         .copyWith(fontSize: 16)),
                 SizedBox(height: 3),
-                Text("Your order has been separate to ship",
+                Text("Your booking has been separate to prepare",
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                     style: CustomTextStyles(context)
@@ -336,8 +336,8 @@ class _ShippingStatusState extends State<ShippingStatus> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (widget.status == "pay") payWidget,
-          if (widget.status == "ship") shipWidget,
-          if (widget.status == "receive") receiveWidget,
+          if (widget.status == "prepare") shipWidget,
+          if (widget.status == "confirm") receiveWidget,
           if (widget.status == "partial") partialWidget,
           if (widget.status == "completed") completeWidget,
           if (widget.status == "cancel") cancelWidget,

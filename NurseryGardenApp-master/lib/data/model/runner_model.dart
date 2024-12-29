@@ -34,24 +34,24 @@ class RunnerModel {
 }
 
 class Data {
-  RunnerList? runnerList;
+  RunnersList? runnersList;
 
   Data({
-    this.runnerList,
+    this.runnersList,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-        runnerList: json["runner"] == null
+        runnersList: json["runners"] == null
             ? null
-            : RunnerList.fromJson(json["runner"]),
+            : RunnersList.fromJson(json["runners"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "runner": runnerList?.toJson(),
+        "runners": runnersList?.toJson(),
       };
 }
 
-class RunnerList {
+class RunnersList {
   int? currentPage;
   List<Runner>? runner;
   String? firstPageUrl;
@@ -66,7 +66,7 @@ class RunnerList {
   int? to;
   int? total;
 
-  RunnerList({
+  RunnersList({
     this.currentPage,
     this.runner,
     this.firstPageUrl,
@@ -82,7 +82,7 @@ class RunnerList {
     this.total,
   });
 
-  factory RunnerList.fromJson(Map<String, dynamic> json) => RunnerList(
+  factory RunnersList.fromJson(Map<String, dynamic> json) => RunnersList(
         currentPage: json["current_page"],
         runner: json["data"] == null
             ? []
@@ -125,7 +125,7 @@ class RunnerList {
 
 class Runner {
   int? id;
-  int? Catid;
+  //int? Catid;
   String? type;
   String? area;
   DateTime? appDate; // Changed to DateTime
@@ -135,13 +135,14 @@ class Runner {
   String? budget;
   DateTime? createdAt;
   DateTime? updatedAt;
-  String? categoryName;
+  //String? categoryName;
   String? imageURL;
   bool? isSelected;
+  int? productID; // Optional
 
   Runner({
     this.id,
-    this.Catid,
+    //this.Catid,
     this.type,
     this.area,
     this.appDate,
@@ -151,18 +152,36 @@ class Runner {
     this.budget,
     this.createdAt,
     this.updatedAt,
-    this.categoryName,
+    //this.categoryName,
     this.imageURL,
     this.isSelected = false,
-  });
+    this.productID,
+    });
 
-  factory Runner.fromJson(Map<String, dynamic> json) => Runner(
+  factory Runner.fromJson(Map<String, dynamic> json) {
+    print("Runner JSON: $json");
+    print("id: ${json["id"]}, type: ${json["id"]?.runtimeType}");
+    // print("Catid: ${json["Catid"]}, type: ${json["Catid"]?.runtimeType}");
+    print("type: ${json["type"]}, type: ${json["type"]?.runtimeType}");
+    print("area: ${json["area"]}, type: ${json["area"]?.runtimeType}");
+    print("appDate: ${json["app_date"]}, type: ${json["app_date"]?.runtimeType}");
+    print("preferredTime: ${json["preferred_time"]}, type: ${json["preferred_time"]?.runtimeType}");
+    print("details: ${json["details"]}, type: ${json["details"]?.runtimeType}");
+    print("photo: ${json["photo"]}, type: ${json["photo"]?.runtimeType}");
+    print("budget: ${json["budget"]}, type: ${json["budget"]?.runtimeType}");
+    print("createdAt: ${json["created_at"]}, type: ${json["created_at"]?.runtimeType}");
+    print("updatedAt: ${json["updated_at"]}, type: ${json["updated_at"]?.runtimeType}");
+    print("categoryName: ${json["category_name"]}, type: ${json["category_name"]?.runtimeType}");
+    print("imageURL: ${json["image_url"]}, type: ${json["image_url"]?.runtimeType}");
+    print("productID: ${json["product_id"]}, type: ${json["product_id"]?.runtimeType}");
+
+    return Runner(
         id: json["id"],
-        Catid: json["Catid"],
+        //Catid: json["Catid"],
         type: json["type"],
         area: json["area"],
-        appDate: json["appDate"] == null ? null : DateTime.parse(json["appDate"]),
-        preferredTime: json["preferredTime"],
+        appDate: json["app_date"] == null ? null : DateTime.parse(json["app_date"]),
+        preferredTime: json["preferred_time"],
         details: json["details"],
         photo: json["photo"] == null ? null : List<String>.from(json["photo"]),
         budget: json["budget"],
@@ -172,13 +191,16 @@ class Runner {
         updatedAt: json["updated_at"] == null
             ? null
             : DateTime.parse(json["updated_at"]),
-        categoryName: json["category_name"],
-        imageURL: jsonDecode(json["image_url"]),
+        //categoryName: json["category_name"],
+        //imageURL: jsonDecode(json["image_url"]),
+        imageURL: json["image_url"],
+        productID: json["product_id"],
       );
+  }
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "Catid": Catid,
+       // "Catid": Catid,
         "type": type,
         "area": area,
         "appDate": appDate?.toIso8601String(),
@@ -188,8 +210,9 @@ class Runner {
         "budget": budget,
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
-        "category_name": categoryName,
+       // "category_name": categoryName,
         "image_url": imageURL,
+        "product_id": productID,
       };
 }
 
