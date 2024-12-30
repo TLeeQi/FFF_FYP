@@ -163,13 +163,13 @@ class DeliveryController extends Controller
 
             // Update delivery
             $delivery->prv_img = $imageName;
-            $delivery->status = 'Confirmed';
+            $delivery->status = 'Completed';
             $delivery->save();
 
             // Update order
             $deliveryList = Delivery::where('order_id', $delivery->order_id)->get();
             foreach ($deliveryList as $deliverys) {
-                if ($deliverys->status != 'Confirmed') {
+                if ($deliverys->status != 'Completed') {
                     return redirect()->route('delivery.index');
                 }
             }

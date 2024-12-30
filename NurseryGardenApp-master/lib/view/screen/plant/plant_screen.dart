@@ -118,7 +118,7 @@ class _PlantScreenState extends State<PlantScreen> {
             children: [
               // Title Section
               const Text(
-                "FixIt and Foliage Frenzy",
+                "Exactly What You Need",
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -126,14 +126,14 @@ class _PlantScreenState extends State<PlantScreen> {
                 ),
               ),
               const SizedBox(height: 8),
-              const Text(
-                "Exactly What You Need",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black87,
-                ),
-              ),
+              // const Text(
+              //   "Exactly What You Need",
+              //   style: TextStyle(
+              //     fontSize: 18,
+              //     fontWeight: FontWeight.w500,
+              //     color: Colors.black87,
+              //   ),
+              // ),
               const SizedBox(height: 16),
 
               // Description Section

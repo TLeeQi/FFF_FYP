@@ -54,7 +54,7 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _loadData();
+      _loadData();      
     });
   }
 
@@ -89,9 +89,12 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
         delivery = _deliveryProvider.deliveryDetail;
       }
     }
-    if (delivery.status == "prepare") {
+
+    print('delivery.status: ${delivery.status}');
+
+    if (delivery.status == "confirm") {
       _currentStep = 1;
-    } else if (delivery.status == "Confirmed") {
+    } else if (delivery.status == "Completed") {
       _currentStep = 2;
     } else {
       _currentStep = 0;
@@ -153,7 +156,7 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                                     color: ColorResources.COLOR_PRIMARY,
                                   ),
                                 ),
-                              if (delivery.status == "prepare")
+                              if (delivery.status == "confirm")
                                 Container(
                                   padding:
                                       const EdgeInsets.fromLTRB(0, 10, 15, 10),
@@ -163,7 +166,7 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                                     color: ColorResources.COLOR_PRIMARY,
                                   ),
                                 ),
-                              if (delivery.status == "Confirmed")
+                              if (delivery.status == "Completed")
                                 Container(
                                   padding:
                                       const EdgeInsets.fromLTRB(0, 10, 15, 10),
@@ -181,11 +184,11 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                                     Text("Admin is searching your service provider",
                                         style: CustomTextStyles(context)
                                             .titleStyle),
-                                  if (delivery.status == "prepare")
+                                  if (delivery.status == "confirm")
                                     Text("Service provider is on the way",
                                         style: CustomTextStyles(context)
                                             .titleStyle),
-                                  if (delivery.status == "Confirmed")
+                                  if (delivery.status == "Completed")
                                     Text("Your requested service has been completed",
                                         style: CustomTextStyles(context)
                                             .titleStyle),
@@ -203,7 +206,7 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                                                 .subTitleStyle),
                                       ],
                                     ),
-                                  if (delivery.status == "prepare")
+                                  if (delivery.status == "confirm")
                                     Row(
                                       children: [
                                         Text("Expected Date: ",
@@ -216,7 +219,7 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                                                 .subTitleStyle),
                                       ],
                                     ),
-                                  if (delivery.status == "Confirmed")
+                                  if (delivery.status == "Completed")
                                     Text(
                                         DateFormat('dd-MM-yyyy').format(
                                             delivery.updatedAt ??
@@ -273,8 +276,8 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                               ]),
                         ),
                       // Click to view delivery order item
-                      if (delivery.status == "Confirmed" ||
-                          delivery.status == "prepare")
+                      if (delivery.status == "Completed" ||
+                          delivery.status == "confirm")
                         Padding(
                           padding: const EdgeInsets.only(top: 20),
                           child: GestureDetector(
@@ -327,8 +330,8 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                                       style:
                                           CustomTextStyles(context).titleStyle),
                                   Spacer(),
-                                  if (delivery.status == "Confirmed" ||
-                                      delivery.status == "prepare")
+                                  if (delivery.status == "Completed" ||
+                                      delivery.status == "confirm")
                                     Padding(
                                       padding: const EdgeInsets.only(right: 5),
                                       child: InkWell(
@@ -338,7 +341,7 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                                                   ""));
                                         },
                                         child: Text(
-                                          "COPY",
+                                          "Vendor Contact:",
                                           style: CustomTextStyles(context)
                                               .titleStyle
                                               .copyWith(
@@ -347,8 +350,8 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                                         ),
                                       ),
                                     ),
-                                  if (delivery.status == "Confirmed" ||
-                                      delivery.status == "prepare")
+                                  if (delivery.status == "Completed" ||
+                                      delivery.status == "confirm")
                                     Text(delivery.trackingNumber ?? "",
                                         style: CustomTextStyles(context)
                                             .subTitleStyle),
@@ -363,7 +366,7 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                                   return ColorResources.COLOR_PRIMARY;
                                 }),
                                 controlsBuilder: (context, details) {
-                                  if (delivery.status == "Confirmed") {
+                                  if (delivery.status == "Completed") {
                                     return Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -428,8 +431,8 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                                       style:
                                           CustomTextStyles(context).titleStyle,
                                     ),
-                                    subtitle: delivery.status == "Confirmed" ||
-                                            delivery.status == "prepare"
+                                    subtitle: delivery.status == "Completed" ||
+                                            delivery.status == "confirm"
                                         ? Text(
                                             DateFormat('dd-MM-yyyy HH:mm')
                                                 .format(delivery.createdAt!),
@@ -438,12 +441,24 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                                                 .copyWith(fontSize: 12),
                                           )
                                         : null,
-                                    content: Text(
-                                        'Your booking has been confirmed and is on the way.',
-                                        style: CustomTextStyles(context)
-                                            .subTitleStyle),
-                                    isActive: delivery.status == "Confirmed" ||
-                                        delivery.status == "prepare",
+                                    content: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Your booking has been confirmed and is on the way.',
+                                          style: CustomTextStyles(context).subTitleStyle,
+                                        ),
+                                        SizedBox(height: 8), // Add some space between the lines
+                                        Text(
+                                          'Assigned Vendor: ${delivery.method}',
+                                          style: CustomTextStyles(context)
+                                              .subTitleStyle
+                                              .copyWith(fontWeight: FontWeight.bold, color: ColorResources.COLOR_PRIMARY), // Customize font
+                                        ),
+                                      ],
+                                    ),
+                                    isActive: delivery.status == "Completed" ||
+                                        delivery.status == "confirm",
                                   ),
                                   Step(
                                     state: StepState.complete,
@@ -452,7 +467,7 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                                       style:
                                           CustomTextStyles(context).titleStyle,
                                     ),
-                                    subtitle: delivery.status == "Confirmed"
+                                    subtitle: delivery.status == "Completed"
                                         ? Text(
                                             DateFormat('dd-MM-yyyy HH:mm')
                                                 .format(delivery.updatedAt!),
@@ -464,7 +479,7 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                                         'Your requested service has been completed.',
                                         style: CustomTextStyles(context)
                                             .subTitleStyle),
-                                    isActive: delivery.status == "Confirmed",
+                                    isActive: delivery.status == "Completed",
                                   ),
                                 ],
                               ),

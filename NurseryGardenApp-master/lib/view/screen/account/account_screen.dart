@@ -9,6 +9,8 @@ import 'package:nurserygardenapp/util/images.dart';
 import 'package:nurserygardenapp/util/routes.dart';
 import 'package:provider/provider.dart';
 import '../../base/custom_dialog.dart';
+import 'package:nurserygardenapp/view/screen/emergency_screen.dart';
+import 'package:nurserygardenapp/view/screen/sos_button.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({Key? key}) : super(key: key);
@@ -124,6 +126,18 @@ class _AccountScreenState extends State<AccountScreen> {
                   );
           },
         ),
+        actions: [
+            SOSButton(
+              onPressed: () {
+                // Handle SOS button press
+                print("SOS button pressed!");
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => EmergencyScreen()),
+                );
+              },
+            ),
+          ],
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,

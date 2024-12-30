@@ -239,7 +239,7 @@ class _OrderDeliveryListScreenState extends State<OrderDeliveryListScreen> {
                                                                     index]
                                                                 .status
                                                                 .toString() ==
-                                                            'Confirmed'
+                                                            'Completed'
                                                         ? ColorResources
                                                             .COLOR_PRIMARY
                                                         : ColorResources

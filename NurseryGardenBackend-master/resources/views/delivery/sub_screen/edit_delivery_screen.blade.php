@@ -16,7 +16,7 @@
                         <select class="form-select" id="selectOption" aria-label="Default select example" name="status">
                             <option hidden value="prepare">Deliver in progress</option>
                             <option value="prepare">Deliver in progress</option>
-                            <option value="Confirmed">Confirmed</option>
+                            <option value="Completed">Completed</option>
                         </select>
                         <label for="exampleFormControlSelect1">Delivery Status</label>
                     </div>
@@ -68,7 +68,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Save</button>
             </div>
-        @elseif($delivery->status == 'Confirmed')
+        @elseif($delivery->status == 'Completed')
             <div class="row">
                 <div class="col-xl">
                     <div class="card mb-4">
@@ -287,7 +287,7 @@
             var selectElement = document.getElementById("selectOption");
             var selectedOptionValue = selectElement.value;
 
-            if ((selectedOptionValue === "Confirmed" && frame.src === "") ||
+            if ((selectedOptionValue === "Completed" && frame.src === "") ||
                 (selectedOptionValue === "prepare" && frame.src !== "")
             ) {
                 alert("Please update the delivery status of the order and ensure the prove of delivery is updated");
