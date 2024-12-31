@@ -127,7 +127,6 @@ class _WiringDetailScreenState extends State<WiringDetailScreen> {
        });
      }
    }
-  
 
   void _removePhoto(int index) {
     setState(() {
@@ -252,11 +251,9 @@ class _WiringDetailScreenState extends State<WiringDetailScreen> {
      bool success = await Provider.of<OrderProvider>(context, listen: false)
           .storeWiringDetail(wiringData, context);
 
-      if (success) {
-        String wiringId = Provider.of<OrderProvider>(context, listen: false).wiringIdCreated;
-        
+      if (success) {        
         if(uploadedPhotos.isNotEmpty){
-          bool uploadSuccess = await _uploadPhotos(wiringId);
+          bool uploadSuccess = await _uploadPhotos();
           if(uploadSuccess){     
             EasyLoading.showToast('Booked Successfully with Photo!');
 
@@ -359,12 +356,12 @@ class _WiringDetailScreenState extends State<WiringDetailScreen> {
     });
   }
 
-  Future<bool> _uploadPhotos(String wiringId) async {
+  Future<bool> _uploadPhotos() async {
     EasyLoading.show(status: 'Uploading photos...');
     try {
         // Ensure that the key 'photos' is used for the list of files
         bool uploadSuccess = await Provider.of<OrderProvider>(context, listen: false)
-            .uploadWiringImages(uploadedPhotos, 'photos', context);
+            .uploadServiceImages(uploadedPhotos, 'photos', context);
 
         if (uploadSuccess) {
             print('Photos uploaded successfully!');

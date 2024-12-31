@@ -516,12 +516,12 @@ class OrderProvider extends ChangeNotifier {
     return result;
   }
 
-  Future<bool> uploadWiringImages(List<File> photos, String key, BuildContext context) async {
+  Future<bool> uploadServiceImages(List<File> photos, String key, BuildContext context) async {
     bool result = false;
     _isLoading = true;
     notifyListeners();
 
-    ApiResponse apiResponse = await orderRepo.uploadWiringImages(photos, key);
+    ApiResponse apiResponse = await orderRepo.uploadServiceImages(photos, key);
     if (context.mounted) {
       result = ResponseHelper.responseHelper(context, apiResponse);
       if (result && apiResponse.response!.data['data'] != null) {

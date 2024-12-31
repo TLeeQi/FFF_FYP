@@ -63,7 +63,7 @@ class OrderRepo {
     }
   }
 
-  Future<ApiResponse> uploadWiringImages(List<File> photos, String key) async {
+  Future<ApiResponse> uploadServiceImages(List<File> photos, String key) async {
     try {
         // Convert photos into a list of MultipartFiles
       // List<MultipartFile> photoFiles = photos.map((photo) {
@@ -84,7 +84,7 @@ class OrderRepo {
           }
 
       Response response = await dioClient.post(
-        AppConstants.ORDER_WIRING_IMAGES_URI,
+        AppConstants.ORDER_SERVICE_IMAGES_URI,
         data: formData,
       );
         return ApiResponse.withSuccess(response);

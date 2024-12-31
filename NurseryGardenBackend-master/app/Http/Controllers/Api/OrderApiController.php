@@ -123,11 +123,6 @@ class OrderApiController extends Controller
 
                 // Decode and add URLs for wiring photos
                 if ($wiring) {
-                    $wiringPhotos = $wiring->photo ? json_decode($wiring->photo, true) : [];
-                    $wiring->photo_urls = array_map(function ($path) {
-                        return asset('storage/' . $path);
-                    }, $wiringPhotos);
-
                     // Add wiring detail to the array
                     $wiringArray[] = $wiring->toArray();
 
@@ -151,11 +146,6 @@ class OrderApiController extends Controller
 
                 // Decode and add URLs for wiring photos
                 if ($piping) {
-                    $pipingPhotos = $piping->photo ? json_decode($piping->photo, true) : [];
-                    $piping->photo_urls = array_map(function ($path) {
-                        return asset('storage/' . $path);
-                    }, $pipingPhotos);
-
                     // Add wiring detail to the array
                     $pipingArray[] = $piping->toArray();
 
@@ -178,11 +168,6 @@ class OrderApiController extends Controller
 
                 // Decode and add URLs for wiring photos
                 if ($gardening) {
-                    $gardeningPhotos = $gardening->photo ? json_decode($gardening->photo, true) : [];
-                    $gardening->photo_urls = array_map(function ($path) {
-                        return asset('storage/' . $path);
-                    }, $gardeningPhotos);
-
                     // Add wiring detail to the array
                     $gardeningArray[] = $gardening->toArray();
 
@@ -205,11 +190,6 @@ class OrderApiController extends Controller
 
                 // Decode and add URLs for runner photos
                 if ($runner) {
-                    $runnerPhotos = $runner->photo ? json_decode($runner->photo, true) : [];
-                    $runner->photo_urls = array_map(function ($path) {
-                        return asset('storage/' . $path);
-                    }, $runnerPhotos);
-
                 // Add wiring detail to the array
                 $runnerArray[] = $runner->toArray();
 
@@ -536,7 +516,7 @@ class OrderApiController extends Controller
     //     ]);
     // }
 
-    public function uploadWiringImages(Request $request)
+    public function uploadServiceImages(Request $request)
     {
         // Log raw input for debugging
         Log::info('Raw Request Data', ['request' => $request->all()]);
@@ -551,7 +531,7 @@ class OrderApiController extends Controller
                 $imageNames = [];
                 if (is_array($uploadedPhotos)) {
                     foreach ($uploadedPhotos as $photo) {
-                        $fileName = $photo->getClientOriginalName();
+                        $fileName = uniqid() . '_' . $photo->getClientOriginalName();
                         $photo->move(public_path('service_image'), $fileName);
                         Log::info('File moved successfully: ' . $fileName);
                         $imageNames[] = $fileName;
@@ -593,7 +573,7 @@ class OrderApiController extends Controller
                 'app_date' => 'required|date',
                 'preferred_time' => 'required|string',
                 'details' => 'nullable|string',
-                'photo' => 'nullable|array',
+                'photo' => 'nullable|string',
                 'budget' => 'required|string',
                 'address' => 'required|string',
                 'prod_id' => 'required|integer',
@@ -692,7 +672,7 @@ class OrderApiController extends Controller
                 'app_date' => 'required|date',
                 'preferred_time' => 'required|string',
                 'details' => 'nullable|string',
-                'photo' => 'nullable|array',
+                'photo' => 'nullable|string',
                 'prod_id' => 'required|integer',        
                 'budget' => 'required|string',
                 'address' => 'required|string',
@@ -791,7 +771,7 @@ class OrderApiController extends Controller
                 'app_date' => 'required|date',
                 'preferred_time' => 'required|string',
                 'details' => 'nullable|string',
-                'photo' => 'nullable|array',
+                'photo' => 'nullable|string',
                 'budget' => 'required|string',
                 'address' => 'required|string',
                 'prod_id' => 'required|integer',

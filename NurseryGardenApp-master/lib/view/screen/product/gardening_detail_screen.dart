@@ -107,13 +107,14 @@ class _GardeningDetailScreenState extends State<GardeningDetailScreen> {
 
   void _pickPhoto() async {
     final ImagePicker picker = ImagePicker();
-    final XFile? photo = await picker.pickImage(source: ImageSource.gallery);
-    if (photo != null) {
-      setState(() {
-        uploadedPhotos.add(File(photo.path));
-      });
-    }
-  }
+     final List<XFile>? photos = await picker.pickMultiImage(); // Allow multiple image selection
+     if (photos != null && photos.isNotEmpty) {
+       setState(() {
+         uploadedPhotos.clear(); // Clear previous photos if needed
+         uploadedPhotos.addAll(photos.map((file) => File(file.path)).toList()); // Add selected photos
+       });
+     }
+   }
 
   void _removePhoto(int index) {
     setState(() {
@@ -125,11 +126,14 @@ class _GardeningDetailScreenState extends State<GardeningDetailScreen> {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
   
+      List<String> imageNames = [];
       // Prepare image names for storage
-      List<String> imageNames = uploadedPhotos.map((file) {
-        String imageName = file.path.split('/').last; // Extract the file name
-        return imageName;
-      }).toList();
+      if (uploadedPhotos.isNotEmpty) {
+        imageNames = uploadedPhotos.map((file) {
+          String imageName = file.path.split('/').last; // Extract the file name
+          return imageName;
+        }).toList();
+      } 
   
     // Create a map to hold the form data
     final Map<String, dynamic> gardeningData = {
@@ -139,7 +143,7 @@ class _GardeningDetailScreenState extends State<GardeningDetailScreen> {
       'app_date': appointmentDate?.toIso8601String().split('T')[0], // Convert to string
       'preferred_time': appointmentTime,
       'details': additionalDetails?.isNotEmpty == true ? additionalDetails : null,
-      'photo': imageNames.join(','),
+      'photo': imageNames.isNotEmpty ? imageNames.join(',') : 'no_service.png',
       'budget': budget,
       'address': address,
       'prod_id': widget.productID,
@@ -156,19 +160,38 @@ class _GardeningDetailScreenState extends State<GardeningDetailScreen> {
           .storeGardeningDetail(gardeningData, context);
 
       if (success) {
-        EasyLoading.showToast('Booked Successfully!');
+        if(uploadedPhotos.isNotEmpty){
+          bool uploadSuccess = await _uploadPhotos();
+          if(uploadSuccess){     
+            EasyLoading.showToast('Booked Successfully with Photo!');
 
-        Navigator.pushReplacementNamed(
-          context,
-          Routes.getOrderConfirmationRoute(
-            'product', // Pass the "comeFrom" argument
-            isWiring: false, // Specify the relevant flag
-            isPiping: false, // Specify the relevant flag
-            isGardening: true, // Specify the relevant flag
-            isRunner: false, // Specify the relevant flag
-            detailData: gardeningData,
-          ),
-        );
+            Navigator.pushReplacementNamed(
+              context,
+              Routes.getOrderConfirmationRoute(
+                "product", 
+                isWiring: false, 
+                isPiping: false, 
+                isGardening: true, 
+                isRunner: false,
+                detailData: gardeningData,
+              ),
+            );
+          }
+        }else{
+          EasyLoading.showToast('Booked Successfully!');
+
+            Navigator.pushReplacementNamed(
+              context,
+              Routes.getOrderConfirmationRoute(
+                "product", 
+                isWiring: false, 
+                isPiping: false, 
+                isGardening: true, 
+                isRunner: false,
+                detailData: gardeningData,
+              ),
+            );
+        }
       } else {
         EasyLoading.showToast('Failed to book gardening service.');
       }
@@ -206,6 +229,28 @@ class _GardeningDetailScreenState extends State<GardeningDetailScreen> {
       isLoading = false;
     });
   }
+
+  Future<bool> _uploadPhotos() async {
+      EasyLoading.show(status: 'Uploading photos...');
+      try {
+          // Ensure that the key 'photos' is used for the list of files
+          bool uploadSuccess = await Provider.of<OrderProvider>(context, listen: false)
+              .uploadServiceImages(uploadedPhotos, 'photos', context);
+
+          if (uploadSuccess) {
+              print('Photos uploaded successfully!');
+              return true;
+          } else {
+              print('Failed to upload photos.');
+              return false;
+          }
+      } catch (e) {
+          print('An error occurred: $e');
+          return false;
+      } finally {
+          EasyLoading.dismiss();
+      }
+    }
 
   Future<void> addToCart() async {
     Navigator.pop(context);
@@ -400,9 +445,16 @@ class _GardeningDetailScreenState extends State<GardeningDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-        title: const Text('Gardening Service'),
-        backgroundColor: ColorResources.COLOR_PRIMARY,
-      ),
+          leading: BackButton(
+            color: Colors.white, // <-- SEE HERE
+
+            onPressed: () {
+              Navigator.pushNamedAndRemoveUntil(context,
+                  Routes.getDashboardRoute("Services"), (route) => false);
+            },),
+            backgroundColor: ColorResources.COLOR_PRIMARY,
+            title: const Text('Gardening Service'),
+        ),
       bottomNavigationBar: BottomAppBar(
         child: Row(
           children: [

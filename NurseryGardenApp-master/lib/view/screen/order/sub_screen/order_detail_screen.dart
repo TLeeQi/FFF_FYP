@@ -17,7 +17,6 @@ import 'package:nurserygardenapp/view/screen/order/widget/empty_order_detail.dar
 import 'package:nurserygardenapp/view/screen/order/widget/shipping_status.dart';
 import 'package:nurserygardenapp/view/screen/payment/payment_helper/payment_type.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class OrderDetailScreen extends StatefulWidget {
   final String orderID;
@@ -1196,18 +1195,24 @@ Widget _buildDetailRow(String label, String? value) {
 }
 
 Widget _buildPhotoGallery(dynamic photoPaths) {
-  if (photoPaths == null || photoPaths is! List || photoPaths.isEmpty) {
+  if (photoPaths == null || photoPaths is! String || photoPaths.isEmpty) {
     return Text("No photos uploaded.");
   }
 
-  final baseUrl = dotenv.env['BASE_URL'] ?? '';
+  // Split the comma-separated string into a list of filenames
+  List<String> photoList = photoPaths.split(',');
 
   return Wrap(
     spacing: 10,
     runSpacing: 10,
-    children: photoPaths.map((path) {
+    children: photoList.map((filename) {
+      // Assuming the images are stored in a specific directory
+      //ngrok
+      String filePath = 'https://3b6b-2405-3800-832-f71-bc85-b3cd-9c9-ef0d.ngrok-free.app/service_image/$filename'; // Update this path as needed
+      print('filePath: $filePath');
+      
       return Image.network(
-        "$baseUrl$path",
+        filePath,
         width: 100,
         height: 100,
         fit: BoxFit.cover,

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\WiringDetail;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\User;
@@ -35,6 +36,7 @@ class HomeController extends Controller
         $data['totalUsers']         = User::where('type', '=', 'user')->count('id');
         $data['totalProducts']      = Product::count('id');
         $data['totalPlants']        = Plant::count('id');
+        $data['totalServices']     = WiringDetail::count('id') + PipingDetail::count('id') + GardeningDetail::count('id') + RunnerDetail::count('id');
         $data['totalSalesProducts'] = Product::sum('sales_amount');
         $data['totalSalesPlants']   = Plant::sum('sales_amount');
         $data['totalOrder']         = Order::count('id');

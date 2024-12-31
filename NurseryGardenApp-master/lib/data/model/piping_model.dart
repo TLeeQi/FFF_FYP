@@ -133,7 +133,7 @@ class Piping {
   DateTime? appDate; // Changed to DateTime
   String? preferredTime;
   String? details; // Optional
-  List<String>? photo; // Optional
+  String? photo; // Optional
   String? budget;
   DateTime? createdAt;
   DateTime? updatedAt;
@@ -191,7 +191,7 @@ class Piping {
         appDate: json["app_date"] == null ? null : DateTime.parse(json["app_date"]),
         preferredTime: json["preferred_time"],
         details: json["details"],
-        photo: json["photo"] == null ? null : List<String>.from(json["photo"]),
+        photo: json["photo"],
         budget: json["budget"],
         createdAt: json["created_at"] == null
             ? null
@@ -215,7 +215,7 @@ class Piping {
         "appDate": appDate?.toIso8601String(),
         "preferredTime": preferredTime,
         "details": details,
-        // "photo": photo == null ? null : List<dynamic>.from(photo!),
+        "photo": photo,
         "budget": budget,
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
