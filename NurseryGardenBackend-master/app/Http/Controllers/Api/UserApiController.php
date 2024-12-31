@@ -79,6 +79,8 @@ class UserApiController extends Controller
     // Temp
     public function handleUploadUserImage(Request $request)
     {
+        \Log::info('Incoming Request Data', $request->all());
+        
         $request->validate([
             'image' => ['required', 'image', 'mimes:jpeg,bmp,png,jpg,svg'],
         ]);

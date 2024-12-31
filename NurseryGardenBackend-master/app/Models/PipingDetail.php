@@ -28,7 +28,6 @@ class PipingDetail extends Model
     protected $casts = [
         'fixitem' => 'array',
         'problem' => 'array',
-        'photo' => 'array',
         'app_date' => 'date',
     ];
 

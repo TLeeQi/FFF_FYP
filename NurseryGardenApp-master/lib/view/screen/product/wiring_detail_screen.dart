@@ -118,13 +118,6 @@ class _WiringDetailScreenState extends State<WiringDetailScreen> {
   }
 
   void _pickPhoto() async {
-    // final ImagePicker picker = ImagePicker();
-    // final XFile? photo = await picker.pickImage(source: ImageSource.gallery);
-    // if (photo != null) {
-    //   setState(() {
-    //     uploadedPhotos.add(File(photo.path));
-    //   });
-    // }
     final ImagePicker picker = ImagePicker();
      final List<XFile>? photos = await picker.pickMultiImage(); // Allow multiple image selection
      if (photos != null && photos.isNotEmpty) {
@@ -224,6 +217,16 @@ class _WiringDetailScreenState extends State<WiringDetailScreen> {
   //     EasyLoading.showToast('Please fill in all the fields!');
   //   }
   
+    List<String> imageNames = [];
+    // Prepare image names for storage
+    if (uploadedPhotos.isNotEmpty) {
+      imageNames = uploadedPhotos.map((file) {
+        String imageName = file.path.split('/').last; // Extract the file name
+        return imageName;
+      }).toList();
+    } 
+
+
     // Create a map to hold the form data
     final Map<String, dynamic> wiringData = {
       'type': electricalService,
@@ -233,9 +236,7 @@ class _WiringDetailScreenState extends State<WiringDetailScreen> {
       'app_date': appointmentDate?.toIso8601String().split('T')[0], // Convert to string
       'preferred_time': appointmentTime,
       'details': additionalDetails?.isNotEmpty == true ? additionalDetails : null,
-      'photo': uploadedPhotos.isNotEmpty 
-      ? uploadedPhotos.map((file) => file.path).toList() 
-      : [], // Ensure an empty array for photos
+      'photo': imageNames.isNotEmpty ? imageNames.join(',') : 'no_service.png',
       'budget': budget,
       'address': address,
       'prod_id': widget.productID,
@@ -252,19 +253,40 @@ class _WiringDetailScreenState extends State<WiringDetailScreen> {
           .storeWiringDetail(wiringData, context);
 
       if (success) {
-        EasyLoading.showToast('Booked Successfully!');
+        String wiringId = Provider.of<OrderProvider>(context, listen: false).wiringIdCreated;
+        
+        if(uploadedPhotos.isNotEmpty){
+          bool uploadSuccess = await _uploadPhotos(wiringId);
+          if(uploadSuccess){     
+            EasyLoading.showToast('Booked Successfully with Photo!');
 
-        Navigator.pushReplacementNamed(
-          context,
-          Routes.getOrderConfirmationRoute(
-            "product", 
-            isWiring: true, 
-            isPiping: false, 
-            isGardening: false, 
-            isRunner: false,
-            detailData: wiringData,
-          ),
-        );
+            Navigator.pushReplacementNamed(
+              context,
+              Routes.getOrderConfirmationRoute(
+                "product", 
+                isWiring: true, 
+                isPiping: false, 
+                isGardening: false, 
+                isRunner: false,
+                detailData: wiringData,
+              ),
+            );
+          }
+        }else{
+          EasyLoading.showToast('Booked Successfully!');
+
+            Navigator.pushReplacementNamed(
+              context,
+              Routes.getOrderConfirmationRoute(
+                "product", 
+                isWiring: true, 
+                isPiping: false, 
+                isGardening: false, 
+                isRunner: false,
+                detailData: wiringData,
+              ),
+            );
+        }
       } else {
         EasyLoading.showToast('Failed to book wiring service.');
       }
@@ -335,6 +357,28 @@ class _WiringDetailScreenState extends State<WiringDetailScreen> {
     setState(() {
       isLoading = false;
     });
+  }
+
+  Future<bool> _uploadPhotos(String wiringId) async {
+    EasyLoading.show(status: 'Uploading photos...');
+    try {
+        // Ensure that the key 'photos' is used for the list of files
+        bool uploadSuccess = await Provider.of<OrderProvider>(context, listen: false)
+            .uploadWiringImages(uploadedPhotos, 'photos', context);
+
+        if (uploadSuccess) {
+            print('Photos uploaded successfully!');
+            return true;
+        } else {
+            print('Failed to upload photos.');
+            return false;
+        }
+    } catch (e) {
+        print('An error occurred: $e');
+        return false;
+    } finally {
+        EasyLoading.dismiss();
+    }
   }
 
   Future<void> addToCart() async {

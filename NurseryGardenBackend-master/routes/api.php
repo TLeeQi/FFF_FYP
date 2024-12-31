@@ -66,6 +66,8 @@ Route::prefix('v1')->namespace('App\\Http\\Controllers\\Api')->group(function ()
         Route::post('order/gardeningdetail', 'OrderApiController@storeGardeningDetail');
         Route::post('order/runnerdetail', 'OrderApiController@storeRunnerDetail');
 
+        Route::post('order/wiring/images', 'OrderApiController@uploadWiringImages');
+        
         /* Vendor */
         Route::post('vendor/{id}/rate', 'VendorApiController@rate');
         Route::get('vendor', 'VendorApiController@vendor');

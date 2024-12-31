@@ -29,7 +29,6 @@ class WiringDetail extends Model
     protected $casts = [
         'fixitem' => 'array',
         'ishavepart' => 'boolean',
-        'photo' => 'array',
         'app_date' => 'date',
     ];
 

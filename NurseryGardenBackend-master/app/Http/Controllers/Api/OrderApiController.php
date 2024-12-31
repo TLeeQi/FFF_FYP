@@ -346,7 +346,8 @@ class OrderApiController extends Controller
                 'app_date' => 'required|date',
                 'preferred_time' => 'required|string',
                 'details' => 'nullable|string',
-                'photos.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                //'photos.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'photo' => 'nullable|string',
                 'budget' => 'required|string',
                 'address' => 'required|string',
                 'prod_id' => 'required|integer',
@@ -375,14 +376,6 @@ class OrderApiController extends Controller
         //     return response()->json(['errors' => $e->errors()], 422);
         // }   
 
-        // Handle file uploads
-        $photoPaths = [];
-        if ($request->hasFile('photos')) {
-            foreach ($request->file('photos') as $photo) {
-                $path = $photo->store('uploads/wiring_photos', 'public'); // Save to storage/app/public/uploads/wiring_photos
-                $photoPaths[] = $path;
-            }
-        }
 
         // Create the order
         try{
@@ -425,7 +418,7 @@ class OrderApiController extends Controller
                 'app_date' => $validatedData['app_date'],
                 'preferred_time' => $validatedData['preferred_time'],
                 'details' => $validatedData['details'],
-                'photo' => !empty($photoPaths) ? json_encode($photoPaths) : null,
+                'photo' => $validatedData['photo'],
                 'budget' => $validatedData['budget'],
                 'price' => $total_order_price,
             ]);
@@ -475,8 +468,113 @@ class OrderApiController extends Controller
 
         $ret['order_id'] = $order->id;
 
-        return $this->success($ret);
+        // return $this->success($ret);
+        return $this->success([
+            'order_id' => $order->id,
+            'wiring_id' => $wiringDetail->id
+        ]);
     }
+
+    // public function uploadWiringImages(Request $request, $wiringId)
+    // {
+    //     \Log::info('Incoming Request Data', ['request' => $request->all()]);
+
+    //     // Initialize variables
+    //     $images = array();
+    //     $imageNames = []; // Default value if no file is uploaded
+    //     $imageLinks = [];
+        
+    //     //\Log::info('File type: ', $request->file('photos'));
+
+    //     if ($request->hasFile('photos')) { // Ensure the field name matches
+    //         \Log::info('Files found in request.');
+    //         $files = $request->file('photos');
+            
+    //         // Check if $files is an array
+    //         if (!is_array($files)) {
+    //             $files = [$files]; // Convert to array if it's a single file
+    //         }
+
+    //         \Log::info('Number of files received: ' . count($files));
+
+    //         foreach ($files as $file) {
+    //             $imageName = uniqid() . '_' . $file->getClientOriginalName(); // Use a unique ID
+    //             try {
+    //                  $destinationPath = public_path('/service_image');
+    //                 // \Log::info('Attempting to move file to: ' . $destinationPath . '/' . $imageName);
+    //                 // $file->move($destinationPath, $imageName);
+    //                 // \Log::info('File moved successfully: ' . $imageName);
+    //                 // $images[] = $imageName; // Add to images array
+    //                 \Log::info('Attempting to move file', [
+    //                     'destination' => $destinationPath . '/' . $imageName,
+    //                     'original_name' => $file->getClientOriginalName(),
+    //                     'size' => $file->getSize(),
+    //                     'mime_type' => $file->getMimeType(),
+    //                 ]);
+    //                 $file->move($destinationPath, $imageName);
+    //                 \Log::info('File moved successfully', ['image_name' => $imageName]);
+
+    //                 // Collect image links and names
+    //                 $imageLinks[] = asset('/service_image/' . $imageName);
+    //                 $imageNames[] = $imageName;
+    //             } catch (\Exception $e) {
+    //                 \Log::error('Failed to move file: ' . $e->getMessage());
+    //             }
+    //         }
+    //     } else {
+    //         \Log::info('No files found in request.');
+    //         //$images[] = $imageName; // Use default image
+    //     }
+
+    //     // $ret['image_link'] = asset('/service_image/' . $imageName);
+    //     // $ret['image_name'] = $imageName;
+    //     // return $this->success($ret);
+    //     return response()->json([
+    //         'success' => true,
+    //         'image_links' => $imageLinks,
+    //         'image_names' => $imageNames
+    //     ]);
+    // }
+
+    public function uploadWiringImages(Request $request)
+    {
+        // Log raw input for debugging
+        Log::info('Raw Request Data', ['request' => $request->all()]);
+
+            // Check if 'photos' exists in the request
+            if ($request->hasFile('photos')) {
+                $uploadedPhotos = $request->file('photos');
+
+                Log::info('Uploaded Photos Type', ['type' => gettype($uploadedPhotos)]);
+                Log::info('Uploaded Photos Count', ['count' => is_array($uploadedPhotos) ? count($uploadedPhotos) : 1]);
+
+                $imageNames = [];
+                if (is_array($uploadedPhotos)) {
+                    foreach ($uploadedPhotos as $photo) {
+                        $fileName = $photo->getClientOriginalName();
+                        $photo->move(public_path('service_image'), $fileName);
+                        Log::info('File moved successfully: ' . $fileName);
+                        $imageNames[] = $fileName;
+                    }
+                } elseif ($uploadedPhotos instanceof UploadedFile) {
+                    $fileName = uniqid() . '_' . $uploadedPhotos->getClientOriginalName();
+                    $uploadedPhotos->move(public_path('service_image'), $fileName);
+                    Log::info('File moved successfully: ' . $fileName);
+                    $imageNames[] = $fileName;
+                }
+
+                Log::info('Final Image Names: ' . json_encode($imageNames));
+
+                return response()->json([
+                    'success' => true,
+                    'image_names' => $imageNames,
+                ]);
+            }
+
+            Log::info('No files found in request');
+            return response()->json(['success' => false, 'message' => 'No photos found in request'], 400);
+        }
+
 
     public function storePipingDetail(Request $request)
     {

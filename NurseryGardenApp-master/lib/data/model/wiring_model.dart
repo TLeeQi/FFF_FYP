@@ -134,7 +134,7 @@ class Wiring {
   String? preferredTime;
   String? details; // Optional
   //String? photo; // Optional
-  List<String>? photo;
+  String? photo;
   String? budget;
   DateTime? createdAt;
   DateTime? updatedAt;
@@ -192,7 +192,7 @@ class Wiring {
         appDate: json["app_date"] == null ? null : DateTime.parse(json["app_date"]),
         preferredTime: json["preferred_time"],
         details: json["details"],
-        photo: json["photo"] == null ? null : List<String>.from(json["photo"]),
+        photo: json["photo"],
         //photo: json["photo"],
         budget: json["budget"],
         createdAt: json["created_at"] == null
@@ -218,7 +218,7 @@ class Wiring {
         "appDate": appDate?.toIso8601String(),
         "preferredTime": preferredTime,
         "details": details,
-        "photo": photo == null ? null : List<dynamic>.from(photo!),
+        "photo": photo,
         //"photo": photo,
         "budget": budget,
         "created_at": createdAt?.toIso8601String(),

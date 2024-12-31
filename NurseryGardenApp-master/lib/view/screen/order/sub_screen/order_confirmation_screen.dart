@@ -13,7 +13,7 @@ import 'package:nurserygardenapp/view/base/circular_indicator.dart';
 import 'package:nurserygardenapp/view/base/page_loading.dart';
 import 'package:nurserygardenapp/view/screen/payment/payment_helper/payment_type.dart';
 import 'package:provider/provider.dart';
-import 'dart:io';
+// import 'dart:io';
 
 class OrderConfirmationScreen extends StatefulWidget {
   final String comeFrom;
@@ -674,15 +674,24 @@ Widget _buildDetailRow(String label, String? value) {
 }
 
 Widget _buildPhotoGallery(dynamic photoPaths) {
-  if (photoPaths == null || photoPaths is! List || photoPaths.isEmpty) {
+  if (photoPaths == null || photoPaths is! String || photoPaths.isEmpty) {
     return Text("No photos uploaded.");
   }
+
+  // Split the comma-separated string into a list of filenames
+  List<String> photoList = photoPaths.split(',');
+
   return Wrap(
     spacing: 10,
     runSpacing: 10,
-    children: photoPaths.map((path) {
-      return Image.file(
-        File(path),
+    children: photoList.map((filename) {
+      // Assuming the images are stored in a specific directory
+      //ngrok
+      String filePath = 'https://3b6b-2405-3800-832-f71-bc85-b3cd-9c9-ef0d.ngrok-free.app/service_image/$filename'; // Update this path as needed
+      print('filePath: $filePath');
+      
+      return Image.network(
+        filePath,
         width: 100,
         height: 100,
         fit: BoxFit.cover,

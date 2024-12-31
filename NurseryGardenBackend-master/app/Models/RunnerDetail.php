@@ -24,7 +24,6 @@ class RunnerDetail extends Model
 
     // Cast attributes to native types
     protected $casts = [
-        'photo' => 'array',
         'app_date' => 'date',
     ];
 

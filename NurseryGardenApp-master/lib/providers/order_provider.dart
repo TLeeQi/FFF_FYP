@@ -18,6 +18,7 @@ import 'package:nurserygardenapp/helper/response_helper.dart';
 import 'package:nurserygardenapp/util/app_constants.dart';
 import 'package:nurserygardenapp/view/base/custom_snackbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:io';
 
 class OrderProvider extends ChangeNotifier {
   final OrderRepo orderRepo;
@@ -303,20 +304,6 @@ class OrderProvider extends ChangeNotifier {
     }
   }
 
-// Wiring? getWiringDetailById(int? wiringId) {
-//     print("Looking for Wiring ID: $wiringId");
-//     if (wiringId == null || _orderWiringDetail == null) {
-//         return null;
-//     }
-    
-//     if (_orderWiringDetail!.id == wiringId) {
-//         return _orderWiringDetail;
-//     } else {
-//         print("Wiring detail not found for ID: $wiringId");
-//         return null;
-//     }
-// }
-
   clearOrderDetail() {
     _orderDetailModel = OrderDetailModel();
     _orderDetailList = [];
@@ -330,9 +317,157 @@ class OrderProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// ================== NOTIFICATION ==================
+
+  Future<Map<String, dynamic>> getUpcomingAppointmentDetails(BuildContext context) async {
+    print("Getting upcoming appointment details");
+
+    DateTime now = DateTime.now();
+    DateTime tomorrow = DateTime(now.year, now.month, now.day + 1);
+
+    // Reuse getOrderList to fetch orders
+    bool success = await getOrderList(context, {'limit': '8'}, isLoadMore: false);
+    if (!success) {
+      print("Failed to fetch orders");
+      return {};
+    }
+
+    print("Order List Length: ${_orderList.length}");
+
+    for (Order order in _orderList) {
+      print("Checking order ID: ${order.id}");
+      DateTime? appointmentDate = await getAppointmentDateFromOrder(context, order);
+
+      if (appointmentDate != null &&
+          appointmentDate.year == tomorrow.year &&
+          appointmentDate.month == tomorrow.month &&
+          appointmentDate.day == tomorrow.day) {
+
+        print("Upcoming appointment found");
+
+        String? vendorName = "order.vendorName"; 
+        String? vendorContact = "order.vendorContact";
+
+        print("order.id: ${order.id.toString()}");
+        print("order.vendorName: $vendorName");
+        print("order.vendorContact: $vendorContact");
+
+        return {
+          'orderId': order.id.toString(),
+          'vendorName': vendorName,
+          'vendorContact': vendorContact,
+        };
+      } else {
+        print("No upcoming appointment found for order ID: ${order.id}");
+      }
+    }
+    return {};
+  }
+
+  Future<DateTime?> getAppointmentDateFromOrder(BuildContext context, Order order) async {
+    print("Getting appointment date from order");
+
+    clearOrderDetail();
+    // Fetch order details
+    bool result = false;
+    String query = ResponseHelper.buildQuery({'orderId': order.id.toString()});
+    _isLoadingDetail = true;
+    ApiResponse apiResponse = await orderRepo.getOrderDetail(query);
+
+    print("API call completed");
+    print("Raw API Response: ${apiResponse.response!.data}");
+
+    if (context.mounted) {
+      print("Context is mounted");
+      result = ResponseHelper.responseHelper(context, apiResponse);
+
+      if (result) {
+        print("About to parse OrderDetailModel");
+
+        try {
+          _orderDetailModel = OrderDetailModel.fromJson(apiResponse.response!.data);
+          print("OrderDetailModel parsed successfully");
+          print("OrderDetailModel data: ${_orderDetailModel.data}");
+        } catch (e) {
+          print("Error parsing OrderDetailModel: $e");
+        }
+
+        _orderDetailList = _orderDetailModel.data?.orderItem ?? [];
+        _orderWiringList = _orderDetailModel.data?.wiring ?? [];
+        _orderPipingList = _orderDetailModel.data?.piping ?? [];
+        _orderGardeningList = _orderDetailModel.data?.gardening ?? [];
+        _orderRunnerList = _orderDetailModel.data?.runner ?? [];
+
+        // Check for appointment dates in each list
+        DateTime? appDate;
+        if (_orderWiringList.isNotEmpty) {
+          appDate = _orderWiringList.first.appDate;
+        } else if (_orderPipingList.isNotEmpty) {
+          appDate = _orderPipingList.first.appDate;
+        } else if (_orderGardeningList.isNotEmpty) {
+          appDate = _orderGardeningList.first.appDate;
+        } else if (_orderRunnerList.isNotEmpty) {
+          appDate = _orderRunnerList.first.appDate;
+        }
+
+        if (appDate != null) {
+          print("Appointment date found: $appDate");
+          _isLoadingDetail = false;
+          return appDate;
+        }
+      } else {
+        print("API call failed with error: ${apiResponse.response!.data['error']}");
+        showCustomSnackBar("Failed to fetch order details: ${apiResponse.response!.data['error']}", context);
+      }
+    } else {
+      print("Context is not mounted");
+    }
+
+    print("No appointment date found");
+    _isLoadingDetail = false;
+    return null; // Return null if no appointment date is found
+  }
+  
+  // // Function to get the count of upcoming orders
+  // Future<int> getUpcomingOrdersCount(BuildContext context, params) async {
+  //   // Check if the order list is empty and fetch it if necessary
+  //   if (_orderList.isEmpty) {
+  //     await getOrderList(context, params);
+  //   }
+
+  //   int count = 0;
+
+  //   // Define your criteria for an "upcoming" order
+  //   DateTime now = DateTime.now();
+  //   DateTime oneWeekFromNow = now.add(Duration(days: 1));
+
+  //   for (Order order in _orderList) {
+  //     // Fetch order details if not already loaded
+  //     if (_orderDetailModel.data == null || !_orderDetailModel.data!.orderItem!.any((item) => item.orderId == order.id)) {
+  //       await getOrderDetail(context, {'orderId': order.id});
+  //     }
+
+  //     DateTime? appointmentDate = getAppointmentDateFromOrder(order);
+  //     // Check if the appointment date is within the next week
+  //     if (appointmentDate != null &&
+  //         appointmentDate.isAfter(now) &&
+  //         appointmentDate.isBefore(oneWeekFromNow)) {
+  //       count++;
+  //     }
+  //   }
+
+  //   print("Order List: $_orderList");
+  //   //print("Appointment Date: ${getAppointmentDateFromOrder(_orderList.first)}");
+  //   print("Upcoming orders count: $count");
+
+  //   return count; // Ensure the function always returns an integer
+  // }
+
   /// ================== MAKE ORDER ==================
   String _orderIdCreated = '';
   String get orderIdCreated => _orderIdCreated;
+  String _wiringIdCreated = '';
+  String get wiringIdCreated => _wiringIdCreated;
 
   Future<bool> addOrder(
       List<Cart> cartList, String address, BuildContext context) async {
@@ -360,6 +495,7 @@ class OrderProvider extends ChangeNotifier {
     bool result = false;
     _isLoading = true;
     _orderIdCreated = '';
+    _wiringIdCreated = '';
     notifyListeners();
 
     ApiResponse apiResponse = await orderRepo.storeWiringDetail(wiringData);
@@ -368,13 +504,56 @@ class OrderProvider extends ChangeNotifier {
       if (result) {
         _orderIdCreated =
             apiResponse.response!.data['data']['order_id'].toString();
-        print(_orderIdCreated);
+        _wiringIdCreated = 
+            apiResponse.response!.data['data']['wiring_id'].toString();
+        print('Order ID: $_orderIdCreated');
+        print('Wiring ID: $_wiringIdCreated');
       }
     }
     
     _isLoading = false;
     notifyListeners();
     return result;
+  }
+
+  Future<bool> uploadWiringImages(List<File> photos, String key, BuildContext context) async {
+    bool result = false;
+    _isLoading = true;
+    notifyListeners();
+
+    ApiResponse apiResponse = await orderRepo.uploadWiringImages(photos, key);
+    if (context.mounted) {
+      result = ResponseHelper.responseHelper(context, apiResponse);
+      if (result && apiResponse.response!.data['data'] != null) {
+        var data = apiResponse.response!.data['data']; // Access the 'data' key
+        var imageNames = data['image_names'];
+        print('API Response: $data');
+        print('Image Names from API: $imageNames');
+        if (imageNames != null && imageNames is List) {
+          _imageNames = List<String>.from(imageNames); // Store the list of image names
+          print('Image Names store in list provider: $_imageNames');
+        }
+      }
+    }
+    _isLoading = false;
+    notifyListeners();
+    return result;
+  }
+
+  List<String> _imageNames = [];
+  List<String> get imageNames => _imageNames; // Expose the image names
+
+  String _imageUrl = '';
+  String get imageUrl => _imageUrl;
+
+  String _imageName = '';
+  String get imageName => _imageName;
+
+  resetImageUrl() {
+    if (_imageUrl != '') {
+      _imageUrl = '';
+      _imageName = '';
+    }
   }
 
   Future<bool> storePipingDetail(

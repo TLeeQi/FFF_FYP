@@ -6,6 +6,9 @@ import 'package:nurserygardenapp/data/model/order_model.dart';
 import 'package:nurserygardenapp/data/model/response/api_response.dart';
 import 'package:nurserygardenapp/util/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:io';
+import 'package:path/path.dart'; // Add this import
+
 
 class OrderRepo {
   final DioClient dioClient;
@@ -55,6 +58,36 @@ class OrderRepo {
         data: wiringData,
       );
       return ApiResponse.withSuccess(response);
+    } catch (e) {
+      return ApiResponse.withError(ApiErrorHandler.getMessage(e));
+    }
+  }
+
+  Future<ApiResponse> uploadWiringImages(List<File> photos, String key) async {
+    try {
+        // Convert photos into a list of MultipartFiles
+      // List<MultipartFile> photoFiles = photos.map((photo) {
+      //   return MultipartFile.fromFileSync(photo.path, filename: photo.path.split('/').last);
+      // }).toList();
+      // List<MultipartFile> photoFiles = [];
+      // for (File photo in photos) {
+      //   photoFiles.add(await MultipartFile.fromFile
+      //   (photo.path, filename: photo.path.split('/').last));
+      // }
+
+       FormData formData = FormData();
+        for (int i = 0; i < photos.length; i++) {
+            formData.files.add(MapEntry(
+              'photos[]', // Ensure the key matches the backend
+              await MultipartFile.fromFile(photos[i].path, filename: basename(photos[i].path)),
+            ));
+          }
+
+      Response response = await dioClient.post(
+        AppConstants.ORDER_WIRING_IMAGES_URI,
+        data: formData,
+      );
+        return ApiResponse.withSuccess(response);
     } catch (e) {
       return ApiResponse.withError(ApiErrorHandler.getMessage(e));
     }

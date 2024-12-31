@@ -23,7 +23,8 @@ class _OrderScreenState extends State<OrderScreen> {
   late OrderProvider order_prov =
       Provider.of<OrderProvider>(context, listen: false);
   final _scrollController = ScrollController();
-  String _selectedStatus = 'Preparing';
+  String _selectedStatus = 'Confirmed';
+  late Future<Map<String, dynamic>> _appointmentDetailsFuture;
 
   List<String> _statusList = [
     "To Pay",
@@ -41,6 +42,7 @@ class _OrderScreenState extends State<OrderScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _loadData();
     });
+    _appointmentDetailsFuture = order_prov.getUpcomingAppointmentDetails(context);
   }
 
   void _onScroll() {
@@ -55,7 +57,7 @@ class _OrderScreenState extends State<OrderScreen> {
   }
 
   // Param
-  var params = {'limit': '8', 'status': 'prepare'};
+  var params = {'limit': '8', 'status': 'confirm'};
 
   Future<void> _loadData({bool isLoadMore = false}) async {
     await order_prov.getOrderList(context, params, isLoadMore: isLoadMore);
@@ -185,7 +187,37 @@ class _OrderScreenState extends State<OrderScreen> {
                             ),
                           );
                         }),
-                      )),
+                      ),
+                    ),
+                ),
+                // Appointment Reminder Section
+                FutureBuilder<Map<String, dynamic>>(
+                  future: _appointmentDetailsFuture,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return CircularProgressIndicator();
+                    } else if (snapshot.hasError) {
+                      return Text("Error loading appointment details");
+                    } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                      final appointmentDetails = snapshot.data!;
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "You have an appointment that is coming tomorrow!\n"
+                          "Order ID: ${appointmentDetails['orderId']}\n"
+                          "Vendor Name: ${appointmentDetails['vendorName'] ?? 'N/A'}\n"
+                          "Vendor Contact: ${appointmentDetails['vendorContact'] ?? 'N/A'}",
+                          style: CustomTextStyles(context).titleStyle.copyWith(
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold,
+                              ),
+                          textAlign: TextAlign.center,
+                        ),
+                      );
+                    } else {
+                      return Text("No upcoming appointment");
+                    }
+                  },
                 ),
                 Expanded(
                   flex: 9,
@@ -322,7 +354,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                                                                 index]
                                                                             .status! ==
                                                                         "confirm"
-                                                                ? 'To ' +
+                                                                ? 
                                                                     orderProvider
                                                                         .orderList[
                                                                             index]
@@ -482,7 +514,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                                                 orderProvider
                                                                     .orderList[
                                                                         index]
-                                                                    .status = "prepare";
+                                                                    .status = "confirm";
                                                               });
                                                               _loadData();
                                                             } else {

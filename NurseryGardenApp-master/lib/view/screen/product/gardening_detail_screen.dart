@@ -125,6 +125,12 @@ class _GardeningDetailScreenState extends State<GardeningDetailScreen> {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
   
+      // Prepare image names for storage
+      List<String> imageNames = uploadedPhotos.map((file) {
+        String imageName = file.path.split('/').last; // Extract the file name
+        return imageName;
+      }).toList();
+  
     // Create a map to hold the form data
     final Map<String, dynamic> gardeningData = {
       'type': gardeningService,
@@ -133,9 +139,7 @@ class _GardeningDetailScreenState extends State<GardeningDetailScreen> {
       'app_date': appointmentDate?.toIso8601String().split('T')[0], // Convert to string
       'preferred_time': appointmentTime,
       'details': additionalDetails?.isNotEmpty == true ? additionalDetails : null,
-      'photo': uploadedPhotos.isNotEmpty 
-      ? uploadedPhotos.map((file) => file.path).toList() 
-      : null, // Ensure an empty array for photos
+      'photo': imageNames.join(','),
       'budget': budget,
       'address': address,
       'prod_id': widget.productID,
