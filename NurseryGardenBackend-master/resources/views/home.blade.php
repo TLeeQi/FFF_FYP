@@ -31,24 +31,8 @@
                         <div class="card-header">
                             <div class="d-flex align-items-center justify-content-between">
                                 <h5 class="card-title m-0 me-2">Transactions</h5>
-                                <div class="dropdown">
-                                    {{-- <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        <i class="mdi mdi-dots-vertical mdi-24px"></i>
-                                    </button> --}}
-                                    {{-- <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
-                                        <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">Share</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">Update</a>
-                                    </div> --}}
-                                </div>
-                            </div>
-                            <p class="mt-3"><span class="fw-medium">Total</span> 😎 </p>
-                        </div>
-                        <div class="card-body">
-                            <div class="row g-3">
-                                <div class="col-md-3 col-6">
-                                    <div class="d-flex align-items-center">
+                                <div class="d-flex">
+                                    <div class="d-flex align-items-center me-4">
                                         <div class="avatar">
                                             <div class="avatar-initial bg-primary rounded shadow">
                                                 <i class="mdi mdi-trending-up mdi-24px"></i>
@@ -59,8 +43,6 @@
                                             <h5 class="mb-0">RM {{ $totalPayments }}</h5>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-3 col-6">
                                     <div class="d-flex align-items-center">
                                         <div class="avatar">
                                             <div class="avatar-initial bg-success rounded shadow">
@@ -73,16 +55,22 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <p class="mt-3"><span class="fw-medium">Total</span> 😎 </p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <!-- Four Services -->
                                 <div class="col-md-3 col-6">
                                     <div class="d-flex align-items-center">
                                         <div class="avatar">
                                             <div class="avatar-initial bg-warning rounded shadow">
-                                                <i class="mdi mdi-cellphone-link mdi-24px"></i>
+                                                <i class="mdi mdi-lightning-bolt mdi-24px"></i>
                                             </div>
                                         </div>
                                         <div class="ms-3">
-                                            <div class="small mb-1">Plant</div>
-                                            <h5 class="mb-0">{{ $totalPlants }}</h5>
+                                            <div class="small mb-1">Wiring</div>
+                                            <h5 class="mb-0">{{ $totalWiring }}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -90,12 +78,38 @@
                                     <div class="d-flex align-items-center">
                                         <div class="avatar">
                                             <div class="avatar-initial bg-info rounded shadow">
-                                                <i class="mdi mdi-currency-usd mdi-24px"></i>
+                                                <i class="mdi mdi-pipe mdi-24px"></i>
                                             </div>
                                         </div>
                                         <div class="ms-3">
-                                            <div class="small mb-1">Product</div>
-                                            <h5 class="mb-0">{{ $totalProducts }}</h5>
+                                            <div class="small mb-1">Piping</div>
+                                            <h5 class="mb-0">{{ $totalPiping }}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6">
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar">
+                                            <div class="avatar-initial bg-success rounded shadow">
+                                                <i class="mdi mdi-tree mdi-24px"></i>
+                                            </div>
+                                        </div>
+                                        <div class="ms-3">
+                                            <div class="small mb-1">Gardening</div>
+                                            <h5 class="mb-0">{{ $totalGardening }}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6">
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar">
+                                            <div class="avatar-initial bg-info rounded shadow">
+                                                <i class="mdi mdi-run mdi-24px"></i>
+                                            </div>
+                                        </div>
+                                        <div class="ms-3">
+                                            <div class="small mb-1">Runner</div>
+                                            <h5 class="mb-0">{{ $totalRunner }}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -155,43 +169,86 @@
                 <div class="col-xl-4 col-md-6">
                     <div class="row gy-4">
                         <!-- Total Profit Weekly Project -->
-                        <div class="col-sm-6">
-                            <div class="card h-100">
-                                <div class="card-header d-flex align-items-center justify-content-between">
+                        <div class="col-sm-12 mb-4">
+                            <div class="card h-100 shadow-sm rounded">
+                                <div class="card-header d-flex align-items-center justify-content-center">
                                     <div class="avatar">
-                                        <div class="avatar-initial bg-secondary rounded-circle shadow">
-                                            <i class="mdi mdi-poll mdi-24px"></i>
+                                        <div class="avatar-initial bg-primary rounded-circle shadow-sm">
+                                            <i class="mdi mdi-poll mdi-24px text-white"></i>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card-body mt-mg-1">
-                                    <h6 class="mb-2">Total Sales Plant</h6>
-                                    <div class="d-flex flex-wrap align-items-center mb-2 pb-1">
-                                        <h4 class="mb-0 me-2">{{ $totalSalesPlants }} Item</h4>
-
-                                    </div>
-                                    {{-- <small class="text-success mt-1">Gardening Plant</small> --}}
+                                <div class="card-body text-center">
+                                    <h6 class="mb-2">Total Services</h6>
+                                    <h4 class="mb-0">{{ $totalServices }} </h4>
                                 </div>
                             </div>
                         </div>
                         <!--/ Total Profit Weekly Project -->
                         <!-- New Yearly Project -->
-                        <div class="col-sm-6">
-                            <div class="card h-100">
-                                <div class="card-header d-flex align-items-center justify-content-between">
+                        <div class="col-sm-6 mb-4">
+                            <div class="card h-100 shadow-sm rounded">
+                                <div class="card-header d-flex align-items-center justify-content-center">
                                     <div class="avatar">
-                                        <div class="avatar-initial bg-primary rounded-circle shadow-sm">
-                                            <i class="mdi mdi-wallet-travel mdi-24px"></i>
+                                        <div class="avatar-initial bg-warning rounded-circle shadow-sm">
+                                            <i class="mdi mdi-lightning-bolt mdi-24px text-white"></i>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card-body mt-mg-1">
-                                    <h6 class="mb-2">Total Sales Product</h6>
-                                    <div class="d-flex flex-wrap align-items-center mb-2 pb-1">
-                                        <h4 class="mb-0 me-2">{{ $totalSalesProducts }} Item</h4>
-
+                                <div class="card-body text-center">
+                                    <h6 class="mb-2">Total Wiring Booking</h6>
+                                    <h4 class="mb-0">{{ $totalWiring }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/ New Yearly Project -->
+                        <!-- New Yearly Project -->
+                        <div class="col-sm-6 mb-4">
+                            <div class="card h-100 shadow-sm rounded">
+                                <div class="card-header d-flex align-items-center justify-content-center">
+                                    <div class="avatar">
+                                        <div class="avatar-initial bg-info rounded-circle shadow-sm">
+                                            <i class="mdi mdi-pipe mdi-24px text-white"></i>
+                                        </div>
                                     </div>
-                                    {{-- <small class="text-success mt-1">Gardening Product</small> --}}
+                                </div>
+                                <div class="card-body text-center">
+                                    <h6 class="mb-2">Total Piping Booking</h6>
+                                    <h4 class="mb-0">{{ $totalPiping }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/ New Yearly Project -->
+                        <!-- New Yearly Project -->
+                        <div class="col-sm-6 mb-4">
+                            <div class="card h-100 shadow-sm rounded">
+                                <div class="card-header d-flex align-items-center justify-content-center">
+                                    <div class="avatar">
+                                        <div class="avatar-initial bg-success rounded-circle shadow-sm">
+                                            <i class="mdi mdi-tree mdi-24px text-white"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body text-center">
+                                    <h6 class="mb-2">Total Gardening Booking</h6>
+                                    <h4 class="mb-0">{{ $totalGardening }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/ New Yearly Project -->
+                        <!-- New Yearly Project -->
+                        <div class="col-sm-6 mb-4">
+                            <div class="card h-100 shadow-sm rounded">
+                                <div class="card-header d-flex align-items-center justify-content-center">
+                                    <div class="avatar">
+                                        <div class="avatar-initial bg-info rounded-circle shadow-sm">
+                                            <i class="mdi mdi-run mdi-24px text-white"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body text-center">
+                                    <h6 class="mb-2">Total Runner Booking</h6>
+                                    <h4 class="mb-0">{{ $totalRunner }}</h4>
                                 </div>
                             </div>
                         </div>

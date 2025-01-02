@@ -13,7 +13,7 @@
         </div>
         {{ session()->forget('success') }}
     @endif
-    <p class="display-5">Products</p>
+    <p class="display-5">Services</p>
 
     <!-- Search -->
     <form action="{{ route('product.search') }}" method="POST">
@@ -37,9 +37,9 @@
                             <th class="text-truncate">ID</th>
                             <th class="text-truncate">Image</th>
                             <th class="text-truncate">Name</th>
-                            <th class="text-truncate">Category</th>
-                            <th class="text-truncate">Quantity</th>
-                            <th class="text-truncate">Price</th>
+                            <!-- <th class="text-truncate">Category</th>
+                            <th class="text-truncate">Quantity</th> -->
+                            <th class="text-truncate">Deposit (RM)</th>
                             <th class="text-truncate">Action</th>
                             <th class="text-truncate">Status</th>
                         </tr>
@@ -68,14 +68,14 @@
                                     </td>
 
                                     <td class="text-truncate">
-                                        <p class="fw-normal mb-1">{{ Str::limit($products->name, 10) }}</p>
+                                        <p class="fw-normal mb-1">{{ $products->name }}</p>
                                     </td>
-                                    <td class="text-truncate">
+                                    <!-- <td class="text-truncate">
                                         <p class="fw-normal mb-1">{{ $products->cat_name }}</p>
                                     </td>
                                     <td class="text-truncate">
                                         <p class="fw-normal mb-1">{{ $products->quantity }}</p>
-                                    </td>
+                                    </td> -->
                                     <td class="text-truncate">
                                         <p class="fw-normal mb-1">{{ $products->price }}</p>
                                     </td>

@@ -455,6 +455,12 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                                               .subTitleStyle
                                               .copyWith(fontWeight: FontWeight.bold, color: ColorResources.COLOR_PRIMARY), // Customize font
                                         ),
+                                        Text(
+                                          'Please contact the vendor for any issues or concerns.',
+                                          style: CustomTextStyles(context)
+                                              .subTitleStyle
+                                              .copyWith(fontWeight: FontWeight.bold, color: ColorResources.COLOR_DANGER), // Customize font
+                                        ),
                                       ],
                                     ),
                                     isActive: delivery.status == "Completed" ||

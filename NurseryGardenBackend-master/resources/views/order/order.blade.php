@@ -13,7 +13,7 @@
         </div>
         {{ session()->forget('success') }}
     @endif
-    <p class="display-5">Orders</p>
+    <p class="display-5">Services</p>
 
     <!-- Search -->
     <form action="{{ route('order.search') }}" method="POST">
@@ -49,7 +49,7 @@
                             <th class="text-truncate">ID</th>
                             <th class="text-truncate">Date</th>
                             <th class="text-truncate">User ID</th>
-                            <th class="text-truncate">Total amount</th>
+                            <th class="text-truncate">Deposit</th>
 
                             <th class="text-truncate">Action</th>
                             {{-- <th class="text-truncate">Status</th> --}}

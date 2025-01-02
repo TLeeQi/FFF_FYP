@@ -13,7 +13,7 @@
         </div>
         {{ session()->forget('success') }}
     @endif
-    <p class="display-5">Delivery List</p>
+    <p class="display-5">Ongoing Booking List</p>
 
     <!-- Search -->
     <form action="{{ route('delivery.search') }}" method="POST">
@@ -22,7 +22,7 @@
             <div class="nav-item d-flex align-items-left">
                 <i class="mdi mdi-magnify mdi-24px lh-0"></i>
                 <input type="search" class="form-control border-0 shadow-none bg-body" id="name" name="name"
-                    placeholder="Search the delivery by order ID..." aria-label="Search..." />
+                    placeholder="Search the services by order ID..." aria-label="Search..." />
             </div>
         </div>
     </form>
@@ -37,8 +37,8 @@
                         <tr>
                             <th class="text-truncate">ID</th>
                             <th class="text-truncate">Order ID</th>
-                            <th class="text-truncate">Delivery Company</th>
-                            <th class="text-truncate">Tracking Number</th>
+                            <th class="text-truncate">Service Provider Company</th>
+                            <th class="text-truncate">Contact Number</th>
                             <th class="text-truncate">Prepare Date</th>
                             <th class="text-truncate">Action</th>
                             <th class="text-truncate">Status</th>

@@ -12,6 +12,10 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use SebastianBergmann\Type\TrueType;
+use App\Models\WiringDetail;
+use App\Models\PipingDetail;
+use App\Models\GardeningDetail;
+use App\Models\RunnerDetail;
 
 class OrderController extends Controller
 {
@@ -73,12 +77,29 @@ class OrderController extends Controller
                     ->select('plant.*', 'category.name as category_name', 'plant.image as image')
                     ->first();
                 $item_detail['plant'][] = $plant;
-            } else if (!is_null($item->product_id)) {
-                $product = Product::leftjoin('category', 'category.id', 'product.cat_id')
-                    ->where('product.id', $item->product_id)
-                    ->select('product.*', 'category.name as category_name', 'product.image as image')
+            } else if (!is_null($item->product_id)){
+                $product = Product::where('product.id', $item->product_id)
+                    ->where('product.status', '1')
                     ->first();
                 $item_detail['product'][] = $product;
+          
+                if(!is_null($item->wiring_id)) {
+                    $wiringDetails = WiringDetail::where('id', $item->wiring_id)
+                        ->first();
+                    $item_detail['wiring'][] = $wiringDetails;
+                } elseif (!is_null($item->piping_id)) {
+                    $pipingDetails = PipingDetail::where('id', $item->piping_id)
+                        ->first();
+                    $item_detail['piping'][] = $pipingDetails;
+                } elseif (!is_null($item->gardening_id)) {
+                    $gardeningDetails = GardeningDetail::where('id', $item->gardening_id)
+                        ->first();
+                    $item_detail['gardening'][] = $gardeningDetails;
+                } elseif (!is_null($item->runner_id)) {
+                    $runnerDetails = RunnerDetail::where('id', $item->runner_id)
+                        ->first();
+                    $item_detail['runner'][] = $runnerDetails;
+                }
             }
         }
 
@@ -104,6 +125,15 @@ class OrderController extends Controller
         $order_item = OrderDetailModel::where('order_id', $id)
             ->orderBy('created_at', 'desc')->get();
 
+        $item_detail = [
+            'plant' => [],
+            'product' => [],
+            'wiring' => [],
+            'piping' => [],
+            'gardening' => [],
+            'runner' => [],
+        ];
+
         foreach ($order_item as $item) {
             if (!is_null($item->plant_id)) {
                 $plant = Plant::leftjoin('category', 'category.id', 'plant.cat_id')
@@ -111,12 +141,29 @@ class OrderController extends Controller
                     ->select('plant.*', 'category.name as category_name', 'plant.image as image')
                     ->first();
                 $item_detail['plant'][] = $plant;
-            } else if (!is_null($item->product_id)) {
-                $product = Product::leftjoin('category', 'category.id', 'product.cat_id')
-                    ->where('product.id', $item->product_id)
-                    ->select('product.*', 'category.name as category_name', 'product.image as image')
+            } else if (!is_null($item->product_id)){
+                $product = Product::where('product.id', $item->product_id)
+                    ->where('product.status', '1')
                     ->first();
                 $item_detail['product'][] = $product;
+          
+                if(!is_null($item->wiring_id)) {
+                    $wiringDetails = WiringDetail::where('id', $item->wiring_id)
+                        ->first();
+                    $item_detail['wiring'][] = $wiringDetails;
+                } elseif (!is_null($item->piping_id)) {
+                    $pipingDetails = PipingDetail::where('id', $item->piping_id)
+                        ->first();
+                    $item_detail['piping'][] = $pipingDetails;
+                } elseif (!is_null($item->gardening_id)) {
+                    $gardeningDetails = GardeningDetail::where('id', $item->gardening_id)
+                        ->first();
+                    $item_detail['gardening'][] = $gardeningDetails;
+                } elseif (!is_null($item->runner_id)) {
+                    $runnerDetails = RunnerDetail::where('id', $item->runner_id)
+                        ->first();
+                    $item_detail['runner'][] = $runnerDetails;
+                }
             }
         }
 
@@ -157,12 +204,29 @@ class OrderController extends Controller
                     ->select('plant.*', 'category.name as category_name', 'plant.image as image')
                     ->first();
                 $item_detail['plant'][] = $plant;
-            } else if (!is_null($item->product_id)) {
-                $product = Product::leftjoin('category', 'category.id', 'product.cat_id')
-                    ->where('product.id', $item->product_id)
-                    ->select('product.*', 'category.name as category_name', 'product.image as image')
+            } else if (!is_null($item->product_id)){
+                $product = Product::where('product.id', $item->product_id)
+                    ->where('product.status', '1')
                     ->first();
                 $item_detail['product'][] = $product;
+          
+                if(!is_null($item->wiring_id)) {
+                    $wiringDetails = WiringDetail::where('id', $item->wiring_id)
+                        ->first();
+                    $item_detail['wiring'][] = $wiringDetails;
+                } elseif (!is_null($item->piping_id)) {
+                    $pipingDetails = PipingDetail::where('id', $item->piping_id)
+                        ->first();
+                    $item_detail['piping'][] = $pipingDetails;
+                } elseif (!is_null($item->gardening_id)) {
+                    $gardeningDetails = GardeningDetail::where('id', $item->gardening_id)
+                        ->first();
+                    $item_detail['gardening'][] = $gardeningDetails;
+                } elseif (!is_null($item->runner_id)) {
+                    $runnerDetails = RunnerDetail::where('id', $item->runner_id)
+                        ->first();
+                    $item_detail['runner'][] = $runnerDetails;
+                }
             }
         }
 

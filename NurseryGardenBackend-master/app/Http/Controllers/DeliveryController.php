@@ -8,6 +8,10 @@ use App\Models\Plant;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\OrderDetailModel;
+use App\Models\WiringDetail;
+use App\Models\PipingDetail;
+use App\Models\GardeningDetail;
+use App\Models\RunnerDetail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -45,12 +49,21 @@ class DeliveryController extends Controller
             ->where('delivery_id', $delivery[0]->id)
             ->get();
         // dd($order_item);
-        $delivery_total_price = 0;
-        foreach ($order_item as $item) {
-            $delivery_total_price += $item->amount;
-        }
+        // $delivery_total_price = 0;
+        // foreach ($order_item as $item) {
+        //     $delivery_total_price += $item->amount;
+        // }
         $user = User::where('id',  $orders->user_id)->get();
 
+        $item_detail = [
+            'plant' => [],
+            'product' => [],
+            'wiring' => [],
+            'piping' => [],
+            'gardening' => [],
+            'runner' => [],
+        ];
+        
         foreach ($order_item as $item) {
             if (!is_null($item->plant_id)) {
                 $plant = Plant::leftjoin('category', 'category.id', 'plant.cat_id')
@@ -58,12 +71,29 @@ class DeliveryController extends Controller
                     ->select('plant.*', 'category.name as category_name', 'plant.image as image')
                     ->first();
                 $item_detail['plant'][] = $plant;
-            } else if (!is_null($item->product_id)) {
-                $product = Product::leftjoin('category', 'category.id', 'product.cat_id')
-                    ->where('product.id', $item->product_id)
-                    ->select('product.*', 'category.name as category_name', 'product.image as image')
+            } else if (!is_null($item->product_id)){
+                $product = Product::where('product.id', $item->product_id)
+                    ->where('product.status', '1')
                     ->first();
                 $item_detail['product'][] = $product;
+          
+                if(!is_null($item->wiring_id)) {
+                    $wiringDetails = WiringDetail::where('id', $item->wiring_id)
+                        ->first();
+                    $item_detail['wiring'][] = $wiringDetails;
+                } elseif (!is_null($item->piping_id)) {
+                    $pipingDetails = PipingDetail::where('id', $item->piping_id)
+                        ->first();
+                    $item_detail['piping'][] = $pipingDetails;
+                } elseif (!is_null($item->gardening_id)) {
+                    $gardeningDetails = GardeningDetail::where('id', $item->gardening_id)
+                        ->first();
+                    $item_detail['gardening'][] = $gardeningDetails;
+                } elseif (!is_null($item->runner_id)) {
+                    $runnerDetails = RunnerDetail::where('id', $item->runner_id)
+                        ->first();
+                    $item_detail['runner'][] = $runnerDetails;
+                }
             }
         }
 
@@ -72,7 +102,7 @@ class DeliveryController extends Controller
             ->with('orders', $order)
             ->with('user', $user)
             ->with('item_detail', $item_detail)
-            ->with('delivery_total_price', $delivery_total_price)
+            //->with('delivery_total_price', $delivery_total_price)
             ->with('deliver', $delivery);
     }
 
@@ -87,113 +117,60 @@ class DeliveryController extends Controller
             $delivery = Delivery::create([
                 'order_id' => $request->order_id,
                 'user_id' => $order->user_id,
-                'status' => $request->status,
+                'status' => 'confirm',
                 'tracking_number' => $request->track_num,
                 'method' => $request->method,
-                'expected_date' => $request->expected_date
+                //'expected_date' => $request->expected_date
             ]);
 
-            // Update Order Item has been Confirmed
-            $selectedItem = [];
-            foreach ($items as $itemss) {
-                $selectedItem[] = explode(',', $itemss);
-            }
+            $order->status = 'confirm';
+            $order->save();
+
+            $delivery->save();
+
             $order_items = OrderDetailModel::where('order_id', $request->order_id)->get();
 
-            foreach ($order_items as $order_item) {
-                for ($val = 0; $val < count($selectedItem[0]); $val++) {
-                    $selected = $selectedItem[0][$val];
-                    // Compare the id from $order_item and $selected
-                    if ($selected == $order_item->id) {
-                        OrderDetailModel::where('id', $order_item->id)->update([
-                            'remark' => true,
-                            'delivery_id' => $delivery->id
-                        ]);
-                    }
-                }
+            foreach ($order_items as $order_item){
+                $order_item->update([
+                    'remark' => true,
+                    'delivery_id' => $delivery->id
+                ]);
             }
 
-            // Update Order Status 
-            $isfull = true;
-            $order_item = OrderDetailModel::where('order_id', $request->order_id)->get();
-
-            foreach ($order_item as $item) {
-                if ($item->remark != true) {
-                    $isfull = false;
-                    break;
-                }
-            }
-
-            if ($isfull == true && $order->is_separate == null) {
-                $order->status = 'confirm';
-                $order->save();
-            } else {
-                $order->status = 'partial';
-                $order->is_separate = true;
-                $order->save();
-            }
-        }
-
-        // Update the booking Detail but not set it to Confirmed
-        if ($request->status == 'prepare' && $request->id != null) {
-            $delivery = Delivery::where('id', $request->id)->first();
-            $delivery->status = 'prepare';
-            $delivery->tracking_number = $request->track_num;
-            $delivery->method = $request->method;
-            $delivery->expected_date = $request->expected_date;
-            $delivery->save();
             Session::flash('success', "Delivery updated successfully!!");
             return redirect()->route('delivery.index');
         }
 
         // Delivery arrived
-        if ($request->hasFile('image_proof')) {
+        if ($request->status == 'confirm') {
+
             // Get delivery
             $delivery = Delivery::where('id', $request->id)->first();
+            
+            if($request->hasFile('image_proof')){            
 
-            // Get delivery image prove
-            $old_path = public_path('delivery_prove/' . $delivery->prv_img);
-            if (File::exists($old_path)) {
-                if ($delivery->prv_img != 'no_delivery.png') {
-                    File::delete($old_path);
+                // Get delivery image prove
+                $old_path = public_path('delivery_prove/' . $delivery->prv_img);
+                if (File::exists($old_path)) {
+                    if ($delivery->prv_img != 'no_delivery.png') {
+                        File::delete($old_path);
+                    }
                 }
-            }
-            $imageName = time() . '.' . $request->file('image_proof')->getClientOriginalExtension();
-            $request->file('image_proof')->move(public_path('/delivery_prove'), $imageName);
+                $imageName = time() . '.' . $request->file('image_proof')->getClientOriginalExtension();
+                $request->file('image_proof')->move(public_path('/delivery_prove'), $imageName);
 
-            // Update delivery
-            $delivery->prv_img = $imageName;
+                // Update delivery
+                $delivery->prv_img = $imageName;                
+            }
+
+            $order->status = 'completed';
+            $order->save();
+        
             $delivery->status = 'Completed';
             $delivery->save();
-
-            // Update order
-            $deliveryList = Delivery::where('order_id', $delivery->order_id)->get();
-            foreach ($deliveryList as $deliverys) {
-                if ($deliverys->status != 'Completed') {
-                    return redirect()->route('delivery.index');
-                }
-            }
-
-            // Update Order Status 
-            $isfull = true;
-            $order_item = OrderDetailModel::where('order_id', $request->order_id)->get();
-
-            foreach ($order_item as $item) {
-                if ($item->remark != true) {
-                    $isfull = false;
-                    break;
-                }
-            }
-
-            if ($isfull == true) {
-                $order->status = 'completed';
-                $order->save();
-            }
 
             Session::flash('success', "Delivery updated successfully!!");
             return redirect()->route('delivery.index');
         }
-        Session::flash('success', "Delivery updated successfully!!");
-        return redirect()->route('order.index');
     }
 }

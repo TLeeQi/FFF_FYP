@@ -687,7 +687,7 @@ Widget _buildPhotoGallery(dynamic photoPaths) {
     children: photoList.map((filename) {
       // Assuming the images are stored in a specific directory
       //ngrok
-      String filePath = 'https://3b6b-2405-3800-832-f71-bc85-b3cd-9c9-ef0d.ngrok-free.app/service_image/$filename'; // Update this path as needed
+      String filePath = 'https://67c5-2405-3800-850-d9bc-95f-38bd-92ee-ad33.ngrok-free.app/service_image/$filename'; // Update this path as needed
       print('filePath: $filePath');
       
       return Image.network(

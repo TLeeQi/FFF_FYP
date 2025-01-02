@@ -193,7 +193,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                       Row(
                                         children: [
                                           Text(
-                                            "Tracking Number:",
+                                            "Contact Number:",
                                             style: CustomTextStyles(context)
                                                 .titleStyle,
                                           ),
@@ -211,7 +211,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                       Row(
                                         children: [
                                           Text(
-                                            "Courier Company: ",
+                                            "Service Provider Company: ",
                                             style: CustomTextStyles(context)
                                                 .titleStyle,
                                           ),

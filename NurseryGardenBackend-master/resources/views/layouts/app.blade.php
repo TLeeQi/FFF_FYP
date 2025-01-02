@@ -96,14 +96,14 @@
                     <li class="menu-item">
                         <a href="{{ route('order.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons mdi mdi-file-document-multiple-outline"></i>
-                            <div data-i18n="Dashboards">Orders</div>
+                            <div data-i18n="Dashboards">Services</div>
                         </a>
                     </li>
 
                     <li class="menu-item">
                         <a href="{{ route('delivery.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons mdi mdi-truck-delivery-outline"></i>
-                            <div data-i18n="Dashboards">Order's Delivery</div>
+                            <i class="menu-icon tf-icons mdi mdi-list-status"></i>
+                            <div data-i18n="Dashboards">Ongoing Booking</div>
                         </a>
                     </li>
 
@@ -135,12 +135,12 @@
                     </li>
 
 
-                    <li class="menu-header small text-uppercase">
+                    <!-- <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Category</span>
-                    </li>
+                    </li> -->
 
                     <!-- Category -->
-                    <li class="menu-item">
+                    <!-- <li class="menu-item">
                         <a href="{{ route('category.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons mdi mdi-format-list-bulleted"></i>
                             <div data-i18n="Dashboards">Categories</div>
@@ -151,7 +151,7 @@
                             <i class="menu-icon tf-icons mdi mdi-plus-box-outline"></i>
                             <div data-i18n="Dashboards">Add Category</div>
                         </a>
-                    </li>
+                    </li> -->
 
 
                     <!-- <li class="menu-header small text-uppercase">
@@ -173,22 +173,22 @@
                     </li> -->
 
                     <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">Product</span>
+                        <span class="menu-header-text">Services</span>
                     </li>
 
                     <!-- Product -->
                     <li class="menu-item">
                         <a href="{{ route('product.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons mdi mdi-package-variant-closed"></i>
-                            <div data-i18n="Dashboards">Products</div>
+                            <div data-i18n="Dashboards">Services</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <!-- <li class="menu-item">
                         <a href="{{ route('product.insert') }}" class="menu-link">
                             <i class="menu-icon tf-icons mdi mdi-plus-box-outline"></i>
                             <div data-i18n="Dashboards">Add Product</div>
                         </a>
-                    </li>
+                    </li> -->
 
 
                     <!-- <li class="menu-header small text-uppercase">
@@ -271,9 +271,9 @@
                                             </div>
                                         </a>
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                         <div class="dropdown-divider my-1"></div>
-                                    </li>
+                                    </li> -->
                                     {{-- <li>
                                         <a class="dropdown-item" href="#">
                                             <i class="mdi mdi-account-outline me-1 mdi-20px"></i>
