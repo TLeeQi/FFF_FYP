@@ -299,7 +299,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                                                                       // == orderProvider.getOrderWiringList.firstWhere((wiring) => wiring.id 
                                                                       // == orderProvider.orderDetailList[index].wiringId).productID).imageURL!}",
                                                                       //ngrok
-                                                                      "https://67c5-2405-3800-850-d9bc-95f-38bd-92ee-ad33.ngrok-free.app/product_image/1735189218.jpg",
+                                                                      "https://6dcb-2405-3800-850-d9bc-df-627-24d2-3754.ngrok-free.app/product_image/1735189218.jpg",
                                                                   memCacheHeight:
                                                                       200,
                                                                   memCacheWidth:
@@ -358,7 +358,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                                                                       // == orderProvider.getOrderWiringList.firstWhere((wiring) => wiring.id 
                                                                       // == orderProvider.orderDetailList[index].wiringId).productID).imageURL!}",
                                                                       //ngrok
-                                                                      "https://67c5-2405-3800-850-d9bc-95f-38bd-92ee-ad33.ngrok-free.app/product_image/1735189281.jpg",
+                                                                      "https://6dcb-2405-3800-850-d9bc-df-627-24d2-3754.ngrok-free.app/product_image/1735189281.jpg",
                                                                   memCacheHeight:
                                                                       200,
                                                                   memCacheWidth:
@@ -417,7 +417,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                                                                       // == orderProvider.getOrderWiringList.firstWhere((wiring) => wiring.id 
                                                                       // == orderProvider.orderDetailList[index].wiringId).productID).imageURL!}",
                                                                       //ngrok
-                                                                      "https://67c5-2405-3800-850-d9bc-95f-38bd-92ee-ad33.ngrok-free.app/product_image/1735189334.jpg",
+                                                                      "https://6dcb-2405-3800-850-d9bc-df-627-24d2-3754.ngrok-free.app/product_image/1735189334.jpg",
                                                                   memCacheHeight:
                                                                       200,
                                                                   memCacheWidth:
@@ -476,7 +476,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                                                                       // == orderProvider.getOrderWiringList.firstWhere((wiring) => wiring.id 
                                                                       // == orderProvider.orderDetailList[index].wiringId).productID).imageURL!}",
                                                                       //ngrok
-                                                                      "https://67c5-2405-3800-850-d9bc-95f-38bd-92ee-ad33.ngrok-free.app/product_image/1735189523.jpg",
+                                                                      "https://6dcb-2405-3800-850-d9bc-df-627-24d2-3754.ngrok-free.app/product_image/1735189523.jpg",
                                                                   memCacheHeight:
                                                                       200,
                                                                   memCacheWidth:
@@ -1208,7 +1208,7 @@ Widget _buildPhotoGallery(dynamic photoPaths) {
     children: photoList.map((filename) {
       // Assuming the images are stored in a specific directory
       //ngrok
-      String filePath = 'https://67c5-2405-3800-850-d9bc-95f-38bd-92ee-ad33.ngrok-free.app/service_image/$filename'; // Update this path as needed
+      String filePath = 'https://6dcb-2405-3800-850-d9bc-df-627-24d2-3754.ngrok-free.app/service_image/$filename'; // Update this path as needed
       print('filePath: $filePath');
       
       return Image.network(

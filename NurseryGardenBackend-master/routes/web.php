@@ -41,9 +41,15 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/customer', [CustomerController::class, 'index'])->name('customer.index');
         Route::any('/customer/search', [CustomerController::class, 'search'])->name('customer.search');
 
+        // Vendor
+        Route::get('/vendor', [CustomerController::class, 'vendor'])->name('customer.vendor');
+        Route::any('/vendor/search', [CustomerController::class, 'vendorsearch'])->name('vendor.search');
+
         Route::group(['middleware' => 'isSadmin'], function () {
             Route::get('/customer/edit/{id}', [CustomerController::class, 'edit'])->name('customer.edit');
             Route::post('/customer/update', [CustomerController::class, 'update'])->name('customer.update');
+            Route::get('/vendor/edit/{id}', [CustomerController::class, 'editvendor'])->name('vendor.edit');
+            Route::post('/vendor/update', [CustomerController::class, 'updatevendor'])->name('vendor.update');
         });
 
         // Category

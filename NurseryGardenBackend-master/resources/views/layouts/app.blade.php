@@ -77,14 +77,26 @@
                     </li>
 
                     <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">Customers</span>
+                        <span class="menu-header-text">Users</span>
                     </li>
 
                     <!-- Dashboards -->
                     <li class="menu-item">
                         <a href="{{ route('customer.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons mdi mdi-account-multiple-outline"></i>
-                            <div data-i18n="Dashboards">Customers</div>
+                            <div data-i18n="Dashboards">Users</div>
+                        </a>
+                    </li>
+
+                    <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">Vendors</span>
+                    </li>
+
+                    <!-- Dashboards -->
+                    <li class="menu-item">
+                        <a href="{{ route('customer.vendor') }}" class="menu-link">
+                            <i class="menu-icon tf-icons mdi mdi-account-multiple-outline"></i>
+                            <div data-i18n="Dashboards">Vendors</div>
                         </a>
                     </li>
 

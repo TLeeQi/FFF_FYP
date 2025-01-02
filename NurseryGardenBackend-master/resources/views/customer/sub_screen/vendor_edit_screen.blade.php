@@ -8,22 +8,22 @@
                     <h5 class="mb-0">Edit Role</h5>
                 </div>
                 <div class="card-body">
-                    @foreach ($customers as $customer)
+                    @foreach ($vendors as $vendor)
                         <form method="POST"
-                            action="{{ route('customer.update', ['id' => $customer->id, 'type' => $customer->type]) }}">
+                            action="{{ route('vendor.update', ['id' => $vendor->id, 'type' => $vendor->type]) }}">
                             @csrf
                             <div class="form-floating form-floating-outline mb-4">
                                 <input type="text" id="id" name="id" class="form-control"
-                                    id="basic-default-fullname" placeholder="ID" value="{{ $customer->id }}" readonly />
+                                    id="basic-default-fullname" placeholder="ID" value="{{ $vendor->id }}" readonly />
                                 <label for="basic-default-fullname">ID</label>
                             </div>
                             <div class="form-floating form-floating-outline mb-4">
                                 <select class="form-select" id="selectOption" aria-label="Default select example"
                                     name="type">
-                                    <option hidden value="{{ $customer->type }}">
-                                        {{ ucfirst(trans($customer->type)) }}</option>
+                                    <option hidden value="{{ $vendor->type }}">
+                                        {{ ucfirst(trans($vendor->type)) }}</option>
                                     <option value="admin">Admin</option>
-                                    <option value="Vendor">Vendor</option>
+                                    <option value="vendor">Vendor</option>
                                     <option value="user">User</option>
                                 </select>
                                 <label for="exampleFormControlSelect1">Type</label>

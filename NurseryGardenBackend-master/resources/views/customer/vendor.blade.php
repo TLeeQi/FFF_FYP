@@ -15,10 +15,10 @@
         {{ session()->forget('success') }}
     @endif
 
-    <p class="display-5">Users</p>
+    <p class="display-5">Vendors</p>
 
     <!-- Search -->
-    <form action="{{ route('customer.search') }}" method="POST">
+    <form action="{{ route('vendor.search') }}" method="POST">
         @csrf
         <div class="navbar-nav align-items-left">
             <div class="nav-item d-flex align-items-left">
@@ -40,33 +40,42 @@
                             <th class="text-truncate">ID</th>
                             <th class="text-truncate">Name</th>
                             <th class="text-truncate">Email</th>
+                            <th class="text-truncate">Phone</th>
+                            <th class="text-truncate">Address</th>
                             @if (Auth::user()->type == 'sadmin')
                                 <th class="text-truncate">Role</th>
                             @endif
                             <th class="text-truncate">Status</th>
+                            <th class="text-truncate">Rating</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($customers as $customer)
+                        @foreach ($vendors as $vendor)
                             <tr>
                                 <td>
                                     <div class="d-flex align-items-center">
-                                        <p class="fw-bold mb-1">{{ $customer->id }}</p>
+                                        <p class="fw-bold mb-1">{{ $vendor->id }}</p>
                                     </div>
                                 </td>
                                 <td class="text-truncate">
-                                    <p class="fw-normal mb-1">{{ $customer->name }}</p>
+                                    <p class="fw-normal mb-1">{{ $vendor->name }}</p>
                                 </td>
                                 <td class="text-truncate">
-                                    <p class="fw-normal mb-1">{{ $customer->email }}</p>
+                                    <p class="fw-normal mb-1">{{ $vendor->email }}</p>
+                                </td>
+                                <td class="text-truncate">
+                                    <p class="fw-normal mb-1">{{ $vendor->contact_number }}</p>
+                                </td>
+                                <td class="text-truncate">
+                                    <p class="fw-normal mb-1">{{ $vendor->address }}</p>
                                 </td>
                                 @if (Auth::user()->type == 'sadmin')
                                     <td class="text-truncate">
                                         <p class="fw-normal mb-1">
-                                            @if ($customer->type == 'sadmin')
-                                                {{ $customer->type }}
+                                            @if ($vendor->type == 'sadmin')
+                                                {{ $vendor->type }}
                                             @else
-                                                <a href="{{ route('customer.edit', $customer->id) }}">{{ $customer->type }}
+                                                <a href="{{ route('customer.edit', $vendor->id) }}">{{ $vendor->type }}
                                             @endif
 
                                         </p></a>
@@ -75,6 +84,9 @@
                                 @endif
                                 <td>
                                     <span class="badge bg-label-success rounded-pill">Active</span>
+                                </td>
+                                <td>
+                                    <p class="fw-normal mb-1">{{ $vendor->rating }}</p>
                                 </td>
                             </tr>
                         @endforeach
@@ -87,6 +99,6 @@
     <!--/ Data Tables -->
     <div class="m-4 d-flex justify-content-between">
         {{-- {{ $customer->links('pagination.using-post') }} --}}
-        {!! $customers->links('vendor.pagination.bootstrap-5') !!}
+        {!! $vendors->links('vendor.pagination.bootstrap-5') !!}
     </div>
 @endsection
