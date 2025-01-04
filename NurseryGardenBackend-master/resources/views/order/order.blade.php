@@ -30,12 +30,16 @@
     <!--Label to Search -->
     <div class="col-12 mt-2 mb-2">
         <a href = "{{ route('order.index') }}" class="btn-sm btn btn-light m-1">All</a>
-        <a href = "{{ route('order.filter', ['status' => 'pay']) }}" class="btn-sm btn btn-secondary m-1">To Pay</a>
-        <a href = "{{ route('order.filter', ['status' => 'prepare']) }}" class="btn-sm btn btn-warning m-1">Preparing</a>
-        <!-- <a href = "{{ route('order.filter', ['status' => 'partial']) }}" class="btn-sm btn btn-info m-1">Partial Receive</a> -->
+        @if(Auth::user()->type !== 'vendor')
+            <a href = "{{ route('order.filter', ['status' => 'pay']) }}" class="btn-sm btn btn-secondary m-1">To Pay</a>
+            <a href = "{{ route('order.filter', ['status' => 'prepare']) }}" class="btn-sm btn btn-warning m-1">Preparing</a>
+            <!-- <a href = "{{ route('order.filter', ['status' => 'partial']) }}" class="btn-sm btn btn-info m-1">Partial Receive</a> -->
+        @endif
         <a href = "{{ route('order.filter', ['status' => 'confirm']) }}" class="btn-sm btn btn-primary m-1">Confirmed</a>
         <a href = "{{ route('order.filter', ['status' => 'completed']) }}" class="btn-sm btn btn-success m-1">Completed</a>
-        <a href = "{{ route('order.filter', ['status' => 'cancel']) }}" class="btn-sm btn btn-danger m-1">Cancel</a>
+        @if(Auth::user()->type !== 'vendor')
+            <a href = "{{ route('order.filter', ['status' => 'cancel']) }}" class="btn-sm btn btn-danger m-1">Cancel</a>
+        @endif
     </div>
 
 
@@ -68,12 +72,14 @@
                                 <tr>
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            @if ($order->status == 'pay')
+                                            <!-- @if ($order->status == 'pay')
                                                 <p>{{ $order->id }}</p>
                                             @else
                                                 <a href="{{ route('order.detail', $order->id) }}"
                                                     class="fw-bold mb-1">{{ $order->id }}</a>
-                                            @endif
+                                            @endif -->
+                                            <a href="{{ route('order.detail', $order->id) }}"
+                                                    class="fw-bold mb-1">{{ $order->id }}</a>
                                         </div>
                                     </td>
 

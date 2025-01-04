@@ -26,14 +26,14 @@
                                                 <span class="badge bg-label-secondary rounded-pill">To
                                                     {{ ucfirst($order->status) }}</span>
                                             @elseif ($order->status == 'prepare')
-                                                <span class="badge bg-label-warning rounded-pill">To
-                                                    {{ ucfirst($order->status) }}</span>
-                                            @elseif ($order->status == 'confirm')
-                                                <span class="badge bg-label-primary rounded-pill">To
-                                                    {{ ucfirst($order->status) }}</span>
+                                                <span class="badge bg-label-warning rounded-pill">
+                                                    Preparing </span>
+                                            @elseif (strtolower($order->status) == 'confirm')
+                                                <span class="badge bg-label-primary rounded-pill">
+                                                    Confirmed </span>
                                             @elseif (strtolower($order->status) == 'completed')
                                                 <span
-                                                    class="badge bg-label-success rounded-pill">{{ ucfirst($order->status) }}</span>
+                                                    class="badge bg-label-success rounded-pill">Completed</span>
                                             @elseif (strtolower($order->status) == 'partial')
                                                 <span
                                                     class="badge bg-label-info rounded-pill">{{ ucfirst($order->status) }}</span>
@@ -42,6 +42,13 @@
                                                     class="badge bg-label-danger rounded-pill">{{ ucfirst($order->status) }}</span>
                                             @endif
                                         @endforeach
+
+                                        @if ($order->status == 'confirm' || $order->status == 'completed')
+                                            @foreach ($vendors as $vendor)
+                                                <p>Service Provider: {{ $vendor->name }}</p>
+                                                <p>Contact Number: {{ $vendor->contact_number }}</p>
+                                            @endforeach
+                                        @endif
 
                                     </p>
                                     <footer class="blockquote-footer  mt-1">

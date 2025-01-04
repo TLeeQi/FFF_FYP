@@ -13,152 +13,89 @@
         </div>
         {{ session()->forget('success') }}
     @endif
-    <p class="display-5">Orders</p>
 
-    <!-- Search -->
-    <form action="{{ route('order.search') }}" method="POST">
+    <p class="display-5">Profile Update</p>
+
+    <form method="POST" action="{{ route('verification.update') }}" enctype="multipart/form-data">
         @csrf
-        <div class="navbar-nav align-items-left">
-            <div class="nav-item d-flex align-items-left">
-                <i class="mdi mdi-magnify mdi-24px lh-0"></i>
-                <input type="search" class="form-control border-0 shadow-none bg-body" id="id" name="id"
-                    placeholder="Search..." aria-label="Search..." />
+        <div class="row mb-3">
+            <div class="col-md-2">
+                <label for="id" class="form-label">ID</label>
+                <input type="text" class="form-control" id="id" name="id" value="{{$user->id}}" readonly>
+            </div>
+            <div class="col-md-10">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{$user->name}}" required>
             </div>
         </div>
-    </form>
 
-    <!--Label to Search -->
-    <div class="col-12 mt-2 mb-2">
-        <a href = "{{ route('verification.index') }}" class="btn-sm btn btn-light m-1">All</a>
-        <a href = "{{ route('verification.filter', ['status' => 'pay']) }}" class="btn-sm btn btn-secondary m-1">To Pay</a>
-        <a href = "{{ route('verification.filter', ['status' => 'prepare']) }}" class="btn-sm btn btn-warning m-1">Preparing</a>
-        <!-- <a href = "{{ route('verification.filter', ['status' => 'partial']) }}" class="btn-sm btn btn-info m-1">Partial Receive</a> -->
-        <a href = "{{ route('verification.filter', ['status' => 'confirm']) }}" class="btn-sm btn btn-primary m-1">Confirmed</a>
-        <a href = "{{ route('verification.filter', ['status' => 'completed']) }}" class="btn-sm btn btn-success m-1">Completed</a>
-        <a href = "{{ route('verification.filter', ['status' => 'cancel']) }}" class="btn-sm btn btn-danger m-1">Cancel</a>
-    </div>
-
-
-    <!-- Data Tables -->
-    <div class="col-12 mt-3">
-        <div class="card">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead class="table-light">
-                        <tr>
-                            <th class="text-truncate">ID</th>
-                            <th class="text-truncate">Date</th>
-                            <th class="text-truncate">User ID</th>
-                            <th class="text-truncate">Total amount</th>
-
-                            <th class="text-truncate">Action</th>
-                            {{-- <th class="text-truncate">Status</th> --}}
-                        </tr>
-
-                    </thead>
-                    <tbody>
-                        @if (count($orders) < 1)
-                            <tr>
-                                <td class="text-truncate">
-                                    <p class="fw-normal mb-1">Data no found.</p>
-                                </td>
-                            </tr>
-                        @else
-                            @foreach ($orders as $order)
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            @if ($order->status == 'pay')
-                                                <p>{{ $order->id }}</p>
-                                            @else
-                                                <a href="{{ route('order.detail', $order->id) }}"
-                                                    class="fw-bold mb-1">{{ $order->id }}</a>
-                                            @endif
-                                        </div>
-                                    </td>
-
-                                    <td class="text-truncate">
-                                        <p class="fw-normal mb-1">
-                                            {{ Carbon\Carbon::parse($order->date)->format('d/m/Y') }}
-                                        </p>
-                                        {{-- <p class="fw-normal mb-1">{{ date('m/d/Y', $order->date) }}</p> --}}
-                                    </td>
-                                    <td class="text-truncate">
-                                        <p class="fw-normal mb-1">{{ $order->user_id }}</p>
-                                    </td>
-                                    <td class="text-truncate">
-                                        <p class="fw-normal mb-1">RM {{ number_format($order->total_amount, 2) }}</p>
-                                    </td>
-
-                                    <td class="text-truncate">
-                                        @if ($order->status == 'pay')
-                                            <a href="" class="btn-sm btn btn-secondary badge m-1">Await
-                                                Payment</a>
-                                        @elseif ($order->status == 'ship')
-                                            <a href="{{ route('order.prepare', $order->id) }}"
-                                                class="btn-sm btn btn-warning badge m-1">Preparing</a>
-                                        @elseif ($order->status == 'confirm')
-                                            <a href="{{ route('delivery.detail', \App\Models\Delivery::where('order_id', $order->id)->first()->id) }}"
-                                                class="btn-sm btn btn-primary badge m-1">Confirmed</a>
-                                        @elseif ($order->status == 'completed')
-                                            <a href="" class="btn-sm btn btn-success badge m-1">Completed</a>
-                                        @elseif($order->status == 'partial')
-                                            <a href="{{ route('order.partial', $order->id) }}"
-                                                class="btn-sm btn btn-info badge m-1">Partial</a>
-                                        @else
-                                            <a href="" class="btn-sm btn btn-danger badge m-1">Cancel</a>
-                                        @endif
-
-                                    </td>
-                                    {{-- <td class="text-truncate">
-                                        @if ($order->status == 'pay')
-                                            <a href="{{ route('order.ship', $order->id) }}"
-                                                class="btn-sm btn btn-secondary badge m-1">Await Payment...</a>
-                                        @elseif ($order->status == 'ship')
-                                            <a href="{{ route('order.ship', $order->id) }}"
-                                                class="btn-sm btn btn-warning badge m-1">Packaging...</a>
-                                        @elseif ($order->status == 'confirm')
-                                            <a href="{{ route('order.ship', $order->id) }}"
-                                                class="btn-sm btn btn-primary badge m-1">Shipping...</a>
-                                        @elseif (strtolower($order->status) == 'completed')
-                                            <a href="{{ route('order.ship', $order->id) }}"
-                                                class="btn-sm btn btn-success badge m-1">Receipt</a>
-                                        @else
-                                            <a href="{{ route('order.ship', $order->id) }}"
-                                                class="btn-sm btn btn-danger badge m-1">Cancel</a>
-                                        @endif
-                                    </td> --}}
-
-
-                                    {{-- <td class="text-truncate">
-                                        @if ($order->status == 'pay')
-                                            <span class="badge bg-label-secondary rounded-pill">To
-                                                {{ ucfirst($order->status) }}</span>
-                                        @elseif ($order->status == 'ship')
-                                            <span class="badge bg-label-warning rounded-pill">To
-                                                {{ ucfirst($order->status) }}</span>
-                                        @elseif ($order->status == 'confirm')
-                                            <span class="badge bg-label-primary rounded-pill">To
-                                                {{ ucfirst($order->status) }}</span>
-                                        @elseif (strtolower($order->status) == 'completed')
-                                            <span
-                                                class="badge bg-label-success rounded-pill">{{ ucfirst($order->status) }}</span>
-                                        @else
-                                            <span
-                                                class="badge bg-label-danger rounded-pill">{{ ucfirst($order->status) }}</span>
-                                        @endif
-                                    </td> --}}
-                                </tr>
-                            @endforeach
-                        @endif
-                    </tbody>
-                </table>
-            </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{$user->email}}" required>
         </div>
-    </div>
 
-    <!--/ Data Tables -->
-    <div class="m-4 d-flex justify-left">
-        {!! $orders->render() !!}
-    </div>
+        <div class="mb-3">
+            <label for="phone" class="form-label">Phone</label>
+            <input type="text" class="form-control" id="contact_number" name="contact_number" value="{{$user->contact_number}}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="address" class="form-label">Address</label>
+            <input type="text" class="form-control" id="address" name="address" value="{{$user->address}}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="image" class="form-label">Profile Image</label>
+            <input type="file" class="form-control" id="image" name="image" accept="image/*" 
+                   {{ $user->image ? '' : 'required' }} onchange="previewImage(event)">
+        </div>
+
+        <!-- Image Preview Section -->
+        <div class="mb-3">
+            <img id="imagePreview" 
+                 src="{{ $user->image ? asset('user_image/' . $user->image) : '#' }}" 
+                 alt="Image Preview" 
+                 style="display: {{ $user->image ? 'block' : 'none' }}; max-width: 200px; max-height: 200px; width: auto; height: auto;" />
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="3" required>{{ $vendor->description ?? '' }}</textarea>
+        </div>
+
+        @if($vendor->status == 0)
+            <div class="mb-3">
+                <label for="ssm" class="form-label">SSM Document (PDF, DOC, DOCX, JPG, JPEG, PNG)</label>
+                <input type="file" class="form-control" id="ssm" name="ssm" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required>
+            </div>
+        @elseif($vendor->status == 1 && $vendor->ssm_path)
+            <div class="mb-3">
+                <p>SSM Document: <a href="{{ asset('ssm_files/' . $vendor->ssm_path) }}" target="_blank">View Document</a></p>
+            </div>
+        @endif
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+
+    <script>
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                var output = document.getElementById('imagePreview');
+                output.src = reader.result;
+                output.style.display = 'block';
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 @endsection

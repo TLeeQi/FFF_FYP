@@ -263,7 +263,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                       !productProvider.isLoading
                                   ? Center(
                                       child: Text(
-                                        "No Product",
+                                        "No Service Available",
                                         style: TextStyle(
                                             color: Colors.grey.withOpacity(0.7),
                                             fontSize: 18),

@@ -206,19 +206,19 @@ class _DeliveryDetailScreenState extends State<DeliveryDetailScreen> {
                                                 .subTitleStyle),
                                       ],
                                     ),
-                                  if (delivery.status == "confirm")
-                                    Row(
-                                      children: [
-                                        Text("Expected Date: ",
-                                            style: CustomTextStyles(context)
-                                                .subTitleStyle),
-                                        Text(
-                                            DateFormat('dd-MM-yyyy')
-                                                .format(delivery.expectedDate!),
-                                            style: CustomTextStyles(context)
-                                                .subTitleStyle),
-                                      ],
-                                    ),
+                                  // if (delivery.status == "confirm")
+                                  //   Row(
+                                  //     children: [
+                                  //       Text("Expected Date: ",
+                                  //           style: CustomTextStyles(context)
+                                  //               .subTitleStyle),
+                                  //       Text(
+                                  //           DateFormat('dd-MM-yyyy')
+                                  //               .format(delivery.expectedDate!),
+                                  //           style: CustomTextStyles(context)
+                                  //               .subTitleStyle),
+                                  //     ],
+                                  //   ),
                                   if (delivery.status == "Completed")
                                     Text(
                                         DateFormat('dd-MM-yyyy').format(

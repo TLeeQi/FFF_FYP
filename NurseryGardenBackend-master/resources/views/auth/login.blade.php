@@ -8,6 +8,7 @@
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 
+    <link rel="icon" type="image/x-icon" href="{{ url('/icon/fff_icon.png') }}" />
 <body>
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -63,6 +64,11 @@
 
                                     <div class="pt-1 mb-4">
                                         <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
+                                    </div>
+
+                                    <div class="pt-1 mb-4">
+                                        <h6>New Vendor? </h6>
+                                        <a href="{{ route('register') }}" class="small text-muted">Register</a>
                                     </div>
 
                                     {{-- <a href="#!" class="small text-muted">Terms of use.</a>

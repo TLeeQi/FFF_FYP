@@ -7,6 +7,7 @@ import 'package:nurserygardenapp/util/dimensions.dart';
 import 'package:nurserygardenapp/view/base/custom_appbar.dart';
 import 'package:nurserygardenapp/view/base/page_loading.dart';
 import 'package:provider/provider.dart';
+// import 'package:nurserygardenapp/providers/delivery_provider.dart';
 
 class OrderReceiptScreen extends StatefulWidget {
   final String orderID;
@@ -126,12 +127,47 @@ class _OrderReceiptScreenState extends State<OrderReceiptScreen> {
                                           .subTitleStyle),
                                 ],
                               ),
+                              // Divider(),
+                              // Text("Service Provider Information",
+                              //     style: CustomTextStyles(context)
+                              //         .titleStyle
+                              //         .copyWith(fontSize: 16)),
+                              // SizedBox(height: 5),                          
+                              // Row(
+                              //   children: [
+                              //     Text("Service Provider: ",
+                              //         style:
+                              //             CustomTextStyles(context).titleStyle),
+                              //     Text(deliveryProvider.delivery.trackingNumber ?? "N/A",
+                              //         style: CustomTextStyles(context)
+                              //             .subTitleStyle),
+                              //   ],
+                              // ),
+                              // SizedBox(height: 5),
+                              // Row(
+                              //   mainAxisAlignment: MainAxisAlignment.start,
+                              //   crossAxisAlignment: CrossAxisAlignment.start,
+                              //   children: [
+                              //     Text("Service Provider Contact Number: ",
+                              //         style:
+                              //             CustomTextStyles(context).titleStyle),
+                              //     Flexible(
+                              //       child: Text(
+                              //           deliveryProvider.delivery.method.toString() ??
+                              //               "",
+                              //           overflow: TextOverflow.ellipsis,
+                              //           maxLines: 4,
+                              //           style: CustomTextStyles(context)
+                              //               .subTitleStyle),
+                              //     ),
+                              //   ],
+                              // ),
                               Divider(),
                               Text("Admin of Fix It and Foliage Frenzy",
                                   style: CustomTextStyles(context)
                                       .titleStyle
                                       .copyWith(fontSize: 16)),
-                              SizedBox(height: 5),
+                              SizedBox(height: 5),                          
                               Row(
                                 children: [
                                   Text("Admin: ",

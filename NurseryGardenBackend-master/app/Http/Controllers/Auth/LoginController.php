@@ -48,15 +48,23 @@ class LoginController extends Controller
         // Check for 'type' equal to 'admin'
         if (Auth::attempt([
             'email' => $request->email, 'password' => $request->password,
-            'type' => 'admin'
+            'type' => 'admin' 
         ])) {
             return $this->sendLoginResponse($request);
         }
 
-        // Check for 'type' equal to 'admin'
+        // Check for 'type' equal to 'sadmin'
         if (Auth::attempt([
             'email' => $request->email, 'password' => $request->password,
             'type' => 'sadmin'
+        ])) {
+            return $this->sendLoginResponse($request);
+        }
+
+        // Check for 'type' equal to 'vendor'
+        if (Auth::attempt([
+            'email' => $request->email, 'password' => $request->password,
+            'type' => 'vendor'
         ])) {
             return $this->sendLoginResponse($request);
         }

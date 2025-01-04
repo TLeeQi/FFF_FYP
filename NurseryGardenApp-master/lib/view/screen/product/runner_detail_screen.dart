@@ -537,10 +537,12 @@ class _RunnerDetailScreenState extends State<RunnerDetailScreen> {
                   // Pricing Image Section
                   if (_isPricingVisible) 
                     // Pricing Image Section
-                    Center(
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
                       child: Image.asset(
-                        'assets/image1.jpg', // Replace with your image asset
-                        height: 200,
+                        'assets/image/pricing/runner.png', // Replace with your image asset
+                        height: 200, // Set a reasonable height
+                        fit: BoxFit.cover, // Adjust the fit as needed
                       ),
                     ),
                   

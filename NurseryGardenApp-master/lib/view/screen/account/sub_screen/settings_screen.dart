@@ -40,33 +40,33 @@ class _SettingScreenState extends State<SettingScreen> {
                 style: CustomTextStyles(context).subTitleStyle,
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, Routes.getChangePasswordRoute());
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border(
-                        bottom: BorderSide(
-                      color: ColorResources.COLOR_GREY.withOpacity(0.3),
-                      width: 0.5,
-                    ))),
-                child: ListTile(
-                  leading: Icon(
-                    Icons.list_alt_outlined,
-                    color: ColorResources.COLOR_BLACK,
-                  ),
-                  title: Text("Change Password",
-                      style: CustomTextStyles(context)
-                          .subTitleStyle
-                          .copyWith(fontSize: 16)),
-                  trailing: Icon(
-                    Icons.chevron_right_outlined,
-                  ),
-                ),
-              ),
-            ),
+            // GestureDetector(
+            //   onTap: () {
+            //     Navigator.pushNamed(context, Routes.getChangePasswordRoute());
+            //   },
+            //   child: Container(
+            //     decoration: BoxDecoration(
+            //         color: Colors.white,
+            //         border: Border(
+            //             bottom: BorderSide(
+            //           color: ColorResources.COLOR_GREY.withOpacity(0.3),
+            //           width: 0.5,
+            //         ))),
+            //     child: ListTile(
+            //       leading: Icon(
+            //         Icons.list_alt_outlined,
+            //         color: ColorResources.COLOR_BLACK,
+            //       ),
+            //       title: Text("Change Password",
+            //           style: CustomTextStyles(context)
+            //               .subTitleStyle
+            //               .copyWith(fontSize: 16)),
+            //       trailing: Icon(
+            //         Icons.chevron_right_outlined,
+            //       ),
+            //     ),
+            //   ),
+            // ),
             // GestureDetector(
             //   onTap: () {
             //     Navigator.pushNamed(context, Routes.getChangeEmailRoute());

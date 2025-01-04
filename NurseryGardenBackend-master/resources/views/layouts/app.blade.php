@@ -69,6 +69,7 @@
                 <ul class="menu-inner py-1">
 
                     <!-- Dashboards -->
+                    
                     <li class="menu-item">
                         <a href="{{ route('home') }}" class="menu-link">
                             <i class="menu-icon tf-icons mdi mdi-home-outline"></i>
@@ -76,39 +77,41 @@
                         </a>
                     </li>
 
+                    @if(Auth::user()->type == 'admin' || Auth::user()->type == 'sadmin')
+                        <li class="menu-header small text-uppercase">
+                            <span class="menu-header-text">Users</span>
+                        </li>
+
+                        <!-- Dashboards -->
+                        <li class="menu-item">
+                            <a href="{{ route('customer.index') }}" class="menu-link">
+                                <i class="menu-icon tf-icons mdi mdi-account-multiple-outline"></i>
+                                <div data-i18n="Dashboards">Users</div>
+                            </a>
+                        </li>
+
+                        <li class="menu-header small text-uppercase">
+                            <span class="menu-header-text">Vendors</span>
+                        </li>
+
+                        <!-- Dashboards -->
+                        <li class="menu-item">
+                            <a href="{{ route('customer.vendor') }}" class="menu-link">
+                                <i class="menu-icon tf-icons mdi mdi-account-multiple-outline"></i>
+                                <div data-i18n="Dashboards">Vendors</div>
+                            </a>
+                        </li>
+                    @endif
+
                     <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">Users</span>
-                    </li>
-
-                    <!-- Dashboards -->
-                    <li class="menu-item">
-                        <a href="{{ route('customer.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons mdi mdi-account-multiple-outline"></i>
-                            <div data-i18n="Dashboards">Users</div>
-                        </a>
-                    </li>
-
-                    <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">Vendors</span>
-                    </li>
-
-                    <!-- Dashboards -->
-                    <li class="menu-item">
-                        <a href="{{ route('customer.vendor') }}" class="menu-link">
-                            <i class="menu-icon tf-icons mdi mdi-account-multiple-outline"></i>
-                            <div data-i18n="Dashboards">Vendors</div>
-                        </a>
-                    </li>
-
-                    <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">Order</span>
+                        <span class="menu-header-text">Bookings</span>
                     </li>
 
                     <!-- Order -->
                     <li class="menu-item">
                         <a href="{{ route('order.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons mdi mdi-file-document-multiple-outline"></i>
-                            <div data-i18n="Dashboards">Services</div>
+                            <div data-i18n="Dashboards">Services Lists</div>
                         </a>
                     </li>
 
@@ -136,16 +139,17 @@
                             <div data-i18n="Dashboards">Add Biddings</div>
                         </a>
                     </li> -->
-                    <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">Verification</span>
-                    </li>
-                    <li class="menu-item">
-                        <a href="{{ route('verification.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons mdi mdi-check-decagram-outline"></i>
-                            <div data-i18n="Dashboards">Verifications</div>
-                        </a>
-                    </li>
-
+                    @if(Auth::user()->type == 'vendor')
+                        <li class="menu-header small text-uppercase">
+                            <span class="menu-header-text">Profile</span>
+                        </li>
+                        <li class="menu-item">
+                            <a href="{{ route('verification.verification') }}" class="menu-link">
+                                <i class="menu-icon tf-icons mdi mdi-check-decagram-outline"></i>
+                                <div data-i18n="Dashboards">Profile Update</div>
+                            </a>
+                        </li>
+                    @endif
 
                     <!-- <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Category</span>
@@ -184,6 +188,7 @@
                         </a>
                     </li> -->
 
+                    @if(Auth::user()->type == 'admin' || Auth::user()->type == 'sadmin')
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Services</span>
                     </li>
@@ -195,6 +200,7 @@
                             <div data-i18n="Dashboards">Services</div>
                         </a>
                     </li>
+                    @endif
                     <!-- <li class="menu-item">
                         <a href="{{ route('product.insert') }}" class="menu-link">
                             <i class="menu-icon tf-icons mdi mdi-plus-box-outline"></i>
@@ -221,18 +227,19 @@
                         </a>
                     </li> -->
 
-                    <li class="menu-header small text-uppercase">
+                    <!-- @if(Auth::user()->type == 'admin' || Auth::user()->type == 'sadmin') -->
+                    <!-- <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Report</span>
-                    </li>
+                    </li> -->
 
                     <!-- Product -->
-                    <li class="menu-item">
+                    <!--<li class="menu-item">
                         <a href="{{ route('report.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons mdi mdi-file-chart-outline"></i>
                             <div data-i18n="Dashboards">Generate Report</div>
                         </a>
-                    </li>
-
+                    </li> -->
+                    <!-- @endif -->
                 </ul>
             </aside>
             <!-- / Menu -->
@@ -277,8 +284,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
-                                                    <h6 class="mb-0">John Doe</h6>
-                                                    <small class="text-muted">Admin</small>
+                                                    <h6 class="mb-0">{{ Auth::user()->name }}</h6>
+                                                    <small class="text-muted">{{ Auth::user()->type }}</small>
                                                 </div>
                                             </div>
                                         </a>

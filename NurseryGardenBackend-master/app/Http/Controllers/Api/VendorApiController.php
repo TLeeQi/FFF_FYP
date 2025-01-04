@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Vendor;
+use App\Models\User;
 use App\Models\VendorRating;
 // use DateTime;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +21,11 @@ class VendorApiController extends Controller
 
 	 public function vendor()
     {
-        $vendor = Vendor::where('status', '1')
+        $vendor = User::where('vendors.status', '1')
+            ->leftjoin('vendors', 'vendors.user_id', '=', 'users.id')
+            ->where('users.type', 'vendor')
+            ->where('vendors.status', '1')
+            ->select('users.*', 'vendors.rating as rating', 'vendors.id as vendor_id', 'vendors.description as description')
 			->get();
 
         $ret['vendors'] = $vendor;
@@ -32,7 +37,11 @@ class VendorApiController extends Controller
         \Log::info('Authorization Header:', [$request->header('Authorization')]);
 
 		//$datetime = Carbon::now()->toDateTimeString();
-		$vendor_query = Vendor::where('status', '1');
+		$vendor_query = User::where('users.status', '1')
+        ->leftjoin('vendors', 'vendors.user_id', '=', 'users.id')
+        ->where('users.type', 'vendor')
+        ->where('vendors.status', '1')
+        ->select('users.*', 'vendors.rating as rating', 'vendors.id as vendor_id', 'vendors.description as description');
 
 		// Pagination Limit
 		if ($request->limit) {
@@ -116,8 +125,10 @@ class VendorApiController extends Controller
 
 	public function searchKeyword()
     {
-        $vendors_query = Vendor::where('status', '1')
-            ->get(['name']);
+        $vendors_query = User::where('users.status', '1')
+                    ->where('users.type', 'vendor')
+                    ->where('vendors.status', '1')
+                    ->get(['name']);
         $ret['vendor_name'] = $vendors_query;
         return $this->success($ret);
     }
@@ -131,12 +142,15 @@ class VendorApiController extends Controller
             return $this->fail('Invalid request');
         }
 
-        $vendor_query = Vendor::where('status', '1');
+        $vendor_query = User::where('users.status', '1')
+        ->where('users.type', 'vendor')
+        ->leftjoin('vendors', 'vendors.user_id', '=', 'users.id')
+        ->where('vendors.status', '1')
+        ->select('users.*', 'vendors.rating as rating', 'vendors.id as vendor_id', 'vendors.description as description');
 
         // Search by product name
         if ($request->keyword) {
-            $vendor_query = $vendor_query->where('name', 'like', '%' . $request->keyword . '%')
-			->where('status', '1');
+            $vendor_query = $vendor_query->where('name', 'like', '%' . $request->keyword . '%');
         }
 
         // Search by category
@@ -196,20 +210,20 @@ class VendorApiController extends Controller
         return $this->success($ret);
     }
 
-	public function show(Request $request)
-    {
-        $vendors = Vendor::where('id', $request->id)
-            ->where('status', '1')
-            ->select('*')
-            ->first();
+	// public function show(Request $request)
+    // {
+    //     $vendors = Vendor::where('id', $request->id)
+    //         ->where('status', '1')
+    //         ->select('*')
+    //         ->first();
 
-        if ($vendors != null) {
-            $ret['vendor'] = $vendors;
-            return $this->success($ret);
-        } else {
-            return $this->fail('Vendor not found');
-        }
-    }
+    //     if ($vendors != null) {
+    //         $ret['vendor'] = $vendors;
+    //         return $this->success($ret);
+    //     } else {
+    //         return $this->fail('Vendor not found');
+    //     }
+    // }
 
     public function rate(Request $request, $id)
     {

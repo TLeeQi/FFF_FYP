@@ -13,6 +13,7 @@ use App\Models\WiringDetail;
 use App\Models\PipingDetail;
 use App\Models\GardeningDetail;
 use App\Models\RunnerDetail;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Address;
 use App\Models\Payment;
@@ -906,6 +907,12 @@ class OrderApiController extends Controller
             ->where('order_id', $id)
             ->where('user_id', Auth::id())
             ->first();
+
+        // $vendor = User::select('users.name as vendor_name', 'users.address as vendor_address')
+        //     ->leftJoin('vendors', 'vendors.user_id', 'users.id')
+        //     ->leftJoin('delivery', 'delivery.vendor_id', 'vendors.id')
+        //     ->where('delivery.order_id', $id)
+        //     ->first();
 
         $sender = [
             "Sender" => "Fix It and Foliage Frenzy",

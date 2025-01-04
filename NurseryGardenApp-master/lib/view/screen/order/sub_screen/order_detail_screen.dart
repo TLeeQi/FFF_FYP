@@ -17,6 +17,8 @@ import 'package:nurserygardenapp/view/screen/order/widget/empty_order_detail.dar
 import 'package:nurserygardenapp/view/screen/order/widget/shipping_status.dart';
 import 'package:nurserygardenapp/view/screen/payment/payment_helper/payment_type.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OrderDetailScreen extends StatefulWidget {
   final String orderID;
@@ -30,8 +32,10 @@ class OrderDetailScreen extends StatefulWidget {
 class _OrderDetailScreenState extends State<OrderDetailScreen> {
   late OrderProvider order_prov =
       Provider.of<OrderProvider>(context, listen: false);
+
   Order order = Order();
   String address = "";
+  double? _submittedRating;
 
   // Param
   var params = {};
@@ -43,6 +47,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       params['id'] = widget.orderID;
       _loadData();
+      _loadSubmittedRating();
     });
   }
 
@@ -57,6 +62,21 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
 
     // Check if the order is a wiring order
       await order_prov.getOrderDetail(context, params);
+  }
+
+ Future<void> _loadSubmittedRating() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _submittedRating = prefs.getDouble('rating_${widget.orderID}');
+    });
+  }
+
+  Future<void> _submitRating(double rating) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setDouble('rating_${widget.orderID}', rating);
+    setState(() {
+      _submittedRating = rating;
+    });
   }
 
   @override
@@ -299,7 +319,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                                                                       // == orderProvider.getOrderWiringList.firstWhere((wiring) => wiring.id 
                                                                       // == orderProvider.orderDetailList[index].wiringId).productID).imageURL!}",
                                                                       //ngrok
-                                                                      "https://6dcb-2405-3800-850-d9bc-df-627-24d2-3754.ngrok-free.app/product_image/1735189218.jpg",
+                                                                      "https://d706-2405-3800-850-d9bc-71ca-7038-5869-8337.ngrok-free.app/product_image/1735189218.jpg",
                                                                   memCacheHeight:
                                                                       200,
                                                                   memCacheWidth:
@@ -358,7 +378,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                                                                       // == orderProvider.getOrderWiringList.firstWhere((wiring) => wiring.id 
                                                                       // == orderProvider.orderDetailList[index].wiringId).productID).imageURL!}",
                                                                       //ngrok
-                                                                      "https://6dcb-2405-3800-850-d9bc-df-627-24d2-3754.ngrok-free.app/product_image/1735189281.jpg",
+                                                                      "https://d706-2405-3800-850-d9bc-71ca-7038-5869-8337.ngrok-free.app/product_image/1735189281.jpg",
                                                                   memCacheHeight:
                                                                       200,
                                                                   memCacheWidth:
@@ -417,7 +437,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                                                                       // == orderProvider.getOrderWiringList.firstWhere((wiring) => wiring.id 
                                                                       // == orderProvider.orderDetailList[index].wiringId).productID).imageURL!}",
                                                                       //ngrok
-                                                                      "https://6dcb-2405-3800-850-d9bc-df-627-24d2-3754.ngrok-free.app/product_image/1735189334.jpg",
+                                                                      "https://d706-2405-3800-850-d9bc-71ca-7038-5869-8337.ngrok-free.app/product_image/1735189334.jpg",
                                                                   memCacheHeight:
                                                                       200,
                                                                   memCacheWidth:
@@ -476,7 +496,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                                                                       // == orderProvider.getOrderWiringList.firstWhere((wiring) => wiring.id 
                                                                       // == orderProvider.orderDetailList[index].wiringId).productID).imageURL!}",
                                                                       //ngrok
-                                                                      "https://6dcb-2405-3800-850-d9bc-df-627-24d2-3754.ngrok-free.app/product_image/1735189523.jpg",
+                                                                      "https://d706-2405-3800-850-d9bc-71ca-7038-5869-8337.ngrok-free.app/product_image/1735189523.jpg",
                                                                   memCacheHeight:
                                                                       200,
                                                                   memCacheWidth:
@@ -928,6 +948,51 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                                 SizedBox(
                                   height: 10,
                                 ),
+                                if (order.status == "completed")
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Column(
+                              children: [
+                                Text(
+                                  "Thank you for your order!",
+                                  style: CustomTextStyles(context)
+                                      .titleStyle
+                                      .copyWith(fontSize: 18),
+                                ),
+                                SizedBox(height: 10),
+                                if (_submittedRating == null) ...[
+                                Text(
+                                  "Please rate your experience:",
+                                  style: CustomTextStyles(context)
+                                      .subTitleStyle
+                                      .copyWith(fontSize: 16),
+                                ),
+                                SizedBox(height: 10),
+                                // Add your rating widget here
+                                RatingBar.builder(
+                                  initialRating: 0,
+                                  minRating: 1,
+                                  direction: Axis.horizontal,
+                                  allowHalfRating: true,
+                                  itemCount: 5,
+                                  itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                                  itemBuilder: (context, _) => Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                  ),
+                                  onRatingUpdate: (rating) {
+                                    print(rating);
+                                    // Handle rating submission
+                                    _submitRating(rating);
+                                  },
+                                ),
+                                ] else ...[
+                                  Text("Your submitted rating: $_submittedRating",
+                                    style: CustomTextStyles(context).subTitleStyle.copyWith(fontSize: 16),),
+                                ],
+                              ],
+                            ),
+                          ),
                                 // if (order.status == "pay")
                                 //   Container(
                                 //     padding: const EdgeInsets.all(8),
@@ -1208,7 +1273,7 @@ Widget _buildPhotoGallery(dynamic photoPaths) {
     children: photoList.map((filename) {
       // Assuming the images are stored in a specific directory
       //ngrok
-      String filePath = 'https://6dcb-2405-3800-850-d9bc-df-627-24d2-3754.ngrok-free.app/service_image/$filename'; // Update this path as needed
+      String filePath = 'https://d706-2405-3800-850-d9bc-71ca-7038-5869-8337.ngrok-free.app/service_image/$filename'; // Update this path as needed
       print('filePath: $filePath');
       
       return Image.network(

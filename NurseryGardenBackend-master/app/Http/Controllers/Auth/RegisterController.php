@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use App\Models\Vendor;
 
 class RegisterController extends Controller
 {
@@ -39,6 +41,7 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+       // $this->middleware('vendor')->only(['register']);
     }
 
     /**
@@ -69,5 +72,42 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    public function register()
+    {
+        return view('auth.register');
+    }
+
+    public function createVendor(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'category' => ['required', 'array'],
+        ]);
+
+        // Convert the category array into a comma-separated string
+        $categoryString = implode(',', $request->category);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'type' => 'vendor',
+            'password' => Hash::make($request->password),
+        ]);
+
+        $user->save();
+
+        $vendor = Vendor::create([
+            'user_id' => $user->id,
+            'category' => $categoryString,
+            'status' => '0',
+        ]);
+
+        $vendor->save();
+
+        return redirect()->route('home');
     }
 }

@@ -27,6 +27,8 @@ class User extends Authenticatable
         'gender',
         'contact_number',
         'image',
+        'status',
+        'type',
     ];
 
     public $appends = [

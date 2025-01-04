@@ -27,6 +27,7 @@ class Delivery extends Model
         'prv_img',
         'created_at',
         'updated_at',
+        'vendor_id',
     ];
 
     public const STATUS = [
@@ -57,5 +58,10 @@ class Delivery extends Model
     public function order()
     {
         return $this->belongsTo(Order::class, 'order_id');
+    }
+
+    public function vendor()
+    {
+        return $this->belongsTo(Vendor::class, 'vendor_id');
     }
 }

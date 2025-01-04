@@ -304,15 +304,37 @@
                                 <input type="hidden" name="status" id="status" value="prepare">
 
                                 <div class="form-floating form-floating-outline mb-4">
-                                    <input type="text" id="method" name="method" class="form-control"
-                                        id="basic-default-fullname" placeholder="Service Provider Company" required />
-                                    <label for="basic-default-fullname">Service Provider Company</label>
-                                </div>
+                                <select id="vendor_id" name="vendor_id" class="form-control" required>
+                                    <option value="">Select Service Provider Company</option>
+                        
+                                    @foreach($vendors as $vendor)
+                                        <option name="vendor_id" id="vendor_id" value="{{ $vendor->vendor_id }}" data-contact="{{ $vendor->contact_number }}" data-name="{{ $vendor->name }}">
+                                            {{ $vendor->name }}
+                                        </option>                                        
+                                    @endforeach
+                                </select>
+                                <label for="vendor_id">Service Provider Company</label>
+                            </div>
+
                                 <div class="form-floating form-floating-outline mb-4">
-                                    <input type="text" id="track_num" name="track_num" class="form-control"
-                                        id="basic-default-fullname" placeholder="Contact Number" required />
-                                    <label for="basic-default-fullname">Contact Number</label>
+                                    <input type="text" id="contact_number" name="contact_number" class="form-control"
+                                        placeholder="Contact Number" readonly required />
+                                    <label for="contact_number">Contact Number</label>
                                 </div>
+
+                                <!-- Hidden input for vendor name -->
+                                <input type="hidden" id="vendor_name" name="vendor_name" />
+
+                                <script>
+                                    document.getElementById('vendor_id').addEventListener('change', function() {
+                                        var selectedOption = this.options[this.selectedIndex];
+                                        var contactNumber = selectedOption.getAttribute('data-contact');
+                                        var vendorName = selectedOption.getAttribute('data-name');
+                                        
+                                        document.getElementById('contact_number').value = contactNumber || '';
+                                        document.getElementById('vendor_name').value = vendorName || '';
+                                    });
+                                </script>
                                 <!-- <div class="form-floating form-floating-outline mb-4">
                                     <input class="form-control" type="date" id="html5-date-input" required
                                         name="expected_date" />

@@ -20,7 +20,11 @@ class Vendor extends Model
         'rating', 
         'status', 
         'image',
-        'description'];
+        'description',
+        'user_id',
+        'ssm_path',
+        'category'
+    ];
 
     public $appends = [
         'image_url'
@@ -43,6 +47,11 @@ class Vendor extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function delivery()
+    {
+        return $this->hasMany(Delivery::class);
     }
 
 }

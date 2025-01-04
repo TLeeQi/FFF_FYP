@@ -9,6 +9,8 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PlantController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomController;
+use App\Http\Controllers\VendorController;
+use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,13 +31,34 @@ Route::get('/', function () {
 });
 
 Auth::routes([
-    'register' => false,
+    'register' => true,
     'reset' => false,
 ]);
 
 Route::get('/home', [HomeController::class, 'home'])->name('home');
+Route::get('/register', [RegisterController::class, 'register'])->name('register');
+Route::post('/createVendor', [RegisterController::class, 'createVendor'])->name('createVendor');
 
 Route::middleware('auth:sanctum')->group(function () {
+    // Order
+    Route::get('/order', [OrderController::class, 'index'])->name('order.index');
+    Route::get('/order/detail/{id}', [OrderController::class, 'order_detail'])->name('order.detail');
+    Route::any('/order/search', [OrderController::class, 'search'])->name('order.search');
+    Route::any('/order/filter/{status}', [OrderController::class, 'filter'])->name('order.filter');
+    Route::get('/order/prepare/{id}', [OrderController::class, 'showShipOrder'])->name('order.prepare');
+    Route::get('/order/partial/{id}', [OrderController::class, 'showPartialOrder'])->name('order.partial');
+
+    // Delivery
+    Route::post('/order/delivery', [DeliveryController::class, 'updateDelivery'])->name('delivery.update');
+    Route::get('/delivery', [DeliveryController::class, 'index'])->name('delivery.index');
+    Route::any('/delivery/search', [DeliveryController::class, 'search'])->name('delivery.search');
+    Route::get('/delivery/detail/{id}', [DeliveryController::class, 'detail'])->name('delivery.detail');
+
+    Route::group(['middleware' => 'isVendor'], function () {
+       // Verification Vendor
+       Route::get('/verification', [VendorController::class, 'verification'])->name('verification.verification');
+       Route::post('/verification/update', [VendorController::class, 'update'])->name('verification.update');
+    });
     Route::group(['middleware' => 'isAdmin'], function () {
         // Customer
         Route::get('/customer', [CustomerController::class, 'index'])->name('customer.index');
@@ -44,6 +67,9 @@ Route::middleware('auth:sanctum')->group(function () {
         // Vendor
         Route::get('/vendor', [CustomerController::class, 'vendor'])->name('customer.vendor');
         Route::any('/vendor/search', [CustomerController::class, 'vendorsearch'])->name('vendor.search');
+        Route::any('/vendor/filter/{status}', [CustomerController::class, 'vendorfilter'])->name('vendor.filter');
+        Route::any('/vendor/detail/{id}', [CustomerController::class, 'vendorDetail'])->name('vendor.detail');
+        Route::any('/vendor/verify/{id}', [CustomerController::class, 'vendorVerify'])->name('vendor.verify');
 
         Route::group(['middleware' => 'isSadmin'], function () {
             Route::get('/customer/edit/{id}', [CustomerController::class, 'edit'])->name('customer.edit');
@@ -79,22 +105,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/product/update', [ProductController::class, 'update'])->name('product.update');
         Route::get('/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
 
-        // Order
-        Route::get('/order', [OrderController::class, 'index'])->name('order.index');
-        Route::get('/order/detail/{id}', [OrderController::class, 'order_detail'])->name('order.detail');
-        Route::any('/order/search', [OrderController::class, 'search'])->name('order.search');
-        Route::any('/order/filter/{status}', [OrderController::class, 'filter'])->name('order.filter');
-        Route::get('/order/prepare/{id}', [OrderController::class, 'showShipOrder'])->name('order.prepare');
-        Route::get('/order/partial/{id}', [OrderController::class, 'showPartialOrder'])->name('order.partial');
-
-         // Verification
-         Route::get('/verification', [OrderController::class, 'index'])->name('verification.index');
-         Route::get('/verification/detail/{id}', [OrderController::class, 'order_detail'])->name('verification.detail');
-         Route::any('/verification/search', [OrderController::class, 'search'])->name('verification.search');
-         Route::any('/verification/filter/{status}', [OrderController::class, 'filter'])->name('verification.filter');
-         Route::get('/verification/prepare/{id}', [OrderController::class, 'showShipOrder'])->name('verification.ship');
-         Route::get('/verification/partial/{id}', [OrderController::class, 'showPartialOrder'])->name('verification.partial');
-
         // Custom
         Route::get('/custom/style', [CustomController::class, 'index'])->name('custom.index');
         Route::get('/customs/style/insert', [CustomController::class, 'insert'])->name('custom.insert');
@@ -106,13 +116,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
         //Report
         Route::get('/report', [CustomController::class, 'index'])->name('report.index');
-
-
-        // Delivery
-        Route::post('/order/delivery', [DeliveryController::class, 'updateDelivery'])->name('delivery.update');
-        Route::get('/delivery', [DeliveryController::class, 'index'])->name('delivery.index');
-        Route::any('/delivery/search', [DeliveryController::class, 'search'])->name('delivery.search');
-        Route::get('/delivery/detail/{id}', [DeliveryController::class, 'detail'])->name('delivery.detail');
 
         // Bidding
         Route::get('/bidding', [BiddingController::class, 'index'])->name('bidding.index');

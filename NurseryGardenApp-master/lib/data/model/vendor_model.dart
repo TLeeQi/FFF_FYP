@@ -152,7 +152,7 @@ class Vendor {
         id: json["id"],
         name: json["name"],
         email: json["email"],
-        phone: json["phone"],
+        phone: json["contact_number"],
         address: json["address"],
         rating: json["rating"] != null
             ? double.tryParse(json["rating"].toString()) ?? 0.0
@@ -164,7 +164,7 @@ class Vendor {
             ? null
             : DateTime.parse(json["updated_at"]),
         image: json["image"],
-        imageURL: jsonDecode(json["image_url"]),
+        imageURL: json["image_url"],
         status: json["status"],
         description: json["description"],
       );

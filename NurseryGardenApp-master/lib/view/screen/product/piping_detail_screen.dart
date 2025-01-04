@@ -561,10 +561,12 @@ class _PipingDetailScreenState extends State<PipingDetailScreen> {
                   // Pricing Image Section
                   if (_isPricingVisible) 
                     // Pricing Image Section
-                    Center(
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
                       child: Image.asset(
-                        'assets/image1.jpg', // Replace with your image asset
-                        height: 200,
+                        'assets/image/pricing/piping.png', // Replace with your image asset
+                        height: 200, // Set a reasonable height
+                        fit: BoxFit.cover, // Adjust the fit as needed
                       ),
                     ),
                   

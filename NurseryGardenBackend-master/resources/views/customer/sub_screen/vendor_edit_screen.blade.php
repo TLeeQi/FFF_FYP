@@ -20,16 +20,15 @@
                             <div class="form-floating form-floating-outline mb-4">
                                 <select class="form-select" id="selectOption" aria-label="Default select example"
                                     name="type">
-                                    <option hidden value="{{ $vendor->type }}">
-                                        {{ ucfirst(trans($vendor->type)) }}</option>
-                                    <option value="admin">Admin</option>
+
                                     <option value="vendor">Vendor</option>
+                                    <option value="admin">Admin</option>
                                     <option value="user">User</option>
                                 </select>
                                 <label for="exampleFormControlSelect1">Type</label>
                             </div>
                             <button type="submit" class="btn btn-primary">Save</button>
-                            <a href="{{ route('customer.index') }}" class="btn btn-primary" value="Back">Back</a>
+                            <a href="{{ route('customer.vendor') }}" class="btn btn-primary" value="Back">Back</a>
                         </form>
                     @endforeach
                 </div>

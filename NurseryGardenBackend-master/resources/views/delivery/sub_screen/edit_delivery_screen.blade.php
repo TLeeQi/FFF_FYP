@@ -5,19 +5,19 @@
         @if ($delivery->status == 'confirm')
             <div class="card mb-4 p-4">
                 <div class="card-header d-flex justify-content-between align-items-center mb-3 px-0">
-                    <h5 class="mb-0">Edit Order Status</h5>
+                    <h5 class="mb-0">Edit Status</h5>
                 </div>
 
                 <form method="POST"
                     action="{{ route('delivery.update', ['id' => $delivery->id, 'order_id' => $delivery->order_id]) }}"
-                    enctype="multipart/form-data" onsubmit="">
+                    enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="status" id="status" value="confirm">
                     <div class="form-floating form-floating-outline mb-4">
                         <select class="form-select" id="selectOption" aria-label="Default select example" name="selectOption">
                             <option hidden value="Completed">Completed</option>
-                            <!-- <option value="confirm">Confirmed</option> -->
-                            <option value="Completed">Completed</option>
+                            <!-- <option value="prepare">Prepare</option> -->
+                            <option value="Completed" selected>Completed</option>
                         </select>
                         <label for="exampleFormControlSelect1">Booking Status</label>
                     </div>
@@ -25,18 +25,20 @@
                     <div class="form-floating form-floating-outline mb-4">
                         <input type="text" id="method" name="method" class="form-control"
                             value="{{ $delivery->method }}" placeholder="Service Provider Company"
-                            required />
+                            readonly />
                         <label for="method">Service Provider Company</label>
                     </div>
 
                     <div class="form-floating form-floating-outline mb-4">
                         <input type="text" id="track_num" name="track_num" class="form-control"
-                            value="{{ $delivery->tracking_number }}" placeholder="Contact Number" required />
+                            value="{{ $delivery->tracking_number }}" placeholder="Contact Number" readonly />
                         <label for="track_num">Contact Number</label>
                     </div>
 
                     <div class="col-12">
                         <h6 class="mt-2">Proof of Service Completed</h6>
+                        <!-- Message to indicate image upload requirement -->
+                        <p id="uploadMessage" style="color: red; display: none;">Please upload an image as proof of service completion.</p>
                     </div>
 
                     <div class="col-md-12">
@@ -51,6 +53,7 @@
                                 onchange="preview()" required>
                             <label for="formValidationFile">Proof of Service Completed</label>
                         </div>
+                        
                     </div>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>
@@ -95,10 +98,11 @@
                                         </div>
                                         <blockquote class="blockquote mb-0">
                                             <p>
-                                                <b>Admin: </b>Fix It and Foliage Frenzy<br>
-                                                <b>Address: </b>Fix It and Foliage Frenzy, 81300, Impian Emas,
-                                                Johor
-                                                <br>
+                                                @foreach ($vendors as $vendor)
+                                                    <b>Company: </b>{{$vendor->name}}<br>
+                                                    <b>Contact Number: </b>{{$vendor->contact_number}}
+                                                    <br>
+                                                @endforeach
                                             </p>
                                         </blockquote>
                                     </div>
@@ -287,14 +291,24 @@
     @endforeach
     </form>
     <script>
+        document.getElementById('selectOption').addEventListener('change', function() {
+            var fileInput = document.getElementById('formFile');
+            var uploadMessage = document.getElementById('uploadMessage');
+            if (this.value === 'Completed') {
+                fileInput.setAttribute('required', 'required');
+                uploadMessage.style.display = 'block'; // Show the message
+            } else {
+                fileInput.removeAttribute('required');
+                uploadMessage.style.display = 'none'; // Hide the message
+            }
+        });
 
         function preview() {
-            frame.src = URL.createObjectURL(event.target.files[0]);
-        }
-
-        function clearImage() {
-            document.getElementById('formFile').value = null;
-            frame.src = "";
+            var frame = document.getElementById('frame');
+            var file = document.getElementById('formFile').files[0];
+            if (file) {
+                frame.src = URL.createObjectURL(file);
+            }
         }
     </script>
 @endsection

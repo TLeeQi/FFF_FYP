@@ -19,23 +19,49 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use function PHPUnit\Framework\isNull;
-
+use Illuminate\Support\Facades\Auth;
 class DeliveryController extends Controller
 {
     public function index()
     {
-        $delivery = Delivery::orderBy('created_at', 'desc')->paginate(10);
+        $user = Auth::user();
+
+        if($user->type == 'vendor'){
+            //$vendor = Vendor::where('user_id', $user->id)->first();
+            $delivery = Delivery::select(
+                "delivery.*",
+            )->leftJoin('vendors', 'vendors.id', '=', 'delivery.vendor_id')
+            ->where('vendors.user_id', $user->id)
+            ->orderBy('delivery.created_at', 'desc')
+            ->paginate(10);
+        }else{
+            $delivery = Delivery::orderBy('created_at', 'desc')->paginate(10);
+        }
         return view('delivery.delivery')->with('delivery', $delivery);
     }
 
     public function search(Request $request)
     {
         $query = $request->name;
-        $delivery = Delivery::where("order_id", '=', "$query")
+        $user = Auth::user();
+
+        if($user->type == 'vendor'){
+            //$vendor = Vendor::where('user_id', $user->id)->first();
+            $delivery = Delivery::select(
+                "delivery.*",
+            )->leftJoin('vendors', 'vendors.id', '=', 'delivery.vendor_id')
+            ->where('vendors.user_id', $user->id)
+            ->orderBy('delivery.created_at', 'desc')
             ->paginate(10);
+        }else{
+            $delivery = Delivery::where("order_id", '=', "$query")
+                ->paginate(10);
+        }
+        
         $delivery->appends(array(
             'keyword' => $query
         ));
+
         return view('delivery.delivery')
             ->with('delivery', $delivery);
     }
@@ -48,6 +74,12 @@ class DeliveryController extends Controller
         $order_item = OrderDetailModel::where('order_id', $orders->id)
             ->where('delivery_id', $delivery[0]->id)
             ->get();
+        $vendors = Delivery::where('delivery.id', $id)
+            ->leftjoin('vendors', 'vendors.id', '=', 'delivery.vendor_id')
+            ->leftjoin('users', 'users.id', '=', 'vendors.user_id')
+            ->select('vendors.id as vendor_id', 'users.name as name', 'users.contact_number as contact_number')
+            ->get();
+
         // dd($order_item);
         // $delivery_total_price = 0;
         // foreach ($order_item as $item) {
@@ -103,23 +135,27 @@ class DeliveryController extends Controller
             ->with('user', $user)
             ->with('item_detail', $item_detail)
             //->with('delivery_total_price', $delivery_total_price)
-            ->with('deliver', $delivery);
+            ->with('deliver', $delivery)
+            ->with('vendors', $vendors);
     }
 
     public function updateDelivery(Request $request)
     {
+        \Log::info('Request Data:', $request->all());
         $items = $request->items;
         $order = Order::where('id', $request->order_id)->first();
 
         // Create new delivery for new item
         if ($items != null) {
+
             // Create New Delivery
             $delivery = Delivery::create([
                 'order_id' => $request->order_id,
                 'user_id' => $order->user_id,
                 'status' => 'confirm',
-                'tracking_number' => $request->track_num,
-                'method' => $request->method,
+                'tracking_number' => $request->contact_number,
+                'method' => $request->vendor_name,
+                'vendor_id' => $request->vendor_id,
                 //'expected_date' => $request->expected_date
             ]);
 
@@ -137,7 +173,7 @@ class DeliveryController extends Controller
                 ]);
             }
 
-            Session::flash('success', "Delivery updated successfully!!");
+            Session::flash('success', "Status updated successfully!!");
             return redirect()->route('delivery.index');
         }
 
@@ -160,17 +196,27 @@ class DeliveryController extends Controller
                 $request->file('image_proof')->move(public_path('/delivery_prove'), $imageName);
 
                 // Update delivery
-                $delivery->prv_img = $imageName;                
+                $delivery->prv_img = $imageName;     
+                
+                $order->status = 'completed';
+                $order->save();
+            
+                $delivery->status = 'Completed';
+                $delivery->save();
+
+                Session::flash('success', "Status updated successfully!!");
+                return redirect()->route('delivery.index');
+            }else{
+                $order->status = 'prepare';
+                $order->save();
+            
+                $delivery->status = 'prepare';
+                $delivery->save();
+
+                Session::flash('success', "Status updated successfully!!");
+                return redirect()->route('delivery.index');
             }
-
-            $order->status = 'completed';
-            $order->save();
-        
-            $delivery->status = 'Completed';
-            $delivery->save();
-
-            Session::flash('success', "Delivery updated successfully!!");
-            return redirect()->route('delivery.index');
+            
         }
     }
 }
