@@ -58,6 +58,7 @@ Route::middleware('auth:sanctum')->group(function () {
        // Verification Vendor
        Route::get('/verification', [VendorController::class, 'verification'])->name('verification.verification');
        Route::post('/verification/update', [VendorController::class, 'update'])->name('verification.update');
+       Route::get('/faq', [VendorController::class, 'faq'])->name('faq');
     });
     Route::group(['middleware' => 'isAdmin'], function () {
         // Customer

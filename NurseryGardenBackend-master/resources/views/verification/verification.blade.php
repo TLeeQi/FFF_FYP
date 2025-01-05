@@ -74,6 +74,13 @@
             </div>
         @endif
 
+        @if($vendor->rating != 'NULL')
+            <div class="mb-3">
+                <label for="rating" class="form-label">Rating</label>
+                <input type="number" class="form-control" id="rating" name="rating" value="{{$vendor->rating}}" readonly>
+            </div>
+        @endif
+
         <button type="submit" class="btn btn-primary">Submit</button>
 
 

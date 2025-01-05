@@ -5,9 +5,17 @@
 
         <div class="container-xl flex-grow-1 container-p-y">
             @if(Auth::user()->type === 'vendor' && $vendor && $vendor->status != '1')
-                <div class="alert alert-warning">
-                    Your profile is incomplete. Please <a href="{{ route('verification.verification') }}">update your profile</a> to access the dashboard.
-                </div>
+                @if($vendor->description === 'NULL')
+                    <div class="alert alert-warning">
+                        Your profile is incomplete. Please <a href="{{ route('verification.verification') }}">update your profile</a> to access the dashboard.
+                    </div>
+                @else
+                    <div class="alert alert-warning">
+                        Your profile is pending approved by admins. 
+                        Please wait for approval. 
+                        You can update your profile <a href="{{ route('verification.verification') }}">here</a> before approval.
+                    </div>
+                @endif
             @elseif(Auth::user()->type === 'vendor' && $vendor && $vendor->status == '1')
             <div class="row gy-4">
                     <!-- Congratulations card -->

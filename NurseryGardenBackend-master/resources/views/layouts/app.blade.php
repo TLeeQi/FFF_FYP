@@ -149,6 +149,16 @@
                                 <div data-i18n="Dashboards">Profile Update</div>
                             </a>
                         </li>
+
+                        <li class="menu-header small text-uppercase">
+                            <span class="menu-header-text">FAQ</span>
+                        </li>
+                        <li class="menu-item">
+                            <a href="{{ route('faq') }}" class="menu-link">
+                                <i class="menu-icon tf-icons mdi mdi-check-decagram-outline"></i>
+                                <div data-i18n="Dashboards">FAQ</div>
+                            </a>
+                        </li>
                     @endif
 
                     <!-- <li class="menu-header small text-uppercase">

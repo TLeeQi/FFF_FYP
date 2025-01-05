@@ -96,4 +96,8 @@ class VendorController extends Controller
         ->with('success', 'Vendor information updated successfully');
     }
 
+    public function faq()
+    {
+        return view('faq');
+    }
 }
