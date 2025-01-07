@@ -64,10 +64,10 @@ class CustomerController extends Controller
     public function vendor()
     {
         $vendor = User::where('type', 'vendor')
-        ->where('users.status', '1')
-        ->leftjoin('vendors', 'vendors.user_id', '=', 'users.id')
-        ->select('users.*', 'vendors.rating as rating', 'vendors.id as vendor_id', 'vendors.description as description', 'vendors.category as category', 'vendors.status as vendor_status')
-        ->paginate(10);
+            ->where('users.status', '1')
+            ->leftjoin('vendors', 'vendors.user_id', '=', 'users.id')
+            ->select('users.*', 'vendors.rating as rating', 'vendors.id as vendor_id', 'vendors.description as description', 'vendors.category as category', 'vendors.status as vendor_status', 'users.image as image', 'vendors.comment as comment')
+            ->paginate(10);
 
         return view('customer.vendor')->with("vendors", $vendor);
     }
@@ -130,7 +130,9 @@ class CustomerController extends Controller
                 'users.type as type', 
                 'vendors.description as description',
                 'vendors.status as vendor_status',
-                'vendors.category as category'
+                'vendors.category as category',
+                'vendors.comment as comment',
+                'vendors.rating as rating'
             )
             ->whereNull('vendors.description')
             ->orderBy('vendors.created_at', 'desc')
@@ -149,13 +151,15 @@ class CustomerController extends Controller
                 'users.type as type', 
                 'vendors.description as description',
                 'vendors.status as vendor_status',
-                'vendors.category as category'
+                'vendors.category as category',
+                'vendors.comment as comment',
+                'vendors.rating as rating'
             )
             ->whereNotNull('vendors.description')  // Filters vendors with non-NULL description
             ->orderBy('vendors.created_at', 'desc')
             ->paginate(10)->setPath('');
-        }else{
-            $vendor = Vendor::where('vendors.status', '1')
+        }else if($request->status == 'rejected'){
+            $vendor = Vendor::where('vendors.status', '2')
             ->leftJoin('users', 'vendors.user_id', '=', 'users.id')
             ->select(
                 'vendors.id as vendor_id', 
@@ -167,10 +171,17 @@ class CustomerController extends Controller
                 'users.type as type', 
                 'vendors.description as description',
                 'vendors.status as vendor_status',
-                'vendors.category as category'
+                'vendors.category as category',
+                'vendors.comment as comment',
+                'vendors.rating as rating'
             )
             ->orderBy('vendors.created_at', 'desc')
             ->paginate(10)->setPath('');
+        }else{
+            $vendor = Vendor::where('vendors.status', '1')
+            ->leftJoin('users', 'vendors.user_id', '=', 'users.id')
+            ->select('users.*', 'vendors.rating as rating', 'vendors.id as vendor_id', 'vendors.description as description', 'vendors.category as category', 'vendors.status as vendor_status', 'users.image as image')
+            ->paginate(10);
         }
         return view('customer.vendor')->with('vendors', $vendor);
     }
@@ -189,7 +200,8 @@ class CustomerController extends Controller
             'vendors.description as description', 
             'vendors.category as category', 
             'vendors.status as vendor_status', 
-            'vendors.ssm_path as ssm_path')
+            'vendors.ssm_path as ssm_path',
+            'vendors.comment as comment')
             ->first();
 
         if (!$vendor) {
@@ -209,4 +221,10 @@ class CustomerController extends Controller
         return redirect()->route('vendor.detail', $id)->with('success', 'Vendor verified successfully!');
     }
 
+    public function vendorReject(Request $request, $id)
+    {
+        $vendor = Vendor::where('id', $id)->first()
+        ->update(['status' => '2', 'comment' => $request->comment]);
+        return redirect()->route('vendor.detail', $id)->with('success', 'Vendor rejected successfully!');
+    }
 }

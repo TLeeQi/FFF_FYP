@@ -5,15 +5,22 @@
 
         <div class="container-xl flex-grow-1 container-p-y">
             @if(Auth::user()->type === 'vendor' && $vendor && $vendor->status != '1')
-                @if($vendor->description === 'NULL')
+                @if($vendor->description === 'NULL' && $vendor->status == '0')
                     <div class="alert alert-warning">
                         Your profile is incomplete. Please <a href="{{ route('verification.verification') }}">update your profile</a> to access the dashboard.
                     </div>
-                @else
+                @elseif($vendor->description != 'NULL' && $vendor->status == '0')
                     <div class="alert alert-warning">
                         Your profile is pending approved by admins. 
                         Please wait for approval. 
                         You can update your profile <a href="{{ route('verification.verification') }}">here</a> before approval.
+                    </div>
+                @elseif($vendor->status == '2')
+                    <div class="alert alert-warning">
+                        Your profile is rejected by admins. 
+                        Please check the reason below:
+                        <p>{{ $vendor->comment }}</p>
+                        You can update your profile <a href="{{ route('verification.verification') }}">here</a> to update your profile.
                     </div>
                 @endif
             @elseif(Auth::user()->type === 'vendor' && $vendor && $vendor->status == '1')
@@ -335,8 +342,30 @@
                                                 </div>
                                             </div>
                                             <div class="ms-3">
-                                                <div class="small mb-1">Customers</div>
+                                                <div class="small mb-1">Users</div>
                                                 <h5 class="mb-0">{{ $totalUsers }}</h5>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar">
+                                                <div class="avatar-initial bg-primary rounded shadow">
+                                                <i class="mdi mdi-account-group-outline mdi-24px"></i>
+                                                </div>
+                                            </div>
+                                            <div class="ms-3">
+                                                <div class="small mb-1">Vendors</div>
+                                                <h5 class="mb-0" >{{ $totalVendors }}</h5>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar">
+                                                <div class="avatar-initial bg-warning rounded shadow">
+                                                <i class="mdi mdi-account-clock-outline mdi-24px"></i>
+                                                </div>
+                                            </div>
+                                            <div class="ms-3">
+                                                <div class="small mb-1" style="color: red;">Pending Vendors</div>
+                                                <h5 class="mb-0" style="color: red;">{{ $pendingVendors }}</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -446,6 +475,7 @@
                     </div>
                     <!--/ Total Earnings -->
 
+                   
                     <!-- Four Cards -->
                     <div class="col-xl-4 col-md-6">
                         <div class="row gy-4">
@@ -567,6 +597,7 @@
                         </div>
                         <!--/ Sales by Countries -->
                     </div>
+                    
                 </div>
             @endif
         </div>

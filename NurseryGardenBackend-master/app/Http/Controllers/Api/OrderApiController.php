@@ -532,13 +532,13 @@ class OrderApiController extends Controller
                 $imageNames = [];
                 if (is_array($uploadedPhotos)) {
                     foreach ($uploadedPhotos as $photo) {
-                        $fileName = uniqid() . '_' . $photo->getClientOriginalName();
+                        $fileName = $photo->getClientOriginalName();
                         $photo->move(public_path('service_image'), $fileName);
                         Log::info('File moved successfully: ' . $fileName);
                         $imageNames[] = $fileName;
                     }
                 } elseif ($uploadedPhotos instanceof UploadedFile) {
-                    $fileName = uniqid() . '_' . $uploadedPhotos->getClientOriginalName();
+                    $fileName = $uploadedPhotos->getClientOriginalName();
                     $uploadedPhotos->move(public_path('service_image'), $fileName);
                     Log::info('File moved successfully: ' . $fileName);
                     $imageNames[] = $fileName;

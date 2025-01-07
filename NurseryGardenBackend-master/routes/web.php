@@ -71,6 +71,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::any('/vendor/filter/{status}', [CustomerController::class, 'vendorfilter'])->name('vendor.filter');
         Route::any('/vendor/detail/{id}', [CustomerController::class, 'vendorDetail'])->name('vendor.detail');
         Route::any('/vendor/verify/{id}', [CustomerController::class, 'vendorVerify'])->name('vendor.verify');
+        Route::any('/vendor/reject/{id}', [CustomerController::class, 'vendorReject'])->name('vendor.reject');
 
         Route::group(['middleware' => 'isSadmin'], function () {
             Route::get('/customer/edit/{id}', [CustomerController::class, 'edit'])->name('customer.edit');

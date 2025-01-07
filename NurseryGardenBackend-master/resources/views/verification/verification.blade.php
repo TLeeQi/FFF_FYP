@@ -67,11 +67,31 @@
             <div class="mb-3">
                 <label for="ssm" class="form-label">SSM Document (PDF, DOC, DOCX, JPG, JPEG, PNG)</label>
                 <input type="file" class="form-control" id="ssm" name="ssm" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required>
+                @if($vendor->ssm_path)
+                    <p>Current SSM Document: 
+                        <a href="{{ asset('ssm_files/' . $vendor->ssm_path) }}" target="_blank">{{ basename($vendor->ssm_path) }}</a>
+                    </p>
+                @else
+                    <p>No document uploaded yet.</p>
+                @endif
             </div>
         @elseif($vendor->status == 1 && $vendor->ssm_path)
             <div class="mb-3">
                 <p>SSM Document: <a href="{{ asset('ssm_files/' . $vendor->ssm_path) }}" target="_blank">View Document</a></p>
             </div>
+        @elseif($vendor->status == 2)
+        <div class="mb-3">
+            <label for="ssm" class="form-label">SSM Document (PDF, DOC, DOCX, JPG, JPEG, PNG)</label>
+            <input type="file" class="form-control" id="ssm" name="ssm" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+            
+            @if($vendor->ssm_path)
+                <p>Current SSM Document: 
+                    <a href="{{ asset('ssm_files/' . $vendor->ssm_path) }}" target="_blank">{{ basename($vendor->ssm_path) }}</a>
+                </p>
+            @else
+                <p>No document uploaded yet.</p>
+            @endif
+        </div>
         @endif
 
         @if($vendor->rating != 'NULL')

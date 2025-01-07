@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 05, 2025 at 04:04 AM
+-- Generation Time: Jan 07, 2025 at 04:28 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -44,7 +44,8 @@ CREATE TABLE `address` (
 
 INSERT INTO `address` (`id`, `address`, `status`, `name`, `phone`, `user_id`, `created_at`, `updated_at`) VALUES
 (1, 'hwhueyeje', '1', NULL, NULL, 4, '2024-11-18 16:07:44', '2024-11-18 16:07:44'),
-(2, 'yyy', '1', NULL, NULL, 4, '2024-12-05 03:40:33', '2024-12-05 03:40:33');
+(2, 'yyy', '1', NULL, NULL, 4, '2024-12-05 03:40:33', '2024-12-05 03:40:33'),
+(3, 'gtgtvhbu', '1', NULL, NULL, 112, '2025-01-07 13:10:01', '2025-01-07 13:10:01');
 
 -- --------------------------------------------------------
 
@@ -209,21 +210,11 @@ INSERT INTO `delivery` (`id`, `tracking_number`, `method`, `status`, `details`, 
 (12, 'wwwq', 'qwsw', 'prepare', NULL, NULL, NULL, 4, 128, NULL, '2025-01-01 16:09:22', '2025-01-01 16:09:22'),
 (13, 'ded', 'eede', 'prepare', NULL, NULL, NULL, 4, 129, NULL, '2025-01-01 16:13:20', '2025-01-01 16:13:20'),
 (14, 'd', 'mk', 'prepare', NULL, NULL, NULL, 4, 130, NULL, '2025-01-01 16:32:29', '2025-01-01 16:32:29'),
-(15, 'd', 'cdd', 'confirm', NULL, NULL, NULL, 4, 132, NULL, '2025-01-01 16:38:34', '2025-01-01 16:38:34'),
-(16, 'fvfv', 'fvfv', 'Completed', NULL, NULL, NULL, 4, 133, NULL, '2025-01-01 17:16:02', '2025-01-02 15:33:24'),
-(17, 'z', 'zz', 'Completed', NULL, '1735780287.jpg', NULL, 4, 134, 2, '2025-01-01 17:19:35', '2025-01-02 01:11:27'),
-(18, NULL, NULL, 'confirm', NULL, NULL, NULL, 4, 133, 1, '2025-01-02 13:34:11', '2025-01-02 13:34:11'),
-(19, '0123456789', NULL, 'Completed', NULL, NULL, NULL, 4, 135, NULL, '2025-01-02 13:53:29', '2025-01-02 15:27:21'),
-(20, '0123456789', NULL, 'confirm', NULL, NULL, NULL, 4, 131, NULL, '2025-01-02 13:55:22', '2025-01-02 13:55:22'),
-(21, '0123456789', NULL, 'confirm', NULL, NULL, NULL, 4, 122, NULL, '2025-01-02 13:59:32', '2025-01-02 13:59:32'),
-(22, '0123456789', NULL, 'confirm', NULL, NULL, NULL, 4, 121, NULL, '2025-01-02 14:02:02', '2025-01-02 14:02:02'),
-(23, '0123456789', 'vendor1', 'prepare', NULL, NULL, NULL, 4, 120, NULL, '2025-01-02 14:05:52', '2025-01-02 15:36:01'),
-(24, '0123456789', 'vendor1', 'Completed', NULL, '1735827133.jpg', NULL, 4, 119, NULL, '2025-01-02 14:10:25', '2025-01-02 14:12:13'),
-(25, '0123456789', 'vendor1', 'Completed', NULL, '1735831314.jpg', NULL, 4, 136, NULL, '2025-01-02 15:09:26', '2025-01-02 15:21:54'),
-(27, '0123456789', 'vendor1', 'Completed', NULL, '1735833028.jpg', NULL, 4, 137, 1, '2025-01-02 15:50:14', '2025-01-02 15:50:28'),
-(28, '123-4567890', 'vendor2', 'Completed', NULL, '1735960575.jpg', NULL, 4, 138, 2, '2025-01-04 03:14:50', '2025-01-04 03:16:15'),
-(29, '123-4567890', 'vendor2', 'Completed', NULL, '1735962635.jpg', NULL, 4, 140, 2, '2025-01-04 03:50:10', '2025-01-04 03:50:35'),
-(30, '0123456789', 'vendor7', 'Completed', NULL, '1735962700.jpg', NULL, 4, 139, 13, '2025-01-04 03:51:15', '2025-01-04 03:51:40');
+(15, 'd', 'cdd', 'prepare', NULL, NULL, NULL, 4, 132, NULL, '2025-01-01 16:38:34', '2025-01-01 16:38:34'),
+(16, 'fvfv', 'fvfv', 'confirm', NULL, NULL, NULL, 4, 133, NULL, '2025-01-01 17:16:02', '2025-01-01 17:16:02'),
+(17, 'z', 'zz', 'Completed', NULL, '1735780287.jpg', NULL, 4, 134, NULL, '2025-01-01 17:19:35', '2025-01-02 01:11:27'),
+(18, '0123456789', 'Elite Home Services', 'Completed', NULL, '1736258076.png', NULL, 112, 136, 9, '2025-01-07 13:44:13', '2025-01-07 13:54:36'),
+(19, '0123456789', 'HandyPro Solutions', 'confirm', NULL, NULL, NULL, 112, 143, 12, '2025-01-07 13:54:23', '2025-01-07 13:54:23');
 
 -- --------------------------------------------------------
 
@@ -274,8 +265,7 @@ INSERT INTO `gardening_details` (`id`, `type`, `area`, `types_property`, `app_da
 (6, 'Flower Planting', 'Above 1000 sqr ft', 'Commercial (e.g. factory, shopping centre)', '2024-12-29', 'Lunch Time (11 AM - 1 PM)', NULL, '[]', 'RM5000 - RM9999', '2024-12-28 17:58:03', '2024-12-28 17:58:03'),
 (7, 'Flower Planting', 'Above 1000 sqr ft', 'High-rise (e.g. condo, apartment)', '2024-12-29', 'Early Afternoon (1 PM - 3 PM)', NULL, '[]', 'RM10000 - RM19999', '2024-12-28 18:05:56', '2024-12-28 18:05:56'),
 (8, 'Flower Planting', '500 - 1000 sqr ft', 'Commercial (e.g. factory, shopping centre)', '2024-12-31', 'Lunch Time (11 AM - 1 PM)', NULL, '1000070276.jpg,1000070275.jpg', 'RM20000 - RM49999', '2024-12-31 02:45:56', '2024-12-31 02:45:56'),
-(9, 'Flower Planting', '500 - 1000 sqr ft', 'Light Commercial (e.g. office, shop, cafe)', '2025-01-02', 'Early Afternoon (1 PM - 3 PM)', NULL, 'no_service.png', 'RM10000 - RM19999', '2025-01-02 15:16:47', '2025-01-02 15:16:47'),
-(10, 'Flower Planting', 'Below 500 sqr ft', 'Light Commercial (e.g. office, shop, cafe)', '2025-01-05', 'Late Afternoon (3 PM - 5 PM)', NULL, '1000070276.jpg', 'RM10000 - RM19999', '2025-01-04 02:39:09', '2025-01-04 02:39:09');
+(9, 'Flower Planting', 'Above 1000 sqr ft', 'High-rise (e.g. condo, apartment)', '2025-01-07', 'Early Afternoon (1 PM - 3 PM)', NULL, '1000070302.jpg', 'RM50000 - RM99999', '2025-01-07 13:11:59', '2025-01-07 13:11:59');
 
 -- --------------------------------------------------------
 
@@ -324,9 +314,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (51, '2024_12_27_223627_add_description_to_vendors_table', 7),
 (54, '2024_12_30_234113_update_photo_column_in_wiring_piping_gardening_runner', 8),
 (55, '2025_01_02_100414_add_user_id_to_vendors_table', 9),
-(56, '2025_01_02_213704_add_vendor_id_to_delivery_table', 10),
-(57, '2025_01_03_015722_add_ssm_to_vendor_table', 11),
-(58, '2025_01_04_010659_add_category_to_vendor_table', 12);
+(56, '2025_01_02_213704_add_vendor_id_to_delivery_table', 9),
+(57, '2025_01_03_015722_add_ssm_to_vendor_table', 9),
+(58, '2025_01_04_010659_add_category_to_vendor_table', 9),
+(59, '2025_01_07_224619_add_comment_to_vendors_table', 10);
 
 -- --------------------------------------------------------
 
@@ -472,10 +463,10 @@ INSERT INTO `order` (`id`, `status`, `date`, `total_amount`, `user_id`, `address
 (116, 'pay', '2024-12-31', 50.00, 4, 'hhfd', NULL, NULL, NULL, '2024-12-31 02:01:37', '2024-12-31 02:01:37', 50.00),
 (117, 'prepare', '2024-12-31', 50.00, 4, 'grgg', NULL, NULL, NULL, '2024-12-31 02:10:10', '2024-12-31 02:19:15', 50.00),
 (118, 'confirm', '2024-12-31', 50.00, 4, 'bdb', NULL, NULL, '1', '2024-12-31 02:11:07', '2025-01-01 13:12:22', 50.00),
-(119, 'completed', '2024-12-31', 50.00, 4, 'gegsfs', NULL, NULL, NULL, '2024-12-31 02:32:49', '2025-01-02 14:12:13', 50.00),
-(120, 'prepare', '2024-12-31', 50.00, 4, 'dgd', NULL, NULL, NULL, '2024-12-31 02:35:15', '2025-01-02 15:36:01', 50.00),
-(121, 'confirm', '2024-12-31', 50.00, 4, 'yrgrg', NULL, NULL, NULL, '2024-12-31 02:42:15', '2025-01-02 14:02:02', 50.00),
-(122, 'confirm', '2024-12-31', 50.00, 4, 'gdh', NULL, NULL, NULL, '2024-12-31 02:44:20', '2025-01-02 13:59:32', 50.00),
+(119, 'pay', '2024-12-31', 50.00, 4, 'gegsfs', NULL, NULL, NULL, '2024-12-31 02:32:49', '2024-12-31 02:32:49', 50.00),
+(120, 'pay', '2024-12-31', 50.00, 4, 'dgd', NULL, NULL, NULL, '2024-12-31 02:35:15', '2024-12-31 02:35:15', 50.00),
+(121, 'pay', '2024-12-31', 50.00, 4, 'yrgrg', NULL, NULL, NULL, '2024-12-31 02:42:15', '2024-12-31 02:42:15', 50.00),
+(122, 'pay', '2024-12-31', 50.00, 4, 'gdh', NULL, NULL, NULL, '2024-12-31 02:44:20', '2024-12-31 02:44:20', 50.00),
 (123, 'confirm', '2024-12-31', 50.00, 4, 'gdvd', NULL, NULL, NULL, '2024-12-31 02:45:56', '2025-01-01 10:11:53', 50.00),
 (124, 'confirm', '2024-12-31', 50.00, 4, 'gdg', NULL, NULL, NULL, '2024-12-31 02:46:10', '2025-01-01 10:03:43', 50.00),
 (125, 'confirm', '2024-12-31', 50.00, 4, 'gdge', NULL, NULL, NULL, '2024-12-31 02:46:27', '2025-01-01 15:46:57', 50.00),
@@ -484,18 +475,22 @@ INSERT INTO `order` (`id`, `status`, `date`, `total_amount`, `user_id`, `address
 (128, 'confirm', '2025-01-01', 50.00, 4, 'dhfhf', NULL, NULL, NULL, '2025-01-01 15:59:39', '2025-01-01 16:09:22', 50.00),
 (129, 'confirm', '2025-01-02', 50.00, 4, 'gfg', NULL, NULL, NULL, '2025-01-01 16:12:45', '2025-01-01 16:13:20', 50.00),
 (130, 'confirm', '2025-01-02', 50.00, 4, 'vdvd', NULL, NULL, NULL, '2025-01-01 16:31:54', '2025-01-01 16:32:29', 50.00),
-(131, 'confirm', '2025-01-02', 50.00, 4, 'gefe', NULL, NULL, NULL, '2025-01-01 16:37:19', '2025-01-02 13:55:22', 50.00),
+(131, 'pay', '2025-01-02', 50.00, 4, 'gefe', NULL, NULL, NULL, '2025-01-01 16:37:19', '2025-01-01 16:37:19', 50.00),
 (132, 'confirm', '2025-01-02', 50.00, 4, 'gefe', NULL, NULL, NULL, '2025-01-01 16:37:35', '2025-01-01 16:38:34', 50.00),
-(133, 'completed', '2025-01-02', 50.00, 4, 'gugj', NULL, NULL, NULL, '2025-01-01 17:15:34', '2025-01-02 15:33:24', 50.00),
+(133, 'prepare', '2025-01-02', 50.00, 4, 'gugj', NULL, NULL, NULL, '2025-01-01 17:15:34', '2025-01-01 17:15:48', 50.00),
 (134, 'completed', '2025-01-02', 50.00, 4, 'yvyg', NULL, NULL, NULL, '2025-01-01 17:18:57', '2025-01-02 01:11:27', 50.00),
-(135, 'completed', '2025-01-02', 50.00, 4, 'ghh', NULL, NULL, NULL, '2025-01-02 13:45:08', '2025-01-02 15:27:21', 50.00),
-(136, 'completed', '2025-01-02', 50.00, 4, 'gug', NULL, NULL, NULL, '2025-01-02 15:06:17', '2025-01-02 15:21:54', 50.00),
-(137, 'completed', '2025-01-02', 50.00, 4, 'high', NULL, NULL, NULL, '2025-01-02 15:16:47', '2025-01-02 15:50:28', 50.00),
-(138, 'completed', '2025-01-04', 50.00, 4, 'xjgxgxucti', NULL, NULL, NULL, '2025-01-04 02:26:36', '2025-01-04 03:16:15', 50.00),
-(139, 'completed', '2025-01-04', 50.00, 4, 'jvj', NULL, NULL, NULL, '2025-01-04 02:38:41', '2025-01-04 03:51:40', 50.00),
-(140, 'completed', '2025-01-04', 50.00, 4, 'hhjk', NULL, NULL, NULL, '2025-01-04 02:39:09', '2025-01-04 03:50:35', 50.00),
-(141, 'prepare', '2025-01-04', 50.00, 4, 'jsgsueu', NULL, NULL, NULL, '2025-01-04 02:39:33', '2025-01-04 02:39:45', 50.00),
-(142, 'pay', '2025-01-04', 50.00, 4, 'bb', NULL, NULL, NULL, '2025-01-04 08:21:21', '2025-01-04 08:21:21', 50.00);
+(135, 'pay', '2025-01-07', 50.00, 112, 'gubjbuh', NULL, NULL, NULL, '2025-01-07 13:09:44', '2025-01-07 13:09:44', 50.00),
+(136, 'completed', '2025-01-07', 50.00, 112, 'vhh', NULL, NULL, NULL, '2025-01-07 13:11:11', '2025-01-07 13:54:36', 50.00),
+(137, 'pay', '2025-01-07', 50.00, 112, 'ggh', NULL, NULL, NULL, '2025-01-07 13:11:59', '2025-01-07 13:11:59', 50.00),
+(138, 'pay', '2025-01-07', 50.00, 112, 'ghhj', NULL, NULL, NULL, '2025-01-07 13:14:06', '2025-01-07 13:14:06', 50.00),
+(139, 'pay', '2025-01-07', 50.00, 112, 'hh jj', NULL, NULL, NULL, '2025-01-07 13:20:21', '2025-01-07 13:20:21', 50.00),
+(140, 'pay', '2025-01-07', 50.00, 112, 'ghh', NULL, NULL, NULL, '2025-01-07 13:27:37', '2025-01-07 13:27:37', 50.00),
+(141, 'pay', '2025-01-07', 50.00, 112, 'ghh', NULL, NULL, NULL, '2025-01-07 13:29:26', '2025-01-07 13:29:26', 50.00),
+(142, 'prepare', '2025-01-07', 50.00, 112, 'hh', NULL, NULL, NULL, '2025-01-07 13:30:45', '2025-01-07 13:54:03', 50.00),
+(143, 'confirm', '2025-01-07', 50.00, 112, 'hh', NULL, NULL, NULL, '2025-01-07 13:30:55', '2025-01-07 13:54:23', 50.00),
+(144, 'pay', '2025-01-07', 50.00, 112, 'jianain', NULL, NULL, NULL, '2025-01-07 13:57:49', '2025-01-07 13:57:49', 50.00),
+(145, 'pay', '2025-01-07', 50.00, 112, 'gjj', NULL, NULL, NULL, '2025-01-07 13:59:43', '2025-01-07 13:59:43', 50.00),
+(146, 'pay', '2025-01-07', 50.00, 112, 'hhj', NULL, NULL, NULL, '2025-01-07 14:01:55', '2025-01-07 14:01:55', 50.00);
 
 -- --------------------------------------------------------
 
@@ -614,10 +609,10 @@ INSERT INTO `order_detail` (`id`, `quantity`, `price`, `amount`, `order_id`, `re
 (110, 1, 50.00, 50.00, 116, NULL, 2, NULL, NULL, NULL, '2024-12-31 02:01:37', '2024-12-31 02:01:37', 80, NULL, NULL, NULL),
 (111, 1, 50.00, 50.00, 117, NULL, 2, NULL, NULL, NULL, '2024-12-31 02:10:10', '2024-12-31 02:10:10', 81, NULL, NULL, NULL),
 (112, 1, 50.00, 50.00, 118, NULL, 2, NULL, NULL, NULL, '2024-12-31 02:11:07', '2024-12-31 02:11:07', 82, NULL, NULL, NULL),
-(113, 1, 50.00, 50.00, 119, '1', 2, NULL, 24, NULL, '2024-12-31 02:32:49', '2025-01-02 14:10:25', 83, NULL, NULL, NULL),
-(114, 1, 50.00, 50.00, 120, '1', 2, NULL, 23, NULL, '2024-12-31 02:35:15', '2025-01-02 14:05:52', 84, NULL, NULL, NULL),
-(115, 1, 50.00, 50.00, 121, '1', 3, NULL, 22, NULL, '2024-12-31 02:42:15', '2025-01-02 14:02:02', NULL, 6, NULL, NULL),
-(116, 1, 50.00, 50.00, 122, '1', 3, NULL, 21, NULL, '2024-12-31 02:44:20', '2025-01-02 13:59:32', NULL, 7, NULL, NULL),
+(113, 1, 50.00, 50.00, 119, NULL, 2, NULL, NULL, NULL, '2024-12-31 02:32:49', '2024-12-31 02:32:49', 83, NULL, NULL, NULL),
+(114, 1, 50.00, 50.00, 120, NULL, 2, NULL, NULL, NULL, '2024-12-31 02:35:15', '2024-12-31 02:35:15', 84, NULL, NULL, NULL),
+(115, 1, 50.00, 50.00, 121, NULL, 3, NULL, NULL, NULL, '2024-12-31 02:42:15', '2024-12-31 02:42:15', NULL, 6, NULL, NULL),
+(116, 1, 50.00, 50.00, 122, NULL, 3, NULL, NULL, NULL, '2024-12-31 02:44:20', '2024-12-31 02:44:20', NULL, 7, NULL, NULL),
 (117, 1, 50.00, 50.00, 123, NULL, 4, NULL, NULL, NULL, '2024-12-31 02:45:56', '2024-12-31 02:45:56', NULL, NULL, 8, NULL),
 (118, 1, 50.00, 50.00, 124, NULL, 5, NULL, NULL, NULL, '2024-12-31 02:46:10', '2024-12-31 02:46:10', NULL, NULL, NULL, 5),
 (119, 1, 50.00, 50.00, 125, NULL, 2, NULL, NULL, NULL, '2024-12-31 02:46:27', '2024-12-31 02:46:27', 85, NULL, NULL, NULL),
@@ -626,18 +621,22 @@ INSERT INTO `order_detail` (`id`, `quantity`, `price`, `amount`, `order_id`, `re
 (122, 1, 50.00, 50.00, 128, '1', 2, NULL, 12, NULL, '2025-01-01 15:59:39', '2025-01-01 16:09:22', 86, NULL, NULL, NULL),
 (123, 1, 50.00, 50.00, 129, '1', 2, NULL, 13, NULL, '2025-01-01 16:12:45', '2025-01-01 16:13:20', 87, NULL, NULL, NULL),
 (124, 1, 50.00, 50.00, 130, '1', 2, NULL, 14, NULL, '2025-01-01 16:31:54', '2025-01-01 16:32:29', 88, NULL, NULL, NULL),
-(125, 1, 50.00, 50.00, 131, '1', 2, NULL, 20, NULL, '2025-01-01 16:37:19', '2025-01-02 13:55:22', 89, NULL, NULL, NULL),
+(125, 1, 50.00, 50.00, 131, NULL, 2, NULL, NULL, NULL, '2025-01-01 16:37:19', '2025-01-01 16:37:19', 89, NULL, NULL, NULL),
 (126, 1, 50.00, 50.00, 132, '1', 2, NULL, 15, NULL, '2025-01-01 16:37:35', '2025-01-01 16:38:34', 90, NULL, NULL, NULL),
-(127, 1, 50.00, 50.00, 133, '1', 2, NULL, 18, NULL, '2025-01-01 17:15:34', '2025-01-02 13:34:11', 91, NULL, NULL, NULL),
+(127, 1, 50.00, 50.00, 133, '1', 2, NULL, 16, NULL, '2025-01-01 17:15:34', '2025-01-01 17:16:02', 91, NULL, NULL, NULL),
 (128, 1, 50.00, 50.00, 134, '1', 2, NULL, 17, NULL, '2025-01-01 17:18:57', '2025-01-01 17:19:35', 92, NULL, NULL, NULL),
-(129, 1, 50.00, 50.00, 135, '1', 2, NULL, 19, NULL, '2025-01-02 13:45:08', '2025-01-02 13:53:29', 93, NULL, NULL, NULL),
-(130, 1, 50.00, 50.00, 136, '1', 5, NULL, 25, NULL, '2025-01-02 15:06:17', '2025-01-02 15:09:26', NULL, NULL, NULL, 6),
-(131, 1, 50.00, 50.00, 137, '1', 4, NULL, 27, NULL, '2025-01-02 15:16:47', '2025-01-02 15:50:15', NULL, NULL, 9, NULL),
-(132, 1, 50.00, 50.00, 138, '1', 2, NULL, 28, NULL, '2025-01-04 02:26:36', '2025-01-04 03:14:50', 94, NULL, NULL, NULL),
-(133, 1, 50.00, 50.00, 139, '1', 3, NULL, 30, NULL, '2025-01-04 02:38:41', '2025-01-04 03:51:15', NULL, 10, NULL, NULL),
-(134, 1, 50.00, 50.00, 140, '1', 4, NULL, 29, NULL, '2025-01-04 02:39:09', '2025-01-04 03:50:10', NULL, NULL, 10, NULL),
-(135, 1, 50.00, 50.00, 141, NULL, 5, NULL, NULL, NULL, '2025-01-04 02:39:33', '2025-01-04 02:39:33', NULL, NULL, NULL, 7),
-(136, 1, 50.00, 50.00, 142, NULL, 2, NULL, NULL, NULL, '2025-01-04 08:21:21', '2025-01-04 08:21:21', 95, NULL, NULL, NULL);
+(129, 1, 50.00, 50.00, 135, NULL, 2, NULL, NULL, NULL, '2025-01-07 13:09:44', '2025-01-07 13:09:44', 93, NULL, NULL, NULL),
+(130, 1, 50.00, 50.00, 136, '1', 3, NULL, 18, NULL, '2025-01-07 13:11:11', '2025-01-07 13:44:13', NULL, 10, NULL, NULL),
+(131, 1, 50.00, 50.00, 137, NULL, 4, NULL, NULL, NULL, '2025-01-07 13:11:59', '2025-01-07 13:11:59', NULL, NULL, 9, NULL),
+(132, 1, 50.00, 50.00, 138, NULL, 5, NULL, NULL, NULL, '2025-01-07 13:14:06', '2025-01-07 13:14:06', NULL, NULL, NULL, 6),
+(133, 1, 50.00, 50.00, 139, NULL, 5, NULL, NULL, NULL, '2025-01-07 13:20:21', '2025-01-07 13:20:21', NULL, NULL, NULL, 7),
+(134, 1, 50.00, 50.00, 140, NULL, 2, NULL, NULL, NULL, '2025-01-07 13:27:37', '2025-01-07 13:27:37', 94, NULL, NULL, NULL),
+(135, 1, 50.00, 50.00, 141, NULL, 2, NULL, NULL, NULL, '2025-01-07 13:29:26', '2025-01-07 13:29:26', 95, NULL, NULL, NULL),
+(136, 1, 50.00, 50.00, 142, NULL, 2, NULL, NULL, NULL, '2025-01-07 13:30:45', '2025-01-07 13:30:45', 96, NULL, NULL, NULL),
+(137, 1, 50.00, 50.00, 143, '1', 2, NULL, 19, NULL, '2025-01-07 13:30:55', '2025-01-07 13:54:23', 97, NULL, NULL, NULL),
+(138, 1, 50.00, 50.00, 144, NULL, 2, NULL, NULL, NULL, '2025-01-07 13:57:49', '2025-01-07 13:57:49', 98, NULL, NULL, NULL),
+(139, 1, 50.00, 50.00, 145, NULL, 2, NULL, NULL, NULL, '2025-01-07 13:59:43', '2025-01-07 13:59:43', 99, NULL, NULL, NULL),
+(140, 1, 50.00, 50.00, 146, NULL, 2, NULL, NULL, NULL, '2025-01-07 14:01:55', '2025-01-07 14:01:55', 100, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -721,19 +720,10 @@ INSERT INTO `payment` (`id`, `status`, `amount`, `details`, `method`, `date`, `o
 (31, 'success', 50.00, 'pi_3QcUvPHH9VySX7IE1MvKar2f_secret_p14BxmcidWsHX8rbaNq7o0DYG', 'Card', '2025-01-02', 132, NULL, 4, '2025-01-01 16:37:39', '2025-01-01 16:37:59'),
 (32, 'success', 50.00, 'pi_3QcVW9HH9VySX7IE1sF4eLs9_secret_JoVmHrS1Q0ptIy570DrB5TwjN', 'Card', '2025-01-02', 133, NULL, 4, '2025-01-01 17:15:37', '2025-01-01 17:15:48'),
 (33, 'success', 50.00, 'pi_3QcVZQHH9VySX7IE0XBdONES_secret_TjDG9pz78lb0asHXhqXtCgoIU', 'Card', '2025-01-02', 134, NULL, 4, '2025-01-01 17:19:00', '2025-01-01 17:19:22'),
-(34, 'success', 50.00, 'pi_3QcoizHH9VySX7IE1UmoRRUk_secret_QD3N8IWMlcddEEqRunFbwtqkr', 'Card', '2025-01-02', 135, NULL, 4, '2025-01-02 13:46:09', '2025-01-02 13:46:25'),
-(35, 'success', 50.00, 'pi_3QcorEHH9VySX7IE0AVfN5G3_secret_pe5QK6WRRCpuAErayTm2GlKdF', 'Card', '2025-01-02', 131, NULL, 4, '2025-01-02 13:54:40', '2025-01-02 13:54:51'),
-(36, 'success', 50.00, 'pi_3QcovSHH9VySX7IE0JZ4MFwR_secret_xwSxqFcN4kKroBo8GylCbiHvP', 'Card', '2025-01-02', 122, NULL, 4, '2025-01-02 13:59:02', '2025-01-02 13:59:13'),
-(37, 'success', 50.00, 'pi_3QcoxtHH9VySX7IE0I9NNQUV_secret_0dSJXmSHkPbpRdkOWmjDjvUXR', 'Card', '2025-01-02', 121, NULL, 4, '2025-01-02 14:01:33', '2025-01-02 14:01:48'),
-(38, 'success', 50.00, 'pi_3Qcp1VHH9VySX7IE0Fd0NsQy_secret_KnbIuMg7COKXCMo4uXWtBOVuX', 'Card', '2025-01-02', 120, NULL, 4, '2025-01-02 14:05:17', '2025-01-02 14:05:27'),
-(39, 'success', 50.00, 'pi_3Qcp5xHH9VySX7IE0dJRW4Ev_secret_IoKfXsXTem78wS4kwOUn4qoXH', 'Card', '2025-01-02', 119, NULL, 4, '2025-01-02 14:09:53', '2025-01-02 14:10:04'),
-(40, 'pending', 50.00, 'pi_3Qcpu4HH9VySX7IE0LLKQNyD_secret_aE8curgzANcNxqVJbpuTuJ3hx', 'Card', '2025-01-02', 115, NULL, 4, '2025-01-02 15:01:40', '2025-01-02 15:01:40'),
-(41, 'success', 50.00, 'pi_3Qcq0DHH9VySX7IE05ScrDa6_secret_evopSherXBHmNBE44bvBEKKiM', 'Card', '2025-01-02', 136, NULL, 4, '2025-01-02 15:08:01', '2025-01-02 15:08:13'),
-(42, 'success', 50.00, 'pi_3Qcq8oHH9VySX7IE1QX3jKyI_secret_lvXeXh2ys0dr90Yl6TXQlQXrD', 'Card', '2025-01-02', 137, NULL, 4, '2025-01-02 15:16:54', '2025-01-02 15:17:08'),
-(43, 'success', 50.00, 'pi_3QdN99HH9VySX7IE0C2gXxle_secret_Vs0DSvtR2GF4gbc6TzuakSHgE', 'Card', '2025-01-04', 138, NULL, 4, '2025-01-04 02:31:27', '2025-01-04 02:31:41'),
-(44, 'success', 50.00, 'pi_3QdNGDHH9VySX7IE0IZXD3fY_secret_RCaqSeyzd3i8u8AehzO3eZOZ1', 'Card', '2025-01-04', 139, NULL, 4, '2025-01-04 02:38:45', '2025-01-04 02:38:55'),
-(45, 'success', 50.00, 'pi_3QdNGeHH9VySX7IE0HsNr8Gr_secret_Pt17n0FAPyZni4W7gt0bhhJCv', 'Card', '2025-01-04', 140, NULL, 4, '2025-01-04 02:39:12', '2025-01-04 02:39:21'),
-(46, 'success', 50.00, 'pi_3QdNH2HH9VySX7IE1LaHEe1v_secret_bgVGG2uQN6Wr6OFqfjNAQjPmn', 'Card', '2025-01-04', 141, NULL, 4, '2025-01-04 02:39:36', '2025-01-04 02:39:45');
+(34, 'success', 50.00, 'pi_3QecYyHH9VySX7IE0OnxkuVl_secret_P8rGmhfvZTYS8d7k3jqn1ABpW', 'Card', '2025-01-07', 136, NULL, 112, '2025-01-07 13:11:17', '2025-01-07 13:11:26'),
+(35, 'success', 50.00, 'pi_3QedDuHH9VySX7IE042j9Ard_secret_avkyNJ4HLsSuABTQ8j7eSE07B', 'Card', '2025-01-07', 143, NULL, 112, '2025-01-07 13:53:34', '2025-01-07 13:53:46'),
+(36, 'success', 50.00, 'pi_3QedEBHH9VySX7IE02mdR5SZ_secret_L9vHw6T5mDQJfE5mX0fzrhbxP', 'Card', '2025-01-07', 142, NULL, 112, '2025-01-07 13:53:51', '2025-01-07 13:54:03'),
+(37, 'pending', 50.00, 'pi_3QedMCHH9VySX7IE1aaFiltG_secret_cQpnrUVOYLksFFZTcmyKEC8KG', 'Card', '2025-01-07', 146, NULL, 112, '2025-01-07 14:02:09', '2025-01-07 14:02:09');
 
 -- --------------------------------------------------------
 
@@ -772,8 +762,9 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (14, 'App\\Models\\User', 4, 'auth_token', 'c2b38f8aebb1a41a490acc9abf48e881375c8d555329cfad3470987a6f583e32', '[\"*\"]', '2024-12-30 10:03:09', NULL, '2024-12-30 10:03:08', '2024-12-30 10:03:09'),
 (15, 'App\\Models\\User', 4, 'auth_token', 'b3d766123b5647a00490fba93a7b2e8aadd5cdb047c72129db91160e2cd752be', '[\"*\"]', '2024-12-30 10:04:07', NULL, '2024-12-30 10:03:57', '2024-12-30 10:04:07'),
 (16, 'App\\Models\\User', 4, 'auth_token', 'fc9935f18fe33a5b369bdd4487b0085447719cddd790a03e91d38974bd7071ba', '[\"*\"]', '2024-12-30 10:04:30', NULL, '2024-12-30 10:04:29', '2024-12-30 10:04:30'),
-(17, 'App\\Models\\User', 4, 'auth_token', '2646b3cd1f0c83c37bfc5e6d45729687e8a94dfcb1a68334de618a40c66db70d', '[\"*\"]', '2025-01-04 08:22:03', NULL, '2024-12-30 10:05:29', '2025-01-04 08:22:03'),
-(19, 'App\\Models\\User', 117, 'auth_token', '8caa646bea72f0f4b3c6ff4e831f86467830bf3739b83db6f2b17d6bd8b72d99', '[\"*\"]', NULL, NULL, '2025-01-04 08:37:17', '2025-01-04 08:37:17');
+(17, 'App\\Models\\User', 4, 'auth_token', '2646b3cd1f0c83c37bfc5e6d45729687e8a94dfcb1a68334de618a40c66db70d', '[\"*\"]', '2025-01-02 00:59:04', NULL, '2024-12-30 10:05:29', '2025-01-02 00:59:04'),
+(18, 'App\\Models\\User', 112, 'auth_token', '7dc80cde37abc9515916dc4c1f13c41b75fe279e058e5099dbc4c1ac1e2bbe74', '[\"*\"]', NULL, NULL, '2025-01-07 13:09:23', '2025-01-07 13:09:23'),
+(19, 'App\\Models\\User', 112, 'auth_token', 'ad44d227ad59e6c40a3b73329344d040c003aee156fea84f0a2cd381f63057d4', '[\"*\"]', '2025-01-07 14:34:23', NULL, '2025-01-07 13:09:24', '2025-01-07 14:34:23');
 
 -- --------------------------------------------------------
 
@@ -810,7 +801,7 @@ INSERT INTO `piping_details` (`id`, `type`, `fixitem`, `problem`, `types_propert
 (7, 'Repair', '[\"Bathtub\"]', '[\"Noisy\\/Vibration\",\"Other (Explain in Additional Details)\"]', 'Light Commercial (e.g. office, shop, cafe)', '2024-12-31', 'Late Afternoon (3 PM - 5 PM)', NULL, '1000070276.jpg,1000070275.jpg', 'RM20000 - RM49999', '2024-12-31 02:44:20', '2024-12-31 02:44:20'),
 (8, 'Dismantle', '[\"Pipe\\/drain\",\"Shower\"]', '[\"No problem. Install\\/replace only.\",\"Leak\\/drip\"]', 'High-rise (e.g. condo, apartment)', '2024-12-31', 'Late Afternoon (3 PM - 5 PM)', NULL, '1000070276.jpg,1000070275.jpg', 'RM5000 - RM9999', '2024-12-31 03:39:12', '2024-12-31 03:39:12'),
 (9, 'Dismantle', '[\"Pipe\\/drain\",\"Shower\"]', '[\"No problem. Install\\/replace only.\",\"Leak\\/drip\"]', 'Light Commercial (e.g. office, shop, cafe)', '2024-12-31', 'Early Afternoon (1 PM - 3 PM)', NULL, '1000070276.jpg,1000070275.jpg', 'RM50000 - RM99999', '2024-12-31 03:41:20', '2024-12-31 03:41:20'),
-(10, 'Repair', '[\"Water Heater\",\"Shower\"]', '[\"No problem. Install\\/replace only.\",\"Leak\\/drip\"]', 'Commercial (e.g. factory, shopping centre)', '2025-01-05', 'Early Afternoon (1 PM - 3 PM)', 'yc', '1000070274.jpg', 'RM20000 - RM49999', '2025-01-04 02:38:41', '2025-01-04 02:38:41');
+(10, 'Replacement', '[\"Pipe\\/drain\",\"Shower\"]', '[\"No problem. Install\\/replace only.\",\"Leak\\/drip\"]', 'Commercial (e.g. factory, shopping centre)', '2025-01-07', 'Lunch Time (11 AM - 1 PM)', 'vbbj', 'no_service.png', 'RM50000 - RM99999', '2025-01-07 13:11:11', '2025-01-07 13:11:11');
 
 -- --------------------------------------------------------
 
@@ -1141,8 +1132,8 @@ INSERT INTO `runner_details` (`id`, `type`, `area`, `app_date`, `preferred_time`
 (3, 'Delivery', 'Kota Iskandar', '2024-12-29', 'Anytime', NULL, '[]', 'RM10000 - RM19999', '2024-12-28 17:58:42', '2024-12-28 17:58:42'),
 (4, 'Other (Explain in Additional Details)', 'Kota Tinggi', '2024-12-31', 'Late Afternoon (3 PM - 5 PM)', NULL, '[]', 'RM50000 - RM99999', '2024-12-28 18:06:08', '2024-12-28 18:06:08'),
 (5, 'Other (Explain in Additional Details)', 'Kota Pontian', '2024-12-31', 'Early Afternoon (1 PM - 3 PM)', NULL, '1000070276.jpg,1000070275.jpg', 'RM50000 - RM99999', '2024-12-31 02:46:10', '2024-12-31 02:46:10'),
-(6, 'Other (Explain in Additional Details)', 'Kota Muar', '2025-01-02', 'Late Afternoon (3 PM - 5 PM)', NULL, 'no_service.png', 'RM100000 - RM199999', '2025-01-02 15:06:17', '2025-01-02 15:06:17'),
-(7, 'Other (Explain in Additional Details)', 'Kota Muar', '2025-01-04', 'Late Afternoon (3 PM - 5 PM)', NULL, '1000070276.jpg', 'RM50000 - RM99999', '2025-01-04 02:39:33', '2025-01-04 02:39:33');
+(6, 'Delivery', 'Kota Muar', '2025-01-07', 'Early Afternoon (1 PM - 3 PM)', NULL, '1000070299.jpg', 'RM20000 - RM49999', '2025-01-07 13:14:06', '2025-01-07 13:14:06'),
+(7, 'Delivery', 'Kota Muar', '2025-01-07', 'Early Afternoon (1 PM - 3 PM)', NULL, '1000070299.jpg', 'RM20000 - RM49999', '2025-01-07 13:20:21', '2025-01-07 13:20:21');
 
 -- --------------------------------------------------------
 
@@ -1164,9 +1155,20 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('7r9QgdhDJ207OG98poxkBokWwt7LGy3eLM8XiYhx', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoienJqU0JUQmw3N1pQRTlLQjZEV3RvT040eVpJWEpnVUlIWjdHQXJkciI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MTE1OiJodHRwOi8vZDcwNi0yNDA1LTM4MDAtODUwLWQ5YmMtNzFjYS03MDM4LTU4NjktODMzNy5uZ3Jvay1mcmVlLmFwcC9hc3NldHMvdmVuZG9yL2xpYnMvYXBleC1jaGFydHMvYXBleGNoYXJ0cy5qcy9ob21lIjt9czozOiJ1cmwiO2E6MDp7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7fQ==', 1736010001),
-('KvSPbg0Irq7xA04pj0bvr6ZDK7qZ4Pk9qfx2bJKw', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiVzZJR2NkYVpieEhwbFh1dlY5RENmVDczZk44TUJhZkUxRXhuZGNRNCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NzE6Imh0dHA6Ly9kNzA2LTI0MDUtMzgwMC04NTAtZDliYy03MWNhLTcwMzgtNTg2OS04MzM3Lm5ncm9rLWZyZWUuYXBwL2xvZ2luIjt9czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo3MDoiaHR0cDovL2Q3MDYtMjQwNS0zODAwLTg1MC1kOWJjLTcxY2EtNzAzOC01ODY5LTgzMzcubmdyb2stZnJlZS5hcHAvaG9tZSI7fX0=', 1736000954),
-('SO8QTNcAplfiTwa3PeRugmOu2eRdaSkYQtBNuVzd', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiRFBUNEFkMkJud2JiUGFQbHhwNzNoVFdCMzQyUHNuSjBJakdodEdCRyI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjExNToiaHR0cDovL2Q3MDYtMjQwNS0zODAwLTg1MC1kOWJjLTcxY2EtNzAzOC01ODY5LTgzMzcubmdyb2stZnJlZS5hcHAvYXNzZXRzL3ZlbmRvci9saWJzL2FwZXgtY2hhcnRzL2FwZXhjaGFydHMuanMvaG9tZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7fQ==', 1735979611);
+('0o237quUH1SNtEjZtPfzk1uXqTDr8sqeJ9QkC6Hj', NULL, '127.0.0.1', 'Dart/3.6 (dart:io)', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicmxpTmJ1SHRvalZSQU1PUWZPV0dzQ09tSnk3blFEaXNXR2l4MGhTeSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NzA6Imh0dHA6Ly9mM2UxLTIwMDEtZTY4LTU0MzMtY2E0NS1iY2UxLWY5Y2QtNGNiOC1lYjkubmdyb2stZnJlZS5hcHAvbG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1736258386),
+('E3vP8hTMW17bgICVPoAjqKGr9he1YhqWGAJI1Lua', NULL, '127.0.0.1', 'Dart/3.6 (dart:io)', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoidDd4SnNCaTBoSVJmVnVHMlJOQk5DcTRISHp5azl3cjJZZGc5dVd0cCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NzA6Imh0dHA6Ly9mM2UxLTIwMDEtZTY4LTU0MzMtY2E0NS1iY2UxLWY5Y2QtNGNiOC1lYjkubmdyb2stZnJlZS5hcHAvbG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1736256569),
+('eJBadqb2y4VsuJ2vFZgMKxOxv7hwdhrQgwpap5tj', NULL, '127.0.0.1', 'Dart/3.6 (dart:io)', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiemJ2MUN1S3FYUTBxQms5ZkRiaGpscWI0S0ZjWnNEMDBQT1VKNHVFZCI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo2OToiaHR0cDovL2YzZTEtMjAwMS1lNjgtNTQzMy1jYTQ1LWJjZTEtZjljZC00Y2I4LWViOS5uZ3Jvay1mcmVlLmFwcC9ob21lIjt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Njk6Imh0dHA6Ly9mM2UxLTIwMDEtZTY4LTU0MzMtY2E0NS1iY2UxLWY5Y2QtNGNiOC1lYjkubmdyb2stZnJlZS5hcHAvaG9tZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1736258271),
+('EK0KSexCrlCip13JrfbqusNlIiN3STVkmdiO773M', NULL, '127.0.0.1', 'Dart/3.6 (dart:io)', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoidDZsNkdhWFp3OGpLbFJOdFZRTzJraXNzeDAySkNGcTBvbTV5a0t3QyI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo2OToiaHR0cDovL2YzZTEtMjAwMS1lNjgtNTQzMy1jYTQ1LWJjZTEtZjljZC00Y2I4LWViOS5uZ3Jvay1mcmVlLmFwcC9ob21lIjt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Njk6Imh0dHA6Ly9mM2UxLTIwMDEtZTY4LTU0MzMtY2E0NS1iY2UxLWY5Y2QtNGNiOC1lYjkubmdyb2stZnJlZS5hcHAvaG9tZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1736256569),
+('EOptZL67rriwKkpG2LLOFtYdTaC0xquBMPN48RJx', NULL, '127.0.0.1', 'Dart/3.6 (dart:io)', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiMTZlWGNHT2ozN2Rvd21MMTQ4Y2ZPSnp2bGFJTlFLbVVzZDBHdVVtYyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NzA6Imh0dHA6Ly9mM2UxLTIwMDEtZTY4LTU0MzMtY2E0NS1iY2UxLWY5Y2QtNGNiOC1lYjkubmdyb2stZnJlZS5hcHAvbG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1736256460),
+('goXDBPIOcsl919qW71jMR58aiDTaAo9wC3jHKHLP', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiWWZwTXhQWUVSb2pNMWNyVUlja2lBdFZyMUtLOFZSd0FObnJjUFlyMSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MTE0OiJodHRwOi8vZWVmZC0yMDAxLWU2OC01NDMzLWNhNDUtYmNlMS1mOWNkLTRjYjgtZWI5Lm5ncm9rLWZyZWUuYXBwL2Fzc2V0cy92ZW5kb3IvbGlicy9hcGV4LWNoYXJ0cy9hcGV4Y2hhcnRzLmpzL2hvbWUiO31zOjM6InVybCI7YTowOnt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6Mjt9', 1736263684),
+('gUUfPVSHWJ07ULi0S29rS69yP5f7mJ20D0LUTIaa', NULL, '127.0.0.1', 'Dart/3.6 (dart:io)', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoickhJbkM0Rm1oOUhQNW5oY21IMUhtZEl2d2hod3RDcXdYeGlqRDMzTSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NzA6Imh0dHA6Ly9mM2UxLTIwMDEtZTY4LTU0MzMtY2E0NS1iY2UxLWY5Y2QtNGNiOC1lYjkubmdyb2stZnJlZS5hcHAvbG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1736256569),
+('Hr1pJQxCQeCYbeEiZcU67BxA4LDcoa3i6MFovvDg', NULL, '127.0.0.1', 'Dart/3.6 (dart:io)', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoidjlhd3NYMGhtQjFHQVBVaU9oZkUzTEYwZTRmYU5aalZZVFNMbWhlRiI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo2OToiaHR0cDovL2YzZTEtMjAwMS1lNjgtNTQzMy1jYTQ1LWJjZTEtZjljZC00Y2I4LWViOS5uZ3Jvay1mcmVlLmFwcC9ob21lIjt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Njk6Imh0dHA6Ly9mM2UxLTIwMDEtZTY4LTU0MzMtY2E0NS1iY2UxLWY5Y2QtNGNiOC1lYjkubmdyb2stZnJlZS5hcHAvaG9tZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1736256569),
+('hx7Ffoa3aOBYHfeHHxs3gbXzpHsz69FriXHBHfVd', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiR3JNNXpnMVd0bkdubFh5Tk9kczlhTGthU3lTcWd6U3YyVmhGeVJhZSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MTE1OiJodHRwOi8vZjNlMS0yMDAxLWU2OC01NDMzLWNhNDUtYmNlMS1mOWNkLTRjYjgtZWI5Lm5ncm9rLWZyZWUuYXBwL2Fzc2V0cy92ZW5kb3IvbGlicy9hcGV4LWNoYXJ0cy9hcGV4Y2hhcnRzLmpzL2xvZ2luIjt9czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czoxMTQ6Imh0dHA6Ly9mM2UxLTIwMDEtZTY4LTU0MzMtY2E0NS1iY2UxLWY5Y2QtNGNiOC1lYjkubmdyb2stZnJlZS5hcHAvYXNzZXRzL3ZlbmRvci9saWJzL2FwZXgtY2hhcnRzL2FwZXhjaGFydHMuanMvaG9tZSI7fX0=', 1736260203),
+('JksaY5sboHVpEFRSMRqhMCib3y34iuIaX8liwlfN', NULL, '127.0.0.1', 'Dart/3.6 (dart:io)', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoicnlGSmtGMUdsWWd3NG13NDBqUHBUa0UyaXpwalVwMnFpS05KU2tQQSI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo2OToiaHR0cDovL2YzZTEtMjAwMS1lNjgtNTQzMy1jYTQ1LWJjZTEtZjljZC00Y2I4LWViOS5uZ3Jvay1mcmVlLmFwcC9ob21lIjt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Njk6Imh0dHA6Ly9mM2UxLTIwMDEtZTY4LTU0MzMtY2E0NS1iY2UxLWY5Y2QtNGNiOC1lYjkubmdyb2stZnJlZS5hcHAvaG9tZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1736258385),
+('KMVmlbLTeb2QCo3ArvZMQxCxrkVmlQoTOvs7mj6o', NULL, '127.0.0.1', 'Dart/3.6 (dart:io)', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiUE5udXdrMFJEb3F2TVZrSGhhWkR2dEpPMWtScHhiVURlNnV1U1JoMyI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo2OToiaHR0cDovL2YzZTEtMjAwMS1lNjgtNTQzMy1jYTQ1LWJjZTEtZjljZC00Y2I4LWViOS5uZ3Jvay1mcmVlLmFwcC9ob21lIjt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Njk6Imh0dHA6Ly9mM2UxLTIwMDEtZTY4LTU0MzMtY2E0NS1iY2UxLWY5Y2QtNGNiOC1lYjkubmdyb2stZnJlZS5hcHAvaG9tZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1736256460),
+('KshiizNRCxg75eNMOzvG0UB0vwR9wNa1vM580DFG', NULL, '127.0.0.1', 'Dart/3.6 (dart:io)', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiYTBZeUVLdTk2emJydnRyVTl1bjRWdmJ3M1I2cklmYk9mVVlrblFJOSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NzA6Imh0dHA6Ly9mM2UxLTIwMDEtZTY4LTU0MzMtY2E0NS1iY2UxLWY5Y2QtNGNiOC1lYjkubmdyb2stZnJlZS5hcHAvbG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1736256460),
+('ovHlzuwg7OhwgvwIXhjyDO0lKNAHzFsKgdhGQFpX', NULL, '127.0.0.1', 'Dart/3.6 (dart:io)', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiUWRickt5azJsMDFNM3VKc2Y4UVliZzRlOFhHalZVYnI0aW1tNmJZbyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NzA6Imh0dHA6Ly9mM2UxLTIwMDEtZTY4LTU0MzMtY2E0NS1iY2UxLWY5Y2QtNGNiOC1lYjkubmdyb2stZnJlZS5hcHAvbG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1736258271),
+('qKfLK7AHTfsLuLwflnYDAhFba5ZGmBmCxjo3hEsI', NULL, '127.0.0.1', 'Dart/3.6 (dart:io)', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoid0RQbUpEZGlhUzkyMzhTeWJBSWE1TVdnZU13bGJzTUxHenVLek03RSI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo2OToiaHR0cDovL2YzZTEtMjAwMS1lNjgtNTQzMy1jYTQ1LWJjZTEtZjljZC00Y2I4LWViOS5uZ3Jvay1mcmVlLmFwcC9ob21lIjt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Njk6Imh0dHA6Ly9mM2UxLTIwMDEtZTY4LTU0MzMtY2E0NS1iY2UxLWY5Y2QtNGNiOC1lYjkubmdyb2stZnJlZS5hcHAvaG9tZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1736256459);
 
 -- --------------------------------------------------------
 
@@ -1200,10 +1202,10 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `address`, `birth_date`, `gender`, `vip`, `contact_number`, `image`, `type`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
 (2, 'sadmin', 'sadmin@gmail.com', NULL, '$2y$10$kG9GWZ/oK.ysSftRw1jhCOWLJxtVXBP4i5thjBkz.ul5zpnMRbHxa', NULL, NULL, NULL, '0', NULL, NULL, 'sadmin', '1', NULL, NULL, NULL),
 (3, 'admin', 'admin@gmail.com', NULL, '$2y$10$Bju6SCDrj8odD0skw.6aJ.MWSrjPNNZgT/sUJIpVMtUxw3m0gSgEG', NULL, NULL, NULL, '0', NULL, NULL, 'admin', '1', NULL, NULL, NULL),
-(4, 'user', 'user@gmail.com', NULL, '$2y$10$sENXxpl99//ebqThGgxGEOHfNVNXk0VkzYEtVMsNYY/MfcaaNKtrW', NULL, NULL, 'Female', '0', NULL, '1732985265.jpg', 'user', '1', NULL, NULL, '2025-01-04 08:21:51'),
+(4, 'user', 'user@gmail.com', NULL, '$2y$10$sENXxpl99//ebqThGgxGEOHfNVNXk0VkzYEtVMsNYY/MfcaaNKtrW', NULL, NULL, 'Male', '0', NULL, '1732985265.jpg', 'user', '1', NULL, NULL, '2024-11-30 16:47:47'),
 (5, 'user1', 'user1@gmail.com', NULL, '$2y$10$deZ8nRPaMFghL0zlbtwn4.XGkLOGfsJqAVr/VmUYJrgFMLXSUpEA.', NULL, NULL, NULL, '0', NULL, NULL, 'user', '1', NULL, NULL, NULL),
-(6, 'vendor1', 'vendor@gmail.com', NULL, '$2y$10$E4TU2vANYKQwSfbfAxLkiex/ObzKRz5wlAFpe1Q.Elw7Na0ATl/V6', 'vendor addresss', NULL, NULL, '0', '0123456789', 'vendor1.png', 'vendor', '1', NULL, NULL, '2025-01-03 10:47:27'),
-(7, 'vendor2', 'vendor2@gmail.com', '2024-11-18 12:24:27', '$2y$10$yZVHrb7aqsnRjETrdGKMXea0576ftDdu3JPdGa17vrjlU5ovmFMBy', 'vendor address2', NULL, 'Female', '0', '123-4567890', 'vendor1.png', 'vendor', '1', NULL, '2024-11-18 12:24:31', '2024-11-18 12:24:31'),
+(6, 'vendor1', 'vendor@gmail.com', NULL, '$2y$10$E4TU2vANYKQwSfbfAxLkiex/ObzKRz5wlAFpe1Q.Elw7Na0ATl/V6', NULL, NULL, NULL, '0', NULL, NULL, 'user', '1', NULL, NULL, NULL),
+(7, 'vendor2', 'vendor2@gmail.com', '2024-11-18 12:24:27', '$2y$10$yZVHrb7aqsnRjETrdGKMXea0576ftDdu3JPdGa17vrjlU5ovmFMBy', NULL, NULL, 'Female', '0', NULL, NULL, 'user', '1', NULL, '2024-11-18 12:24:31', '2024-11-18 12:24:31'),
 (8, 'Theresia Daugherty III', 'wiegand.sheldon@example.com', '2024-11-18 12:24:27', '$2y$10$PE8eJB1pTCzs/2viPfrt3.tjHzY40aq/zRQbfE9Gwb77ADf0S3jZW', NULL, NULL, 'Female', '0', NULL, NULL, 'user', '1', NULL, '2024-11-18 12:24:31', '2024-11-18 12:24:31'),
 (9, 'Nikki Hartmann', 'dulce09@example.org', '2024-11-18 12:24:27', '$2y$10$ltFjNYmcAhs9n75SpkwZduXSCRtYg7Gbl1AyxCWKVeP9NcurCx.vO', NULL, NULL, 'Male', '0', NULL, NULL, 'user', '1', NULL, '2024-11-18 12:24:31', '2024-11-18 12:24:31'),
 (10, 'Trenton Douglas III', 'abbie.quigley@example.net', '2024-11-18 12:24:27', '$2y$10$NP3ngn7RMOPGvquD6k1ED.rcX6MnbcSKz0yLEMWeewz5/UEIaoQZS', NULL, NULL, 'Male', '0', NULL, NULL, 'user', '1', NULL, '2024-11-18 12:24:31', '2024-11-18 12:24:31'),
@@ -1303,12 +1305,13 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `ad
 (109, 'Shaina Kshlerin', 'jammie70@example.com', '2024-11-18 12:25:54', '$2y$10$3DjYb04ob.fGTwaPivbbceol5BwT83HElj9nDlaEZB9c9ok6YZ15G', NULL, NULL, 'Male', '0', NULL, NULL, 'user', '1', NULL, '2024-11-18 12:25:54', '2024-11-18 12:25:54'),
 (110, 'Miguel Waelchi', 'kshlerin.elissa@example.org', '2024-11-18 12:25:54', '$2y$10$FQqoi0rEY1so/SzAqLByau0oCYAyl9/R2Wjt6tXa0bOeuMYpXIQz.', NULL, NULL, 'Female', '0', NULL, NULL, 'user', '1', NULL, '2024-11-18 12:25:54', '2024-11-18 12:25:54'),
 (111, 'Tanya Hirthe MD', 'lula.nikolaus@example.net', '2024-11-18 12:25:54', '$2y$10$iNpVQHTzsOXYkoWrf2zpu.Ym0yKDUHJfi9G/uoPbPXQ2Po5BfuPXK', NULL, NULL, 'Male', '0', NULL, NULL, 'user', '1', NULL, '2024-11-18 12:25:54', '2024-11-18 12:25:54'),
-(112, 'Vendor3', 'vendor3@gmail.com', NULL, '$2y$10$U.nQrsUqLwYqZJdbEgI0feIQmbVaWUKhuf8L.LptsJ.3.kRo1rXwO', NULL, NULL, NULL, '0', NULL, NULL, 'vendor', '1', NULL, '2025-01-03 17:29:53', '2025-01-03 17:29:53'),
-(113, 'vendor4', 'vendor4@gmail.com', NULL, '$2y$10$oGm9hc1wDxRyzBc.tmFrtetTI7XKolQzNk.As744PEOiaBg6UiLPi', NULL, NULL, NULL, '0', NULL, NULL, 'vendor', '1', NULL, '2025-01-03 17:38:36', '2025-01-03 17:38:36'),
-(114, 'vendor5', 'vendor5@gmail.com', NULL, '$2y$10$UNHTKsME3VjaDggawpiiD.I/rZOvJvfZ3y6JRAxQ6eEtv3toQTC0.', NULL, NULL, NULL, '0', NULL, NULL, 'vendor', '1', NULL, '2025-01-03 17:39:43', '2025-01-03 17:39:43'),
-(115, 'vendor6', 'vendor6@gmail.com', NULL, '$2y$10$cXhhrppXpSXDXtsr4VYuSuqj4V5uquaL7cFXxO.lWXrCCmlmB7rIC', NULL, NULL, NULL, '0', NULL, NULL, 'vendor', '1', NULL, '2025-01-03 17:44:11', '2025-01-03 17:44:11'),
-(116, 'vendor7', 'vendor7@gmail.com', NULL, '$2y$10$prDEA7Cb.5K9OYOO.TTDBew7Vr8CmqodyGCZdHlM4tYRwr65Kh87y', 'no 1, jalan boh', NULL, NULL, '0', '0123456789', '1735962505.jpg', 'vendor', '1', NULL, '2025-01-04 03:47:44', '2025-01-04 03:48:25'),
-(117, 'user3', 'user3@gmail.com', NULL, '$2y$10$SKHb5YJC2TWkLxhQqH1iZ.2KC5Gk8ZdI3kK4gq5YOPJtLGUMJp/Te', NULL, NULL, NULL, '0', NULL, NULL, 'user', '1', NULL, '2025-01-04 08:37:17', '2025-01-04 08:37:17');
+(112, 'user7', 'user7@gmail.com', NULL, '$2y$10$3ptKfddjAFMLOhNRTYiCQunugChNQMro4t8qtaYjQ8n5WTJeshCZ2', NULL, NULL, NULL, '0', NULL, NULL, 'user', '1', NULL, '2025-01-07 13:09:23', '2025-01-07 13:09:23'),
+(113, 'Elite Home Services', 'vendor3@gmail.com', NULL, '$2y$10$i34OJfPctF7Ben/psFlJUOcRElNlQXzEPSar/q5d2agMOfm3QBiAa', 'Southern University College, PTD 64888, Jalan Selatan Utama, KM 15, Off, Skudai Lbh, 81300 Skudai, Johor Darul Ta\'zim', NULL, NULL, '0', '0123456789', '1736256323.png', 'vendor', '1', NULL, '2025-01-07 13:22:15', '2025-01-07 13:25:23'),
+(114, 'Green Thumb Experts', 'vendor4@gmail.com', NULL, '$2y$10$Uz.7nejXpC.AehWeghq9ie0xfyBxP5sOHmPgQpY5eHEj43yl6HxKW', 'Southern University College, PTD 64888, Jalan Selatan Utama, KM 15, Off, Skudai Lbh, 81300 Skudai, Johor Darul Ta\'zim', NULL, NULL, '0', '0123456789', '1736257676.jpg', 'vendor', '1', NULL, '2025-01-07 13:45:22', '2025-01-07 13:47:56'),
+(115, 'QuickFix Runners', 'vendor5@gmail.com', NULL, '$2y$10$AUyfCCjLbnIp2wQPvOUO/eJvbg2A0.2eXH.shmI7NxV.5oA2VPbDW', 'Southern University College, PTD 64888, Jalan Selatan Utama, KM 15, Off, Skudai Lbh, 81300 Skudai, Johor Darul Ta\'zim', NULL, NULL, '0', '0123456789', '1736257964.png', 'vendor', '1', NULL, '2025-01-07 13:48:24', '2025-01-07 13:52:44'),
+(116, 'HandyPro Solutions', 'vendor6@gmail.com', NULL, '$2y$10$fbllUSqGEO3BM0TUtpPWfujo9HGwRgjet/Gesa29M4dpCO1dtH8/u', 'Southern University College, PTD 64888, Jalan Selatan Utama, KM 15, Off, Skudai Lbh, 81300 Skudai, Johor Darul Ta\'zim', NULL, NULL, '0', '0123456789', '1736257840.jpg', 'vendor', '1', NULL, '2025-01-07 13:49:51', '2025-01-07 13:50:40'),
+(117, 'Urban Maintenance Co.', 'vendor7@gmail.com', NULL, '$2y$10$swtNiZH4oypakefXNeJV/eQQd9WGBttnfQS6Wz3t.5NqjUozCIJEW', 'Southern University College, PTD 64888, Jalan Selatan Utama, KM 15, Off, Skudai Lbh, 81300 Skudai, Johor Darul Ta\'zim', NULL, NULL, '0', '0123456789', '1736260564.jpg', 'vendor', '1', NULL, '2025-01-07 14:35:18', '2025-01-07 14:36:04'),
+(118, 'Swift Hands Services', 'vendor8@gmail.com', NULL, '$2y$10$ZdkgFEcxDsmh4cxjjPDH6uZtEPdRcleY7P4lOPnfZEhKrPJ8GVOTy', 'Southern University College, PTD 64888, Jalan Selatan Utama, KM 15, Off, Skudai Lbh, 81300 Skudai, Johor Darul Ta\'zim', NULL, NULL, '0', '0123456789', '1736260642.jpg', 'vendor', '1', NULL, '2025-01-07 14:36:32', '2025-01-07 14:37:22');
 
 -- --------------------------------------------------------
 
@@ -1323,30 +1326,31 @@ CREATE TABLE `vendors` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `status` varchar(255) NOT NULL DEFAULT '1',
-  `image` varchar(255) DEFAULT NULL,
   `description` longtext DEFAULT NULL,
   `ssm_path` varchar(255) DEFAULT NULL,
-  `category` varchar(255) DEFAULT NULL
+  `category` varchar(255) DEFAULT NULL,
+  `comment` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `vendors`
 --
 
-INSERT INTO `vendors` (`id`, `rating`, `user_id`, `created_at`, `updated_at`, `status`, `image`, `description`, `ssm_path`, `category`) VALUES
-(1, 2.90, 6, '2024-12-25 15:29:14', '2025-01-03 10:52:44', '1', 'vendor1.png', 'ndhjsdn', '1735901383_Q&A.pdf', 'piping,runner'),
-(2, 3.30, 7, '2024-12-25 15:29:14', '2025-01-03 20:12:05', '1', 'vendor2.png', '414', '1735901383_Q&A.pdf', 'wiring,gardening'),
-(3, 2.50, NULL, '2024-12-25 15:29:14', '2024-12-25 15:29:14', '0', 'vendor3.png', NULL, NULL, NULL),
-(4, 2.00, NULL, '2024-12-25 15:29:14', '2024-12-25 15:29:14', '0', 'vendor4.png', NULL, NULL, NULL),
-(5, 1.10, NULL, '2024-12-25 15:29:14', '2024-12-25 15:29:14', '0', 'vendor5.png', NULL, NULL, NULL),
-(6, 2.80, NULL, '2024-12-25 15:29:14', '2024-12-25 15:29:14', '0', 'vendor6.png', NULL, NULL, NULL),
-(7, 1.80, NULL, '2024-12-25 15:29:14', '2024-12-25 15:29:14', '0', 'vendor7.png', NULL, NULL, NULL),
-(8, 3.40, NULL, '2024-12-25 15:29:14', '2024-12-25 15:29:14', '0', 'vendor8.png', NULL, NULL, NULL),
-(9, 0.00, 112, '2025-01-03 17:29:53', '2025-01-03 17:29:53', '0', NULL, 'gbgb', NULL, NULL),
-(10, 0.00, 113, '2025-01-03 17:38:36', '2025-01-03 17:38:36', '0', NULL, NULL, NULL, NULL),
-(11, 0.00, 114, '2025-01-03 17:39:43', '2025-01-03 17:39:43', '0', NULL, NULL, NULL, NULL),
-(12, 0.00, 115, '2025-01-03 17:44:11', '2025-01-03 17:44:11', '0', NULL, NULL, NULL, 'piping,runner'),
-(13, 0.00, 116, '2025-01-04 03:47:44', '2025-01-04 03:49:09', '1', NULL, 'cefewcfe', '1735962505_1735463823.jpg', 'wiring,piping,gardening');
+INSERT INTO `vendors` (`id`, `rating`, `user_id`, `created_at`, `updated_at`, `status`, `description`, `ssm_path`, `category`, `comment`) VALUES
+(1, 2.90, 6, '2024-12-25 15:29:14', '2024-12-25 15:29:14', '0', NULL, NULL, NULL, NULL),
+(2, 3.30, 7, '2024-12-25 15:29:14', '2024-12-25 15:29:14', '0', NULL, NULL, NULL, NULL),
+(3, 2.50, NULL, '2024-12-25 15:29:14', '2024-12-25 15:29:14', '0', NULL, NULL, NULL, NULL),
+(4, 2.00, NULL, '2024-12-25 15:29:14', '2024-12-25 15:29:14', '0', NULL, NULL, NULL, NULL),
+(5, 1.10, NULL, '2024-12-25 15:29:14', '2024-12-25 15:29:14', '0', NULL, NULL, NULL, NULL),
+(6, 2.80, NULL, '2024-12-25 15:29:14', '2024-12-25 15:29:14', '0', NULL, NULL, NULL, NULL),
+(7, 1.80, NULL, '2024-12-25 15:29:14', '2024-12-25 15:29:14', '0', NULL, NULL, NULL, NULL),
+(8, 3.40, NULL, '2024-12-25 15:29:14', '2024-12-25 15:29:14', '0', NULL, NULL, NULL, NULL),
+(9, 3.50, 113, '2025-01-07 13:22:15', '2025-01-07 13:26:03', '1', 'Elite Home Services specializes in residential and commercial electrical wiring and plumbing solutions. With over 10 years of experience, they provide high-quality installations, repairs, and maintenance with a focus on safety and efficiency', '1736256323_SSM.pdf', 'wiring,piping', NULL),
+(10, 4.30, 114, '2025-01-07 13:45:22', '2025-01-07 13:51:15', '1', 'Green Thumb Experts offers professional gardening services, including landscaping, plant care, and garden design. They are known for their sustainable practices and personalized garden setups for homes and businesses.', '1736257676_SSM.pdf', 'gardening', NULL),
+(11, 4.80, 115, '2025-01-07 13:48:24', '2025-01-07 13:53:27', '1', 'QuickFix Runners provides on-demand errand-running services along with basic plumbing repairs. Their team is trained to handle small-scale tasks quickly and efficiently, catering to both residential and corporate clients.', '1736257964_SSM.pdf', 'piping,runner', NULL),
+(12, 5.00, 116, '2025-01-07 13:49:51', '2025-01-07 13:51:25', '1', 'HandyPro Solutions is a multi-service vendor specializing in electrical wiring, gardening, and running errands. They are well-regarded for their versatility and prompt customer service.', '1736257840_SSM.pdf', 'wiring,gardening,runner', NULL),
+(13, 0.00, 117, '2025-01-07 14:35:18', '2025-01-07 15:27:58', '2', 'Urban Maintenance Co. offers professional plumbing services and expert gardening solutions for urban spaces. They focus on eco-friendly techniques and reliable repairs for both home and commercial projects. up', '1736260564_SSM.pdf', 'piping,gardening', 'Description not clear'),
+(14, 0.00, 118, '2025-01-07 14:36:32', '2025-01-07 14:37:22', '0', 'Swift Hands Services excels in errand-running and electrical wiring tasks. Their team is known for its quick response times, precise workmanship, and customer-first approach, making them a go-to for diverse needs.', '1736260642_SSM.pdf', 'wiring,runner', NULL);
 
 -- --------------------------------------------------------
 
@@ -1512,9 +1516,14 @@ INSERT INTO `wiring_details` (`id`, `type`, `fixitem`, `ishavepart`, `types_prop
 (90, 'Repair', '[\"Outlets\"]', 1, 'Light Commercial (e.g. office, shop, cafe)', '2025-01-02', 'Anytime', NULL, '1000070276.jpg,1000070275.jpg', 'RM20000 - RM49999', '2025-01-01 16:37:35', '2025-01-01 16:37:35'),
 (91, 'Repair', '[\"Fuse Box\",\"Ceiling Fan\"]', 0, 'Light Commercial (e.g. office, shop, cafe)', '2025-01-02', 'Late Afternoon (3 PM - 5 PM)', NULL, '1000070276.jpg,1000070275.jpg', 'RM10000 - RM19999', '2025-01-01 17:15:34', '2025-01-01 17:15:34'),
 (92, 'Repair', '[\"Wiring\",\"Outlets\"]', 0, 'Commercial (e.g. factory, shopping centre)', '2025-01-02', 'Lunch Time (11 AM - 1 PM)', NULL, '1000070275.jpg,1000070276.jpg', 'RM20000 - RM49999', '2025-01-01 17:18:57', '2025-01-01 17:18:57'),
-(93, 'Repair', '[\"Light Bulb\",\"Fuse Box\"]', 0, 'Light Commercial (e.g. office, shop, cafe)', '2025-01-02', 'Late Afternoon (3 PM - 5 PM)', 'gy', '1000070275.jpg,1000070276.jpg', 'RM20000 - RM49999', '2025-01-02 13:45:08', '2025-01-02 13:45:08'),
-(94, 'Repair', '[\"Ceiling Fan\",\"Fuse Box\"]', 0, 'Light Commercial (e.g. office, shop, cafe)', '2025-01-04', 'Anytime', NULL, '1000070275.jpg', 'RM20000 - RM49999', '2025-01-04 02:26:36', '2025-01-04 02:26:36'),
-(95, 'Repair', '[\"Light Bulb\",\"Wiring\"]', 0, 'Light Commercial (e.g. office, shop, cafe)', '2025-01-04', 'Early Afternoon (1 PM - 3 PM)', NULL, '1000070276.jpg', 'RM20000 - RM49999', '2025-01-04 08:21:21', '2025-01-04 08:21:21');
+(93, 'Repair', '[\"Light Bulb\",\"Wiring\"]', 1, 'Light Commercial (e.g. office, shop, cafe)', '2025-01-07', 'Early Afternoon (1 PM - 3 PM)', NULL, '1000070303.jpg', 'RM20000 - RM49999', '2025-01-07 13:09:44', '2025-01-07 13:09:44'),
+(94, 'Maintenance', '[\"Fuse Box\",\"Ceiling Fan\"]', 0, 'Light Commercial (e.g. office, shop, cafe)', '2025-01-07', 'Early Afternoon (1 PM - 3 PM)', NULL, '1000070303.jpg,1000070302.jpg', 'RM20000 - RM49999', '2025-01-07 13:27:37', '2025-01-07 13:27:37'),
+(95, 'Repair', '[\"Fuse Box\",\"Ceiling Fan\"]', 0, 'Commercial (e.g. factory, shopping centre)', '2025-01-07', 'Early Afternoon (1 PM - 3 PM)', 'tvthy', '1000070299.jpg,1000070300.jpg', 'RM50000 - RM99999', '2025-01-07 13:29:26', '2025-01-07 13:29:26'),
+(96, 'Repair', '[\"Fuse Box\",\"Ceiling Fan\"]', 0, 'High-rise (e.g. condo, apartment)', '2025-01-07', 'Early Afternoon (1 PM - 3 PM)', NULL, '1000070302.jpg,1000070303.jpg', 'RM100000 - RM199999', '2025-01-07 13:30:45', '2025-01-07 13:30:45'),
+(97, 'Repair', '[\"Fuse Box\",\"Ceiling Fan\"]', 0, 'High-rise (e.g. condo, apartment)', '2025-01-07', 'Early Afternoon (1 PM - 3 PM)', NULL, '1000070302.jpg,1000070303.jpg', 'RM100000 - RM199999', '2025-01-07 13:30:55', '2025-01-07 13:30:55'),
+(98, 'Repair', '[\"Fuse Box\",\"Wiring\"]', 0, 'Commercial (e.g. factory, shopping centre)', '2025-01-07', 'Early Afternoon (1 PM - 3 PM)', NULL, '1000070303.jpg', 'RM5000 - RM9999', '2025-01-07 13:57:49', '2025-01-07 13:57:49'),
+(99, 'Repair', '[\"Fuse Box\",\"Light Bulb\"]', 1, 'Light Commercial (e.g. office, shop, cafe)', '2025-01-07', 'Early Afternoon (1 PM - 3 PM)', NULL, '1000070303.jpg', 'RM20000 - RM49999', '2025-01-07 13:59:43', '2025-01-07 13:59:43'),
+(100, 'Repair', '[\"Wiring\",\"Ceiling Fan\"]', 1, 'Light Commercial (e.g. office, shop, cafe)', '2025-01-07', 'Late Afternoon (3 PM - 5 PM)', NULL, '1000070299.jpg', 'RM20000 - RM49999', '2025-01-07 14:01:55', '2025-01-07 14:01:55');
 
 --
 -- Indexes for dumped tables
@@ -1714,7 +1723,7 @@ ALTER TABLE `wiring_details`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `bidding`
@@ -1750,7 +1759,7 @@ ALTER TABLE `custom`
 -- AUTO_INCREMENT for table `delivery`
 --
 ALTER TABLE `delivery`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -1762,37 +1771,37 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `gardening_details`
 --
 ALTER TABLE `gardening_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
 
 --
 -- AUTO_INCREMENT for table `order_detail`
 --
 ALTER TABLE `order_detail`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=141;
 
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `piping_details`
@@ -1822,13 +1831,13 @@ ALTER TABLE `runner_details`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 
 --
 -- AUTO_INCREMENT for table `vendors`
 --
 ALTER TABLE `vendors`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `vendor_ratings`
@@ -1840,7 +1849,7 @@ ALTER TABLE `vendor_ratings`
 -- AUTO_INCREMENT for table `wiring_details`
 --
 ALTER TABLE `wiring_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- Constraints for dumped tables

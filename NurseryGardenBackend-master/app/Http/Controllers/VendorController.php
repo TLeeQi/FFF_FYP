@@ -59,7 +59,10 @@ class VendorController extends Controller
         $user->save();
 
         //Handle SSM Path
-        $ssmPath = null;
+        $vendor = Vendor::where('user_id', $user->id)->first();
+        $ssmFileName = $vendor->ssm_path; // Default to existing path
+        $ssmPath = '';
+
         try {
             if ($request->hasFile('ssm') && $request->file('ssm')->isValid()) {
                 $ssmFile = $request->file('ssm');
@@ -85,6 +88,7 @@ class VendorController extends Controller
                 'description' => $request->description,
                 'ssm_path' => $ssmFileName,
                 'status' => '0',
+                'comment' => 'NULL',
             ]
         );
 

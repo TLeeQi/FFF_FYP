@@ -37,6 +37,7 @@
             <a href = "{{ route('vendor.filter', ['status' => 'new']) }}" class="btn-sm btn btn-primary m-1">New</a>
             <a href = "{{ route('vendor.filter', ['status' => 'pending']) }}" class="btn-sm btn btn-warning m-1">Pending</a>
             <a href = "{{ route('vendor.filter', ['status' => 'verified']) }}" class="btn-sm btn btn-success m-1">Verified</a>
+            <a href = "{{ route('vendor.filter', ['status' => 'rejected']) }}" class="btn-sm btn btn-danger m-1">Rejected</a>
         @endif
     </div>
 
@@ -58,9 +59,10 @@
                             @endif
                             <th class="text-truncate">Description</th>
                             <th class="text-truncate">Status</th>
-                            <th class="text-truncate">Category</th>
+                            <th class="text-truncate">Rating</th>
+                            <th class="text-truncate">Category</th>                            
                             <th class="text-truncate">Action</th>
-                            <!-- <th class="text-truncate">Rating</th> -->
+                            <th class="text-truncate">Comment</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -75,7 +77,7 @@
                                     <p class="fw-normal mb-1">{{ $vendor->name }}</p>
                                 </td>
                                 <td class="text-truncate">
-                                    <p class="fw-normal mb-1"><img src="{{ asset('vendor_image') }}/{{ $vendor->image }}" alt="Vendor Image" style="width: 100px; height: 100px;"></p>
+                                    <img src="{{ asset('user_image') }}/{{ $vendor->image }}" alt="Vendor Image" style="width: 100px; height: 100px;">
                                 </td>
                                 <td class="text-truncate">
                                     <p class="fw-normal mb-1">{{ $vendor->email }}</p>
@@ -83,8 +85,13 @@
                                 <td class="text-truncate">
                                     <p class="fw-normal mb-1">{{ $vendor->contact_number }}</p>
                                 </td>
-                                <td class="text-truncate">
-                                    <p class="fw-normal mb-1">{{ $vendor->address }}</p>
+                                <td class="text-truncate" style="max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                    <p class="fw-normal mb-1" style="max-height: 50px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                        {{ $vendor->address }}
+                                    </p>
+                                    @if(strlen($vendor->address) > 100)
+                                        <a href="#" class="read-more" onclick="toggleDescription(this); return false;">Read more</a>
+                                    @endif
                                 </td>
                                 @if (Auth::user()->type == 'sadmin')
                                     <td class="text-truncate">
@@ -99,9 +106,14 @@
 
                                     </td>
                                 @endif
-                                <td class="text-truncate">
-                                    <p class="fw-normal mb-1">{{ $vendor->description }}</p>
-                                </td>
+                                <td class="text-truncate" style="max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                <p class="fw-normal mb-1" style="max-height: 50px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                    {{ $vendor->description }}
+                                </p>
+                                @if(strlen($vendor->description) > 100)
+                                    <a href="#" class="read-more" onclick="toggleDescription(this); return false;">Read more</a>
+                                @endif
+                            </td>
                                 @if ($vendor->vendor_status == '1')
                                     <td>
                                         <span class="badge bg-label-success rounded-pill">Verified</span>
@@ -114,10 +126,14 @@
                                     <td>
                                         <span class="badge bg-label-primary rounded-pill" style="color: blue;">New</span>
                                     </td>
+                                @elseif ($vendor->vendor_status == '2')
+                                    <td>
+                                        <span class="badge bg-label-danger rounded-pill" style="color: red;">Rejected</span>
+                                    </td>
                                 @endif
-                                <!-- <td>
+                                <td>
                                     <p class="fw-normal mb-1">{{ $vendor->rating }}</p>
-                                </td> -->
+                                </td>
                                 <td>
                                     <p class="fw-normal mb-1">{{ $vendor->category }}</p>
                                 </td>
@@ -125,6 +141,13 @@
                                     <p class="fw-normal mb-1">
                                         <a href="{{ route('vendor.detail', $vendor->vendor_id) }}" class="btn btn-primary">View</a>
                                     </p>
+                                </td>
+                                <td>
+                                    @if(!is_null($vendor->comment))
+                                        <p class="fw-normal mb-1">{{ $vendor->comment }}</p>
+                                    @else
+                                        <p class="fw-normal mb-1">N/A</p>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
@@ -139,4 +162,18 @@
         {{-- {{ $customer->links('pagination.using-post') }} --}}
         {!! $vendors->links('vendor.pagination.bootstrap-5') !!}
     </div>
+    <script>
+    function toggleDescription(link) {
+        const description = link.previousElementSibling;
+        if (description.style.whiteSpace === 'nowrap') {
+            description.style.whiteSpace = 'normal';
+            description.style.maxHeight = 'none';
+            link.textContent = 'Collapse';
+        } else {
+            description.style.whiteSpace = 'nowrap';
+            description.style.maxHeight = '50px';
+            link.textContent = 'Read more';
+        }
+    }
+</script>
 @endsection

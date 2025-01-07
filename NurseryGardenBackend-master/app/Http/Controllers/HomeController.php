@@ -67,6 +67,10 @@ class HomeController extends Controller
             $data['totalSalesPlants']   = Plant::sum('sales_amount');
             $data['totalOrder']         = Order::count('id');
             $data['totalPayments']      = Payment::where('status', 'success')->sum('amount');
+            $data['totalVendors']        = Vendor::where('status', '1')->count('id');
+            $data['pendingVendors']     = Vendor::where('status', '0')
+                                        ->where('description', '!=', null)
+                                        ->count('id');
 
             return view('home')->with($data, 'data');
         } else if(Auth::user()->type == "vendor"){

@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('vendors', function (Blueprint $table) {
-            $table->string('status')->default('1'); // Add status column
+            //
+            $table->text('comment')->nullable();
         });
     }
 
@@ -22,8 +23,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('vendors', function (Blueprint $table) {
-            $table->dropColumn('status');
-            $table->dropColumn('image');
+            //
+            $table->dropColumn('comment');
         });
     }
 };

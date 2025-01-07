@@ -13,17 +13,13 @@ class Vendor extends Model
     public $primaryKey = 'id';
 
     protected $fillable = [
-        'name', 
-        'email', 
-        'phone', 
-        'address', 
         'rating', 
         'status', 
-        'image',
         'description',
         'user_id',
         'ssm_path',
-        'category'
+        'category',
+        'comment'
     ];
 
     public $appends = [
@@ -37,7 +33,7 @@ class Vendor extends Model
 
     public function getImageUrlAttribute()
     {
-        return  json_encode(asset('/vendor_image/' . $this->image));
+        return  json_encode(asset('/user_image/' . $this->image));
     }
     
     public function ratings()
