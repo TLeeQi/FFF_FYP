@@ -15,43 +15,6 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         DB::table('category')->insertOrIgnore([
-            [
-                'name' => "Lotus",
-                'status' => "1",
-                'type' => "Plant",
-            ],
-            [
-                'name' => "Desert Rose",
-                'status' => "1",
-                'type' => "Plant",
-            ],
-            [
-                'name' => "Cactus",
-                'status' => "1",
-                'type' => "Plant",
-            ],
-            [
-                'name' => "Hydrangeas",
-                'status' => "1",
-                'type' => "Plant",
-            ],
-            [
-                'name' => "Soil",
-                'status' => "1",
-                'type' => "Product",
-            ],
-
-            [
-                'name' => "Pot",
-                'status' => "1",
-                'type' => "Product",
-            ],
-
-            [
-                'name' => "Shovel",
-                'status' => "1",
-                'type' => "Product",
-            ],
 
             [
                 'name' => "Wiring",
