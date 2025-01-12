@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nurserygardenapp/util/color_resources.dart';
+import 'package:FFF/util/color_resources.dart';
 
 class EmergencyScreen extends StatelessWidget {
   const EmergencyScreen({Key? key}) : super(key: key);

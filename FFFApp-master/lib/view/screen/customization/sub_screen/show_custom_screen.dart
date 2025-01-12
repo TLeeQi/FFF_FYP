@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:nurserygardenapp/providers/customize_provider.dart';
-import 'package:nurserygardenapp/util/color_resources.dart';
-import 'package:nurserygardenapp/util/custom_text_style.dart';
-import 'package:nurserygardenapp/util/routes.dart';
-import 'package:nurserygardenapp/view/base/custom_appbar.dart';
-import 'package:nurserygardenapp/view/base/custom_button.dart';
-import 'package:nurserygardenapp/view/screen/customization/widget/video_items.dart';
+import 'package:FFF/providers/customize_provider.dart';
+import 'package:FFF/util/color_resources.dart';
+import 'package:FFF/util/custom_text_style.dart';
+import 'package:FFF/util/routes.dart';
+import 'package:FFF/view/base/custom_appbar.dart';
+import 'package:FFF/view/base/custom_button.dart';
+import 'package:FFF/view/screen/customization/widget/video_items.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 

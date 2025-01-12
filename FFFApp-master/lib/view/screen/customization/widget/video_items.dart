@@ -1,8 +1,8 @@
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:nurserygardenapp/util/color_resources.dart';
-import 'package:nurserygardenapp/util/custom_text_style.dart';
+import 'package:FFF/util/color_resources.dart';
+import 'package:FFF/util/custom_text_style.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoItems extends StatefulWidget {

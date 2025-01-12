@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:nurserygardenapp/util/app_constants.dart';
+import 'package:FFF/util/app_constants.dart';
 
 BiddingModel biddingModelFromJson(String str) =>
     BiddingModel.fromJson(json.decode(str));

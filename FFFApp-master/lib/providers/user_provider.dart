@@ -2,12 +2,12 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/widgets.dart';
-import 'package:nurserygardenapp/data/model/response/api_response.dart';
-import 'package:nurserygardenapp/data/model/user_model.dart';
-import 'package:nurserygardenapp/data/repositories/user_repo.dart';
-import 'package:nurserygardenapp/helper/response_helper.dart';
-import 'package:nurserygardenapp/util/app_constants.dart';
-import 'package:nurserygardenapp/view/base/custom_snackbar.dart';
+import 'package:FFF/data/model/response/api_response.dart';
+import 'package:FFF/data/model/user_model.dart';
+import 'package:FFF/data/repositories/user_repo.dart';
+import 'package:FFF/helper/response_helper.dart';
+import 'package:FFF/util/app_constants.dart';
+import 'package:FFF/view/base/custom_snackbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserProvider extends ChangeNotifier {

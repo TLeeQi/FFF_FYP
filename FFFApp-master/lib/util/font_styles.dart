@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nurserygardenapp/util/dimensions.dart';
+import 'package:FFF/util/dimensions.dart';
 
 const RubikMedium = TextStyle(
   fontFamily: 'Rubik',

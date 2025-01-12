@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:nurserygardenapp/providers/plant_provider.dart';
-import 'package:nurserygardenapp/util/color_resources.dart';
-import 'package:nurserygardenapp/util/routes.dart';
+import 'package:FFF/providers/plant_provider.dart';
+import 'package:FFF/util/color_resources.dart';
+import 'package:FFF/util/routes.dart';
 import 'package:provider/provider.dart';
 
 class PlantSearchScreen extends StatefulWidget {

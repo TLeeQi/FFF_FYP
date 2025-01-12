@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:nurserygardenapp/util/color_resources.dart';
-import 'package:nurserygardenapp/view/screen/account/account_screen.dart';
-// import 'package:nurserygardenapp/view/screen/bidding/bidding_screen.dart';
-import 'package:nurserygardenapp/view/screen/vendor/vendor_screen.dart';
-import 'package:nurserygardenapp/view/screen/order/order_screen.dart';
-import 'package:nurserygardenapp/view/screen/plant/plant_screen.dart';
-import 'package:nurserygardenapp/view/screen/product/product_screen.dart';
+import 'package:FFF/util/color_resources.dart';
+import 'package:FFF/view/screen/account/account_screen.dart';
+// import 'package:FFF/view/screen/bidding/bidding_screen.dart';
+import 'package:FFF/view/screen/vendor/vendor_screen.dart';
+import 'package:FFF/view/screen/order/order_screen.dart';
+import 'package:FFF/view/screen/plant/plant_screen.dart';
+import 'package:FFF/view/screen/product/product_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   final int pageIndex;

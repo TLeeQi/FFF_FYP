@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:nurserygardenapp/util/color_resources.dart';
+import 'package:FFF/util/color_resources.dart';
 
 class LoadingThreeCircle extends StatelessWidget {
   const LoadingThreeCircle({super.key});

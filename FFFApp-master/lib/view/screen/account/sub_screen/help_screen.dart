@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nurserygardenapp/util/custom_text_style.dart';
-import 'package:nurserygardenapp/view/base/custom_appbar.dart';
+import 'package:FFF/util/custom_text_style.dart';
+import 'package:FFF/view/base/custom_appbar.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/services.dart';
 

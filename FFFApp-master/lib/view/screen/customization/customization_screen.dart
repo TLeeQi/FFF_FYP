@@ -2,13 +2,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:nurserygardenapp/data/model/cart_model.dart';
-import 'package:nurserygardenapp/providers/customize_provider.dart';
-import 'package:nurserygardenapp/util/app_constants.dart';
-import 'package:nurserygardenapp/util/color_resources.dart';
-import 'package:nurserygardenapp/util/custom_text_style.dart';
-import 'package:nurserygardenapp/util/routes.dart';
-import 'package:nurserygardenapp/view/screen/customization/widget/empty_item.dart';
+import 'package:FFF/data/model/cart_model.dart';
+import 'package:FFF/providers/customize_provider.dart';
+import 'package:FFF/util/app_constants.dart';
+import 'package:FFF/util/color_resources.dart';
+import 'package:FFF/util/custom_text_style.dart';
+import 'package:FFF/util/routes.dart';
+import 'package:FFF/view/screen/customization/widget/empty_item.dart';
 import 'package:provider/provider.dart';
 
 class CustomizationScreen extends StatefulWidget {

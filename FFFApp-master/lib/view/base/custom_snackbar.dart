@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nurserygardenapp/util/app_constants.dart';
-import 'package:nurserygardenapp/util/color_resources.dart';
+import 'package:FFF/util/app_constants.dart';
+import 'package:FFF/util/color_resources.dart';
 
 void showCustomSnackBar(
   String message,

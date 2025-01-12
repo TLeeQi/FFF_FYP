@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nurserygardenapp/util/custom_text_style.dart';
-import 'package:nurserygardenapp/view/base/custom_appbar.dart';
+import 'package:FFF/util/custom_text_style.dart';
+import 'package:FFF/view/base/custom_appbar.dart';
 
 class FAQsScreen extends StatelessWidget {
   const FAQsScreen({super.key});

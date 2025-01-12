@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:nurserygardenapp/providers/auth_provider.dart';
-import 'package:nurserygardenapp/providers/splash_provider.dart';
-import 'package:nurserygardenapp/util/app_constants.dart';
-import 'package:nurserygardenapp/util/color_resources.dart';
-import 'package:nurserygardenapp/util/font_styles.dart';
-import 'package:nurserygardenapp/util/images.dart';
-import 'package:nurserygardenapp/util/routes.dart';
+import 'package:FFF/providers/auth_provider.dart';
+import 'package:FFF/providers/splash_provider.dart';
+import 'package:FFF/util/app_constants.dart';
+import 'package:FFF/util/color_resources.dart';
+import 'package:FFF/util/font_styles.dart';
+import 'package:FFF/util/images.dart';
+import 'package:FFF/util/routes.dart';
 import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -100,14 +100,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
 // import 'package:connectivity_plus/connectivity_plus.dart';
 // import 'package:flutter/material.dart';
-// import 'package:nurserygardenapp/providers/auth_provider.dart';
-// import 'package:nurserygardenapp/providers/splash_provider.dart';
-// import 'package:nurserygardenapp/util/app_constants.dart';
-// import 'package:nurserygardenapp/util/color_resources.dart';
-// import 'package:nurserygardenapp/util/font_styles.dart';
-// import 'package:nurserygardenapp/util/images.dart';
-// import 'package:nurserygardenapp/util/routes.dart';
-// import 'package:nurserygardenapp/view/base/custom_snackbar.dart';
+// import 'package:FFF/providers/auth_provider.dart';
+// import 'package:FFF/providers/splash_provider.dart';
+// import 'package:FFF/util/app_constants.dart';
+// import 'package:FFF/util/color_resources.dart';
+// import 'package:FFF/util/font_styles.dart';
+// import 'package:FFF/util/images.dart';
+// import 'package:FFF/util/routes.dart';
+// import 'package:FFF/view/base/custom_snackbar.dart';
 // import 'package:provider/provider.dart';
 
 // class SplashScreen extends StatefulWidget {

@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:nurserygardenapp/providers/customize_provider.dart';
-import 'package:nurserygardenapp/util/custom_text_style.dart';
-import 'package:nurserygardenapp/util/routes.dart';
-import 'package:nurserygardenapp/view/base/custom_appbar.dart';
-import 'package:nurserygardenapp/view/base/page_loading.dart';
+import 'package:FFF/providers/customize_provider.dart';
+import 'package:FFF/util/custom_text_style.dart';
+import 'package:FFF/util/routes.dart';
+import 'package:FFF/view/base/custom_appbar.dart';
+import 'package:FFF/view/base/page_loading.dart';
 import 'package:provider/provider.dart';
 
 class CustomStyleScreen extends StatefulWidget {

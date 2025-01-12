@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:nurserygardenapp/data/model/bidding_detail_model.dart';
-import 'package:nurserygardenapp/data/model/bidding_model.dart';
-import 'package:nurserygardenapp/data/model/bidding_refund_model.dart';
-import 'package:nurserygardenapp/data/model/response/api_response.dart';
-import 'package:nurserygardenapp/data/repositories/bidding_repo.dart';
-import 'package:nurserygardenapp/helper/response_helper.dart';
-import 'package:nurserygardenapp/util/app_constants.dart';
+import 'package:FFF/data/model/bidding_detail_model.dart';
+import 'package:FFF/data/model/bidding_model.dart';
+import 'package:FFF/data/model/bidding_refund_model.dart';
+import 'package:FFF/data/model/response/api_response.dart';
+import 'package:FFF/data/repositories/bidding_repo.dart';
+import 'package:FFF/helper/response_helper.dart';
+import 'package:FFF/util/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class BiddingProvider extends ChangeNotifier {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nurserygardenapp/providers/user_provider.dart';
-import 'package:nurserygardenapp/util/dimensions.dart';
-import 'package:nurserygardenapp/view/base/circular_indicator.dart';
-import 'package:nurserygardenapp/view/base/custom_appbar.dart';
-import 'package:nurserygardenapp/view/base/custom_button.dart';
-import 'package:nurserygardenapp/view/base/custom_textfield.dart';
+import 'package:FFF/providers/user_provider.dart';
+import 'package:FFF/util/dimensions.dart';
+import 'package:FFF/view/base/circular_indicator.dart';
+import 'package:FFF/view/base/custom_appbar.dart';
+import 'package:FFF/view/base/custom_button.dart';
+import 'package:FFF/view/base/custom_textfield.dart';
 import 'package:provider/provider.dart';
 
 class ChangesEmailScreen extends StatefulWidget {

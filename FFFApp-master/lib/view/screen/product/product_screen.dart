@@ -1,15 +1,15 @@
 import 'package:carousel_slider/carousel_slider.dart' as carousel_slider;
 import 'package:flutter/material.dart';
-import 'package:nurserygardenapp/providers/product_provider.dart';
-import 'package:nurserygardenapp/util/color_resources.dart';
-import 'package:nurserygardenapp/util/images.dart';
-import 'package:nurserygardenapp/util/routes.dart';
-import 'package:nurserygardenapp/view/base/empty_grid_item.dart';
-import 'package:nurserygardenapp/view/screen/product/widget/product_grid_item.dart';
+import 'package:FFF/providers/product_provider.dart';
+import 'package:FFF/util/color_resources.dart';
+import 'package:FFF/util/images.dart';
+import 'package:FFF/util/routes.dart';
+import 'package:FFF/view/base/empty_grid_item.dart';
+import 'package:FFF/view/screen/product/widget/product_grid_item.dart';
 import 'package:provider/provider.dart';
 import 'package:vs_scrollbar/vs_scrollbar.dart';
-import 'package:nurserygardenapp/view/screen/sos_button.dart'; // Correct import for the current structure
-import 'package:nurserygardenapp/view/screen/emergency_screen.dart';
+import 'package:FFF/view/screen/sos_button.dart'; // Correct import for the current structure
+import 'package:FFF/view/screen/emergency_screen.dart';
 
 final List<String> imgList = [
   Images.carousel_first,

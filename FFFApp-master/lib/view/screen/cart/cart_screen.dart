@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:input_quantity/input_quantity.dart';
-import 'package:nurserygardenapp/data/model/cart_model.dart';
-import 'package:nurserygardenapp/providers/cart_provider.dart';
-import 'package:nurserygardenapp/util/color_resources.dart';
-import 'package:nurserygardenapp/util/custom_text_style.dart';
-import 'package:nurserygardenapp/util/routes.dart';
-import 'package:nurserygardenapp/view/screen/cart/widget/empty_cart_item.dart';
+import 'package:FFF/data/model/cart_model.dart';
+import 'package:FFF/providers/cart_provider.dart';
+import 'package:FFF/util/color_resources.dart';
+import 'package:FFF/util/custom_text_style.dart';
+import 'package:FFF/util/routes.dart';
+import 'package:FFF/view/screen/cart/widget/empty_cart_item.dart';
 import 'package:provider/provider.dart';
 
 class CartScreen extends StatefulWidget {

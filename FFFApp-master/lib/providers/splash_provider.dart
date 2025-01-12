@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nurserygardenapp/data/repositories/splash_repo.dart';
+import 'package:FFF/data/repositories/splash_repo.dart';
 
 class SplashProvider extends ChangeNotifier {
   final SplashRepo splashRepo;

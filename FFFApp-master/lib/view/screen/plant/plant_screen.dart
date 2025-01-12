@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nurserygardenapp/view/screen/sos_button.dart'; // Correct import for the current structure
-import 'package:nurserygardenapp/util/color_resources.dart';
-import 'package:nurserygardenapp/view/screen/emergency_screen.dart';
+import 'package:FFF/view/screen/sos_button.dart'; // Correct import for the current structure
+import 'package:FFF/util/color_resources.dart';
+import 'package:FFF/view/screen/emergency_screen.dart';
 
 class PlantScreen extends StatefulWidget {
   const PlantScreen({super.key});

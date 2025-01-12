@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:nurserygardenapp/data/model/auth_model.dart';
-import 'package:nurserygardenapp/providers/auth_provider.dart';
-import 'package:nurserygardenapp/util/color_resources.dart';
-import 'package:nurserygardenapp/util/custom_text_style.dart';
-import 'package:nurserygardenapp/util/dimensions.dart';
-import 'package:nurserygardenapp/util/routes.dart';
-import 'package:nurserygardenapp/view/base/custom_button.dart';
-import 'package:nurserygardenapp/view/base/custom_snackbar.dart';
-import 'package:nurserygardenapp/view/base/custom_space.dart';
-import 'package:nurserygardenapp/view/base/custom_textfield.dart';
+import 'package:FFF/data/model/auth_model.dart';
+import 'package:FFF/providers/auth_provider.dart';
+import 'package:FFF/util/color_resources.dart';
+import 'package:FFF/util/custom_text_style.dart';
+import 'package:FFF/util/dimensions.dart';
+import 'package:FFF/util/routes.dart';
+import 'package:FFF/view/base/custom_button.dart';
+import 'package:FFF/view/base/custom_snackbar.dart';
+import 'package:FFF/view/base/custom_space.dart';
+import 'package:FFF/view/base/custom_textfield.dart';
 import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {

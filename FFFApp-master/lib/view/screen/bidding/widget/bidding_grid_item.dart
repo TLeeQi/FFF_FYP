@@ -2,11 +2,11 @@
 
 // import 'package:cached_network_image/cached_network_image.dart';
 // import 'package:flutter/material.dart';
-// import 'package:nurserygardenapp/data/model/bidding_model.dart';
-// import 'package:nurserygardenapp/providers/bidding_provider.dart';
-// import 'package:nurserygardenapp/util/color_resources.dart';
-// import 'package:nurserygardenapp/util/custom_text_style.dart';
-// import 'package:nurserygardenapp/view/base/custom_space.dart';
+// import 'package:FFF/data/model/bidding_model.dart';
+// import 'package:FFF/providers/bidding_provider.dart';
+// import 'package:FFF/util/color_resources.dart';
+// import 'package:FFF/util/custom_text_style.dart';
+// import 'package:FFF/view/base/custom_space.dart';
 // import 'package:provider/provider.dart';
 
 // class BiddingGridItem extends StatefulWidget {

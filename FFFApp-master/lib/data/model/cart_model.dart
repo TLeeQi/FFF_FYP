@@ -4,8 +4,8 @@
 
 import 'dart:convert';
 
-import 'package:nurserygardenapp/data/model/plant_model.dart';
-import 'package:nurserygardenapp/data/model/product_model.dart';
+import 'package:FFF/data/model/plant_model.dart';
+import 'package:FFF/data/model/product_model.dart';
 
 CartModel cartModelFromJson(String str) => CartModel.fromJson(json.decode(str));
 

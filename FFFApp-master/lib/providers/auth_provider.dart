@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:nurserygardenapp/data/model/response/api_response.dart';
-import 'package:nurserygardenapp/data/model/auth_model.dart';
-import 'package:nurserygardenapp/data/repositories/auth_repo.dart';
-import 'package:nurserygardenapp/helper/api_checker.dart';
-import 'package:nurserygardenapp/helper/response_helper.dart';
+import 'package:FFF/data/model/response/api_response.dart';
+import 'package:FFF/data/model/auth_model.dart';
+import 'package:FFF/data/repositories/auth_repo.dart';
+import 'package:FFF/helper/api_checker.dart';
+import 'package:FFF/helper/response_helper.dart';
 import '../view/base/custom_snackbar.dart';
 
 class AuthProvider with ChangeNotifier {

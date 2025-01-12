@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:nurserygardenapp/util/color_resources.dart';
-import 'package:nurserygardenapp/view/base/custom_appbar.dart';
+import 'package:FFF/util/color_resources.dart';
+import 'package:FFF/view/base/custom_appbar.dart';
 
 class ImageEnlargeWidget extends StatefulWidget {
   final String tag;

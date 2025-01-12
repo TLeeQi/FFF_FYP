@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:nurserygardenapp/providers/delivery_provider.dart';
-import 'package:nurserygardenapp/util/color_resources.dart';
-import 'package:nurserygardenapp/util/custom_text_style.dart';
-import 'package:nurserygardenapp/util/dimensions.dart';
-import 'package:nurserygardenapp/view/base/custom_appbar.dart';
-import 'package:nurserygardenapp/view/base/page_loading.dart';
+import 'package:FFF/providers/delivery_provider.dart';
+import 'package:FFF/util/color_resources.dart';
+import 'package:FFF/util/custom_text_style.dart';
+import 'package:FFF/util/dimensions.dart';
+import 'package:FFF/view/base/custom_appbar.dart';
+import 'package:FFF/view/base/page_loading.dart';
 import 'package:provider/provider.dart';
 
 class DeliveryReceiptScreen extends StatefulWidget {

@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:input_quantity/input_quantity.dart';
-import 'package:nurserygardenapp/data/model/cart_model.dart';
-import 'package:nurserygardenapp/data/model/plant_model.dart';
-import 'package:nurserygardenapp/providers/cart_provider.dart';
-import 'package:nurserygardenapp/providers/plant_provider.dart';
-import 'package:nurserygardenapp/util/color_resources.dart';
-import 'package:nurserygardenapp/util/custom_text_style.dart';
-import 'package:nurserygardenapp/util/dimensions.dart';
-// import 'package:nurserygardenapp/util/routes.dart';
-import 'package:nurserygardenapp/view/base/custom_button.dart';
-import 'package:nurserygardenapp/view/base/custom_space.dart';
-import 'package:nurserygardenapp/view/base/image_enlarge_widget.dart';
-import 'package:nurserygardenapp/view/base/page_loading.dart';
+import 'package:FFF/data/model/cart_model.dart';
+import 'package:FFF/data/model/plant_model.dart';
+import 'package:FFF/providers/cart_provider.dart';
+import 'package:FFF/providers/plant_provider.dart';
+import 'package:FFF/util/color_resources.dart';
+import 'package:FFF/util/custom_text_style.dart';
+import 'package:FFF/util/dimensions.dart';
+// import 'package:FFF/util/routes.dart';
+import 'package:FFF/view/base/custom_button.dart';
+import 'package:FFF/view/base/custom_space.dart';
+import 'package:FFF/view/base/image_enlarge_widget.dart';
+import 'package:FFF/view/base/page_loading.dart';
 import 'package:provider/provider.dart';
 
 class PlantDetailScreen extends StatefulWidget {

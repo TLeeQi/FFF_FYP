@@ -4,9 +4,9 @@
 
 import 'dart:convert';
 
-import 'package:nurserygardenapp/data/model/delivery_model.dart';
-import 'package:nurserygardenapp/data/model/order_model.dart';
-import 'package:nurserygardenapp/data/model/user_model.dart';
+import 'package:FFF/data/model/delivery_model.dart';
+import 'package:FFF/data/model/order_model.dart';
+import 'package:FFF/data/model/user_model.dart';
 
 DeliveryReceiptModel deliveryReceiptModelFromJson(String str) =>
     DeliveryReceiptModel.fromJson(json.decode(str));

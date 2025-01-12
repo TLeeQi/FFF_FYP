@@ -4,9 +4,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
-import 'package:nurserygardenapp/providers/user_provider.dart';
-import 'package:nurserygardenapp/util/color_resources.dart';
-import 'package:nurserygardenapp/util/images.dart';
+import 'package:FFF/providers/user_provider.dart';
+import 'package:FFF/util/color_resources.dart';
+import 'package:FFF/util/images.dart';
 import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
 

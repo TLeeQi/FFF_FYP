@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:nurserygardenapp/util/color_resources.dart';
-import 'package:nurserygardenapp/util/dimensions.dart';
+import 'package:FFF/util/color_resources.dart';
+import 'package:FFF/util/dimensions.dart';
 
 class CustomTextField extends StatefulWidget {
   final String hintText;

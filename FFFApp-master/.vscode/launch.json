@@ -5,18 +5,18 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "nurserygardenapp",
+			"name": "FFF",
 			"request": "launch",
 			"type": "dart"
 		},
 		{
-			"name": "nurserygardenapp (profile mode)",
+			"name": "FFF (profile mode)",
 			"request": "launch",
 			"type": "dart",
 			"flutterMode": "profile"
 		},
 		{
-			"name": "nurserygardenapp (release mode)",
+			"name": "FFF (release mode)",
 			"request": "launch",
 			"type": "dart",
 			"flutterMode": "release"

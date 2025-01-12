@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:nurserygardenapp/data/dio/login_interceptor.dart';
-import 'package:nurserygardenapp/util/app_constants.dart';
+import 'package:FFF/data/dio/login_interceptor.dart';
+import 'package:FFF/util/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DioClient {

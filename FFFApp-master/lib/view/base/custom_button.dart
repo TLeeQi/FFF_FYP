@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nurserygardenapp/util/color_resources.dart';
-import 'package:nurserygardenapp/util/dimensions.dart';
+import 'package:FFF/util/color_resources.dart';
+import 'package:FFF/util/dimensions.dart';
 
 class CustomButton extends StatelessWidget {
   final VoidCallback? onTap;

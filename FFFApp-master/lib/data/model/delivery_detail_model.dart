@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:nurserygardenapp/data/model/delivery_model.dart';
+import 'package:FFF/data/model/delivery_model.dart';
 
 DeliveryDetailModel deliveryDetailModelFromJson(String str) =>
     DeliveryDetailModel.fromJson(json.decode(str));

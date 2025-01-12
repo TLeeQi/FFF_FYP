@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:nurserygardenapp/providers/vendor_provider.dart';
-import 'package:nurserygardenapp/view/screen/vendor/widget/vendor_grid_item.dart';
-// import 'package:nurserygardenapp/view/screen/vendor/vendor_detail_screen.dart';
+import 'package:FFF/providers/vendor_provider.dart';
+import 'package:FFF/view/screen/vendor/widget/vendor_grid_item.dart';
+// import 'package:FFF/view/screen/vendor/vendor_detail_screen.dart';
 import 'package:provider/provider.dart';
 // import 'package:flutter/material.dart';
-import 'package:nurserygardenapp/util/color_resources.dart';
-import 'package:nurserygardenapp/util/routes.dart';
+import 'package:FFF/util/color_resources.dart';
+import 'package:FFF/util/routes.dart';
 import 'package:vs_scrollbar/vs_scrollbar.dart';
-import 'package:nurserygardenapp/view/base/empty_grid_item.dart';
-import 'package:nurserygardenapp/view/screen/emergency_screen.dart';
-import 'package:nurserygardenapp/view/screen/sos_button.dart';
+import 'package:FFF/view/base/empty_grid_item.dart';
+import 'package:FFF/view/screen/emergency_screen.dart';
+import 'package:FFF/view/screen/sos_button.dart';
 
 
 class VendorScreen extends StatefulWidget {

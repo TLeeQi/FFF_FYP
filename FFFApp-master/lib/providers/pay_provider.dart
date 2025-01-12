@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:nurserygardenapp/data/model/payment_model.dart';
-import 'package:nurserygardenapp/data/model/response/api_response.dart';
-import 'package:nurserygardenapp/data/repositories/pay_repo.dart';
-import 'package:nurserygardenapp/helper/response_helper.dart';
-import 'package:nurserygardenapp/view/base/custom_snackbar.dart';
+import 'package:FFF/data/model/payment_model.dart';
+import 'package:FFF/data/model/response/api_response.dart';
+import 'package:FFF/data/repositories/pay_repo.dart';
+import 'package:FFF/helper/response_helper.dart';
+import 'package:FFF/view/base/custom_snackbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PayProvider extends ChangeNotifier {

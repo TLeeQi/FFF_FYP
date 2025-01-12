@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:nurserygardenapp/data/model/response/error_response.dart';
+import 'package:FFF/data/model/response/error_response.dart';
 
 class ApiErrorHandler {
   static dynamic getMessage(error) {

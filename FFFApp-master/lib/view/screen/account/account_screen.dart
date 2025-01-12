@@ -1,16 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:nurserygardenapp/providers/auth_provider.dart';
-import 'package:nurserygardenapp/providers/user_provider.dart';
-import 'package:nurserygardenapp/util/app_constants.dart';
-import 'package:nurserygardenapp/util/color_resources.dart';
-import 'package:nurserygardenapp/util/custom_text_style.dart';
-import 'package:nurserygardenapp/util/images.dart';
-import 'package:nurserygardenapp/util/routes.dart';
+import 'package:FFF/providers/auth_provider.dart';
+import 'package:FFF/providers/user_provider.dart';
+import 'package:FFF/util/app_constants.dart';
+import 'package:FFF/util/color_resources.dart';
+import 'package:FFF/util/custom_text_style.dart';
+import 'package:FFF/util/images.dart';
+import 'package:FFF/util/routes.dart';
 import 'package:provider/provider.dart';
 import '../../base/custom_dialog.dart';
-import 'package:nurserygardenapp/view/screen/emergency_screen.dart';
-import 'package:nurserygardenapp/view/screen/sos_button.dart';
+import 'package:FFF/view/screen/emergency_screen.dart';
+import 'package:FFF/view/screen/sos_button.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({Key? key}) : super(key: key);
