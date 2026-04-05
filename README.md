@@ -20,9 +20,16 @@ At the same time, administrators can:
 - Real-time booking status tracking
 - User authentication & profile management
 - Appointment scheduling
+🧑‍🔧 Vendor Portal (Service Provider)
+- Manage incoming bookings
+- Update service status (e.g. accepted, in progress, completed)
+- Vendor profile management
+- Identity verification via document (e.g. SSM) submission
+- View booking history & service requests
 🛠️ Admin Web Panel
 - Dashboard for system overview
-- Manage users & service providers
+- Manage users, vendors & service providers
+- Approve vendor registration (SSM verification)
 - Booking management & monitoring
 - Data maintenance & control
   
