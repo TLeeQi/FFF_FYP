@@ -9,100 +9,100 @@ A full-stack household service booking application designed to streamline servic
 ![Home](./screenshots/user home.jpg)  
 *🏠 Browse available household services with a clean and intuitive home interface.*
 
-![Search](./screenshots/user search.jpg)  
-*🔍 Search and explore services or vendors بسهولة.*
+![Search](./Screenshot/user search.jpg)  
+*🔍 Search and explore services.*
 
-![Service](./screenshots/user service.jpg)  
+![Service](./Screenshot/user service.jpg)  
 *🛠️ View categorized services for easy selection.*
 
-![Service Detail](./screenshots/user service detail.jpg)  
-*📄 Detailed service information including pricing and descriptions.*
+![Service Detail](./Screenshot/user service detail.jpg)  
+*📄 Detailed service information, including pricing and descriptions.*
 
-![Vendor List](./screenshots/user vendor list.jpg)  
+![Vendor List](./Screenshot/user vendor list.jpg)  
 *👨‍🔧 Browse available vendors providing selected services.*
 
-![Vendor Details](./screenshots/user vendor details.jpg)  
+![Vendor Details](./Screenshot/user vendor details.jpg)  
 *📌 View vendor profiles, service details, and ratings.*
 
-![Booking](./screenshots/user booking details.jpg)  
+![Booking](./Screenshot/user booking details.jpg)  
 *📅 Book services and manage appointment details.*
 
-![Booking List](./screenshots/user booking list.jpg)  
+![Booking List](./Screenshot/user booking list.jpg)  
 *📋 Track all bookings in one place.*
 
-![Booking Status](./screenshots/user booking status.jpg)  
+![Booking Status](./Screenshot/user booking status.jpg)  
 *⏱️ Monitor real-time status updates of service requests.*
 
-![Payment](./screenshots/user payment.jpg)  
+![Payment](./Screenshot/user payment.jpg)  
 *💳 Seamless payment interface for completing bookings.*
 
-![Account](./screenshots/user account page.jpg)  
+![Account](./Screenshot/user account page.jpg)  
 *👤 Manage user profile and personal information.*
 
-![Edit Profile](./screenshots/user edit profile.jpg)  
+![Edit Profile](./Screenshot/user edit profile.jpg)  
 *✏️ Update personal details easily.*
 
-![Settings](./screenshots/user account setting 1.jpg)  
-![Settings](./screenshots/user account setting 2.jpg)  
+![Settings](./Screenshot/user account setting 1.jpg)  
+![Settings](./Screenshot/user account setting 2.jpg)  
 *⚙️ Configure account settings and preferences.*
 
-![Help](./screenshots/user help & support.jpg)  
+![Help](./Screenshot/user help & support.jpg)  
 *🆘 Access help & support features.*
 
-![FAQ](./screenshots/user FAQ.jpg)  
+![FAQ](./Screenshot/user FAQ.jpg)  
 *❓ Frequently asked questions for user guidance.*
 
-![Login](./screenshots/user login.jpg)  
-![Register](./screenshots/user register.jpg)  
+![Login](./Screenshot/user login.jpg)  
+![Register](./Screenshot/user register.jpg)  
 *🔐 Secure authentication system for user access.*
 
 ---
 
 ### 🧑‍🔧 Vendor Portal
-![Vendor Login](./screenshots/vendor login.png)  
+![Vendor Login](./Screenshot/vendor login.png)  
 *🔐 Vendor authentication system.*
 
-![Vendor Register](./screenshots/vendor register.png)  
+![Vendor Register](./Screenshot/vendor register.png)  
 *📝 Vendor onboarding and registration.*
 
-![Vendor Dashboard](./screenshots/vendor dashboard.png)  
+![Vendor Dashboard](./Screenshot/vendor dashboard.png)  
 *📊 Overview of bookings and vendor activities.*
 
-![Vendor Profile](./screenshots/vendor profile.png)  
+![Vendor Profile](./Screenshot/vendor profile.png)  
 *👤 Manage vendor profile and service information.*
 
-![Vendor List](./screenshots/vendor list 1.png)  
-![Vendor List](./screenshots/vendor list 2.png)  
+![Vendor List](./Screenshot/vendor list 1.png)  
+![Vendor List](./Screenshot/vendor list 2.png)  
 *📋 Manage service listings and availability.*
 
-![Vendor FAQ](./screenshots/vendor FAQ.png)  
+![Vendor FAQ](./Screenshot/vendor FAQ.png)  
 *❓ Support and guidance for vendors.*
 
 ---
 
 ### 🖥️ Admin Dashboard
-![Admin Login](./screenshots/admin login.png)  
+![Admin Login](./Screenshot/admin login.png)  
 *🔐 Admin authentication system.*
 
-![Admin Dashboard](./screenshots/admin dashboard.png)  
+![Admin Dashboard](./Screenshot/admin dashboard.png)  
 *📊 System overview with key metrics and insights.*
 
-![Manage Users](./screenshots/manage user.png)  
+![Manage Users](./Screenshot/manage user.png)  
 *👥 Manage user accounts and information.*
 
-![Manage Vendors](./screenshots/manage vendors.png)  
+![Manage Vendors](./Screenshot/manage vendors.png)  
 *🧑‍🔧 Oversee vendor registrations and activities.*
 
-![Approve Vendor](./screenshots/approve vendor.png)  
+![Approve Vendor](./Screenshot/approve vendor.png)  
 *✅ Verify and approve vendor SSM information.*
 
-![Manage Services](./screenshots/manage services.png)  
+![Manage Services](./v/manage services.png)  
 *🛠️ Control available services in the system.*
 
-![Service Details](./screenshots/manage service details.png)  
+![Service Details](./Screenshot/manage service details.png)  
 *📄 Update and maintain service details.*
 
-![Manage Booking](./screenshots/manage booking.png)  
+![Manage Booking](./Screenshot/manage booking.png)  
 *📋 Monitor and manage all booking transactions.*
 
 ### 📌 Overview
