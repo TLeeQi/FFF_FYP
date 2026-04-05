@@ -2,6 +2,7 @@
 A full-stack household service booking application designed to streamline service requests, provider management, and administrative operations. This project includes both a user-facing booking platform and a web-based admin panel for system maintenance and monitoring.
 
 🎥 Project Demo
+[Watch Demo Video](https://youtu.be/rMYTqgY70k4?si=2CefpEX1VxUEaMEf)
 
 📌 Overview
 This Final Year Project focuses on solving inefficiencies in traditional household service booking by providing a centralized digital platform where users can:
