@@ -3,7 +3,7 @@ A full-stack household service booking application designed to streamline servic
 
 ### 🎥 Project Demo
 [Watch Demo Video](https://youtu.be/rMYTqgY70k4?si=2CefpEX1VxUEaMEf)
-
+<br/>
 ### 📱 System Highlights
 
 <p align="center">
@@ -56,14 +56,15 @@ This system supports a role-based access control (RBAC) system with multiple use
 This project incorporates AI-assisted development practices:
 - AI-assisted code generation for rapid prototyping
 - Manual debugging, refinement, and system integration
-- Test case generation with further human validation and optimization
+- Test case generation with further human validation and optimization<br/>
+
 👉 Demonstrates practical usage of AI as a development tool rather than full dependency.
 
 ### 🏆 Achievements
 🥇 Gold Award & Best Presenter Award – I-RICE 2025
-🥇 Gold Award (Project) & 🥉 Bronze Award (3-Minute Thesis) – Virtual Innovation Competition 2025
-🥇 Gold Medal – International Invention, Innovation and Design Competition 2024
-🥇 Gold Award – JIICaS 2024
+<br/>🥇 Gold Award (Project) & 🥉 Bronze Award (3-Minute Thesis) – Virtual Innovation Competition 2025
+<br/>🥇 Gold Medal – International Invention, Innovation and Design Competition 2024
+<br/>🥇 Gold Award – JIICaS 2024
 
 ### 📜 Intellectual Property
 ✅ Granted Copyright
