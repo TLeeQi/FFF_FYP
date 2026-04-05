@@ -4,8 +4,6 @@ A full-stack household service booking application designed to streamline servic
 ### 🎥 Project Demo
 [Watch Demo Video](https://youtu.be/rMYTqgY70k4?si=2CefpEX1VxUEaMEf)
 
-![Dashboard](./screenshots/admin.png)
-
 ### 📌 Overview
 This Final Year Project focuses on solving inefficiencies in traditional household service booking by providing a centralized digital platform where users can:
 - Book household services (wiring, plumber, gardening, runner service)
