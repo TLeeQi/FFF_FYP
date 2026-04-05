@@ -7,10 +7,10 @@ A full-stack household service booking application designed to streamline servic
 ### 📱 System Highlights
 
 <p align="center">
-  <img src="./Screenshot/user-home.jpg" width="250"/>
-  <img src="./Screenshot/user-booking-details.jpg" width="250"/>
-  <img src="./Screenshot/admin-dashboard.png" width="250"/>
-  <img src="./Screenshot/vendor-profile.png" width="250"/>
+  <img src="./Screenshot/user-home.jpg" width="100"/>
+  <img src="./Screenshot/user-booking-details.jpg" width="100"/>
+  <img src="./Screenshot/admin-dashboard.png" width="300"/>
+  <img src="./Screenshot/vendor-profile.png" width="300"/>
 </p>
 <p align="center">
   <em>User • Booking • Admin Dashboard • Vendor Profile</em>
