@@ -6,10 +6,15 @@ A full-stack household service booking application designed to streamline servic
 
 ### 📱 System Highlights
 
-![User Home](./Screenshot/user-home.jpg)
-![Booking](./Screenshot/user-booking-details.jpg)
-![Admin Dashboard](./Screenshot/admin-dashboard.png)
-![Vendor Profile](./Screenshot/vendor-profile.png) 
+<p align="center">
+  <img src="./Screenshot/user-home.jpg" width="250"/>
+  <img src="./Screenshot/user-booking-details.jpg" width="250"/>
+  <img src="./Screenshot/admin-dashboard.png" width="250"/>
+  <img src="./Screenshot/vendor-profile.png" width="250"/>
+</p>
+<p align="center">
+  <em>User • Booking • Admin Dashboard • Vendor Profile</em>
+</p>
 
 🔗 **View UI Screenshots:**  
 [UI Screenshots](https://github.com/TLeeQi/FFF_FYP/tree/main/screenshots)
