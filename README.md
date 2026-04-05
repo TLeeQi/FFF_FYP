@@ -6,7 +6,7 @@ A full-stack household service booking application designed to streamline servic
 
 ## 📸 UI Preview
 ### 📱 User Application
-![Home](./screenshots/user-home.jpg)  
+![Home](./Screenshot/user-home.jpg)  
 *🏠 Browse available household services with a clean and intuitive home interface.*
 
 ![Search](./Screenshot/user-search.jpg)  
