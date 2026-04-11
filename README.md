@@ -58,8 +58,6 @@ This project incorporates AI-assisted development practices:
 - Manual debugging, refinement, and system integration
 - Test case generation with further human validation and optimization<br/>
 
-👉 Demonstrates practical usage of AI as a development tool rather than full dependency.
-
 ### 🏆 Achievements
 🥇 Gold Award & Best Presenter Award – I-RICE 2025
 <br/>🥇 Gold Award (Project) & 🥉 Bronze Award (3-Minute Thesis) – Virtual Innovation Competition 2025
