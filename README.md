@@ -65,7 +65,14 @@ This project incorporates AI-assisted development practices:
 <br/>🥇 Gold Award – JIICaS 2024
 
 ### 📜 Intellectual Property
-✅ Granted Copyright
+
+✅ This project is an original work and is protected under copyright law.
+
+© 2025 Tong Lee Qi. All rights reserved.
+
+Copyright registration has been officially granted.
+📄 View Copyright Proof (Sensitive data masked):
+<img src="./Proof/Copyright.png" width="300"/>
 
 ### 🛠️ Tech Stack
 - Frontend: Flutter
