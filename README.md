@@ -58,8 +58,6 @@ This project incorporates AI-assisted development practices:
 - Manual debugging, refinement, and system integration
 - Test case generation with further human validation and optimization<br/>
 
-👉 Demonstrates practical usage of AI as a development tool rather than full dependency.
-
 ### 🏆 Achievements
 🥇 Gold Award & Best Presenter Award – I-RICE 2025
 <br/>🥇 Gold Award (Project) & 🥉 Bronze Award (3-Minute Thesis) – Virtual Innovation Competition 2025
@@ -67,7 +65,14 @@ This project incorporates AI-assisted development practices:
 <br/>🥇 Gold Award – JIICaS 2024
 
 ### 📜 Intellectual Property
-✅ Granted Copyright
+
+✅ This project is an original work and is protected under copyright law.
+
+© 2025 Tong Lee Qi. All rights reserved.
+
+Copyright registration has been officially granted.
+📄 View Copyright Proof (Sensitive data masked):
+<img src="./Proof/Copyright.png" width="300"/>
 
 ### 🛠️ Tech Stack
 - Frontend: Flutter
